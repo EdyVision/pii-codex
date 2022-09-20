@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  # Triggers the test workflow on push for all branches
+  push:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Run Tests
+    strategy:
+      matrix:
+        python-version: [ 3.9.12 ]
+    runs-on: ubuntu-latest
+
+    # Checkout the code, install poetry, install dependencies,
+    # and run test with coverage
+    steps:
+      - name: Environment Setup
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install Global Dependencies
+        run: pip install -U pip && pip install poetry wheel
+      - run: python -m venv .venv && source .venv/bin/activate
+      - name: Install Project Dependencies
+        run: poetry env info && poetry install
+      - name: Run Tests
+        run: |
+        poetry run coverage run -m pytest -v tests
+        poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=85
