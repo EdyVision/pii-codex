@@ -7,11 +7,9 @@ from typing import List
 import strawberry
 from dataclasses_json import dataclass_json, LetterCase
 
-"""
-All listed PII Types from Milne et al (2018) and a few others along with
-models used for PII categorization for DHS, NIST, HIPAA, and the risk 
-assessment models for reporting. 
-"""
+# All listed PII Types from Milne et al (2018) and a few others along with
+# models used for PII categorization for DHS, NIST, HIPAA, and the risk
+# assessment models for reporting.
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

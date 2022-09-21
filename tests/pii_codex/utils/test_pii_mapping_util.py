@@ -1,5 +1,6 @@
 import pandas as pd
 from assertpy import assert_that
+import pytest
 
 from pii_codex.models.common import (
     PIIType,
@@ -16,7 +17,6 @@ from pii_codex.utils.pii_mapping_util import (
     delete_mapping_folder,
     map_pii_type,
 )
-import pytest
 
 
 class TestPIIMappingUtil:

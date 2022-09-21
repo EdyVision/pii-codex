@@ -18,7 +18,7 @@ class BasePIIRanker:
             ranked_pii.append(map_pii_type(pii_type))
         return RiskAssessmentList(
             risk_assessments=ranked_pii,
-            average_rank=calculate_average_risk_score(ranked_pii),
+            average_risk_score=calculate_average_risk_score(ranked_pii),
         )
 
 
@@ -33,13 +33,13 @@ class AmazonPIIRanker(BasePIIRanker):
             ranked_pii.append(map_pii_type(pii_type))
         return RiskAssessmentList(
             risk_assessments=ranked_pii,
-            average_rank=calculate_average_risk_score(ranked_pii),
+            average_risk_score=calculate_average_risk_score(ranked_pii),
         )
 
 
 class AzurePIIRanker(BasePIIRanker):
-    def assess_pii_token(self, pii_type: str) -> float:
+    def assess_pii_token(self, detected_pii_type: str) -> float:
         raise Exception("Not Implemented yet")
 
-    def rank_pii_tokens(self, pii_types: List[str]) -> float:
+    def rank_pii_tokens(self, detected_pii_types: List[str]) -> float:
         raise Exception("Not Implemented yet")

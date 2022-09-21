@@ -1,3 +1,4 @@
+# pylint: disable=broad-except
 import logging
 from typing import List
 from presidio_analyzer import AnalyzerEngine

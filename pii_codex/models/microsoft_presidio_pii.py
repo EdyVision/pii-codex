@@ -7,10 +7,8 @@ from typing import List
 import strawberry
 from dataclasses_json import dataclass_json, LetterCase
 
-"""
-PII Types associated with Microsoft Presidio Analyzer
-Supported Entities: https://microsoft.github.io/presidio/supported_entities/
-"""
+# PII Types associated with Microsoft Presidio Analyzer
+# Supported Entities: https://microsoft.github.io/presidio/supported_entities/
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

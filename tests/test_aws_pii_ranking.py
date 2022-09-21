@@ -1,6 +1,6 @@
+from assertpy import assert_that
 from pii_codex.models.common import PIIType, RiskLevel, RiskAssessment
 from pii_codex.services.ranking_service import AmazonPIIRanker
-from assertpy import assert_that
 
 
 class TestAmazonPIIRanking:

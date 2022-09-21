@@ -16,10 +16,10 @@ test.all:
 	@pytest tests
 
 test.coverage:
-	@coverage run -m pytest -vv tests && coverage report -m --omit="*/test*,config/*.conf" --fail-under=80
+	@poetry run coverage run -m pytest -vv tests && coverage report -m --omit="*/test*,config/*.conf" --fail-under=90
 
 lint:
-	@pylint app tests
+	@poetry run pylint pii_codex tests
 
 format.check:
 	@black . --check

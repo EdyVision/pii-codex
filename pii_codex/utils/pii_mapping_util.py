@@ -1,8 +1,9 @@
 import os
 from typing import List
+from pathlib import Path
 import pandas as pd
 import numpy as np
-from pathlib import Path
+
 
 from pii_codex.models.common import (
     RiskLevel,
@@ -82,8 +83,8 @@ def open_pii_type_mapping_csv(
         dirname, f"../data/{mapping_file_version}/{mapping_file_name}.csv"
     )
     path = Path(__file__).parent / filename
-    with path.open() as f:
-        return pd.read_csv(f)
+    with path.open() as file:
+        return pd.read_csv(file)
 
 
 def open_pii_type_mapping_json(
@@ -100,8 +101,8 @@ def open_pii_type_mapping_json(
     )
 
     path = Path(__file__).parent / filename
-    with path.open() as f:
-        json_file_dataframe = pd.read_json(f)
+    with path.open() as file:
+        json_file_dataframe = pd.read_json(file)
         json_file_dataframe.drop("index", axis=1, inplace=True)
 
         return json_file_dataframe

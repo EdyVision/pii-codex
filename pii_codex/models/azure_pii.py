@@ -5,11 +5,11 @@ from enum import Enum
 import strawberry
 from dataclasses_json import dataclass_json, LetterCase
 
-"""
-PII Types and Models as expanded in research
-Research Page:
-https://azuresdkdocs.blob.core.windows.net/$web/python/azure-ai-textanalytics/latest/azure.ai.textanalytics.html#azure.ai.textanalytics.TextAnalyticsClient.recognize_pii_entities
-"""
+
+# PII Types and Models as expanded in research
+# Research Page:
+# https://azuresdkdocs.blob.core.windows.net/$web/python/azure-ai-textanalytics/latest/
+# azure.ai.textanalytics.html#azure.ai.textanalytics.TextAnalyticsClient.recognize_pii_entities
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

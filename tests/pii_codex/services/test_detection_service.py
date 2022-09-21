@@ -14,19 +14,30 @@ detection_service = PIIDetectionService()
 @pytest.mark.parametrize(
     "test_input,pii_types,expected_result",
     [
-        ("Not", [MSFTPresidioPIIType.PHONE.value], False),
-        ("PII", [MSFTPresidioPIIType.EMAIL.value], False),
-        ("example@example.com", [MSFTPresidioPIIType.EMAIL.value], True),
-        ("My email is example@example.eu.edu", [MSFTPresidioPIIType.EMAIL.value], True),
+        ("Not", [MSFTPresidioPIIType.PHONE_NUMBER.value], False),
+        ("PII", [MSFTPresidioPIIType.EMAIL_ADDRESS.value], False),
+        ("example@example.com", [MSFTPresidioPIIType.EMAIL_ADDRESS.value], True),
+        (
+            "My email is example@example.eu.edu",
+            [MSFTPresidioPIIType.EMAIL_ADDRESS.value],
+            True,
+        ),
         (
             "My phone number is 191-212-456-7890",
-            [MSFTPresidioPIIType.PHONE.value],
+            [MSFTPresidioPIIType.PHONE_NUMBER.value],
             False,
         ),  # International number not working
-        ("My phone number is 305-555-5555", [MSFTPresidioPIIType.PHONE.value], True),
+        (
+            "My phone number is 305-555-5555",
+            [MSFTPresidioPIIType.PHONE_NUMBER.value],
+            True,
+        ),
         (
             "My phone number is 305-555-5555 and email is example@example.com",
-            [MSFTPresidioPIIType.PHONE.value, MSFTPresidioPIIType.EMAIL.value],
+            [
+                MSFTPresidioPIIType.PHONE_NUMBER.value,
+                MSFTPresidioPIIType.EMAIL_ADDRESS.value,
+            ],
             True,
         ),
     ],
