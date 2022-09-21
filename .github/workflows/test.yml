@@ -27,7 +27,9 @@ jobs:
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
       - name: Install Project Dependencies
-        run: poetry install
+        run: |
+          poetry config virtualenvs.create false
+          make install
       - name: Lint Check
         run: make lint
       - name: Run Tests
