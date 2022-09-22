@@ -12,11 +12,11 @@ from dataclasses_json import dataclass_json, LetterCase
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
-class AWSPIIType(Enum):
-    EMAIL: str = "Email"
+class AWSComprehendPIIType(Enum):
+    EMAIL_ADDRESS: str = "Email"
     ADDRESS: str = "Address"
     NAME: str = "Name"
-    PHONE: str = "PhoneNumber"
+    PHONE_NUMBER: str = "PhoneNumber"
     DATE_TIME: str = "DateTime"
     URL: str = "URL"
     AGE: str = "Age"

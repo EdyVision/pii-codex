@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![License: Hippocratic 3.0](https://img.shields.io/badge/License-Hippocratic_3.0-green.svg)](https://firstdonoharm.dev)
 
-The PII Codex project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in unstructured text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, and third-party open source software. The categorizations are directly influenced by the research by Milne et al. 2018 while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.  
+The PII Codex project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in unstructured text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research by Milne et al. 2018 while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.  
 
 ## Local Setup
 Install dependencies first. Virtual environment highly recommended.
@@ -81,13 +81,12 @@ Using the built-in mapper can be a help, just pass in the mapping you'd like to 
 In the case that you are not bringing your own detection service, there is a detection service built into PII Codex that provides flexibility in analyzer type. The following are supported PII detectors bundled into the service that are either open source or offered by a cloud service provider:
 
 <ol>
-    <li>Microsoft Presidio (Open Source)</li>
-    <li>AWS Comprehend (Requires AWS Account)</li>
-    <li>Azure PII Detection Cognitive Skill (Requires Azure Account)</li>
-    <li>PII Codex Custom Analyzer (Open Source)</li>
+    <li>Microsoft Presidio (Open Source) [<a href="https://github.com/microsoft/presidio">docs</a>]</li>
+    <li>AWS Comprehend (Requires AWS Account) [<a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html">docs</a>]</li>
+    <li>Azure PII Detection Cognitive Skill (Requires Azure Account) [<a href="">docs</a>]</li>
 </ol>
 
 These analyzers leverage Named Entity Recognition (NER) to identify or extract PII tokens from text. Each detection service will have its own notebook under the `/notebooks` folder. In there you will see how each analyzer is called and the associated analysis results.
 
 ## Attributions
-This project benefited greatly from a number of PII research works like that from Milne et. al (2018), Schwartz and Solove (2012), [insert the rest]. A special thanks to all the software modules, open source projects, and frameworks that made the setup and organization of this project much easier like Poetry, Microsoft Presidio, and spaCy.
+This project benefited greatly from a number of PII research works like that from Milne et. al (2018), Schwartz and Solove (2012), [insert the rest]. A special thanks to all the software modules, open source projects, and frameworks that made the setup and organization of this project much easier like Poetry, Microsoft Presidio, spaCy, and several others.

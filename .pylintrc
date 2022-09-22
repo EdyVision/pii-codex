@@ -42,6 +42,7 @@ unsafe-load-any-extension=no
 # --disable=W".
 disable=logging-fstring-interpolation,
         no-member,
+        raise-missing-from,
         import-error,
         missing-module-docstring,
         missing-function-docstring,

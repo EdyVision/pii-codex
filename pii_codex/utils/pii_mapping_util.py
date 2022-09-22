@@ -1,10 +1,12 @@
+# pylint: disable=broad-except, unused-variable
 import os
 from typing import List
 from pathlib import Path
 import pandas as pd
 import numpy as np
 
-
+from pii_codex.models.aws_pii import AWSComprehendPIIType
+from pii_codex.models.azure_pii import AzurePIIType
 from pii_codex.models.common import (
     RiskLevel,
     RiskAssessment,
@@ -13,7 +15,9 @@ from pii_codex.models.common import (
     HIPAACategory,
     DHSCategory,
     NISTCategory,
+    PIIType,
 )
+from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 from pii_codex.utils.file_util import delete_folder, delete_file, write_json_file
 
 dirname = os.path.dirname(__file__)
@@ -63,6 +67,51 @@ def map_pii_type(pii_type: str) -> RiskAssessment:
         dhs_category=DHSCategory(information_detail_lookup.DHS_Category.item()),
         nist_category=NISTCategory(information_detail_lookup.NIST_Category.item()),
     )
+
+
+def convert_common_pii_to_msft_presidio_type(pii_type: PIIType) -> MSFTPresidioPIIType:
+    """
+    Converts a common PII Type to a MSFT Presidio Type
+    :param pii_type:
+    :return:
+    """
+
+    try:
+        converted_type = MSFTPresidioPIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception("The current version does not support this PII Type conversion.")
+
+    return converted_type
+
+
+def convert_common_pii_to_azure_pii_type(pii_type: PIIType) -> AzurePIIType:
+    """
+    Converts a common PII Type to an Azure PII Type
+    :param pii_type:
+    :return:
+    """
+    try:
+        converted_type = AzurePIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception("The current version does not support this PII Type conversion.")
+
+    return converted_type
+
+
+def convert_common_pii_to_aws_comprehend_type(
+    pii_type: PIIType,
+) -> AWSComprehendPIIType:
+    """
+    Converts a common PII Type to an AWS PII Type
+    :param pii_type:
+    :return:
+    """
+    try:
+        converted_type = AWSComprehendPIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception("The current version does not support this PII Type conversion.")
+
+    return converted_type
 
 
 # endregion
