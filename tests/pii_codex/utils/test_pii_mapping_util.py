@@ -44,11 +44,6 @@ class TestPIIMappingUtil:
             assert_that(isinstance(mapped_pii.nist_category, NISTCategory)).is_true()
             assert_that(isinstance(mapped_pii.hipaa_category, HIPAACategory)).is_true()
 
-    def test_common_type_pii_collection_greater_than_others(self):
-        assert_that(len(PIIType) >= len(MSFTPresidioPIIType)).is_true()
-        assert_that(len(PIIType) >= len(AzurePIIType)).is_true()
-        assert_that(len(PIIType) >= len(AWSComprehendPIIType)).is_true()
-
     @pytest.mark.parametrize(
         "pii_type",
         PIIType,
@@ -121,4 +116,4 @@ class TestPIIMappingUtil:
         )
 
         delete_mapping_folder(mapping_file_version=new_version)
-        # endregion
+    # endregion

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Rosado
+    given-names: Eidan J.
+    orcid: https://orcid.org/0000-0003-0665-098X
+title: "pii-codex: a Python library for PII detection, categorization, and risk severity ranking"
+version: 0.1.0
+doi: tbd
+date-released: 2022-10-01

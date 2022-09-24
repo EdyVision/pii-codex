@@ -1,5 +1,5 @@
-# Makefile Project Mycelia
-# Can be used from github workflow and locally
+# Makefile PII Codex
+# Can be used from github workflow or locally
 default: install test lint
 
 test: lint test.all

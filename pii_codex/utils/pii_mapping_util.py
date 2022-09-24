@@ -1,7 +1,5 @@
 # pylint: disable=broad-except, unused-variable
-import os
 from typing import List
-from pathlib import Path
 import pandas as pd
 import numpy as np
 
@@ -18,9 +16,7 @@ from pii_codex.models.common import (
     PIIType,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.utils.file_util import delete_folder, delete_file, write_json_file
-
-dirname = os.path.dirname(__file__)
+from pii_codex.utils.file_util import delete_folder, delete_file, write_json_file, get_relative_path
 
 # region PII MAPPING AND RATING UTILS
 
@@ -128,11 +124,8 @@ def open_pii_type_mapping_csv(
     @param mapping_file_name:
     @param mapping_file_version:
     """
-    filename = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{mapping_file_name}.csv"
-    )
-    path = Path(__file__).parent / filename
-    with path.open() as file:
+    file_path = get_relative_path(f"../data/{mapping_file_version}/{mapping_file_name}.csv")
+    with file_path.open() as file:
         return pd.read_csv(file)
 
 
@@ -145,12 +138,9 @@ def open_pii_type_mapping_json(
     @param mapping_file_version:
     @return:
     """
-    filename = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{mapping_file_name}.json"
-    )
 
-    path = Path(__file__).parent / filename
-    with path.open() as file:
+    file_path = get_relative_path(f"../data/{mapping_file_version}/{mapping_file_name}.json")
+    with file_path.open() as file:
         json_file_dataframe = pd.read_json(file)
         json_file_dataframe.drop("index", axis=1, inplace=True)
 
@@ -170,11 +160,9 @@ def convert_pii_type_mapping_csv_to_json(
     @param json_file_name:
     """
 
-    folder_path = os.path.join(dirname, f"../data/{mapping_file_version}")
+    folder_path = get_relative_path(f"../data/{mapping_file_version}")
 
-    file_path = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{json_file_name}.json"
-    )
+    file_path = get_relative_path(f"../data/{mapping_file_version}/{json_file_name}.json")
 
     write_json_file(
         folder_name=folder_path,
@@ -194,9 +182,7 @@ def delete_mapping_file(
     @param json_file_name:
     """
 
-    file_path = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{json_file_name}.json"
-    )
+    file_path = get_relative_path(f"../data/{mapping_file_version}/{json_file_name}.json")
 
     delete_file(file_path)
 
@@ -210,7 +196,7 @@ def delete_mapping_folder(
     @param mapping_file_version:
     """
 
-    folder_path = os.path.join(dirname, f"../data/{mapping_file_version}")
+    folder_path = get_relative_path(f"../data/{mapping_file_version}")
     delete_folder(folder_path)
 
 
