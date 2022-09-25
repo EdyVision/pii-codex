@@ -1,20 +1,23 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from enum import Enum
+from json import JSONEncoder
 from typing import List
 
 import strawberry
-from dataclasses_json import dataclass_json, LetterCase
 
-"""
-All listed PII Types from Milne et al (2018) and a few others along with
-models used for PII categorization for DHS, NIST, HIPAA, and the risk 
-assessment models for reporting. 
-"""
+# All listed PII Types from Milne et al (2018) and a few others along with
+# models used for PII categorization for DHS, NIST, HIPAA, and the risk
+# assessment models for reporting.
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@strawberry.enum
+class AnalysisProviderType(Enum):
+    AZURE: str = "AZURE"
+    AWS: str = "AWS"
+    PRESIDIO: str = "PRESIDIO"
+
+
 @strawberry.enum
 class RiskLevel(Enum):
     LEVEL_ONE: int = 1  # Not-Identifiable
@@ -22,7 +25,6 @@ class RiskLevel(Enum):
     LEVEL_THREE: int = 3  # Identifiable
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class RiskLevelDefinition(Enum):
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
@@ -30,46 +32,128 @@ class RiskLevelDefinition(Enum):
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class RiskAssessment:
-    pii_type_detected: str
-    risk_level: RiskLevel
-    risk_level_definition: RiskLevelDefinition
-    cluster_membership_type: ClusterMembershipType
-    hipaa_category: HIPAACategory
-    dhs_category: DHSCategory
-    nist_category: NISTCategory
+    pii_type_detected: str = None
+    risk_level: int = RiskLevel.LEVEL_ONE.value
+    risk_level_definition: str = (
+        RiskLevelDefinition.LEVEL_ONE.value
+    )  # Default if it's not semi or fully identifiable
+    cluster_membership_type: str = None
+    hipaa_category: str = None
+    dhs_category: str = None
+    nist_category: str = None
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class RiskAssessmentList:
     risk_assessments: List[RiskAssessment]
     average_risk_score: float
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
-class AnalysisResult:
+class DetectionResult:
     entity_type: str
     score: float
     start: int
     end: int
+
+
+@strawberry.type
+class DetectionResultList:
+    detection_results: List[DetectionResult]
+
+
+@strawberry.type
+class AnalysisResult:
+    detection: DetectionResult
     risk_assessment: RiskAssessment
 
+    def to_dict(self):
+        return {
+            "riskAssessment": self.risk_assessment.__dict__,
+            "detection": self.detection.__dict__,
+        }
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+    def to_flattened_dict(self):
+        assessment = self.risk_assessment.__dict__.copy()
+        assessment.update(self.detection.__dict__)
+        return assessment
+
+
 @strawberry.type
 class AnalysisResultList:
-    analysis_results: List[AnalysisResult]
+    analyses: List[AnalysisResult]
+
+    def to_dict(self):
+        return {"analyses": [item.to_flattened_dict() for item in self.analyses]}
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@strawberry.type
+class BatchAnalysisResult:
+    index: int
+    analyses: List[AnalysisResult]
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "index": self.index,
+        }
+
+
+@strawberry.type
+class ScoredBatchAnalysisResult:
+    index: int
+    analyses: List[AnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "index": self.index,
+            "averageRiskScore": self.average_risk_score,
+        }
+
+
+@strawberry.type
+class BatchAnalysisResultList:
+    batched_analyses: List[BatchAnalysisResult]
+
+    def to_dict(self):
+        return {
+            "batched_analyses": [item.to_flattened_dict() for item in self.analyses]
+        }
+
+
+@strawberry.type
+class ScoredAnalysisResultList:
+    analyses: List[AnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "averageRiskScore": self.average_risk_score,
+        }
+
+
+@strawberry.type
+class ScoredBatchAnalysisResultList:
+    batched_analyses: List[ScoredBatchAnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "batchedAnalyses": [item.to_dict() for item in self.batched_analyses],
+            "averageRiskScore": self.average_risk_score,
+        }
+
+
+class AnalysisEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
 @strawberry.enum
 class PIIType(Enum):
     PHONE_NUMBER: str = "PHONE"
@@ -116,36 +200,25 @@ class PIIType(Enum):
     INCOME_LEVEL: str = "INCOME_LEVEL"
     OCCUPATION: str = "OCCUPATION"
     DOCUMENTS: str = "DOCUMENTS"
-    LEGAL_DOCUMENTS: str = "LEGAL_DOCUMENTS"
     MEDICAL_LICENSE: str = "MEDICAL_LICENSE"
     LICENSE_PLATE_NUMBER: str = "LICENSE_PLATE_NUMBER"
+    SECURITY_ACCESS_CODES: str = "SECURITY_ACCESS_CODES"
+    PASSWORD: str = "PASSWORD"
     US_SOCIAL_SECURITY_NUMBER: str = "US_SOCIAL_SECURITY_NUMBER"
     US_BANK_ACCOUNT_NUMBER: str = "US_BANK_ACCOUNT_NUMBER"
     US_DRIVERS_LICENSE_NUMBER: str = "US_DRIVERS_LICENSE_NUMBER"
     US_PASSPORT_NUMBER: str = "US_PASSPORT_NUMBER"
     US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = "US_INDIVIDUAL_TAXPAYER_IDENTIFICATION"
     INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = "INTERNATIONAL_BANKING_ACCOUNT_NUMBER"
-    UK_NATIONAL_HEALTH_NUMBER: str = "UK_NATIONAL_HEALTH_NUMBER"
-    AU_BUSINESS_NUMBER: str = "AU_BUSINESS_NUMBER"
-    AU_COMPANY_NUMBER: str = "AU_COMPANY_NUMBER"
-    AU_MEDICAL_ACCOUNT_NUMBER: str = "AU_MEDICAL_ACCOUNT_NUMBER"
-    AU_TAX_FILE_NUMBER: str = "AU_TAX_FILE_NUMBER"
-    ES_TAX_IDENTIFICATION_NUMBER: str = "ES_TAX_IDENTIFICATION_NUMBER"
-    SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = (
-        "SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER"
-    )
-    SECURITY_ACCESS_CODES: str = "SECURITY_ACCESS_CODES"
-    PASSWORD: str = "PASSWORD"
+    SWIFT_CODE: str = "SWIFTCode"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class NISTCategory(Enum):
     LINKABLE: str = "Linkable"
     DIRECTLY_PII: str = "Directly PII"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class DHSCategory(Enum):
     NOT_MENTIONED: str = "Not Mentioned"
@@ -153,14 +226,12 @@ class DHSCategory(Enum):
     STAND_ALONE_PII: str = "Stand Alone PII"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class HIPAACategory(Enum):
     NON_PHI: str = "Not Protected Health Information"
     PHI: str = "Protected Health Information"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class ClusterMembershipType(Enum):
     BASIC_DEMOGRAPHICS: str = "Basic Demographics"

@@ -1,4 +1,4 @@
-name: Test
+name: Run Tests and Lint Check
 
 on:
   # Triggers the test workflow on push for all branches
@@ -26,10 +26,12 @@ jobs:
           python-version: 3.9
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
-      - run: python -m venv .venv && source .venv/bin/activate
       - name: Install Project Dependencies
-        run: poetry env info && poetry install
+        run: |
+          poetry config virtualenvs.create false
+          make install
+      - name: Lint Check
+        run: make lint
       - name: Run Tests
         run: |
-          poetry run coverage run -m pytest -v tests
-          poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=85
+          make test.coverage

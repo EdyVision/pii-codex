@@ -1,9 +1,8 @@
-import os
-from typing import List
+# pylint: disable=broad-except, unused-variable
 import pandas as pd
-import numpy as np
-from pathlib import Path
 
+from pii_codex.models.aws_pii import AWSComprehendPIIType
+from pii_codex.models.azure_pii import AzurePIIType
 from pii_codex.models.common import (
     RiskLevel,
     RiskAssessment,
@@ -12,21 +11,17 @@ from pii_codex.models.common import (
     HIPAACategory,
     DHSCategory,
     NISTCategory,
+    PIIType,
 )
-from pii_codex.utils.file_util import delete_folder, delete_file, write_json_file
-
-dirname = os.path.dirname(__file__)
+from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
+from pii_codex.utils.file_util import (
+    delete_folder,
+    delete_file,
+    write_json_file,
+    get_relative_path,
+)
 
 # region PII MAPPING AND RATING UTILS
-
-
-def calculate_average_risk_score(risk_assessments: List[RiskAssessment]) -> float:
-    """
-    Returns the average risk score per token
-    @param risk_assessments:
-    @return:
-    """
-    return np.mean([risk_level.risk_level_value for risk_level in risk_assessments])
 
 
 def map_pii_type(pii_type: str) -> RiskAssessment:
@@ -51,17 +46,70 @@ def map_pii_type(pii_type: str) -> RiskAssessment:
 
     return RiskAssessment(
         pii_type_detected=pii_type,
-        risk_level=RiskLevel[risk_level_definition.name],
-        risk_level_definition=risk_level_definition,
+        risk_level=RiskLevel[risk_level_definition.name].value,
+        risk_level_definition=risk_level_definition.value,
         cluster_membership_type=ClusterMembershipType(
             information_detail_lookup.Cluster_Membership_Type.item()
-        ),
+        ).value,
         hipaa_category=HIPAACategory[
             information_detail_lookup.HIPAA_Protected_Health_Information_Category.item()
-        ],
-        dhs_category=DHSCategory(information_detail_lookup.DHS_Category.item()),
-        nist_category=NISTCategory(information_detail_lookup.NIST_Category.item()),
+        ].value,
+        dhs_category=DHSCategory(information_detail_lookup.DHS_Category.item()).value,
+        nist_category=NISTCategory(
+            information_detail_lookup.NIST_Category.item()
+        ).value,
     )
+
+
+def convert_common_pii_to_msft_presidio_type(pii_type: PIIType) -> MSFTPresidioPIIType:
+    """
+    Converts a common PII Type to a MSFT Presidio Type
+    :param pii_type:
+    :return:
+    """
+
+    try:
+        converted_type = MSFTPresidioPIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
+
+
+def convert_common_pii_to_azure_pii_type(pii_type: PIIType) -> AzurePIIType:
+    """
+    Converts a common PII Type to an Azure PII Type
+    :param pii_type:
+    :return:
+    """
+    try:
+        converted_type = AzurePIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
+
+
+def convert_common_pii_to_aws_comprehend_type(
+    pii_type: PIIType,
+) -> AWSComprehendPIIType:
+    """
+    Converts a common PII Type to an AWS PII Type
+    :param pii_type:
+    :return:
+    """
+    try:
+        converted_type = AWSComprehendPIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
 
 
 # endregion
@@ -78,12 +126,11 @@ def open_pii_type_mapping_csv(
     @param mapping_file_name:
     @param mapping_file_version:
     """
-    filename = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{mapping_file_name}.csv"
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{mapping_file_name}.csv"
     )
-    path = Path(__file__).parent / filename
-    with path.open() as f:
-        return pd.read_csv(f)
+    with file_path.open() as file:
+        return pd.read_csv(file)
 
 
 def open_pii_type_mapping_json(
@@ -95,13 +142,12 @@ def open_pii_type_mapping_json(
     @param mapping_file_version:
     @return:
     """
-    filename = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{mapping_file_name}.json"
-    )
 
-    path = Path(__file__).parent / filename
-    with path.open() as f:
-        json_file_dataframe = pd.read_json(f)
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{mapping_file_name}.json"
+    )
+    with file_path.open() as file:
+        json_file_dataframe = pd.read_json(file)
         json_file_dataframe.drop("index", axis=1, inplace=True)
 
         return json_file_dataframe
@@ -120,10 +166,10 @@ def convert_pii_type_mapping_csv_to_json(
     @param json_file_name:
     """
 
-    folder_path = os.path.join(dirname, f"../data/{mapping_file_version}")
+    folder_path = get_relative_path(f"../data/{mapping_file_version}")
 
-    file_path = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{json_file_name}.json"
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{json_file_name}.json"
     )
 
     write_json_file(
@@ -133,7 +179,7 @@ def convert_pii_type_mapping_csv_to_json(
     )
 
 
-def delete_mapping_file(
+def delete_json_mapping_file(
     mapping_file_version: str = "v1",
     json_file_name: str = "pii_type_mappings",
 ):
@@ -144,14 +190,14 @@ def delete_mapping_file(
     @param json_file_name:
     """
 
-    file_path = os.path.join(
-        dirname, f"../data/{mapping_file_version}/{json_file_name}.json"
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{json_file_name}.json"
     )
 
     delete_file(file_path)
 
 
-def delete_mapping_folder(
+def delete_json_mapping_folder(
     mapping_file_version: str,
 ):
     """
@@ -160,7 +206,7 @@ def delete_mapping_folder(
     @param mapping_file_version:
     """
 
-    folder_path = os.path.join(dirname, f"../data/{mapping_file_version}")
+    folder_path = get_relative_path(f"../data/{mapping_file_version}")
     delete_folder(folder_path)
 
 

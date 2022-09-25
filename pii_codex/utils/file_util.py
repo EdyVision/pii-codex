@@ -1,8 +1,25 @@
+"""
+File utils
+"""
+
 import json
 import logging
 import os
+from pathlib import Path
 
 dirname = os.path.dirname(__file__)
+
+
+def get_relative_path(path_to_file: str):
+    """
+    Returns the file_path relative to the project
+
+    :param path_to_file:
+    :return:
+    """
+    filename = os.path.join(dirname, path_to_file)
+
+    return Path(__file__).parent / filename
 
 
 def write_json_file(folder_name: str, file_name: str, json_data: json):

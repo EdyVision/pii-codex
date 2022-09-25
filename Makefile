@@ -1,5 +1,5 @@
-# Makefile Project Mycelia
-# Can be used from github workflow and locally
+# Makefile PII Codex
+# Can be used from github workflow or locally
 default: install test lint
 
 test: lint test.all
@@ -16,10 +16,10 @@ test.all:
 	@pytest tests
 
 test.coverage:
-	@coverage run -m pytest -vv tests && coverage report -m --omit="*/test*,config/*.conf" --fail-under=80
+	@poetry run coverage run -m pytest -vv tests && coverage report -m --omit="*/test*,config/*.conf" --fail-under=95
 
 lint:
-	@pylint app tests
+	@poetry run pylint pii_codex tests
 
 format.check:
 	@black . --check

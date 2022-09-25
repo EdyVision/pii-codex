@@ -1,19 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from enum import Enum
-from typing import List
-
 import strawberry
-from dataclasses_json import dataclass_json, LetterCase
 
-"""
-PII Types associated with Microsoft Presidio Analyzer
-Supported Entities: https://microsoft.github.io/presidio/supported_entities/
-"""
+# PII Types associated with Microsoft Presidio Analyzer
+# Supported Entities: https://microsoft.github.io/presidio/supported_entities/
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class MSFTPresidioPIIType(Enum):
     PHONE_NUMBER: str = "PHONE_NUMBER"
@@ -43,21 +36,3 @@ class MSFTPresidioPIIType(Enum):
     AU_TAX_FILE_NUMBER: str = "AU_TFN"
     ES_TAX_IDENTIFICATION_NUMBER: str = "ES_NIF"
     SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = "SG_NRIC_FIN"
-
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-@strawberry.type
-class AnalysisResult:
-    entity_type: str
-    score: float
-    recognizer_name: str
-    start: int
-    end: int
-
-
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
-@strawberry.type
-class AnalysisResultList:
-    analysis_results: List[AnalysisResult]
