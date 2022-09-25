@@ -2,13 +2,6 @@ import boto3
 
 from ...config import settings
 
-COMPREHEND_CLIENT = boto3.client(
-    "comprehend",
-    aws_access_key_id=settings.AWS_ACCESS_KEY,
-    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    region_name="us-east-1",
-)  # us-west-1 doesn't support comprehend yet
-
 
 class AWSComprehend:
     """
@@ -16,7 +9,12 @@ class AWSComprehend:
     Boto3 Docs: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html
     """
 
-    COMPREHEND = COMPREHEND_CLIENT
+    COMPREHEND = boto3.client(
+        "comprehend",
+        aws_access_key_id=settings.AWS_ACCESS_KEY,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name="us-east-1",
+    )  # us-west-1 doesn't support comprehend yet
 
     def detect_pii(self, text: str, language_code: str) -> dict:
         """
@@ -43,7 +41,3 @@ class AWSComprehend:
         return self.COMPREHEND.detect_pii_entities(
             Text=text, LanguageCode=language_code
         )
-
-
-# Exported Services
-AWS_COMPREHEND = AWSComprehend()

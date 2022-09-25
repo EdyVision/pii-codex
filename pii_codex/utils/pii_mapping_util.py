@@ -14,6 +14,7 @@ from pii_codex.models.common import (
     DHSCategory,
     NISTCategory,
     PIIType,
+    AnalysisResult,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 from pii_codex.utils.file_util import (
@@ -24,15 +25,6 @@ from pii_codex.utils.file_util import (
 )
 
 # region PII MAPPING AND RATING UTILS
-
-
-def calculate_average_risk_score(risk_assessments: List[RiskAssessment]) -> float:
-    """
-    Returns the average risk score per token
-    @param risk_assessments:
-    @return:
-    """
-    return np.mean([risk_level.risk_level_value for risk_level in risk_assessments])
 
 
 def map_pii_type(pii_type: str) -> RiskAssessment:
@@ -57,16 +49,18 @@ def map_pii_type(pii_type: str) -> RiskAssessment:
 
     return RiskAssessment(
         pii_type_detected=pii_type,
-        risk_level=RiskLevel[risk_level_definition.name],
-        risk_level_definition=risk_level_definition,
+        risk_level=RiskLevel[risk_level_definition.name].value,
+        risk_level_definition=risk_level_definition.value,
         cluster_membership_type=ClusterMembershipType(
             information_detail_lookup.Cluster_Membership_Type.item()
-        ),
+        ).value,
         hipaa_category=HIPAACategory[
             information_detail_lookup.HIPAA_Protected_Health_Information_Category.item()
-        ],
-        dhs_category=DHSCategory(information_detail_lookup.DHS_Category.item()),
-        nist_category=NISTCategory(information_detail_lookup.NIST_Category.item()),
+        ].value,
+        dhs_category=DHSCategory(information_detail_lookup.DHS_Category.item()).value,
+        nist_category=NISTCategory(
+            information_detail_lookup.NIST_Category.item()
+        ).value,
     )
 
 

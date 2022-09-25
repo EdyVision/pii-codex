@@ -13,7 +13,7 @@ class TestAmazonPIIRanking:
         risk_assessment: RiskAssessment = self.ranker.assess_pii_token(
             detected_pii_type=PIIType.US_SOCIAL_SECURITY_NUMBER.name
         )
-        assert_that(risk_assessment.risk_level).is_equal_to(RiskLevel.LEVEL_THREE)
+        assert_that(risk_assessment.risk_level).is_equal_to(3)
         assert_that(risk_assessment.pii_type_detected).is_equal_to(
             PIIType.US_SOCIAL_SECURITY_NUMBER.name
         )

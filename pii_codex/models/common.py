@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
+from json import JSONEncoder
 from typing import List
 
 import strawberry
@@ -12,7 +13,13 @@ from dataclasses_json import dataclass_json, LetterCase
 # assessment models for reporting.
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@strawberry.enum
+class AnalysisProviderType(Enum):
+    AZURE_ANALYSIS: str = "AZURE"
+    AWS_COMPREHEND_ANALYSIS: str = "AWS"
+    MICROSOFT_PRESIDIO_ANALYSIS: str = "PRESIDIO"
+
+
 @strawberry.enum
 class RiskLevel(Enum):
     LEVEL_ONE: int = 1  # Not-Identifiable
@@ -20,7 +27,6 @@ class RiskLevel(Enum):
     LEVEL_THREE: int = 3  # Identifiable
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class RiskLevelDefinition(Enum):
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
@@ -28,29 +34,23 @@ class RiskLevelDefinition(Enum):
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class RiskAssessment:
-    risk_level: RiskLevel
-    risk_level_definition: RiskLevelDefinition
     pii_type_detected: str = None
-    cluster_membership_type: ClusterMembershipType = None
-    hipaa_category: HIPAACategory = None
-    dhs_category: DHSCategory = None
-    nist_category: NISTCategory = None
+    risk_level: int
+    risk_level_definition: str
+    cluster_membership_type: str = None
+    hipaa_category: str = None
+    dhs_category: str = None
+    nist_category: str = None
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class RiskAssessmentList:
     risk_assessments: List[RiskAssessment]
     average_risk_score: float
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class DetectionResult:
     entity_type: str
@@ -59,29 +59,41 @@ class DetectionResult:
     end: int
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class DetectionResultList:
     detection_results: List[DetectionResult]
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
 @strawberry.type
 class AnalysisResult:
     detection: DetectionResult
     risk_assessment: RiskAssessment
 
+    def to_dict(self):
+        return {
+            "riskAssessment": self.risk_assessment.__dict__,
+            "detection": self.detection.__dict__,
+        }
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+    def to_flattened_dict(self):
+        assessment = self.risk_assessment.__dict__.copy()
+        assessment.update(self.detection.__dict__)
+        return assessment
+
+
 @strawberry.type
 class AnalysisResultList:
     analysis_results: List[AnalysisResult]
 
+    def to_dict(self):
+        return [item.to_flattened_dict() for item in self.analysis_results]
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+
+class AnalysisEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
 @strawberry.enum
 class PIIType(Enum):
     PHONE_NUMBER: str = "PHONE"
