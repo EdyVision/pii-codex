@@ -2,8 +2,7 @@ from pydantic import BaseSettings
 
 
 class CommonSettings(BaseSettings):
-    APP_NAME: str = "Unraveled API"
-    DEBUG_MODE: bool = False
+    APP_NAME: str = "PII Codex"
 
 
 class AWSSettings(BaseSettings):
@@ -15,15 +14,8 @@ class AWSSettings(BaseSettings):
     AWS_REGION: str = ""  # Example: us-east-1
 
 
-class MachineLearningSettings(BaseSettings):
-    """ML Learning Settings like NLTK and other such libraries"""
-
-    NLTK_DATA_PATH: str = "./data/nltk_data"
-
-
 class Settings(
     CommonSettings,
-    MachineLearningSettings,
     AWSSettings,
 ):
     class Config:

@@ -100,4 +100,4 @@ In general, you can contribute to this project by creating issues. You are also 
 You can use issues to report bugs and seek support. Before creating any new issues, please check for similar ones in the issue list first.
 
 ## Attributions
-This project benefited greatly from a number of PII research works like that from Milne et al (2016), Schwartz and Solove (2012), [insert the rest], and the documentation by NIST, DHS, and HIPAA. A special thanks to all the open source projects, and frameworks that made the setup and organization of this project much easier like Poetry, Microsoft Presidio, spaCy, Jupyter, and several others.
+This project benefited greatly from a number of PII research works like that from Milne et al (2016), Schwartz and Solove (2012), and the documentation by NIST, DHS, and HIPAA. A special thanks to all the open source projects, and frameworks that made the setup and organization of this project much easier like Poetry, Microsoft Presidio, spaCy, Jupyter, and several others.
