@@ -17,6 +17,7 @@ presidio-analyzer = "^2.2.29"
 jupyter = "^1.0.0"
 pandas = "^1.4.4"
 ipykernel = "^6.15.3"
+boto3 = "^1.24.80"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.3"

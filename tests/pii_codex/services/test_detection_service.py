@@ -1,9 +1,9 @@
 import pytest
 from assertpy import assert_that
 
+from pii_codex.models.common import DetectionResultList
 from pii_codex.models.microsoft_presidio_pii import (
     MSFTPresidioPIIType,
-    AnalysisResultList,
 )
 from pii_codex.services.detection_service import PIIDetectionService
 
@@ -43,12 +43,14 @@ detection_service = PIIDetectionService()
     ],
 )
 def test_msft_presidio_analysis(test_input, pii_types, expected_result):
-    presidio_results: AnalysisResultList = detection_service.analyze_with_msft_presidio(
-        text=test_input,
-        entities=pii_types,
+    presidio_results: DetectionResultList = (
+        detection_service.analyze_with_msft_presidio(
+            text=test_input,
+            entities=pii_types,
+        )
     )
 
     if expected_result:
-        assert_that(presidio_results.analysis_results).is_not_empty()
+        assert_that(presidio_results.detection_results).is_not_empty()
     else:
-        assert_that(presidio_results.analysis_results).is_empty()
+        assert_that(presidio_results.detection_results).is_empty()

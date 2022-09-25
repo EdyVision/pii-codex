@@ -16,7 +16,12 @@ from pii_codex.models.common import (
     PIIType,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.utils.file_util import delete_folder, delete_file, write_json_file, get_relative_path
+from pii_codex.utils.file_util import (
+    delete_folder,
+    delete_file,
+    write_json_file,
+    get_relative_path,
+)
 
 # region PII MAPPING AND RATING UTILS
 
@@ -75,7 +80,9 @@ def convert_common_pii_to_msft_presidio_type(pii_type: PIIType) -> MSFTPresidioP
     try:
         converted_type = MSFTPresidioPIIType[pii_type.name]
     except Exception as ex:
-        raise Exception("The current version does not support this PII Type conversion.")
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
 
     return converted_type
 
@@ -89,7 +96,9 @@ def convert_common_pii_to_azure_pii_type(pii_type: PIIType) -> AzurePIIType:
     try:
         converted_type = AzurePIIType[pii_type.name]
     except Exception as ex:
-        raise Exception("The current version does not support this PII Type conversion.")
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
 
     return converted_type
 
@@ -105,7 +114,9 @@ def convert_common_pii_to_aws_comprehend_type(
     try:
         converted_type = AWSComprehendPIIType[pii_type.name]
     except Exception as ex:
-        raise Exception("The current version does not support this PII Type conversion.")
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
 
     return converted_type
 
@@ -124,7 +135,9 @@ def open_pii_type_mapping_csv(
     @param mapping_file_name:
     @param mapping_file_version:
     """
-    file_path = get_relative_path(f"../data/{mapping_file_version}/{mapping_file_name}.csv")
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{mapping_file_name}.csv"
+    )
     with file_path.open() as file:
         return pd.read_csv(file)
 
@@ -139,7 +152,9 @@ def open_pii_type_mapping_json(
     @return:
     """
 
-    file_path = get_relative_path(f"../data/{mapping_file_version}/{mapping_file_name}.json")
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{mapping_file_name}.json"
+    )
     with file_path.open() as file:
         json_file_dataframe = pd.read_json(file)
         json_file_dataframe.drop("index", axis=1, inplace=True)
@@ -162,7 +177,9 @@ def convert_pii_type_mapping_csv_to_json(
 
     folder_path = get_relative_path(f"../data/{mapping_file_version}")
 
-    file_path = get_relative_path(f"../data/{mapping_file_version}/{json_file_name}.json")
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{json_file_name}.json"
+    )
 
     write_json_file(
         folder_name=folder_path,
@@ -171,7 +188,7 @@ def convert_pii_type_mapping_csv_to_json(
     )
 
 
-def delete_mapping_file(
+def delete_json_mapping_file(
     mapping_file_version: str = "v1",
     json_file_name: str = "pii_type_mappings",
 ):
@@ -182,12 +199,14 @@ def delete_mapping_file(
     @param json_file_name:
     """
 
-    file_path = get_relative_path(f"../data/{mapping_file_version}/{json_file_name}.json")
+    file_path = get_relative_path(
+        f"../data/{mapping_file_version}/{json_file_name}.json"
+    )
 
     delete_file(file_path)
 
 
-def delete_mapping_folder(
+def delete_json_mapping_folder(
     mapping_file_version: str,
 ):
     """

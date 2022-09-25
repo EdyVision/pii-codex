@@ -17,8 +17,8 @@ from pii_codex.utils.pii_mapping_util import (
     open_pii_type_mapping_csv,
     open_pii_type_mapping_json,
     convert_pii_type_mapping_csv_to_json,
-    delete_mapping_file,
-    delete_mapping_folder,
+    delete_json_mapping_file,
+    delete_json_mapping_folder,
     map_pii_type,
     convert_common_pii_to_msft_presidio_type,
     convert_common_pii_to_azure_pii_type,
@@ -53,7 +53,9 @@ class TestPIIMappingUtil:
             converted_pii = convert_common_pii_to_msft_presidio_type(pii_type)
             assert_that(isinstance(converted_pii, MSFTPresidioPIIType)).is_true()
         except Exception as ex:
-            assert_that(ex.args[0]).contains("The current version does not support this PII Type conversion.")
+            assert_that(ex.args[0]).contains(
+                "The current version does not support this PII Type conversion."
+            )
 
     @pytest.mark.parametrize(
         "pii_type",
@@ -64,7 +66,9 @@ class TestPIIMappingUtil:
             converted_pii = convert_common_pii_to_azure_pii_type(pii_type)
             assert_that(isinstance(converted_pii, AzurePIIType)).is_true()
         except Exception as ex:
-            assert_that(ex.args[0]).contains("The current version does not support this PII Type conversion.")
+            assert_that(ex.args[0]).contains(
+                "The current version does not support this PII Type conversion."
+            )
 
     @pytest.mark.parametrize(
         "pii_type",
@@ -75,7 +79,9 @@ class TestPIIMappingUtil:
             converted_pii = convert_common_pii_to_aws_comprehend_type(pii_type)
             assert_that(isinstance(converted_pii, AWSComprehendPIIType)).is_true()
         except Exception as ex:
-            assert_that(ex.args[0]).contains("The current version does not support this PII Type conversion.")
+            assert_that(ex.args[0]).contains(
+                "The current version does not support this PII Type conversion."
+            )
 
     # endregion
 
@@ -111,9 +117,10 @@ class TestPIIMappingUtil:
         assert_that(isinstance(json_file_dataframe, pd.DataFrame)).is_true()
 
         # Delete file and folder
-        delete_mapping_file(
+        delete_json_mapping_file(
             mapping_file_version=new_version, json_file_name="pii_type_mappings"
         )
 
-        delete_mapping_folder(mapping_file_version=new_version)
+        delete_json_mapping_folder(mapping_file_version=new_version)
+
     # endregion

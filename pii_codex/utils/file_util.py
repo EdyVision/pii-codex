@@ -17,9 +17,7 @@ def get_relative_path(path_to_file: str):
     :param path_to_file:
     :return:
     """
-    filename = os.path.join(
-        dirname, path_to_file
-    )
+    filename = os.path.join(dirname, path_to_file)
 
     return Path(__file__).parent / filename
 

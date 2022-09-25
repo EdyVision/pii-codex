@@ -52,11 +52,25 @@ class RiskAssessmentList:
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
 @strawberry.type
-class AnalysisResult:
+class DetectionResult:
     entity_type: str
     score: float
     start: int
     end: int
+
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+@strawberry.type
+class DetectionResultList:
+    detection_results: List[DetectionResult]
+
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass
+@strawberry.type
+class AnalysisResult:
+    detection: DetectionResult
     risk_assessment: RiskAssessment
 
 
