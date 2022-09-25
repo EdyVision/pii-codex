@@ -1,7 +1,5 @@
 # pylint: disable=broad-except, unused-variable
-from typing import List
 import pandas as pd
-import numpy as np
 
 from pii_codex.models.aws_pii import AWSComprehendPIIType
 from pii_codex.models.azure_pii import AzurePIIType
@@ -14,7 +12,6 @@ from pii_codex.models.common import (
     DHSCategory,
     NISTCategory,
     PIIType,
-    AnalysisResult,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 from pii_codex.utils.file_util import (

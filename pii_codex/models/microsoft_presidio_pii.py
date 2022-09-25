@@ -2,13 +2,11 @@ from __future__ import annotations
 
 from enum import Enum
 import strawberry
-from dataclasses_json import dataclass_json, LetterCase
 
 # PII Types associated with Microsoft Presidio Analyzer
 # Supported Entities: https://microsoft.github.io/presidio/supported_entities/
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class MSFTPresidioPIIType(Enum):
     PHONE_NUMBER: str = "PHONE_NUMBER"

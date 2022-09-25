@@ -37,12 +37,21 @@ class TestPIIMappingUtil:
         if pii_type is not PIIType.DOCUMENTS.name:
             mapped_pii = map_pii_type(pii_type)
             assert_that(mapped_pii.risk_level).is_greater_than(1)
-            # assert_that(
-            #     isinstance(mapped_pii.cluster_membership_type, ClusterMembershipType)
-            # ).is_true()
-            # assert_that(isinstance(mapped_pii.dhs_category, DHSCategory)).is_true()
-            # assert_that(isinstance(mapped_pii.nist_category, NISTCategory)).is_true()
-            # assert_that(isinstance(mapped_pii.hipaa_category, HIPAACategory)).is_true()
+            assert_that(
+                isinstance(
+                    ClusterMembershipType(mapped_pii.cluster_membership_type),
+                    ClusterMembershipType,
+                )
+            ).is_true()
+            assert_that(
+                isinstance(DHSCategory(mapped_pii.dhs_category), DHSCategory)
+            ).is_true()
+            assert_that(
+                isinstance(NISTCategory(mapped_pii.nist_category), NISTCategory)
+            ).is_true()
+            assert_that(
+                isinstance(HIPAACategory(mapped_pii.hipaa_category), HIPAACategory)
+            ).is_true()
 
     @pytest.mark.parametrize(
         "pii_type",

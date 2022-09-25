@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from enum import Enum
 from json import JSONEncoder
 from typing import List
 
 import strawberry
-from dataclasses_json import dataclass_json, LetterCase
 
 # All listed PII Types from Milne et al (2018) and a few others along with
 # models used for PII categorization for DHS, NIST, HIPAA, and the risk
@@ -15,9 +13,9 @@ from dataclasses_json import dataclass_json, LetterCase
 
 @strawberry.enum
 class AnalysisProviderType(Enum):
-    AZURE_ANALYSIS: str = "AZURE"
-    AWS_COMPREHEND_ANALYSIS: str = "AWS"
-    MICROSOFT_PRESIDIO_ANALYSIS: str = "PRESIDIO"
+    AZURE: str = "AZURE"
+    AWS: str = "AWS"
+    PRESIDIO: str = "PRESIDIO"
 
 
 @strawberry.enum
@@ -37,8 +35,10 @@ class RiskLevelDefinition(Enum):
 @strawberry.type
 class RiskAssessment:
     pii_type_detected: str = None
-    risk_level: int
-    risk_level_definition: str
+    risk_level: int = RiskLevel.LEVEL_ONE.value
+    risk_level_definition: str = (
+        RiskLevelDefinition.LEVEL_ONE.value
+    )  # Default if it's not semi or fully identifiable
     cluster_membership_type: str = None
     hipaa_category: str = None
     dhs_category: str = None
@@ -83,10 +83,70 @@ class AnalysisResult:
 
 @strawberry.type
 class AnalysisResultList:
-    analysis_results: List[AnalysisResult]
+    analyses: List[AnalysisResult]
 
     def to_dict(self):
-        return [item.to_flattened_dict() for item in self.analysis_results]
+        return {"analyses": [item.to_flattened_dict() for item in self.analyses]}
+
+
+@strawberry.type
+class BatchAnalysisResult:
+    index: int
+    analyses: List[AnalysisResult]
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "index": self.index,
+        }
+
+
+@strawberry.type
+class ScoredBatchAnalysisResult:
+    index: int
+    analyses: List[AnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "index": self.index,
+            "averageRiskScore": self.average_risk_score,
+        }
+
+
+@strawberry.type
+class BatchAnalysisResultList:
+    batched_analyses: List[BatchAnalysisResult]
+
+    def to_dict(self):
+        return {
+            "batched_analyses": [item.to_flattened_dict() for item in self.analyses]
+        }
+
+
+@strawberry.type
+class ScoredAnalysisResultList:
+    analyses: List[AnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "analyses": [item.to_flattened_dict() for item in self.analyses],
+            "averageRiskScore": self.average_risk_score,
+        }
+
+
+@strawberry.type
+class ScoredBatchAnalysisResultList:
+    batched_analyses: List[ScoredBatchAnalysisResult]
+    average_risk_score: float
+
+    def to_dict(self):
+        return {
+            "batchedAnalyses": [item.to_dict() for item in self.batched_analyses],
+            "averageRiskScore": self.average_risk_score,
+        }
 
 
 class AnalysisEncoder(JSONEncoder):
@@ -153,14 +213,12 @@ class PIIType(Enum):
     SWIFT_CODE: str = "SWIFTCode"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class NISTCategory(Enum):
     LINKABLE: str = "Linkable"
     DIRECTLY_PII: str = "Directly PII"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class DHSCategory(Enum):
     NOT_MENTIONED: str = "Not Mentioned"
@@ -168,14 +226,12 @@ class DHSCategory(Enum):
     STAND_ALONE_PII: str = "Stand Alone PII"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class HIPAACategory(Enum):
     NON_PHI: str = "Not Protected Health Information"
     PHI: str = "Protected Health Information"
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class ClusterMembershipType(Enum):
     BASIC_DEMOGRAPHICS: str = "Basic Demographics"

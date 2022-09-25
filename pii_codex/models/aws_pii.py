@@ -3,14 +3,12 @@ from __future__ import annotations
 from enum import Enum
 
 import strawberry
-from dataclasses_json import dataclass_json, LetterCase
 
 # PII Types and Models as expanded in research
 # Research Page:
 # AWS Comprehend PII Docs: https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
 @strawberry.enum
 class AWSComprehendPIIType(Enum):
     EMAIL_ADDRESS: str = "EMAIL"
