@@ -1,6 +1,8 @@
 from assertpy import assert_that
-from pii_codex.models.common import PIIType, RiskAssessment
+from pii_codex.models.common import PIIType
+from pii_codex.models.analysis import RiskAssessment
 from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
+from pii_codex.utils.statistics_util import get_mean
 
 
 class TestPIIAssessmentService:
@@ -23,9 +25,7 @@ class TestPIIAssessmentService:
         )
         assert_that(isinstance(risk_assessment_list[0], RiskAssessment))
         assert_that(
-            PII_ASSESSMENT_SERVICE.calculate_risk_assessment_score_average(
-                risk_assessment_list
-            )
+            get_mean([assessment.risk_level for assessment in risk_assessment_list])
         ).is_equal_to(3.0)
 
         # PII types with different ratings
@@ -37,7 +37,5 @@ class TestPIIAssessmentService:
         )
         assert_that(isinstance(risk_assessment_list[0], RiskAssessment))
         assert_that(
-            PII_ASSESSMENT_SERVICE.calculate_risk_assessment_score_average(
-                risk_assessment_list
-            )
+            get_mean([assessment.risk_level for assessment in risk_assessment_list])
         ).is_equal_to(2.5)

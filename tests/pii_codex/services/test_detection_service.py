@@ -1,10 +1,12 @@
+from typing import List
 from unittest import mock
 
 import pytest
 from assertpy import assert_that
 
 from pii_codex.clients.aws_comprehend import AWSComprehend
-from pii_codex.models.common import DetectionResultList, PIIType
+from pii_codex.models.common import PIIType
+from pii_codex.models.analysis import DetectionResult
 from pii_codex.models.microsoft_presidio_pii import (
     MSFTPresidioPIIType,
 )
@@ -47,20 +49,22 @@ from pii_codex.services.pii_detection import (
     ],
 )
 def test_msft_presidio_analysis(test_input, pii_types, expected_result):
-    presidio_results: DetectionResultList = PresidioPIIDetectionService().analyze_text(
+    presidio_results: List[
+        DetectionResult
+    ] = PresidioPIIDetectionService().analyze_item(
         text=test_input,
         entities=pii_types,
     )
 
     if expected_result:
-        assert_that(presidio_results.detection_results).is_not_empty()
+        assert_that(presidio_results).is_not_empty()
     else:
-        assert_that(presidio_results.detection_results).is_empty()
+        assert_that(presidio_results).is_empty()
 
 
 def test_azure_analysis():
     with pytest.raises(Exception) as ex_info:
-        AzurePIIDetectionService().analyze_text(
+        AzurePIIDetectionService().analyze_item(
             text="test_input",
             entities=None,
         )
@@ -105,13 +109,13 @@ def test_aws_comprehend_analysis(test_input, expected_result, expected_pii):
         if expected_pii
         else {"Entities": []}
     )
-    presidio_results: DetectionResultList = (
-        AWSComprehendPIIDetectionService().analyze_text(
-            text=test_input,
-        )
+    presidio_results: List[
+        DetectionResult
+    ] = AWSComprehendPIIDetectionService().analyze_item(
+        text=test_input,
     )
 
     if expected_result:
-        assert_that(presidio_results.detection_results).is_not_empty()
+        assert_that(presidio_results).is_not_empty()
     else:
-        assert_that(presidio_results.detection_results).is_empty()
+        assert_that(presidio_results).is_empty()

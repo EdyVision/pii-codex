@@ -5,7 +5,6 @@ from pii_codex.models.aws_pii import AWSComprehendPIIType
 from pii_codex.models.azure_pii import AzurePIIType
 from pii_codex.models.common import (
     RiskLevel,
-    RiskAssessment,
     RiskLevelDefinition,
     ClusterMembershipType,
     HIPAACategory,
@@ -13,6 +12,7 @@ from pii_codex.models.common import (
     NISTCategory,
     PIIType,
 )
+from pii_codex.models.analysis import RiskAssessment
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 from pii_codex.utils.file_util import (
     delete_folder,

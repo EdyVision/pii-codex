@@ -1,9 +1,11 @@
-from typing import List
+from typing import List, Tuple
 
-import numpy as np
-
-from ..models.common import RiskAssessment, AnalysisResult, ScoredBatchAnalysisResult
+from ..models.analysis import RiskAssessment, AnalysisResultItem, AnalysisResult
 from ..utils.pii_mapping_util import map_pii_type
+from collections import Counter
+from itertools import chain
+
+from ..utils.statistics_util import get_mean, get_sum
 
 
 class PIIAssessmentService:
@@ -37,6 +39,7 @@ class PIIAssessmentService:
     ) -> List[RiskAssessment]:
         """
         Assesses a list of detected PII types given an array of type name strings from commmon.PIIType enum
+
         @param detected_pii_types: array type name strings from commmon.PIIType
         enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
         @return: List[RiskAssessment]
@@ -54,31 +57,41 @@ class PIIAssessmentService:
     ) -> float:
         """
         Returns the average risk score per token
+
         @param risk_assessments:
         @return: float
         """
-        return np.mean([assessment.risk_level for assessment in risk_assessments])
+        return get_mean([assessment.risk_level for assessment in risk_assessments])
 
     @staticmethod
-    def calculate_analysis_score_average(analyses: List[AnalysisResult]) -> float:
+    def get_detected_pii_count(analyses: List[AnalysisResult]) -> float:
         """
-        Returns the average risk score per token assessment in AnalysisResult list
-        @param analyses: List[AnalysisResult]
+        Returns the count of detected PII for analyses performed on a collection
+
+        @param analyses: List[ScoredAnalysisResult]
         @return: float
         """
-        return np.mean([analysis.risk_assessment.risk_level for analysis in analyses])
+        return get_sum([len(analysis.analysis) for analysis in analyses])
 
     @staticmethod
-    def calculate_batch_score_average(
-        scored_analyses: List[ScoredBatchAnalysisResult],
-    ) -> float:
+    def get_detected_pii_types(
+        analyses: List[AnalysisResult],
+    ) -> Tuple[List[str], Counter]:
         """
-        Returns the average risk score for batch analysis assessments with individual score averages
+        Returns the list of detected PII types and their frequencies for analyses performed on a collection
 
-        @param scored_analyses: List[ScoredBatchAnalysisResult]
-        @return: float
+        @param analyses: List[ScoredAnalysisResult]
+        @return: Tuple[List[str], Counter]
         """
-        return np.mean([analysis.average_risk_score for analysis in scored_analyses])
+        flattened_list_of_detections = list(
+            chain.from_iterable(
+                [analysis.get_detected_types() for analysis in analyses]
+            )
+        )
+
+        return list(set(flattened_list_of_detections)), Counter(
+            flattened_list_of_detections
+        )
 
 
 PII_ASSESSMENT_SERVICE = PIIAssessmentService()

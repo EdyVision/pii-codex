@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from enum import Enum
-from json import JSONEncoder
-from typing import List
 
 import strawberry
 
 # All listed PII Types from Milne et al (2018) and a few others along with
-# models used for PII categorization for DHS, NIST, HIPAA, and the risk
-# assessment models for reporting.
+# models used for PII categorization for DHS, NIST, and HIPAA
 
 
 @strawberry.enum
@@ -30,128 +27,6 @@ class RiskLevelDefinition(Enum):
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
     LEVEL_TWO: str = "Semi-Identifiable"
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
-
-
-@strawberry.type
-class RiskAssessment:
-    pii_type_detected: str = None
-    risk_level: int = RiskLevel.LEVEL_ONE.value
-    risk_level_definition: str = (
-        RiskLevelDefinition.LEVEL_ONE.value
-    )  # Default if it's not semi or fully identifiable
-    cluster_membership_type: str = None
-    hipaa_category: str = None
-    dhs_category: str = None
-    nist_category: str = None
-
-
-@strawberry.type
-class RiskAssessmentList:
-    risk_assessments: List[RiskAssessment]
-    average_risk_score: float
-
-
-@strawberry.type
-class DetectionResult:
-    entity_type: str
-    score: float
-    start: int
-    end: int
-
-
-@strawberry.type
-class DetectionResultList:
-    detection_results: List[DetectionResult]
-
-
-@strawberry.type
-class AnalysisResult:
-    detection: DetectionResult
-    risk_assessment: RiskAssessment
-
-    def to_dict(self):
-        return {
-            "riskAssessment": self.risk_assessment.__dict__,
-            "detection": self.detection.__dict__,
-        }
-
-    def to_flattened_dict(self):
-        assessment = self.risk_assessment.__dict__.copy()
-        assessment.update(self.detection.__dict__)
-        return assessment
-
-
-@strawberry.type
-class AnalysisResultList:
-    analyses: List[AnalysisResult]
-
-    def to_dict(self):
-        return {"analyses": [item.to_flattened_dict() for item in self.analyses]}
-
-
-@strawberry.type
-class BatchAnalysisResult:
-    index: int
-    analyses: List[AnalysisResult]
-
-    def to_dict(self):
-        return {
-            "analyses": [item.to_flattened_dict() for item in self.analyses],
-            "index": self.index,
-        }
-
-
-@strawberry.type
-class ScoredBatchAnalysisResult:
-    index: int
-    analyses: List[AnalysisResult]
-    average_risk_score: float
-
-    def to_dict(self):
-        return {
-            "analyses": [item.to_flattened_dict() for item in self.analyses],
-            "index": self.index,
-            "averageRiskScore": self.average_risk_score,
-        }
-
-
-@strawberry.type
-class BatchAnalysisResultList:
-    batched_analyses: List[BatchAnalysisResult]
-
-    def to_dict(self):
-        return {
-            "batched_analyses": [item.to_flattened_dict() for item in self.analyses]
-        }
-
-
-@strawberry.type
-class ScoredAnalysisResultList:
-    analyses: List[AnalysisResult]
-    average_risk_score: float
-
-    def to_dict(self):
-        return {
-            "analyses": [item.to_flattened_dict() for item in self.analyses],
-            "averageRiskScore": self.average_risk_score,
-        }
-
-
-@strawberry.type
-class ScoredBatchAnalysisResultList:
-    batched_analyses: List[ScoredBatchAnalysisResult]
-    average_risk_score: float
-
-    def to_dict(self):
-        return {
-            "batchedAnalyses": [item.to_dict() for item in self.batched_analyses],
-            "averageRiskScore": self.average_risk_score,
-        }
-
-
-class AnalysisEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__
 
 
 @strawberry.enum
