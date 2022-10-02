@@ -1,10 +1,9 @@
 from typing import List, Tuple
-
-from ..models.analysis import RiskAssessment, AnalysisResultItem, AnalysisResult
-from ..utils.pii_mapping_util import map_pii_type
 from collections import Counter
 from itertools import chain
 
+from ..models.analysis import RiskAssessment, AnalysisResult
+from ..utils.pii_mapping_util import map_pii_type
 from ..utils.statistics_util import get_mean, get_sum
 
 

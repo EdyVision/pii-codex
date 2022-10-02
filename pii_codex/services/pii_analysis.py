@@ -1,3 +1,4 @@
+# pylint: disable=too-many-arguments
 from typing import List
 
 from pii_codex.models.common import (
@@ -18,9 +19,9 @@ from pii_codex.services.pii_detection import (
 )
 from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
 from pii_codex.utils.statistics_util import (
-    get_population_standard_deviation,
     get_mean,
-    get_standard_deviation, get_variance,
+    get_standard_deviation,
+    get_variance,
 )
 
 
