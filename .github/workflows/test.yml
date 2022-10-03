@@ -1,4 +1,4 @@
-name: Run Tests and Lint Check
+name: Minimum Coverage Met
 
 on:
   # Triggers the test workflow on push for all branches

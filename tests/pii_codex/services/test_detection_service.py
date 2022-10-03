@@ -1,18 +1,17 @@
 from typing import List
-from unittest import mock
 
 import pytest
 from assertpy import assert_that
 
-from pii_codex.clients.aws_comprehend import AWSComprehend
-from pii_codex.models.common import PIIType
-from pii_codex.models.analysis import DetectionResult
+from pii_codex.models.aws_pii import AWSComprehendPIIType
+from pii_codex.models.azure_pii import AzurePIIType
+from pii_codex.models.analysis import DetectionResultItem, DetectionResult
 from pii_codex.models.microsoft_presidio_pii import (
     MSFTPresidioPIIType,
 )
 from pii_codex.services.pii_detection import (
-    AzurePIIDetectionService,
-    AWSComprehendPIIDetectionService,
+    AzurePIIDetectionAdapter,
+    AWSComprehendPIIDetectionAdapter,
     PresidioPIIDetectionService,
 )
 
@@ -48,9 +47,9 @@ from pii_codex.services.pii_detection import (
         ),
     ],
 )
-def test_msft_presidio_analysis(test_input, pii_types, expected_result):
+def test_msft_presidio_analysis_single_item(test_input, pii_types, expected_result):
     presidio_results: List[
-        DetectionResult
+        DetectionResultItem
     ] = PresidioPIIDetectionService().analyze_item(
         text=test_input,
         entities=pii_types,
@@ -58,64 +57,172 @@ def test_msft_presidio_analysis(test_input, pii_types, expected_result):
 
     if expected_result:
         assert_that(presidio_results).is_not_empty()
+        assert_that(isinstance(presidio_results[0], DetectionResultItem)).is_true()
     else:
         assert_that(presidio_results).is_empty()
 
 
-def test_azure_analysis():
-    with pytest.raises(Exception) as ex_info:
-        AzurePIIDetectionService().analyze_item(
-            text="test_input",
-            entities=None,
-        )
+def test_msft_presidio_analysis_collection():
+    presidio_analyzer = PresidioPIIDetectionService()
 
-    assert_that(str(ex_info.value)).is_not_none()
-    assert_that(str(ex_info.value)).is_equal_to("Not implemented yet")
+    presidio_results: List[DetectionResult] = presidio_analyzer.analyze_collection(
+        texts=[
+            "My email is example@example.eu.edu",
+            "My phone number is 305-555-5555 and email is example@example.com",
+        ],
+        entities=presidio_analyzer.get_supported_entities(language_code="en"),
+        language_code="en",
+    )
+
+    assert_that(presidio_results).is_not_empty()
+    assert_that(presidio_results[1].index).is_greater_than(presidio_results[0].index)
+    assert_that(
+        isinstance(presidio_results[0].detections[0], DetectionResultItem)
+    ).is_true()
+
+
+def test_azure_analysis_single_item_conversion():
+    # with pytest.raises(Exception) as ex_info:
+    conversion_results = AzurePIIDetectionAdapter().convert_analyzed_item(
+        pii_detection={
+            "entities": [
+                {
+                    "text": "My email is example@example.eu.edu",
+                    "category": AzurePIIType.EMAIL_ADDRESS.value,
+                    "subcategory": None,
+                    "length": 22,
+                    "offset": 11,
+                    "confidence_score": 0.8,
+                }
+            ]
+        }
+    )
+
+    assert_that(conversion_results).is_not_none()
+    assert_that(isinstance(conversion_results[0], DetectionResultItem)).is_true()
+
+
+def test_azure_analysis_collection_conversion():
+    conversion_results = AzurePIIDetectionAdapter().convert_analyzed_collection(
+        pii_detections=[
+            {
+                "entities": [
+                    {
+                        "text": "My email is example@example.eu.edu",
+                        "category": AzurePIIType.EMAIL_ADDRESS.value,
+                        "subcategory": None,
+                        "length": 22,
+                        "offset": 11,
+                        "confidence_score": 0.8,
+                    }
+                ]
+            },
+            {
+                "entities": [
+                    {
+                        "text": "My email is example1@example.eu.edu",
+                        "category": AzurePIIType.EMAIL_ADDRESS.value,
+                        "subcategory": None,
+                        "length": 23,
+                        "offset": 11,
+                        "confidence_score": 0.8,
+                    }
+                ]
+            },
+        ]
+    )
+
+    assert_that(conversion_results).is_not_empty()
+    assert_that(conversion_results[1].index).is_greater_than(
+        conversion_results[0].index
+    )
+    assert_that(
+        isinstance(conversion_results[0].detections[0], DetectionResultItem)
+    ).is_true()
 
 
 @pytest.mark.parametrize(
-    "test_input,expected_result,expected_pii",
+    "expected_result,expected_pii",
     [
-        ("Not", False, []),
-        ("PII", False, []),
-        ("example@example.com", True, [PIIType.EMAIL_ADDRESS]),
-        ("My email is example@example.eu.edu", True, [PIIType.EMAIL_ADDRESS]),
-        ("My phone number is 191-212-456-7890", True, [PIIType.PHONE_NUMBER]),
+        (False, []),
+        (False, []),
+        (True, [AWSComprehendPIIType.EMAIL_ADDRESS]),
         (
-            "My phone number is 305-555-5555",
             True,
-            [PIIType.EMAIL_ADDRESS, PIIType.PHONE_NUMBER],
+            [AWSComprehendPIIType.EMAIL_ADDRESS],
         ),
         (
-            "My phone number is 305-555-5555 and email is example@example.com",
             True,
-            [PIIType.EMAIL_ADDRESS, PIIType.PHONE_NUMBER],
+            [AWSComprehendPIIType.PHONE_NUMBER],
+        ),
+        (
+            True,
+            [AWSComprehendPIIType.EMAIL_ADDRESS, AWSComprehendPIIType.PHONE_NUMBER],
+        ),
+        (
+            True,
+            [AWSComprehendPIIType.EMAIL_ADDRESS, AWSComprehendPIIType.PHONE_NUMBER],
         ),
     ],
 )
-def test_aws_comprehend_analysis(test_input, expected_result, expected_pii):
-    AWSComprehend.detect_pii = mock.MagicMock(
-        return_value={
+def test_aws_comprehend_analysis_single_item_conversion(expected_result, expected_pii):
+
+    conversion_results: List[
+        DetectionResultItem
+    ] = AWSComprehendPIIDetectionAdapter().convert_analyzed_item(
+        pii_detection={
             "Entities": [
                 {
                     "Score": 0.99,
-                    "Type": pii_type.name,
+                    "Type": pii_type.value,
                     "BeginOffset": 123,
-                    "EndOffset": 123,
+                    "EndOffset": 456,
                 }
                 for pii_type in expected_pii
             ]
-        }
-        if expected_pii
-        else {"Entities": []}
-    )
-    presidio_results: List[
-        DetectionResult
-    ] = AWSComprehendPIIDetectionService().analyze_item(
-        text=test_input,
+        },
     )
 
     if expected_result:
-        assert_that(presidio_results).is_not_empty()
+        assert_that(conversion_results).is_not_empty()
+        assert_that(isinstance(conversion_results[0], DetectionResultItem)).is_true()
     else:
-        assert_that(presidio_results).is_empty()
+        assert_that(conversion_results).is_empty()
+
+
+def test_aws_comprehend_analysis_collection_conversion():
+
+    conversion_results: List[
+        DetectionResult
+    ] = AWSComprehendPIIDetectionAdapter().convert_analyzed_collection(
+        pii_detections=[
+            {
+                "Entities": [
+                    {
+                        "Score": 0.99,
+                        "Type": AWSComprehendPIIType.EMAIL_ADDRESS.value,
+                        "BeginOffset": 123,
+                        "EndOffset": 456,
+                    }
+                ]
+            },
+            {
+                "Entities": [
+                    {
+                        "Score": 0.73,
+                        "Type": AWSComprehendPIIType.PHONE_NUMBER.value,
+                        "BeginOffset": 456,
+                        "EndOffset": 789,
+                    }
+                ]
+            },
+        ]
+    )
+
+    assert_that(conversion_results).is_not_empty()
+    assert_that(conversion_results[1].index).is_greater_than(
+        conversion_results[0].index
+    )
+    assert_that(
+        isinstance(conversion_results[0].detections[0], DetectionResultItem)
+    ).is_true()

@@ -49,17 +49,17 @@ def get_median(values) -> float:
     return statistics.median(values)
 
 
-def get_median_low(values) -> float:
+def get_median_low(values):
     return statistics.median_low(values)
 
 
-def get_median_high(values) -> float:
+def get_median_high(values):
     return statistics.median_high(values)
 
 
-def get_mode(values) -> float:
+def get_mode(values):
     return statistics.mode(values)
 
 
-def get_sum(values) -> float:
+def get_sum(values):
     return np.sum(values)

@@ -30,7 +30,7 @@ class RiskAssessmentList:
 
 
 @strawberry.type
-class DetectionResult:
+class DetectionResultItem:
     """
     Type associated with a singular PII detection (e.g. detection of an email in a string), its associated risk score,
     and where it is located in a string.
@@ -43,12 +43,18 @@ class DetectionResult:
 
 
 @strawberry.type
+class DetectionResult:
+    index: int = 0
+    detections: List[DetectionResultItem]
+
+
+@strawberry.type
 class AnalysisResultItem:
     """
     The results associated to a single detection of a single string (e.g. Social Media Post, SMS, etc.)
     """
 
-    detection: DetectionResult
+    detection: DetectionResultItem
     risk_assessment: RiskAssessment
 
     def to_dict(self):
