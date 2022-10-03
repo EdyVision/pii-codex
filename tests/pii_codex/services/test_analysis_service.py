@@ -1,5 +1,8 @@
 import pytest
 from assertpy import assert_that
+
+from pii_codex.models.aws_pii import AWSComprehendPIIType
+from pii_codex.models.azure_pii import AzurePIIType
 from pii_codex.models.common import (
     AnalysisProviderType,
     PIIType,
@@ -110,7 +113,59 @@ class TestPIIAnalysisService:
                         ],
                     ),
                 ]
-            )
+            ),
+            (
+                [
+                    DetectionResult(
+                        index=0,
+                        detections=[
+                            DetectionResultItem(
+                                entity_type=AzurePIIType.EMAIL_ADDRESS.name,
+                                score=0.99,
+                                start=123,
+                                end=456,
+                            )
+                        ],
+                    ),
+                    DetectionResult(
+                        index=1,
+                        detections=[
+                            DetectionResultItem(
+                                entity_type=AzurePIIType.URL.name,
+                                score=0.73,
+                                start=789,
+                                end=1010,
+                            )
+                        ],
+                    ),
+                ]
+            ),
+            (
+                [
+                    DetectionResult(
+                        index=0,
+                        detections=[
+                            DetectionResultItem(
+                                entity_type=AWSComprehendPIIType.EMAIL_ADDRESS.name,
+                                score=0.99,
+                                start=123,
+                                end=456,
+                            )
+                        ],
+                    ),
+                    DetectionResult(
+                        index=1,
+                        detections=[
+                            DetectionResultItem(
+                                entity_type=AWSComprehendPIIType.URL.name,
+                                score=0.73,
+                                start=789,
+                                end=1010,
+                            )
+                        ],
+                    ),
+                ]
+            ),
         ],
     )
     def test_analyze_detection_collection(self, detection_results_list_input):
@@ -135,3 +190,11 @@ class TestPIIAnalysisService:
         assert_that(analysis_result_set.risk_score_standard_deviation).is_greater_than(
             0.5
         )
+        assert_that(
+            isinstance(
+                PIIType[
+                    analysis_result_set.analyses[0].analysis[0].detection.entity_type
+                ],
+                PIIType,
+            )
+        ).is_true()
