@@ -14,8 +14,8 @@ def get_relative_path(path_to_file: str):
     """
     Returns the file_path relative to the project
 
-    :param path_to_file:
-    :return:
+    @param path_to_file:
+    @return:
     """
     filename = os.path.join(dirname, path_to_file)
 
@@ -51,8 +51,8 @@ def delete_file(
     """
     Deletes a version file if it exists
 
-    :param file_path:
-    :return:
+    @param file_path:
+    @return:
     """
 
     # Delete file if it exists

@@ -1,12 +1,12 @@
 # pylint: disable=broad-except,unused-argument
 import logging
 from typing import List
-from presidio_analyzer import AnalyzerEngine
-
+from presidio_analyzer import AnalyzerEngine, RecognizerResult
 from ..models.analysis import DetectionResultItem, DetectionResult
 from ..utils.pii_mapping_util import (
     convert_aws_comprehend_pii_to_common_pii_type,
     convert_azure_pii_to_common_pii_type,
+    convert_msft_presidio_pii_to_common_pii_type,
 )
 
 
@@ -59,7 +59,6 @@ class AzurePIIDetectionAdapter(BasePIIDetectionAdapter):
         @param pii_detections: List[dict]
         @return: List[DetectionResultItem]
         """
-        # super().convert_analyzed_collection(pii_detections=pii_detections)
         detection_results: List[DetectionResultItem] = []
         for i, result in enumerate(pii_detections):
             # Return results in formatted Analysis Result List object
@@ -106,7 +105,6 @@ class AWSComprehendPIIDetectionAdapter(BasePIIDetectionAdapter):
         @return: List[DetectionResultItem]
         """
 
-        # Return results in formatted Analysis Result List object
         return [
             DetectionResultItem(
                 entity_type=convert_aws_comprehend_pii_to_common_pii_type(
@@ -174,10 +172,18 @@ class PresidioPIIDetectionService:
         """
         Retrieves a list of supported entities, this will narrow down what is available for a given language
 
-        :param language_code: str - defaults to "en"
-        :return: List[str]
+        @param language_code: str - defaults to "en"
+        @return: List[str]
         """
         return self.analyzer.get_supported_entities(language=language_code)
+
+    def get_loaded_recognizers(self, language_code="en"):
+        """
+        Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
+        @param language_code:
+        @return:
+        """
+        return self.analyzer.get_recognizers(language=language_code)
 
     def analyze_item(
         self, text: str, language_code: str = "en", entities: List[str] = None
@@ -246,7 +252,9 @@ class PresidioPIIDetectionService:
                 # Every analysis by the analyzer will have a set of detections within
                 detections = [
                     DetectionResultItem(
-                        entity_type=result.entity_type,  # Have Presidio type converted to common type???
+                        entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                            result.entity_type
+                        ),
                         score=result.score,
                         start=result.start,
                         end=result.end,
@@ -261,5 +269,61 @@ class PresidioPIIDetectionService:
 
         except Exception as ex:
             logging.error(ex.with_traceback())
+
+        return detection_results
+
+    @staticmethod
+    def convert_analyzed_item(
+        pii_detection: List[RecognizerResult],
+    ) -> List[DetectionResultItem]:
+        """
+        Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
+        analysis by Presidio returns an array of RecognizerResult objects.
+
+        @param pii_detection: RecognizerResult from presidio analyzer
+        @return: List[DetectionResultItem]
+        """
+
+        return [
+            DetectionResultItem(
+                entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                    result.entity_type
+                ).name,
+                score=result.score,
+                start=result.start,
+                end=result.end,
+            )
+            for result in pii_detection
+        ]
+
+    @staticmethod
+    def convert_analyzed_collection(
+        pii_detections: List[List[RecognizerResult]],
+    ) -> List[DetectionResult]:
+        """
+        Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
+        analysis results ends up being a 2D array.
+
+        @param pii_detections: List[RecognizerResult] from Presidio analyzer
+
+        """
+
+        detection_results: List[DetectionResultItem] = []
+        for i, result in enumerate(pii_detections):
+            # Return results in formatted Analysis Result List object
+            detections = []
+            for entity in result:
+                detections.append(
+                    DetectionResultItem(
+                        entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                            entity.entity_type
+                        ).name,
+                        score=entity.score,
+                        start=entity.start,
+                        end=entity.end,
+                    )
+                )
+
+            detection_results.append(DetectionResult(index=i, detections=detections))
 
         return detection_results

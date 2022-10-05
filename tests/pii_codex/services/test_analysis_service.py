@@ -170,7 +170,7 @@ class TestPIIAnalysisService:
     )
     def test_analyze_detection_collection(self, detection_results_list_input):
         analysis_result_set: AnalysisResultSet = (
-            PII_ANALYSIS_SERVICE.analyze_detected_collection(
+            PII_ANALYSIS_SERVICE.analyze_detection_collection(
                 detection_collection=detection_results_list_input,
                 collection_name="Test Analysis",
                 collection_type="SAMPLE",

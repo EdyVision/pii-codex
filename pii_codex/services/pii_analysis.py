@@ -52,8 +52,8 @@ class PIIAnalysisService:
 
     def analyze_collection(
         self,
-        analysis_provider: str,
         texts: List[str],
+        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
         language_code: str = "en",
         collection_name: str = None,
         collection_type: str = "population",
@@ -114,7 +114,7 @@ class PIIAnalysisService:
             detected_pii_types=detected_types,
         )
 
-    def analyze_detected_collection(
+    def analyze_detection_collection(
         self,
         detection_collection: List[DetectionResult],
         collection_name: str = None,
