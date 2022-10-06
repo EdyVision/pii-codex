@@ -20,7 +20,7 @@ from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
 from pii_codex.utils.statistics_util import (
     get_mean,
     get_standard_deviation,
-    get_variance,
+    get_variance, get_mode, get_median,
 )
 
 
@@ -45,7 +45,7 @@ class PIIAnalysisService:
         return AnalysisResult(
             index=0,
             analysis=analysis,
-            mean_risk_score=get_mean(
+            risk_score_mean=get_mean(
                 [item.risk_assessment.risk_level for item in analysis]
             ),
         )
@@ -81,7 +81,7 @@ class PIIAnalysisService:
                 AnalysisResult(
                     index=i,
                     analysis=analysis,
-                    mean_risk_score=get_mean(
+                    risk_score_mean=get_mean(
                         [analysis.risk_assessment.risk_level for analysis in analysis]
                     )
                     if analysis
@@ -89,29 +89,10 @@ class PIIAnalysisService:
                 )
             )
 
-        (
-            detected_types,
-            detected_type_frequencies,
-        ) = PII_ASSESSMENT_SERVICE.get_detected_pii_types(analysis_set)
-
-        collection_mean_risk_scores = [
-            analysis.mean_risk_score for analysis in analysis_set
-        ]
-
-        return AnalysisResultSet(
+        return self._build_analysis_result_set(
             collection_name=collection_name,
-            analyses=analysis_set,
-            mean_risk_score=get_mean(collection_mean_risk_scores),
-            risk_scores=collection_mean_risk_scores,
-            risk_score_standard_deviation=get_standard_deviation(
-                collection_mean_risk_scores, collection_type
-            ),
-            risk_score_variance=get_variance(
-                collection_mean_risk_scores, collection_type
-            ),
-            detection_count=PII_ASSESSMENT_SERVICE.get_detected_pii_count(analysis_set),
-            detected_pii_type_frequencies=detected_type_frequencies,
-            detected_pii_types=detected_types,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
         )
 
     def analyze_detection_collection(
@@ -139,29 +120,10 @@ class PIIAnalysisService:
                 )
             )
 
-        (
-            detected_types,
-            detected_type_frequencies,
-        ) = PII_ASSESSMENT_SERVICE.get_detected_pii_types(analysis_set)
-
-        collection_mean_risk_scores = [
-            analysis.mean_risk_score for analysis in analysis_set
-        ]
-
-        return AnalysisResultSet(
+        return self._build_analysis_result_set(
             collection_name=collection_name,
-            analyses=analysis_set,
-            mean_risk_score=get_mean(collection_mean_risk_scores),
-            risk_scores=collection_mean_risk_scores,
-            risk_score_standard_deviation=get_standard_deviation(
-                collection_mean_risk_scores, collection_type
-            ),
-            risk_score_variance=get_variance(
-                collection_mean_risk_scores, collection_type
-            ),
-            detection_count=PII_ASSESSMENT_SERVICE.get_detected_pii_count(analysis_set),
-            detected_pii_type_frequencies=detected_type_frequencies,
-            detected_pii_types=detected_types,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
         )
 
     def analyze_detection_result(
@@ -182,7 +144,7 @@ class PIIAnalysisService:
         return AnalysisResult(
             index=index,
             analysis=detection_analyses,
-            mean_risk_score=get_mean(
+            risk_score_mean=get_mean(
                 [analysis.risk_assessment.risk_level for analysis in detection_analyses]
             ),
         )
@@ -247,6 +209,37 @@ class PIIAnalysisService:
             )
             for detection in detections
         ]
+
+    @staticmethod
+    def _build_analysis_result_set(
+        collection_name: str, collection_type: str, analysis_set: List[AnalysisResult]
+    ):
+        (
+            detected_types,
+            detected_type_frequencies,
+        ) = PII_ASSESSMENT_SERVICE.get_detected_pii_types(analysis_set)
+
+        collection_risk_score_means = [
+            analysis.risk_score_mean for analysis in analysis_set
+        ]
+
+        return AnalysisResultSet(
+            collection_name=collection_name,
+            analyses=analysis_set,
+            risk_score_mean=get_mean(collection_risk_score_means),
+            risk_scores=collection_risk_score_means,
+            risk_score_standard_deviation=get_standard_deviation(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_variance=get_variance(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_mode=get_mode(collection_risk_score_means),
+            risk_score_median=get_median(collection_risk_score_means),
+            detection_count=PII_ASSESSMENT_SERVICE.get_detected_pii_count(analysis_set),
+            detected_pii_type_frequencies=detected_type_frequencies,
+            detected_pii_types=detected_types,
+        )
 
 
 PII_ANALYSIS_SERVICE = PIIAnalysisService()

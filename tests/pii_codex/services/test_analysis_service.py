@@ -29,7 +29,7 @@ class TestPIIAnalysisService:
         assert_that(len(results.analysis)).is_equal_to(
             3
         )  # It counts email as a URL since it contains domain
-        assert_that(results.mean_risk_score).is_greater_than(2.5)
+        assert_that(results.risk_score_mean).is_greater_than(2.5)
 
     def test_collection_analysis(self):
         results = PII_ANALYSIS_SERVICE.analyze_collection(
@@ -52,7 +52,7 @@ class TestPIIAnalysisService:
         assert_that(results.analyses[1].index).is_greater_than(
             results.analyses[0].index
         )
-        assert_that(results.mean_risk_score).is_greater_than(1)
+        assert_that(results.risk_score_mean).is_greater_than(1)
         assert_that(results.detection_count).is_equal_to(
             7
         )  # Emails double as domain detections
@@ -184,7 +184,7 @@ class TestPIIAnalysisService:
         assert_that(
             isinstance(analysis_result_set.analyses[0].analysis[0], AnalysisResultItem)
         ).is_true()
-        assert_that(analysis_result_set.mean_risk_score).is_greater_than(1)
+        assert_that(analysis_result_set.risk_score_mean).is_greater_than(1)
         assert_that(analysis_result_set.detection_count).is_equal_to(2)
         assert_that(analysis_result_set.risk_score_variance).is_equal_to(0.5)
         assert_that(analysis_result_set.risk_score_standard_deviation).is_greater_than(

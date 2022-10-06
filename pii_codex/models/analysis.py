@@ -77,13 +77,13 @@ class AnalysisResult:
 
     index: int = 0
     analysis: List[AnalysisResultItem]
-    mean_risk_score: float = 0.0
+    risk_score_mean: float = 0.0
 
     def to_dict(self):
         return {
             "analysis": [item.to_flattened_dict() for item in self.analysis],
             "index": self.index,
-            "mean_risk_score": self.mean_risk_score,
+            "risk_score_mean": self.risk_score_mean,
         }
 
     def get_detected_types(self) -> List[str]:
@@ -104,20 +104,25 @@ class AnalysisResultSet:
         None  # Frequency count of PII types detected in entire collection
     )
     risk_scores: List[float] = None
-    mean_risk_score: float = 1.0  # Default is 1 for non-identifiable
+    risk_score_mean: float = 1.0  # Default is 1 for non-identifiable
     risk_score_standard_deviation: float = 0.0
     risk_score_variance: float = 0.0
+    risk_score_mode: float = 0.0
+    risk_score_median: float = 0.0
     collection_name: str = None  # Optional ability for analysts to name a set (see analysis storage step in notebooks)
+    collection_type: str = "POPULATION"  # Other option is SAMPLE
 
     def to_dict(self):
         return {
             "collection_name": self.collection_name,
             "analyses": [item.to_dict() for item in self.analyses],
             "detection_count": self.detection_count,
-            "mean_risk_score": self.mean_risk_score,
             "risk_scores": self.risk_scores,
+            "risk_score_mean": self.risk_score_mean,
             "risk_score_standard_deviation": self.risk_score_standard_deviation,
             "risk_score_variance": self.risk_score_variance,
+            "risk_score_mode": self.risk_score_mode,
+            "risk_score_median": self.risk_score_median,
             "detected_pii_types": self.detected_pii_types,
             "detected_pii_type_frequencies": dict(self.detected_pii_type_frequencies),
         }
