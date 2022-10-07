@@ -30,7 +30,7 @@ class RiskAssessmentList:
 
 
 @strawberry.type
-class DetectionResult:
+class DetectionResultItem:
     """
     Type associated with a singular PII detection (e.g. detection of an email in a string), its associated risk score,
     and where it is located in a string.
@@ -43,12 +43,18 @@ class DetectionResult:
 
 
 @strawberry.type
+class DetectionResult:
+    index: int = 0
+    detections: List[DetectionResultItem]
+
+
+@strawberry.type
 class AnalysisResultItem:
     """
     The results associated to a single detection of a single string (e.g. Social Media Post, SMS, etc.)
     """
 
-    detection: DetectionResult
+    detection: DetectionResultItem
     risk_assessment: RiskAssessment
 
     def to_dict(self):
@@ -59,7 +65,10 @@ class AnalysisResultItem:
 
     def to_flattened_dict(self):
         assessment = self.risk_assessment.__dict__.copy()
-        assessment.update(self.detection.__dict__)
+
+        if self.detection:
+            assessment.update(self.detection.__dict__)
+
         return assessment
 
 
@@ -71,17 +80,17 @@ class AnalysisResult:
 
     index: int = 0
     analysis: List[AnalysisResultItem]
-    mean_risk_score: float = 0.0
+    risk_score_mean: float = 0.0
 
     def to_dict(self):
         return {
             "analysis": [item.to_flattened_dict() for item in self.analysis],
             "index": self.index,
-            "mean_risk_score": self.mean_risk_score,
+            "risk_score_mean": self.risk_score_mean,
         }
 
     def get_detected_types(self) -> List[str]:
-        return [pii.detection.entity_type for pii in self.analysis]
+        return [pii.detection.entity_type for pii in self.analysis if pii.detection]
 
 
 @strawberry.type
@@ -98,18 +107,24 @@ class AnalysisResultSet:
         None  # Frequency count of PII types detected in entire collection
     )
     risk_scores: List[float] = None
-    mean_risk_score: float = 1.0  # Default is 1 for non-identifiable
+    risk_score_mean: float = 1.0  # Default is 1 for non-identifiable
+    risk_score_mode: float = 0.0
+    risk_score_median: float = 0.0
     risk_score_standard_deviation: float = 0.0
     risk_score_variance: float = 0.0
     collection_name: str = None  # Optional ability for analysts to name a set (see analysis storage step in notebooks)
+    collection_type: str = "POPULATION"  # Other option is SAMPLE
 
     def to_dict(self):
         return {
             "collection_name": self.collection_name,
+            "collection_type": self.collection_type,
             "analyses": [item.to_dict() for item in self.analyses],
             "detection_count": self.detection_count,
-            "mean_risk_score": self.mean_risk_score,
             "risk_scores": self.risk_scores,
+            "risk_score_mean": self.risk_score_mean,
+            "risk_score_mode": self.risk_score_mode,
+            "risk_score_median": self.risk_score_median,
             "risk_score_standard_deviation": self.risk_score_standard_deviation,
             "risk_score_variance": self.risk_score_variance,
             "detected_pii_types": self.detected_pii_types,

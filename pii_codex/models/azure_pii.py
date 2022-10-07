@@ -70,7 +70,7 @@ class AzurePIIType(Enum):
     DK_PERSONAL_IDENTIFICATION_V2: str = "DKPersonalIdentificationV2"
     DRUG_ENFORCEMENT_AGENCY_NUMBER: str = "DrugEnforcementAgencyNumber"
     EE_PERSONAL_IDENTIFICATION_CODE: str = "EEPersonalIdentificationCode"
-    EMAIL: str = "Email"
+    EMAIL_ADDRESS: str = "Email"
     ES_DNI: str = "ESDNI"
     ES_SOCIAL_SECURITY_NUMBER: str = "ESSocialSecurityNumber"
     ES_TAX_IDENTIFICATION_NUMBER: str = "ESTaxIdentificationNumber"

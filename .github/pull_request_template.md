@@ -1,10 +1,9 @@
 ### Overview
 
-PR elevator pitch. Explain what it's doing and why.
+PR description. Explain what it's doing and why.
 
 - Implementation details...
 - Bugfix details...
-- [Link to any relevant material]()
 
 ### Checklist
 

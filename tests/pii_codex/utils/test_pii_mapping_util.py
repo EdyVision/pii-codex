@@ -23,6 +23,8 @@ from pii_codex.utils.pii_mapping_util import (
     convert_common_pii_to_msft_presidio_type,
     convert_common_pii_to_azure_pii_type,
     convert_common_pii_to_aws_comprehend_type,
+    convert_azure_pii_to_common_pii_type,
+    convert_aws_comprehend_pii_to_common_pii_type,
 )
 
 
@@ -74,6 +76,32 @@ class TestPIIMappingUtil:
         try:
             converted_pii = convert_common_pii_to_azure_pii_type(pii_type)
             assert_that(isinstance(converted_pii, AzurePIIType)).is_true()
+        except Exception as ex:
+            assert_that(ex.args[0]).contains(
+                "The current version does not support this PII Type conversion."
+            )
+
+    @pytest.mark.parametrize(
+        "pii_type",
+        AzurePIIType,
+    )
+    def test_convert_azure_pii_to_common_pii_type(self, pii_type):
+        try:
+            converted_pii = convert_azure_pii_to_common_pii_type(pii_type)
+            assert_that(isinstance(converted_pii, PIIType)).is_true()
+        except Exception as ex:
+            assert_that(ex.args[0]).contains(
+                "The current version does not support this PII Type conversion."
+            )
+
+    @pytest.mark.parametrize(
+        "pii_type",
+        AWSComprehendPIIType,
+    )
+    def test_convert_aws_pii_to_common_pii_type(self, pii_type):
+        try:
+            converted_pii = convert_aws_comprehend_pii_to_common_pii_type(pii_type)
+            assert_that(isinstance(converted_pii, PIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
                 "The current version does not support this PII Type conversion."

@@ -64,8 +64,8 @@ def map_pii_type(pii_type: str) -> RiskAssessment:
 def convert_common_pii_to_msft_presidio_type(pii_type: PIIType) -> MSFTPresidioPIIType:
     """
     Converts a common PII Type to a MSFT Presidio Type
-    :param pii_type:
-    :return:
+    @param pii_type:
+    @return:
     """
 
     try:
@@ -81,8 +81,8 @@ def convert_common_pii_to_msft_presidio_type(pii_type: PIIType) -> MSFTPresidioP
 def convert_common_pii_to_azure_pii_type(pii_type: PIIType) -> AzurePIIType:
     """
     Converts a common PII Type to an Azure PII Type
-    :param pii_type:
-    :return:
+    @param pii_type:
+    @return:
     """
     try:
         converted_type = AzurePIIType[pii_type.name]
@@ -99,11 +99,63 @@ def convert_common_pii_to_aws_comprehend_type(
 ) -> AWSComprehendPIIType:
     """
     Converts a common PII Type to an AWS PII Type
-    :param pii_type:
-    :return:
+    @param pii_type:
+    @return:
     """
     try:
         converted_type = AWSComprehendPIIType[pii_type.name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
+
+
+def convert_azure_pii_to_common_pii_type(pii_type: str) -> PIIType:
+    """
+    Converts an Azure PII Type to a common PII Type
+    @param pii_type:
+    @return:
+    """
+    try:
+        converted_type = PIIType[AzurePIIType(pii_type).name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
+
+
+def convert_aws_comprehend_pii_to_common_pii_type(
+    pii_type: str,
+) -> PIIType:
+    """
+    Converts an AWS PII Type to a common PII Type
+    @param pii_type: str from AWS Comprehend (maps to value of AWSComprehendPIIType)
+    @return:
+    """
+    try:
+        converted_type = PIIType[AWSComprehendPIIType(pii_type).name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this PII Type conversion."
+        )
+
+    return converted_type
+
+
+def convert_msft_presidio_pii_to_common_pii_type(
+    pii_type: str,
+) -> PIIType:
+    """
+    Converts a Microsoft Presidio PII Type to a common PII Type
+    @param pii_type: str from Presidio (maps to value of PIIType)
+    @return:
+    """
+    try:
+        converted_type = PIIType[MSFTPresidioPIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
