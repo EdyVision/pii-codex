@@ -18,7 +18,6 @@ from pii_codex.services.pii_analysis import PII_ANALYSIS_SERVICE
 
 
 class TestPIIAnalysisService:
-
     def test_analyze_pii_type_with_score(self):
         results = PII_ANALYSIS_SERVICE.analyze_item(
             analysis_provider=AnalysisProviderType.PRESIDIO.name,
@@ -34,14 +33,14 @@ class TestPIIAnalysisService:
 
     def test_collection_analysis(self):
         texts_to_analyze = [
-                "Hi, my name is Donnie",
-                "See you there!",
-                "This is cool...",
-                "example@example.com",
-                "My phone number is 555-555-5555",
-                "Oh his work phone number is 777-777-7777",
-                "My phone number is 305-555-5555 and email is example@example.com",
-            ]
+            "Hi, my name is Donnie",
+            "See you there!",
+            "This is cool...",
+            "example@example.com",
+            "My phone number is 555-555-5555",
+            "Oh his work phone number is 777-777-7777",
+            "My phone number is 305-555-5555 and email is example@example.com",
+        ]
         results = PII_ANALYSIS_SERVICE.analyze_collection(
             analysis_provider=AnalysisProviderType.PRESIDIO.name,
             texts=texts_to_analyze,

@@ -70,7 +70,13 @@ class PIIAssessmentService:
         @param analyses: List[ScoredAnalysisResult]
         @return: float
         """
-        return get_sum([len(analysis.analysis) for analysis in analyses if analysis.get_detected_types()])
+        return get_sum(
+            [
+                len(analysis.analysis)
+                for analysis in analyses
+                if analysis.get_detected_types()
+            ]
+        )
 
     @staticmethod
     def get_detected_pii_types(
