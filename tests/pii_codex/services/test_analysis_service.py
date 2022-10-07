@@ -18,6 +18,7 @@ from pii_codex.services.pii_analysis import PII_ANALYSIS_SERVICE
 
 
 class TestPIIAnalysisService:
+
     def test_analyze_pii_type_with_score(self):
         results = PII_ANALYSIS_SERVICE.analyze_item(
             analysis_provider=AnalysisProviderType.PRESIDIO.name,
@@ -32,20 +33,23 @@ class TestPIIAnalysisService:
         assert_that(results.risk_score_mean).is_greater_than(2.5)
 
     def test_collection_analysis(self):
-        results = PII_ANALYSIS_SERVICE.analyze_collection(
-            analysis_provider=AnalysisProviderType.PRESIDIO.name,
-            texts=[
-                "Not",
+        texts_to_analyze = [
+                "Hi, my name is Donnie",
+                "See you there!",
+                "This is cool...",
                 "example@example.com",
                 "My phone number is 555-555-5555",
                 "Oh his work phone number is 777-777-7777",
                 "My phone number is 305-555-5555 and email is example@example.com",
-            ],
+            ]
+        results = PII_ANALYSIS_SERVICE.analyze_collection(
+            analysis_provider=AnalysisProviderType.PRESIDIO.name,
+            texts=texts_to_analyze,
         )
 
         assert_that(results).is_not_none()
         assert_that(isinstance(results, AnalysisResultSet)).is_true()
-        assert_that(len(results.analyses)).is_equal_to(5)
+        assert_that(len(results.analyses)).is_equal_to(len(texts_to_analyze))
         assert_that(
             isinstance(results.analyses[1].analysis[0], AnalysisResultItem)
         ).is_true()
@@ -54,7 +58,7 @@ class TestPIIAnalysisService:
         )
         assert_that(results.risk_score_mean).is_greater_than(1)
         assert_that(results.detection_count).is_equal_to(
-            7
+            8
         )  # Emails double as domain detections
         assert_that(
             results.detected_pii_type_frequencies.most_common(1)[0][0]
@@ -62,6 +66,7 @@ class TestPIIAnalysisService:
         assert_that(results.risk_score_standard_deviation).is_greater_than(0.5)
         assert_that(results.detection_count).is_greater_than(3)
         assert_that(results.risk_score_variance).is_greater_than(0.5)
+        assert_that(results.to_dict()).is_not_none()
 
     @pytest.mark.parametrize(
         "analysis_provider",

@@ -65,7 +65,10 @@ class AnalysisResultItem:
 
     def to_flattened_dict(self):
         assessment = self.risk_assessment.__dict__.copy()
-        assessment.update(self.detection.__dict__)
+
+        if self.detection:
+            assessment.update(self.detection.__dict__)
+
         return assessment
 
 
@@ -87,7 +90,7 @@ class AnalysisResult:
         }
 
     def get_detected_types(self) -> List[str]:
-        return [pii.detection.entity_type for pii in self.analysis]
+        return [pii.detection.entity_type for pii in self.analysis if pii.detection]
 
 
 @strawberry.type
@@ -105,24 +108,25 @@ class AnalysisResultSet:
     )
     risk_scores: List[float] = None
     risk_score_mean: float = 1.0  # Default is 1 for non-identifiable
-    risk_score_standard_deviation: float = 0.0
-    risk_score_variance: float = 0.0
     risk_score_mode: float = 0.0
     risk_score_median: float = 0.0
+    risk_score_standard_deviation: float = 0.0
+    risk_score_variance: float = 0.0
     collection_name: str = None  # Optional ability for analysts to name a set (see analysis storage step in notebooks)
     collection_type: str = "POPULATION"  # Other option is SAMPLE
 
     def to_dict(self):
         return {
             "collection_name": self.collection_name,
+            "collection_type": self.collection_type,
             "analyses": [item.to_dict() for item in self.analyses],
             "detection_count": self.detection_count,
             "risk_scores": self.risk_scores,
             "risk_score_mean": self.risk_score_mean,
-            "risk_score_standard_deviation": self.risk_score_standard_deviation,
-            "risk_score_variance": self.risk_score_variance,
             "risk_score_mode": self.risk_score_mode,
             "risk_score_median": self.risk_score_median,
+            "risk_score_standard_deviation": self.risk_score_standard_deviation,
+            "risk_score_variance": self.risk_score_variance,
             "detected_pii_types": self.detected_pii_types,
             "detected_pii_type_frequencies": dict(self.detected_pii_type_frequencies),
         }

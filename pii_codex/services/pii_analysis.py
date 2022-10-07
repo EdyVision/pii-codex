@@ -11,6 +11,7 @@ from pii_codex.models.analysis import (
     AnalysisResult,
     AnalysisResultSet,
     DetectionResult,
+    RiskAssessment,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 from pii_codex.services.pii_detection import (
@@ -20,7 +21,9 @@ from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
 from pii_codex.utils.statistics_util import (
     get_mean,
     get_standard_deviation,
-    get_variance, get_mode, get_median,
+    get_variance,
+    get_mode,
+    get_median,
 )
 
 
@@ -200,15 +203,19 @@ class PIIAnalysisService:
                 "Unsupported operation. Only the Presidio analyzer is supported at this time."
             )
 
-        return [
-            AnalysisResultItem(
-                detection=detection,
-                risk_assessment=PII_ASSESSMENT_SERVICE.assess_pii_type(
-                    detected_pii_type=detection.entity_type.upper()
-                ),
-            )
-            for detection in detections
-        ]
+        return (
+            [
+                AnalysisResultItem(
+                    detection=detection,
+                    risk_assessment=PII_ASSESSMENT_SERVICE.assess_pii_type(
+                        detected_pii_type=detection.entity_type.upper()
+                    ),
+                )
+                for detection in detections
+            ]
+            if detections
+            else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
+        )
 
     @staticmethod
     def _build_analysis_result_set(
