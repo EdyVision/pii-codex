@@ -28,7 +28,7 @@ jobs:
         run: pip install -U pip && pip install poetry wheel
       - name: Install Project Dependencies
         run: |
-          poetry config virtualenvs.create true
+          poetry config virtualenvs.create false
           make install
           make install.extras
 #      - name: Install Spacy Model(s) for Tests
