@@ -48,8 +48,8 @@ from pii_codex.services.analysis_service import PIIAnalysisService
 PIIAnalysisService().analyze_collection(
     texts=["your collection of strings"],
     language_code="en",
-    collection_name="Data Set Label", # this is optional, geared for those that require labeling of collections
-    collection_type="SAMPLE" # defaults to POPULATION, input used for standard deviation and variance calculations
+    collection_name="Data Set Label", # Optional Labeling
+    collection_type="SAMPLE" # Defaults to POPULATION, used stats calculations
 )
 ```
 

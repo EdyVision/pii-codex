@@ -71,21 +71,13 @@ class AWSComprehendPIIDetectionAdapter(BasePIIDetectionAdapter):
         """
 
         detection_results: List[DetectionResultItem] = []
-        for i, result in enumerate(pii_detections):
+        for i, detection in enumerate(pii_detections):
             # Return results in formatted Analysis Result List object
-            detections = []
-            for entity in result["Entities"]:
-                detections.append(
-                    DetectionResultItem(
-                        entity_type=convert_aws_comprehend_pii_to_common_pii_type(
-                            entity["Type"]
-                        ).name,
-                        score=entity["Score"],
-                        start=entity["BeginOffset"],
-                        end=entity["EndOffset"],
-                    )
+            detection_results.append(
+                DetectionResult(
+                    index=i,
+                    detections=self.convert_analyzed_item(pii_detection=detection),
                 )
-
-            detection_results.append(DetectionResult(index=i, detections=detections))
+            )
 
         return detection_results

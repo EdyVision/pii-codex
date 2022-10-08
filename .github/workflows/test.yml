@@ -1,4 +1,4 @@
-name: Minimum Coverage Met
+name: Test
 
 on:
   # Triggers the test workflow on push for all branches
