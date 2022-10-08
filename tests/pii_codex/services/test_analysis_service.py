@@ -14,12 +14,14 @@ from pii_codex.models.analysis import (
     DetectionResult,
     DetectionResultItem,
 )
-from pii_codex.services.pii_analysis import PII_ANALYSIS_SERVICE
+from pii_codex.services.analysis_service import PIIAnalysisService
 
 
 class TestPIIAnalysisService:
+    pii_analysis_service = PIIAnalysisService()
+
     def test_analyze_pii_type_with_score(self):
-        results = PII_ANALYSIS_SERVICE.analyze_item(
+        results = self.pii_analysis_service.analyze_item(
             analysis_provider=AnalysisProviderType.PRESIDIO.name,
             text="Here is my contact information: Phone number 555-555-5555 and my email is example123@email.com",
         )
@@ -41,7 +43,7 @@ class TestPIIAnalysisService:
             "Oh his work phone number is 777-777-7777",
             "My phone number is 305-555-5555 and email is example@example.com",
         ]
-        results = PII_ANALYSIS_SERVICE.analyze_collection(
+        results = self.pii_analysis_service.analyze_collection(
             analysis_provider=AnalysisProviderType.PRESIDIO.name,
             texts=texts_to_analyze,
         )
@@ -77,7 +79,7 @@ class TestPIIAnalysisService:
         # clients are not integrated with this module.
 
         with pytest.raises(Exception) as execinfo:
-            PII_ANALYSIS_SERVICE.analyze_collection(
+            self.pii_analysis_service.analyze_collection(
                 analysis_provider=analysis_provider,
                 texts=[
                     "Oh his work phone number is 777-777-7777",
@@ -174,7 +176,7 @@ class TestPIIAnalysisService:
     )
     def test_analyze_detection_collection(self, detection_results_list_input):
         analysis_result_set: AnalysisResultSet = (
-            PII_ANALYSIS_SERVICE.analyze_detection_collection(
+            self.pii_analysis_service.analyze_detection_collection(
                 detection_collection=detection_results_list_input,
                 collection_name="Test Analysis",
                 collection_type="SAMPLE",

@@ -1,13 +1,16 @@
 from assertpy import assert_that
 from pii_codex.models.common import PIIType
 from pii_codex.models.analysis import RiskAssessment
-from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
+from pii_codex.services.assessment_service import PIIAssessmentService
 from pii_codex.utils.statistics_util import get_mean
 
 
 class TestPIIAssessmentService:
+
+    pii_assessment_service = PIIAssessmentService()
+
     def test_assess_pii_type(self):
-        risk_assessment: RiskAssessment = PII_ASSESSMENT_SERVICE.assess_pii_type(
+        risk_assessment: RiskAssessment = self.pii_assessment_service.assess_pii_type(
             detected_pii_type=PIIType.US_SOCIAL_SECURITY_NUMBER.name
         )
         assert_that(risk_assessment.risk_level).is_equal_to(3)
@@ -17,7 +20,7 @@ class TestPIIAssessmentService:
 
     def test_assess_pii_type_list(self):
         # PII types with same ratings
-        risk_assessment_list = PII_ASSESSMENT_SERVICE.assess_pii_type_list(
+        risk_assessment_list = self.pii_assessment_service.assess_pii_type_list(
             detected_pii_types=[
                 PIIType.US_SOCIAL_SECURITY_NUMBER.name,
                 PIIType.PHONE_NUMBER.name,
@@ -29,7 +32,7 @@ class TestPIIAssessmentService:
         ).is_equal_to(3.0)
 
         # PII types with different ratings
-        risk_assessment_list = PII_ASSESSMENT_SERVICE.assess_pii_type_list(
+        risk_assessment_list = self.pii_assessment_service.assess_pii_type_list(
             detected_pii_types=[
                 PIIType.US_SOCIAL_SECURITY_NUMBER.name,
                 PIIType.RACE.name,

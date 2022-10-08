@@ -12,8 +12,9 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        python-version: [ 3.9.12 ]
-    runs-on: ubuntu-latest
+        python-version: [ "3.9", "3.10" ]
+        os: [ubuntu-18.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     # Checkout the code, install poetry, install dependencies,
     # and run test with coverage
@@ -23,13 +24,17 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python-version }}
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
       - name: Install Project Dependencies
         run: |
-          poetry config virtualenvs.create false
+          poetry config virtualenvs.create true
           make install
+          make install.extras
+#      - name: Install Spacy Model(s) for Tests
+#        run: |
+#          make install_spacy_en_core_web_lg
       - name: Lint Check
         run: make lint
       - name: Run Tests

@@ -97,6 +97,3 @@ class PIIAssessmentService:
         return list(set(flattened_list_of_detections)), Counter(
             flattened_list_of_detections
         )
-
-
-PII_ASSESSMENT_SERVICE = PIIAssessmentService()
