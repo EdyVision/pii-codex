@@ -12,7 +12,7 @@ classifiers = ["Development Status :: 1 - Planning", "Intended Audience :: Scien
 include = ["LICENSE", "LICENSE-ETHICS"]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.10"
+python = ">=3.9,<3.11"
 strawberry-graphql = "^0.133.5"
 dataclasses-json = "^0.5.7"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
