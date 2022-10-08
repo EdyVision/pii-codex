@@ -1,4 +1,9 @@
-# PII Codex 
+<p align="center">
+<img src="docs/PII-Codex-Logo.svg" alt="PII Codex logo" width="300px"/>
+</p>
+<hr/>
+
+# PII Codex - PII Detection, Categorization, and Severity Assessment
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 ![](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
