@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/PII-Codex-Logo.svg" alt="PII Codex logo" width="300px"/>
+<img src="docs/PII_Codex_Logo.svg" alt="PII Codex logo" width="300px"/>
 </p>
 <hr/>
 
