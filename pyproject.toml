@@ -2,7 +2,7 @@
 name = "pii-codex"
 version = "0.0.1"
 description = ""
-authors = ["Eidan Rosado"]
+authors = ["Eidan J. Rosado"]
 license = "BSD 3-Clause"
 readme = "README.MD"
 homepage = "https://github.com/EdyVision/pii-codex"
@@ -13,7 +13,6 @@ include = ["LICENSE", "LICENSE-ETHICS"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
-strawberry-graphql = "^0.133.5"
 dataclasses-json = "^0.5.7"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 numpy = "^1.23.2"

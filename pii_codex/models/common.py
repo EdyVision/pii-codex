@@ -2,34 +2,28 @@ from __future__ import annotations
 
 from enum import Enum
 
-import strawberry
-
 # All listed PII Types from Milne et al (2018) and a few others along with
 # models used for PII categorization for DHS, NIST, and HIPAA
 
 
-@strawberry.enum
 class AnalysisProviderType(Enum):
     AZURE: str = "AZURE"
     AWS: str = "AWS"
     PRESIDIO: str = "PRESIDIO"
 
 
-@strawberry.enum
 class RiskLevel(Enum):
     LEVEL_ONE: int = 1  # Not-Identifiable
     LEVEL_TWO: int = 2  # Semi-Identifiable
     LEVEL_THREE: int = 3  # Identifiable
 
 
-@strawberry.enum
 class RiskLevelDefinition(Enum):
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
     LEVEL_TWO: str = "Semi-Identifiable"
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
-@strawberry.enum
 class PIIType(Enum):
     PHONE_NUMBER: str = "PHONE"
     WORK_PHONE_NUMBER: str = "PHONE"
@@ -88,26 +82,22 @@ class PIIType(Enum):
     SWIFT_CODE: str = "SWIFTCode"
 
 
-@strawberry.enum
 class NISTCategory(Enum):
     LINKABLE: str = "Linkable"
     DIRECTLY_PII: str = "Directly PII"
 
 
-@strawberry.enum
 class DHSCategory(Enum):
     NOT_MENTIONED: str = "Not Mentioned"
     LINKABLE: str = "Linkable"
     STAND_ALONE_PII: str = "Stand Alone PII"
 
 
-@strawberry.enum
 class HIPAACategory(Enum):
     NON_PHI: str = "Not Protected Health Information"
     PHI: str = "Protected Health Information"
 
 
-@strawberry.enum
 class ClusterMembershipType(Enum):
     BASIC_DEMOGRAPHICS: str = "Basic Demographics"
     PERSONAL_PREFERENCES: str = "Personal Preferences"

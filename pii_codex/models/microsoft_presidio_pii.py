@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from enum import Enum
-import strawberry
 
 # PII Types associated with Microsoft Presidio Analyzer
 # Supported Entities: https://microsoft.github.io/presidio/supported_entities/
 
 
-@strawberry.enum
 class MSFTPresidioPIIType(Enum):
     PHONE_NUMBER: str = "PHONE_NUMBER"
     EMAIL_ADDRESS: str = "EMAIL_ADDRESS"
