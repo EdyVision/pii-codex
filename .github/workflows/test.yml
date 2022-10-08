@@ -12,7 +12,7 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        python-version: [ 3.9.12 ]
+        python-version: [ 3.9.14 ]
     runs-on: ubuntu-latest
 
     # Checkout the code, install poetry, install dependencies,
