@@ -13,7 +13,8 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.9", "3.10", "3.11" ]
-    runs-on: ubuntu-latest
+        os: [ubuntu-18.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     # Checkout the code, install poetry, install dependencies,
     # and run test with coverage
