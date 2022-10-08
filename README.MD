@@ -26,8 +26,8 @@ poetry add pii-codex
 If you are in need of the integrated Microsoft Presidio Analyzer, you'll also need to install the `en_core_web_lg` and the PII-Codex extras:
 
 ```bash
-python3 -m spacy download en_core_web_lg
 poetry install pii-codex --extras="detections"
+python3 -m spacy download en_core_web_lg
 ```
 
 ## Usage
