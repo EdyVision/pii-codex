@@ -36,6 +36,9 @@ class TestPIIMappingUtil:
         [pii_type.name for pii_type in PIIType],
     )
     def test_map_pii_type(self, pii_type):
+        """
+        Requires the type mapping to be in the associated version file in pii_codex/data/
+        """
         if pii_type is not PIIType.DOCUMENTS.name:
             mapped_pii = map_pii_type(pii_type)
             assert_that(mapped_pii.risk_level).is_greater_than(1)

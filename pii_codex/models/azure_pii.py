@@ -5,14 +5,18 @@ from enum import Enum
 import strawberry
 
 
-# PII Types and Models as expanded in research
+# Azure PII Types
 # Research Page:
 # https://azuresdkdocs.blob.core.windows.net/$web/python/azure-ai-textanalytics/latest/
 # azure.ai.textanalytics.html#azure.ai.textanalytics.TextAnalyticsClient.recognize_pii_entities
 
 
 @strawberry.enum
-class AzurePIIType(Enum):
+class AzureDetectionType(Enum):
+    """
+    The values fed into the Azure service for detection
+    """
+
     ABA_ROUTING_NUMBER: str = "ABARoutingNumber"
     ADDRESS: str = "Address"
     AGE: str = "Age"
@@ -189,8 +193,7 @@ class AzurePIIType(Enum):
     UK_NATIONAL_INSURANCE_NUMBER: str = "UKNationalInsuranceNumber"
     UK_UNIQUE_TAXPAYER_NUMBER: str = "UKUniqueTaxpayerNumber"
     URL: str = "URL"
-    US_PASSPORT_NUMBER: str = "USUKPassportNumber"
-    UK_PASSPORT_NUMBER: str = "USUKPassportNumber"
+    USUK_PASSPORT_NUMBER: str = "USUKPassportNumber"
     US_BANK_ACCOUNT_NUMBER: str = "USBankAccountNumber"
     US_DRIVERS_LICENSE_NUMBER: str = "USDriversLicenseNumber"
     US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = "USIndividualTaxpayerIdentification"
@@ -200,7 +203,11 @@ class AzurePIIType(Enum):
 
 
 @strawberry.enum
-class AzurePIITypeDef(Enum):
+class AzurePIIType(Enum):
+    """
+    The values of types returned from the Azure Cognition PII Detection API
+    """
+
     ABA_ROUTING_NUMBER: str = "ABA Routing Number"
     ADDRESS: str = "Address"
     AGE: str = "Age"
@@ -258,7 +265,7 @@ class AzurePIITypeDef(Enum):
     DK_PERSONAL_IDENTIFICATION_V2: str = "DK Personal Identification V2"
     DRUG_ENFORCEMENT_AGENCY_NUMBER: str = "Drug Enforcement Agency Number"
     EE_PERSONAL_IDENTIFICATION_CODE: str = "EE Personal Identification Code"
-    EMAIL: str = "Email"
+    EMAIL_ADDRESS: str = "Email"
     ESDNI: str = "ESDNI"
     ES_SOCIAL_SECURITY_NUMBER: str = "ES Social Security Number"
     ES_TAX_IDENTIFICATION_NUMBER: str = "ES Tax Identification Number"
@@ -383,4 +390,3 @@ class AzurePIITypeDef(Enum):
     US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = "US Individual Taxpayer Identification"
     US_SOCIAL_SECURITY_NUMBER: str = "US Social Security Number"
     ZA_IDENTIFICATION_NUMBER: str = "ZA Identification Number"
-    ALL: str = "All"

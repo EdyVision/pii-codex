@@ -49,7 +49,7 @@ GPS Location,LOCATION,Secure Identifiers,Linkable,Not Mentioned,PHI,Semi-Identif
 Security/Access Codes,SECURITY_ACCESS_CODES,Secure Identifiers,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Passwords,PASSWORD,Secure Identifiers,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Health Insurance ID,HEALTH_INSURANCE_ID,Secure Identifiers,Directly PII,Not Mentioned,PHI,Identifiable
-Passport Number,US_PASSPORT_NUMBER,Secure Identifiers,Directly PII,Stand Alone PII,PHI,Identifiable
+Passport Number,USUK_PASSPORT_NUMBER,Secure Identifiers,Directly PII,Stand Alone PII,PHI,Identifiable
 Age,AGE,Basic Demographics,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Person,PERSON,Financial Information,Directly PII,Linkable,PHI,Identifiable
 Crypto (Financial Accounts),CRYPTO,Financial Information,Directly PII,Linkable,NON_PHI,Semi-Identifiable

@@ -137,7 +137,11 @@ def convert_aws_comprehend_pii_to_common_pii_type(
     @return:
     """
     try:
-        converted_type = PIIType[AWSComprehendPIIType(pii_type).name]
+        if pii_type == AWSComprehendPIIType.US_PASSPORT_NUMBER.value:
+            # Special case, map to USUK for all US and UK Passport types
+            converted_type = PIIType.USUK_PASSPORT_NUMBER
+        else:
+            converted_type = PIIType[AWSComprehendPIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
@@ -155,7 +159,11 @@ def convert_msft_presidio_pii_to_common_pii_type(
     @return:
     """
     try:
-        converted_type = PIIType[MSFTPresidioPIIType(pii_type).name]
+        if pii_type == MSFTPresidioPIIType.US_PASSPORT_NUMBER.value:
+            # Special case, map to USUK for all US and UK Passport types
+            converted_type = PIIType.USUK_PASSPORT_NUMBER
+        else:
+            converted_type = PIIType[MSFTPresidioPIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."

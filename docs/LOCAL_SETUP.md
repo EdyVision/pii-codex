@@ -2,7 +2,7 @@
 For those contributing or modifying the source, use the following to set up locally.
 
 ## Environment Config
-You'll need the Python (^3.9), Poetry, and  configured on your machine. Once those are configured, create a virtual
+You'll need the Python (^3.9) and Poetry configured on your machine. Once those are configured, create a virtual
 environment and install dependencies.
 
 ```bash

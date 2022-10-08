@@ -502,7 +502,7 @@
     {
         "index": 50,
         "Information_Type": "Passport Number",
-        "PII_Type": "US_PASSPORT_NUMBER",
+        "PII_Type": "USUK_PASSPORT_NUMBER",
         "Cluster_Membership_Type": "Secure Identifiers",
         "NIST_Category": "Directly PII",
         "DHS_Category": "Stand Alone PII",
