@@ -21,7 +21,7 @@ test.all:
 	@pytest tests
 
 test.coverage:
-	@poetry run coverage run -m pytest -vv tests && coverage report -m --omit="*/test*,config/*.conf" --fail-under=95
+	@poetry run coverage run -m pytest -vv tests && poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=95
 
 lint:
 	@poetry run pylint pii_codex tests
