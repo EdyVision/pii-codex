@@ -8,6 +8,9 @@ test.cov: test.coverage
 install:
 	@poetry install
 
+install.extras:
+	@poetry install --extras="detections"
+
 install_spacy_en_core_web_lg:
 	@python3 -m spacy download en_core_web_lg
 

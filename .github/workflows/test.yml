@@ -30,6 +30,8 @@ jobs:
         run: |
           poetry config virtualenvs.create false
           make install
+          make install.extras
+          make install_spacy_en_core_web_lg
       - name: Lint Check
         run: make lint
       - name: Run Tests
