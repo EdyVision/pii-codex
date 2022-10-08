@@ -14,10 +14,10 @@ from pii_codex.models.analysis import (
     RiskAssessment,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.services.pii_detection import (
-    PresidioPIIDetectionService,
+from pii_codex.services.analyzers.presidio_analysis import (
+    PresidioPIIAnalyzer,
 )
-from pii_codex.services.pii_assessment import PII_ASSESSMENT_SERVICE
+from pii_codex.services.assessment_service import PIIAssessmentService
 from pii_codex.utils.statistics_util import (
     get_mean,
     get_standard_deviation,
@@ -28,6 +28,9 @@ from pii_codex.utils.statistics_util import (
 
 
 class PIIAnalysisService:
+
+    pii_assessment_service = PIIAssessmentService()
+
     def analyze_item(
         self, analysis_provider: str, text: str, language_code: str = "en"
     ) -> AnalysisResult:
@@ -152,8 +155,8 @@ class PIIAnalysisService:
             ),
         )
 
-    @staticmethod
     def analyze_detection_result_item(
+        self,
         detection_result_item: DetectionResultItem,
     ) -> AnalysisResultItem:
         """
@@ -165,14 +168,13 @@ class PIIAnalysisService:
         """
         return AnalysisResultItem(
             detection=detection_result_item,
-            risk_assessment=PII_ASSESSMENT_SERVICE.assess_pii_type(
+            risk_assessment=self.pii_assessment_service.assess_pii_type(
                 detected_pii_type=detection_result_item.entity_type.upper()
             ),
         )
 
-    @staticmethod
     def _perform_analysis(
-        analysis_provider: str, text: str, language_code: str = "en"
+        self, analysis_provider: str, text: str, language_code: str = "en"
     ) -> List[AnalysisResultItem]:
         """
         Transforms detections into AnalysisResult objects
@@ -184,9 +186,7 @@ class PIIAnalysisService:
         """
 
         if analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
-            detections: List[
-                DetectionResultItem
-            ] = PresidioPIIDetectionService().analyze_item(
+            detections: List[DetectionResultItem] = PresidioPIIAnalyzer().analyze_item(
                 entities=[pii_type.name for pii_type in MSFTPresidioPIIType],
                 text=text,
                 language_code=language_code,
@@ -207,7 +207,7 @@ class PIIAnalysisService:
             [
                 AnalysisResultItem(
                     detection=detection,
-                    risk_assessment=PII_ASSESSMENT_SERVICE.assess_pii_type(
+                    risk_assessment=self.pii_assessment_service.assess_pii_type(
                         detected_pii_type=detection.entity_type.upper()
                     ),
                 )
@@ -217,14 +217,16 @@ class PIIAnalysisService:
             else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
         )
 
-    @staticmethod
     def _build_analysis_result_set(
-        collection_name: str, collection_type: str, analysis_set: List[AnalysisResult]
+        self,
+        collection_name: str,
+        collection_type: str,
+        analysis_set: List[AnalysisResult],
     ):
         (
             detected_types,
             detected_type_frequencies,
-        ) = PII_ASSESSMENT_SERVICE.get_detected_pii_types(analysis_set)
+        ) = self.pii_assessment_service.get_detected_pii_types(analysis_set)
 
         collection_risk_score_means = [
             analysis.risk_score_mean for analysis in analysis_set
@@ -243,10 +245,9 @@ class PIIAnalysisService:
             ),
             risk_score_mode=get_mode(collection_risk_score_means),
             risk_score_median=get_median(collection_risk_score_means),
-            detection_count=PII_ASSESSMENT_SERVICE.get_detected_pii_count(analysis_set),
+            detection_count=self.pii_assessment_service.get_detected_pii_count(
+                analysis_set
+            ),
             detected_pii_type_frequencies=detected_type_frequencies,
             detected_pii_types=detected_types,
         )
-
-
-PII_ANALYSIS_SERVICE = PIIAnalysisService()

@@ -1,5 +1,5 @@
-# Makefile PII Codex
-# Can be used from github workflow or locally
+# PII Codex Makefile
+# Used from GitHub workflow and locally
 default: install test lint
 
 test: lint test.all
@@ -7,6 +7,8 @@ test.cov: test.coverage
 
 install:
 	@poetry install
+
+install_spacy_en_core_web_lg:
 	@python3 -m spacy download en_core_web_lg
 
 jupyter.attach.venv:
@@ -38,6 +40,3 @@ version.bump.major:
 
 package:
 	@poetry build
-
-deployment: package
-
