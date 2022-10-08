@@ -49,4 +49,150 @@ print(results)
 
 The other two detection services available are AWSComprehendPIIDetectionAdapter and AzurePIIDetectionAdapter.
 
+Sample output:
+
+```
+{
+    "collection_name": "PII Collection 1",
+    "collection_type": "POPULATION",
+    "analyses": [
+        {
+            "analysis": [
+                {
+                    "pii_type_detected": "PERSON",
+                    "risk_level": 3,
+                    "risk_level_definition": "Identifiable",
+                    "cluster_membership_type": "Financial Information",
+                    "hipaa_category": "Protected Health Information",
+                    "dhs_category": "Linkable",
+                    "nist_category": "Directly PII",
+                    "entity_type": "PERSON",
+                    "score": 0.85,
+                    "start": 21,
+                    "end": 24,
+                }
+            ],
+            "index": 0,
+            "risk_score_mean": 3,
+        },
+        {
+            "analysis": [
+                {
+                    "pii_type_detected": "EMAIL_ADDRESS",
+                    "risk_level": 3,
+                    "risk_level_definition": "Identifiable",
+                    "cluster_membership_type": "Personal Preferences",
+                    "hipaa_category": "Protected Health Information",
+                    "dhs_category": "Stand Alone PII",
+                    "nist_category": "Directly PII",
+                    "entity_type": "EMAIL_ADDRESS",
+                    "score": 1.0,
+                    "start": 74,
+                    "end": 94,
+                },
+                {
+                    "pii_type_detected": "PHONE_NUMBER",
+                    "risk_level": 3,
+                    "risk_level_definition": "Identifiable",
+                    "cluster_membership_type": "Contact Information",
+                    "hipaa_category": "Protected Health Information",
+                    "dhs_category": "Stand Alone PII",
+                    "nist_category": "Directly PII",
+                    "entity_type": "PHONE_NUMBER",
+                    "score": 0.75,
+                    "start": 45,
+                    "end": 57,
+                },
+                {
+                    "pii_type_detected": "URL",
+                    "risk_level": 2,
+                    "risk_level_definition": "Semi-Identifiable",
+                    "cluster_membership_type": "Community Interaction",
+                    "hipaa_category": "Not Protected Health Information",
+                    "dhs_category": "Linkable",
+                    "nist_category": "Linkable",
+                    "entity_type": "URL",
+                    "score": 0.5,
+                    "start": 85,
+                    "end": 94,
+                },
+            ],
+            "index": 1,
+            "risk_score_mean": 2.6666666666666665,
+        },
+        {
+            "analysis": [
+                {
+                    "pii_type_detected": None,
+                    "risk_level": 1,
+                    "risk_level_definition": "Non-Identifiable",
+                    "cluster_membership_type": None,
+                    "hipaa_category": None,
+                    "dhs_category": None,
+                    "nist_category": None,
+                }
+            ],
+            "index": 2,
+            "risk_score_mean": 1,
+        },
+        {
+            "analysis": [
+                {
+                    "pii_type_detected": "LOCATION",
+                    "risk_level": 2,
+                    "risk_level_definition": "Semi-Identifiable",
+                    "cluster_membership_type": "Secure Identifiers",
+                    "hipaa_category": "Protected Health Information",
+                    "dhs_category": "Not Mentioned",
+                    "nist_category": "Linkable",
+                    "entity_type": "LOCATION",
+                    "score": 0.85,
+                    "start": 42,
+                    "end": 44,
+                }
+            ],
+            "index": 3,
+            "risk_score_mean": 2,
+        },
+        {
+            "analysis": [
+                {
+                    "pii_type_detected": None,
+                    "risk_level": 1,
+                    "risk_level_definition": "Non-Identifiable",
+                    "cluster_membership_type": None,
+                    "hipaa_category": None,
+                    "dhs_category": None,
+                    "nist_category": None,
+                }
+            ],
+            "index": 4,
+            "risk_score_mean": 1,
+        },
+    ],
+    "detection_count": 5,
+    "risk_scores": [3, 2.6666666666666665, 1, 2, 1],
+    "risk_score_mean": 1.9333333333333333,
+    "risk_score_mode": 1,
+    "risk_score_median": 2,
+    "risk_score_standard_deviation": 0.8273115763993905,
+    "risk_score_variance": 0.6844444444444444,
+    "detected_pii_types": [
+        "LOCATION",
+        "EMAIL_ADDRESS",
+        "URL",
+        "PHONE_NUMBER",
+        "PERSON",
+    ],
+    "detected_pii_type_frequencies": {
+        "PERSON": 1,
+        "EMAIL_ADDRESS": 1,
+        "PHONE_NUMBER": 1,
+        "URL": 1,
+        "LOCATION": 1,
+    },
+}
+
+```
+
 Check out full analysis example in the notebook: notebooks/pii-batch-analysis-ms-presidio.
