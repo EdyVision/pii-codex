@@ -1,3 +1,4 @@
+# Creates a new tag and GitHub release based on the output of poetry version
 name: Tag
 
 on:
@@ -30,31 +31,34 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
       - name: Checkout branch "main"
         uses: actions/checkout@v2
         with:
           ref: 'main'
-      - name: Bump Version
+      - name: Install Global Dependencies
+        run: pip install -U pip && pip install poetry wheel
+      - name: Build project for distribution
+        run: poetry build
+      - name: Get Version
+        id: get_version
         run: |
-          if [ "$VERSION_TYPE" = "major" ]; then
-            make version.bump.major
-          elif [ "$VERSION_TYPE" = "minor" ]; then
-            make version.bump.minor
-          else
-            make version.bump.patch
-
-          TAG_NAME=poetry version -s
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
-          echo $TAG_NAME
-#          git add .
-#          git commit -m "Bumped version to "
-#      - name: Release snapshot
-#        id: release-snapshot
-#        uses: actions/create-release@latest
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: v${{ env.VERSION_TYPE }}
-#          release_name: v${{ env.VERSION_TYPE }}
-#          draft: false
-#          prerelease: false
+          TAG_NAME=$(poetry version -s)
+          echo "::set-output name=tag_name::$TAG_NAME"
+          echo "$TAG_NAME"
+      - name: Create Tag
+        uses: actions/github-script@v3
+        env:
+           TAG: v${{ steps.get_version.outputs.tag_name }}
+        with:
+           github-token: ${{ github.token }}
+           script: |
+             github.git.createRef({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.get_version.outputs.tag_name }}",
+               sha: context.sha
+             })
