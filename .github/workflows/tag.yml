@@ -1,5 +1,5 @@
 # Creates a new tag and GitHub release based on the output of poetry version
-name: Snapshot
+name: Tag
 
 on:
   workflow_dispatch:
@@ -41,19 +41,24 @@ jobs:
           ref: 'main'
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
+      - name: Build project for distribution
+        run: poetry build
       - name: Get Version
         id: get_version
         run: |
           TAG_NAME=$(poetry version -s)
           echo "::set-output name=tag_name::$TAG_NAME"
           echo "$TAG_NAME"
-      - name: Release snapshot
-        id: release-snapshot
-        uses: actions/create-release@latest
+      - name: Create Tag
+        uses: actions/github-script@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           TAG: ${{ steps.set-tag.outputs.tag_name }}
         with:
-          tag_name: v${{ steps.get_version.outputs.tag_name }}
-          release_name: v${{ steps.get_version.outputs.tag_name }}
-          draft: false
-          prerelease: false
+           github-token: ${{ github.token }}
+           script: |
+             github.git.createRef({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.get_version.outputs.tag_name }}",
+               sha: context.sha
+             })
