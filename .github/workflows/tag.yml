@@ -34,13 +34,27 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: 'main'
-      - name: Release snapshot
-        id: release-snapshot
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ env.VERSION_TYPE }}
-          release_name: v${{ env.VERSION_TYPE }}
-          draft: false
-          prerelease: false
+      - name: Bump Version
+        run: |
+          if [ "$VERSION_TYPE" = "major" ]; then
+            make version.bump.major
+          elif [ "$VERSION_TYPE" = "minor" ]; then
+            make version.bump.minor
+          else
+            make version.bump.patch
+
+          TAG_NAME=poetry version -s
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          echo $TAG_NAME
+#          git add .
+#          git commit -m "Bumped version to "
+#      - name: Release snapshot
+#        id: release-snapshot
+#        uses: actions/create-release@latest
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: v${{ env.VERSION_TYPE }}
+#          release_name: v${{ env.VERSION_TYPE }}
+#          draft: false
+#          prerelease: false
