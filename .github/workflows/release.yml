@@ -1,9 +1,8 @@
 name: Release
 
 on:
-  push:
-    tags:
-     - '*.*.*'
+  workflow_run:
+    workflows: ["Tag"]
 
 jobs:
   release:

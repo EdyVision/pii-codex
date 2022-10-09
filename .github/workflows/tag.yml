@@ -3,34 +3,12 @@ name: Tag
 
 on:
   workflow_dispatch:
-    inputs:
-      version_type_override:
-        required: false
-        type: choice
-        description: (Optional) override the version type
-        default: (unset)
-        options:
-          - (unset)
-          - patch
-          - minor
-          - major
 
 jobs:
   build:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: set $VERSION_TYPE
-        run: |
-          if [[ ("${{ github.event.inputs.version_type_override }}" == "") || ("${{ github.event.inputs.version_type_override }}" == "(unset)") ]]; then
-            VERSION_TYPE=patch
-          else
-            VERSION_TYPE=${{ github.event.inputs.version_type_override }}
-          fi
-          echo "VERSION_TYPE=$VERSION_TYPE" >> $GITHUB_ENV
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
@@ -59,6 +37,6 @@ jobs:
              github.git.createRef({
                owner: context.repo.owner,
                repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.get_version.outputs.tag_name }}",
+              ref: "refs/tags/v${{ steps.get_version.outputs.tag_name }}",
                sha: context.sha
              })
