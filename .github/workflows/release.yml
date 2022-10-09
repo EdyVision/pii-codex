@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: ["Tag"]
+  push:
+    tags:
+     - '*.*.*'
 
 jobs:
   release:
@@ -17,11 +18,11 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install Poetry
-        run: python install-poetry.py -y
+      - name: Install Global Dependencies
+        run: pip install -U pip && pip install poetry wheel
 
-      - name: Update PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Build project for distribution
+        run: poetry build
 
       - name: Build project for distribution
         run: poetry build
@@ -31,6 +32,7 @@ jobs:
         run: |
           [[ "$(poetry version --short)" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
             || echo ::set-output name=prerelease::true
+
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
