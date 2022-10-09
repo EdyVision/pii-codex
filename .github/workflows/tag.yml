@@ -42,6 +42,7 @@ jobs:
             make version.bump.minor
           else
             make version.bump.patch
+          fi
 
           TAG_NAME=poetry version -s
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
