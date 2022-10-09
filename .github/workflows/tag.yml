@@ -50,8 +50,8 @@ jobs:
             make version.bump.patch
           fi
 
-          echo "TAG_NAME=$(poetry version -s)" >> $GITHUB_ENV
-          echo $TAG_NAME
+          TAG_NAME=$(poetry version -s)
+          echo "::set-output name=tag_name::$TAG_NAME"
 #          git add .
 #          git commit -m "Bumped version to "
 #      - name: Release snapshot
