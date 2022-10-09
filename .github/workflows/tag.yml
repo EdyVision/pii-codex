@@ -41,7 +41,7 @@ jobs:
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
       - name: Bump Version
-        id: version-bump
+        id: version_bump
         run: |
           if [ "$VERSION_TYPE" = "major" ]; then
             make version.bump.major
@@ -54,8 +54,15 @@ jobs:
           TAG_NAME=$(poetry version -s)
           echo "::set-output name=tag_name::$TAG_NAME"
           echo "$TAG_NAME"
-#          git add .
-#          git commit -m "Bumped version to "
+      - name: GIT commit and push all changed files
+        env:
+          CI_COMMIT_MESSAGE: Continuous Integration Version Bump ${{ steps.version_bump.outputs.tag_name }}
+          CI_COMMIT_AUTHOR: Continuous Integration
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "EdyVision@users.noreply.github.com"
+          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
 #      - name: Release snapshot
 #        id: release-snapshot
 #        uses: actions/create-release@latest
