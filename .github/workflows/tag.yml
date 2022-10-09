@@ -52,7 +52,7 @@ jobs:
       - name: Create Tag
         uses: actions/github-script@v3
         env:
-           TAG: ${{ steps.set-tag.outputs.tag_name }}
+           TAG: v${{ steps.get_version.outputs.tag_name }}
         with:
            github-token: ${{ github.token }}
            script: |
