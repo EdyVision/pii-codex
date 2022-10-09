@@ -1,5 +1,5 @@
 # Creates a new tag and GitHub release based on the output of poetry version
-name: Tag
+name: Snapshot
 
 on:
   workflow_dispatch:
