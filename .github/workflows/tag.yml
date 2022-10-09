@@ -53,7 +53,7 @@ jobs:
 
           TAG_NAME=$(poetry version -s)
           echo "::set-output name=tag_name::$TAG_NAME"
-          ::debug::{tag_name}
+          echo "$TAG_NAME"
 #          git add .
 #          git commit -m "Bumped version to "
 #      - name: Release snapshot
