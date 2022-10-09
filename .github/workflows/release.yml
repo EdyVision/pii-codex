@@ -1,38 +1,45 @@
+# Creates a new tag and GitHub release based on the output of poetry version
 name: Release
 
 on:
-  push:
-    tags:
-     - '*.*.*'
+  workflow_dispatch:
 
 jobs:
-  release:
+  build:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v3
         with:
-          python-version: "3.9"
-
+          python-version: 3.9
+      - name: Checkout branch "main"
+        uses: actions/checkout@v2
+        with:
+          ref: 'main'
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
-
       - name: Build project for distribution
         run: poetry build
-
-      - name: Build project for distribution
-        run: poetry build
-
-      - name: Check Version
-        id: check-version
+      - name: Get Version
+        id: get_version
         run: |
-          [[ "$(poetry version --short)" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
-            || echo ::set-output name=prerelease::true
-
+          TAG_NAME=$(poetry version -s)
+          echo "::set-output name=tag_name::$TAG_NAME"
+          echo "$TAG_NAME"
+      - name: Create Tag
+        uses: actions/github-script@v3
+        env:
+           TAG: v${{ steps.get_version.outputs.tag_name }}
+        with:
+           github-token: ${{ github.token }}
+           script: |
+             github.git.createRef({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+              ref: "refs/tags/v${{ steps.get_version.outputs.tag_name }}",
+               sha: context.sha
+             })
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
