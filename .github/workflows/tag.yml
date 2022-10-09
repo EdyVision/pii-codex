@@ -62,7 +62,7 @@ jobs:
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "EdyVision@users.noreply.github.com"
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push
+          git push origin -f
 #      - name: Release snapshot
 #        id: release-snapshot
 #        uses: actions/create-release@latest
