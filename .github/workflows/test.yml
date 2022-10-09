@@ -1,11 +1,8 @@
-name: Minimum Coverage Met
+name: Test
 
 on:
   # Triggers the test workflow on push for all branches
   push:
-    paths:
-      - "pii_codex/**"
-      - "tests/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,9 +32,6 @@ jobs:
           poetry config virtualenvs.create true
           make install
           make install.extras
-#      - name: Install Spacy Model(s) for Tests
-#        run: |
-#          make install_spacy_en_core_web_lg
       - name: Lint Check
         run: make lint
       - name: Run Tests

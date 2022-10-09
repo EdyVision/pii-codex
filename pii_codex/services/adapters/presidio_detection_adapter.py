@@ -43,21 +43,13 @@ class PresidioPIIDetectionAdapter(BasePIIDetectionAdapter):
         """
 
         detection_results: List[DetectionResultItem] = []
-        for i, result in enumerate(pii_detections):
+        for i, detection in enumerate(pii_detections):
             # Return results in formatted Analysis Result List object
-            detections = []
-            for entity in result:
-                detections.append(
-                    DetectionResultItem(
-                        entity_type=convert_msft_presidio_pii_to_common_pii_type(
-                            entity.entity_type
-                        ).name,
-                        score=entity.score,
-                        start=entity.start,
-                        end=entity.end,
-                    )
+            detection_results.append(
+                DetectionResult(
+                    index=i,
+                    detections=self.convert_analyzed_item(pii_detection=detection),
                 )
-
-            detection_results.append(DetectionResult(index=i, detections=detections))
+            )
 
         return detection_results

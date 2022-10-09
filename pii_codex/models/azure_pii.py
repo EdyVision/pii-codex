@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from enum import Enum
 
-import strawberry
-
 
 # Azure PII Types
 # Research Page:
@@ -11,7 +9,6 @@ import strawberry
 # azure.ai.textanalytics.html#azure.ai.textanalytics.TextAnalyticsClient.recognize_pii_entities
 
 
-@strawberry.enum
 class AzureDetectionType(Enum):
     """
     The values fed into the Azure service for detection
@@ -202,7 +199,6 @@ class AzureDetectionType(Enum):
     ALL: str = "All"
 
 
-@strawberry.enum
 class AzurePIIType(Enum):
     """
     The values of types returned from the Azure Cognition PII Detection API

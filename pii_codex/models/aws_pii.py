@@ -2,14 +2,12 @@ from __future__ import annotations
 
 from enum import Enum
 
-import strawberry
 
 # PII Types and Models as expanded in research
 # Research Page:
 # AWS Comprehend PII Docs: https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html
 
 
-@strawberry.enum
 class AWSComprehendPIIType(Enum):
     EMAIL_ADDRESS: str = "EMAIL"
     ADDRESS: str = "ADDRESS"

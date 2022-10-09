@@ -1,8 +1,8 @@
+# pylint: disable=too-many-instance-attributes
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import List, Counter
-
-import strawberry
 
 from pii_codex.models.common import RiskLevel, RiskLevelDefinition
 
@@ -10,7 +10,7 @@ from pii_codex.models.common import RiskLevel, RiskLevelDefinition
 # PII detection, risk assessment, and analysis models
 
 
-@strawberry.type
+@dataclass
 class RiskAssessment:
     pii_type_detected: str = None
     risk_level: int = RiskLevel.LEVEL_ONE.value
@@ -23,13 +23,13 @@ class RiskAssessment:
     nist_category: str = None
 
 
-@strawberry.type
+@dataclass
 class RiskAssessmentList:
     risk_assessments: List[RiskAssessment]
     average_risk_score: float
 
 
-@strawberry.type
+@dataclass
 class DetectionResultItem:
     """
     Type associated with a singular PII detection (e.g. detection of an email in a string), its associated risk score,
@@ -42,13 +42,13 @@ class DetectionResultItem:
     end: int
 
 
-@strawberry.type
+@dataclass
 class DetectionResult:
-    index: int = 0
     detections: List[DetectionResultItem]
+    index: int = 0
 
 
-@strawberry.type
+@dataclass
 class AnalysisResultItem:
     """
     The results associated to a single detection of a single string (e.g. Social Media Post, SMS, etc.)
@@ -72,14 +72,14 @@ class AnalysisResultItem:
         return assessment
 
 
-@strawberry.type
+@dataclass
 class AnalysisResult:
     """
     The analysis results associated with several detections within a single string (e.g. Social Media Post, SMS, etc.)
     """
 
-    index: int = 0
     analysis: List[AnalysisResultItem]
+    index: int = 0
     risk_score_mean: float = 0.0
 
     def to_dict(self):
@@ -93,7 +93,7 @@ class AnalysisResult:
         return [pii.detection.entity_type for pii in self.analysis if pii.detection]
 
 
-@strawberry.type
+@dataclass
 class AnalysisResultSet:
     """
     The analysis results associated with a collection of strings or documents (e.g. Social Media Posts, forum thread,

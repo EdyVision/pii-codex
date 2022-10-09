@@ -7,4 +7,4 @@ authors:
 title: "pii-codex: a Python library for PII detection, categorization, and severity assessment"
 version: 0.1.0
 doi: tbd
-date-released: 2022-10-10
+date-released: 2022-10-08

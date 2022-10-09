@@ -347,7 +347,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "executing"
-version = "1.1.0"
+version = "1.1.1"
 description = "Get the currently executing AST node of a frame, and other information"
 category = "dev"
 optional = false
@@ -411,14 +411,6 @@ type1 = ["xattr"]
 ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=14.0.0)"]
 woff = ["zopfli (>=0.1.4)", "brotlicffi (>=0.8.0)", "brotli (>=1.0.1)"]
-
-[[package]]
-name = "graphql-core"
-version = "3.2.3"
-description = "GraphQL implementation for Python, a port of GraphQL.js, the JavaScript reference implementation for GraphQL."
-category = "main"
-optional = false
-python-versions = ">=3.6,<4"
 
 [[package]]
 name = "idna"
@@ -1581,33 +1573,6 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "typeguard", "pytest"]
 
 [[package]]
-name = "strawberry-graphql"
-version = "0.133.5"
-description = "A library for creating GraphQL APIs"
-category = "main"
-optional = false
-python-versions = ">=3.7,<4.0"
-
-[package.dependencies]
-graphql-core = ">=3.2.0,<3.3.0"
-python-dateutil = ">=2.7.0,<3.0.0"
-typing_extensions = ">=3.7.4,<5.0.0"
-
-[package.extras]
-asgi = ["starlette (>=0.13.6)", "python-multipart (>=0.0.5,<0.0.6)"]
-debug-server = ["starlette (>=0.13.6)", "click (>=7.0,<9.0)", "pygments (>=2.3,<3.0)", "uvicorn (>=0.11.6,<0.19.0)", "python-multipart (>=0.0.5,<0.0.6)"]
-cli = ["click (>=7.0,<9.0)", "pygments (>=2.3,<3.0)"]
-django = ["Django (>=3.2)", "asgiref (>=3.2,<4.0)"]
-channels = ["asgiref (>=3.2,<4.0)", "channels (>=3.0.5)"]
-flask = ["flask (>=1.1)"]
-opentelemetry = ["opentelemetry-api (<2)", "opentelemetry-sdk (<2)"]
-chalice = ["chalice (>=1.22,<2.0)"]
-pydantic = ["pydantic (<2)"]
-fastapi = ["python-multipart (>=0.0.5,<0.0.6)", "fastapi (>=0.65.2)"]
-sanic = ["sanic (>=20.12.2,<22.0.0)"]
-aiohttp = ["aiohttp (>=3.7.4.post0,<4.0.0)"]
-
-[[package]]
 name = "terminado"
 version = "0.16.0"
 description = "Tornado websocket backend for the Xterm.js Javascript terminal emulator library."
@@ -1840,15 +1805,15 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "zipp"
-version = "3.8.1"
+version = "3.9.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["sphinx", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "jaraco.tidelift (>=1.4)"]
-testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)"]
+docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo", "jaraco.tidelift (>=1.4)"]
+testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "func-timeout", "jaraco.functools", "more-itertools", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)"]
 
 [extras]
 detections = ["spacy", "presidio-analyzer"]
@@ -1856,7 +1821,7 @@ detections = ["spacy", "presidio-analyzer"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.11"
-content-hash = "136df723f57265a1d1223a32060d5c2bebe73d3009af298cc8a50e574f51001a"
+content-hash = "636a16f0dc0a13951e9d8382dec3e17e192de58e202e231123e61791870e91ce"
 
 [metadata.files]
 appnope = []
@@ -1894,7 +1859,6 @@ faker = []
 fastjsonschema = []
 filelock = []
 fonttools = []
-graphql-core = []
 idna = []
 importlib-metadata = []
 importlib-resources = []
@@ -1981,7 +1945,6 @@ spacy-legacy = []
 spacy-loggers = []
 srsly = []
 stack-data = []
-strawberry-graphql = []
 terminado = []
 thinc = []
 tinycss2 = []
