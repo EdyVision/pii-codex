@@ -57,10 +57,10 @@ jobs:
       - name: GIT commit and push all changed files
         env:
           CI_COMMIT_MESSAGE: Continuous Integration Version Bump ${{ steps.version_bump.outputs.tag_name }}
-          CI_COMMIT_AUTHOR: Continuous Integration
+          CI_COMMIT_AUTHOR: ${{github.actor}}
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "EdyVision@users.noreply.github.com"
+          git config --global user.email "${{github.actor}}@users.noreply.github.com"
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push origin -f
 #      - name: Release snapshot
