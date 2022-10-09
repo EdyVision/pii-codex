@@ -1,3 +1,4 @@
+# Creates a new tag and GitHub release based on the output of poetry version
 name: Tag
 
 on:
@@ -40,36 +41,19 @@ jobs:
           ref: 'main'
       - name: Install Global Dependencies
         run: pip install -U pip && pip install poetry wheel
-      - name: Bump Version
-        id: version_bump
+      - name: Get Version
+        id: get_version
         run: |
-          if [ "$VERSION_TYPE" = "major" ]; then
-            make version.bump.major
-          elif [ "$VERSION_TYPE" = "minor" ]; then
-            make version.bump.minor
-          else
-            make version.bump.patch
-          fi
-
           TAG_NAME=$(poetry version -s)
           echo "::set-output name=tag_name::$TAG_NAME"
           echo "$TAG_NAME"
-      - name: GIT commit and push all changed files
+      - name: Release snapshot
+        id: release-snapshot
+        uses: actions/create-release@latest
         env:
-          CI_COMMIT_MESSAGE: Continuous Integration Version Bump ${{ steps.version_bump.outputs.tag_name }}
-          CI_COMMIT_AUTHOR: ${{github.actor}}
-        run: |
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "${{github.actor}}@users.noreply.github.com"
-          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push origin -f
-#      - name: Release snapshot
-#        id: release-snapshot
-#        uses: actions/create-release@latest
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: v${{ env.VERSION_TYPE }}
-#          release_name: v${{ env.VERSION_TYPE }}
-#          draft: false
-#          prerelease: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get_version.outputs.tag_name }}
+          release_name: v${{ steps.get_version.outputs.tag_name }}
+          draft: false
+          prerelease: false
