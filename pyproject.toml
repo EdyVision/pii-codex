@@ -15,7 +15,6 @@ include = ["LICENSE", "LICENSE-ETHICS"]
 python = ">=3.9,<3.11"
 dataclasses-json = "^0.5.7"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
-numpy = "^1.23.2"
 pandas = "^1.4.4"
 
 # Optional items for analyses - users have the option to use the integrated Presidio analyzer or
