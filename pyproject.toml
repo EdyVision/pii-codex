@@ -29,7 +29,7 @@ pylint = "^2.15.0"
 coverage = "^6.4.4"
 assertpy = "^1.1"
 Faker = "^14.2.1"
-matplotlib = "^3.6.0"
+matplotlib = "^3.6.1"
 ipykernel = "^6.16.0"
 jupyter = "^1.0.0"
 importlib-resources = "^5.9.0"
@@ -41,6 +41,11 @@ detections = [
     "spacy",
     "presidio-analyzer",
 ]
+
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
+secondary = false
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
