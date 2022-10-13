@@ -2,7 +2,9 @@ from assertpy import assert_that
 
 from pii_codex.models.analysis import DetectionResultItem
 from pii_codex.models.azure_pii import AzurePIIType
-from pii_codex.services.adapters.azure_detection_adapter import AzurePIIDetectionAdapter
+from pii_codex.services.adapters.detection_adapters.azure_detection_adapter import (
+    AzurePIIDetectionAdapter,
+)
 
 
 def test_azure_analysis_single_item_conversion():

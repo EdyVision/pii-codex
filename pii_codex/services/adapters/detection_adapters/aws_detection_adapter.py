@@ -1,7 +1,9 @@
 from typing import List
 
 from pii_codex.models.analysis import DetectionResultItem, DetectionResult
-from pii_codex.services.adapters.detection_adapter_base import BasePIIDetectionAdapter
+from pii_codex.services.adapters.detection_adapters.detection_adapter_base import (
+    BasePIIDetectionAdapter,
+)
 from pii_codex.utils.pii_mapping_util import (
     convert_aws_comprehend_pii_to_common_pii_type,
 )
@@ -70,7 +72,7 @@ class AWSComprehendPIIDetectionAdapter(BasePIIDetectionAdapter):
 
         """
 
-        detection_results: List[DetectionResultItem] = []
+        detection_results: List[DetectionResult] = []
         for i, detection in enumerate(pii_detections):
             # Return results in formatted Analysis Result List object
             detection_results.append(

@@ -3,6 +3,11 @@ name: Test
 on:
   # Triggers the test workflow on push for all branches
   push:
+    paths:
+      - "pii_codex/**"
+      - "poetry.lock"
+      - "pyproject.toml"
+      - ".github/workflows/test.yml"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

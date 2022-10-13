@@ -1,6 +1,6 @@
 from typing import List
 
-from pii_codex.models.analysis import DetectionResultItem, DetectionResult
+from pii_codex.models.analysis import DetectionResult, DetectionResultItem
 
 
 class BasePIIDetectionAdapter:

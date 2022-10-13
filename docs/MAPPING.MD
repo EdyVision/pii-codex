@@ -16,7 +16,6 @@ Iterating through all common types supported:
 ```python
 from pii_codex.models.common import PIIType
 pii_types = [pii_type.name for pii_type in PIIType]
-print(pii_types)
 ```
 
 Each module or cloud resource will have its own string labeling for the PII Type. It is sometimes required to map to that string value in order to properly parse out a PII detection or to initialize an analyzer. To map to a different PII type (if supported with the version, using MSFT Presidio for example):

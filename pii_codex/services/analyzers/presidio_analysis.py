@@ -41,7 +41,7 @@ class PresidioPIIAnalyzer:
         @param language_code: str - defaults to "en"
         @return: List[str]
         """
-        return self.analyzer.get_supported_entities(language=language_code)
+        return self.analyzer.get_supported_entities(language=language_code)  # type: ignore
 
     def get_loaded_recognizers(self, language_code="en"):
         """
@@ -49,7 +49,7 @@ class PresidioPIIAnalyzer:
         @param language_code:
         @return:
         """
-        return self.analyzer.get_recognizers(language=language_code)
+        return self.analyzer.get_recognizers(language=language_code)  # type: ignore
 
     def analyze_item(
         self, text: str, language_code: str = "en", entities: List[str] = None
@@ -72,12 +72,12 @@ class PresidioPIIAnalyzer:
 
         try:
             # Engine Setup - spaCy model setup and PII recognizers
-            detections = self.analyzer.analyze(
+            detections = self.analyzer.analyze(  # type: ignore
                 text=text, entities=entities, language=language_code
             )
 
         except Exception as ex:
-            logging.error(ex.with_traceback())
+            logging.error(ex)
 
         # Return analyzer results in formatted Analysis Result List object
         return [
@@ -111,7 +111,7 @@ class PresidioPIIAnalyzer:
 
             # Engine Setup - spaCy model setup and PII recognizers
             for i, text in enumerate(texts):
-                text_analysis = self.analyzer.analyze(
+                text_analysis = self.analyzer.analyze(  # type: ignore
                     text=text, entities=entities, language=language_code
                 )
 
@@ -120,7 +120,7 @@ class PresidioPIIAnalyzer:
                     DetectionResultItem(
                         entity_type=convert_msft_presidio_pii_to_common_pii_type(
                             result.entity_type
-                        ),
+                        ).name,
                         score=result.score,
                         start=result.start,
                         end=result.end,
@@ -134,7 +134,7 @@ class PresidioPIIAnalyzer:
             # Return analyzer results in formatted Analysis Result List object
 
         except Exception as ex:
-            logging.error(ex.with_traceback())
+            logging.error(ex)
 
         return detection_results
 
@@ -170,7 +170,7 @@ class PresidioPIIAnalyzer:
 
         """
 
-        detection_results: List[DetectionResultItem] = []
+        detection_results: List[DetectionResult] = []
         for i, result in enumerate(pii_detections):
             # Return results in formatted Analysis Result List object
             detections = []

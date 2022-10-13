@@ -25,7 +25,7 @@ class PIIAssessmentService:
         enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
         @return: List[RiskAssessment]
         """
-        ranked_pii: RiskAssessment = []
+        ranked_pii: List[RiskAssessment] = []
 
         for pii_type in detected_pii_types:
             ranked_pii.append(map_pii_type(pii_type))
@@ -43,7 +43,7 @@ class PIIAssessmentService:
         enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
         @return: List[RiskAssessment]
         """
-        ranked_pii: RiskAssessment = []
+        ranked_pii: List[RiskAssessment] = []
 
         for pii_type in detected_pii_types:
             ranked_pii.append(map_pii_type(pii_type))
@@ -63,7 +63,7 @@ class PIIAssessmentService:
         return get_mean([assessment.risk_level for assessment in risk_assessments])
 
     @staticmethod
-    def get_detected_pii_count(analyses: List[AnalysisResult]) -> float:
+    def get_detected_pii_count(analyses: List[AnalysisResult]) -> int:
         """
         Returns the count of detected PII for analyses performed on a collection
 

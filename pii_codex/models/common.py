@@ -24,6 +24,12 @@ class RiskLevelDefinition(Enum):
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
+class MetadataType(Enum):
+    SCREEN_NAME: str = "screen_name"
+    LOCATION: str = "location"
+    URL: str = "url"
+
+
 class PIIType(Enum):
     PHONE_NUMBER: str = "PHONE"
     WORK_PHONE_NUMBER: str = "PHONE"

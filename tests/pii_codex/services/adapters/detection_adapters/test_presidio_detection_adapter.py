@@ -5,7 +5,7 @@ from presidio_analyzer import RecognizerResult
 
 from pii_codex.models.analysis import DetectionResultItem, DetectionResult
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.services.adapters.presidio_detection_adapter import (
+from pii_codex.services.adapters.detection_adapters.presidio_detection_adapter import (
     PresidioPIIDetectionAdapter,
 )
 

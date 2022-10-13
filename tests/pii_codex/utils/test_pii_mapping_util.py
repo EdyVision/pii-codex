@@ -25,6 +25,8 @@ from pii_codex.utils.pii_mapping_util import (
     convert_common_pii_to_aws_comprehend_type,
     convert_azure_pii_to_common_pii_type,
     convert_aws_comprehend_pii_to_common_pii_type,
+    convert_metadata_type_to_common_pii_type,
+    convert_msft_presidio_pii_to_common_pii_type,
 )
 
 
@@ -122,6 +124,22 @@ class TestPIIMappingUtil:
             assert_that(ex.args[0]).contains(
                 "The current version does not support this PII Type conversion."
             )
+
+    def test_convert_metadata_to_pii_failure(self):
+        with pytest.raises(Exception) as execinfo:
+            convert_metadata_type_to_common_pii_type("other_type")
+
+        assert_that(str(execinfo.value)).contains(
+            "The current version does not support this Metadata to PII Type conversion."
+        )
+
+    def test_convert_msft_presidio_pii_to_common_pii_type_failure(self):
+        with pytest.raises(Exception) as execinfo:
+            convert_msft_presidio_pii_to_common_pii_type("other_type")
+
+        assert_that(str(execinfo.value)).contains(
+            "The current version does not support this PII Type conversion."
+        )
 
     # endregion
 

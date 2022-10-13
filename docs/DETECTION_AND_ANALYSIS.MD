@@ -20,7 +20,36 @@ results = PIIAnalysisService().analyze_collection(
     collection_name="Data Set Label", # this is optional, geared for those that require labeling of collections
     collection_type="SAMPLE" # defaults to POPULATION, input used for standard deviation and variance calculations
 )
-print(results)
+```
+
+For those analyzing social media posts, you can also supply metadata per text sample to be analyzed in a dataframe.
+
+```python
+import pandas as pd
+from pii_codex.services.analysis_service import PIIAnalysisService
+
+strings_to_analyze = ["string to analyze", "string to analyze"] # strings to analyze
+results = PIIAnalysisService().analyze_collection(
+    data=pd.DataFrame({
+        "text": [
+            "I attend the University of Central Florida, how about you?",
+            "If anyone needs trig help, my phone number 555-555-5555 and my email is example123@email.com",
+            "Oh I do! My number is 777-777-7777. Where is the residence hall?",
+            "The dorm is over at 123 Dark Data Lane, OH, 11111",
+            "Cool, I'll be there!"
+        ],
+        "metadata": [
+            {"location": True, "url": False, "screen_name": True},
+            {"location": True, "url": False, "screen_name": True},
+            {"location": False, "url": False, "screen_name": True}, # Not all social media posts will have location metadata
+            {"location": False, "url": False, "screen_name": True},
+            {"location": True, "url": False, "screen_name": True},
+        ]
+    }),
+    language_code="en",
+    collection_name="Data Set Label", # this is optional, geared for those that require labeling of collections
+    collection_type="SAMPLE" # defaults to POPULATION, input used for standard deviation and variance calculations
+)
 ```
 
 To supply the analyzer module with a collection of pre-detected results from your own Microsoft Presidio, Azure, or AWS Comprehend analysis process, you will need to first convert the detection to a set of DetectionResult objects to feed into the analyzer as follows:
@@ -29,7 +58,7 @@ To supply the analyzer module with a collection of pre-detected results from you
 from typing import List
 from presidio_analyzer import RecognizerResult
 from pii_codex.services.analysis_service import PIIAnalysisService
-from pii_codex.services.adapters.presidio_detection_adapter import PresidioPIIDetectionAdapter
+from pii_codex.services.adapters.detection_adapters.presidio_detection_adapter import PresidioPIIDetectionAdapter
 from pii_codex.models.analysis import DetectionResult
 
 presidio_detection_service = PresidioPIIDetectionAdapter()
@@ -44,7 +73,6 @@ results = PIIAnalysisService().analyze_detection_collection(
     collection_name="Data Set Label",  # this is more for those that intend to find a way to label collections
     collection_type="SAMPLE"  # defaults to POPULATION, input used for standard deviation and variance calculations
 )
-print(results)
 ```
 
 The other two detection services available are AWSComprehendPIIDetectionAdapter and AzurePIIDetectionAdapter.
