@@ -15,7 +15,6 @@ include = ["LICENSE", "LICENSE-ETHICS"]
 python = ">=3.9,<3.11"
 dataclasses-json = "^0.5.7"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
-numpy = "^1.23.2"
 pandas = "^1.4.4"
 
 # Optional items for analyses - users have the option to use the integrated Presidio analyzer or
@@ -30,7 +29,7 @@ pylint = "^2.15.0"
 coverage = "^6.4.4"
 assertpy = "^1.1"
 Faker = "^14.2.1"
-matplotlib = "^3.6.0"
+matplotlib = "^3.6.1"
 ipykernel = "^6.16.0"
 jupyter = "^1.0.0"
 importlib-resources = "^5.9.0"
@@ -42,6 +41,11 @@ detections = [
     "spacy",
     "presidio-analyzer",
 ]
+
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
+secondary = false
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
