@@ -54,7 +54,7 @@ PIIAnalysisService().analyze_collection(
 )
 ```
 
-You can also pass in a `data` param (dataframe) instead of simple text array with text and metadata to be analyzed for those analyzing social media posts. Current metadata supported are `URL`, `LOCATION`, and `SCREEN_NAME`.
+You can also pass in a `data` param (dataframe) instead of simple text array with a text column and a metadata column to be analyzed for those analyzing social media posts. Current metadata supported are `URL`, `LOCATION`, and `SCREEN_NAME`.
 
 Sample output (results object converted to `dict` from notebook):
 ```
