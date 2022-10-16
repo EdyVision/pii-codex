@@ -1,4 +1,6 @@
 # pylint: disable=broad-except, unused-variable
+from typing import Optional
+
 import pandas as pd
 
 from pii_codex.models.aws_pii import AWSComprehendPIIType
@@ -11,6 +13,7 @@ from pii_codex.models.common import (
     DHSCategory,
     NISTCategory,
     PIIType,
+    MetadataType,
 )
 from pii_codex.models.analysis import RiskAssessment
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
@@ -85,13 +88,11 @@ def convert_common_pii_to_azure_pii_type(pii_type: PIIType) -> AzurePIIType:
     @return:
     """
     try:
-        converted_type = AzurePIIType[pii_type.name]
+        return AzurePIIType[pii_type.name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
         )
-
-    return converted_type
 
 
 def convert_common_pii_to_aws_comprehend_type(
@@ -103,13 +104,11 @@ def convert_common_pii_to_aws_comprehend_type(
     @return:
     """
     try:
-        converted_type = AWSComprehendPIIType[pii_type.name]
+        return AWSComprehendPIIType[pii_type.name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
         )
-
-    return converted_type
 
 
 def convert_azure_pii_to_common_pii_type(pii_type: str) -> PIIType:
@@ -119,13 +118,11 @@ def convert_azure_pii_to_common_pii_type(pii_type: str) -> PIIType:
     @return:
     """
     try:
-        converted_type = PIIType[AzurePIIType(pii_type).name]
+        return PIIType[AzurePIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
         )
-
-    return converted_type
 
 
 def convert_aws_comprehend_pii_to_common_pii_type(
@@ -139,15 +136,13 @@ def convert_aws_comprehend_pii_to_common_pii_type(
     try:
         if pii_type == AWSComprehendPIIType.US_PASSPORT_NUMBER.value:
             # Special case, map to USUK for all US and UK Passport types
-            converted_type = PIIType.USUK_PASSPORT_NUMBER
-        else:
-            converted_type = PIIType[AWSComprehendPIIType(pii_type).name]
+            return PIIType.USUK_PASSPORT_NUMBER
+
+        return PIIType[AWSComprehendPIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
         )
-
-    return converted_type
 
 
 def convert_msft_presidio_pii_to_common_pii_type(
@@ -161,15 +156,28 @@ def convert_msft_presidio_pii_to_common_pii_type(
     try:
         if pii_type == MSFTPresidioPIIType.US_PASSPORT_NUMBER.value:
             # Special case, map to USUK for all US and UK Passport types
-            converted_type = PIIType.USUK_PASSPORT_NUMBER
-        else:
-            converted_type = PIIType[MSFTPresidioPIIType(pii_type).name]
+            return PIIType.USUK_PASSPORT_NUMBER
+
+        return PIIType[MSFTPresidioPIIType(pii_type).name]
     except Exception as ex:
         raise Exception(
             "The current version does not support this PII Type conversion."
         )
 
-    return converted_type
+
+def convert_metadata_type_to_common_pii_type(metadata_type: str) -> Optional[PIIType]:
+    """
+    Converts metadata type str entry to common PII type
+    @param metadata_type:
+    @return: PIIType
+    """
+
+    try:
+        return PIIType[MetadataType(metadata_type.lower()).name]
+    except Exception as ex:
+        raise Exception(
+            "The current version does not support this Metadata to PII Type conversion."
+        )
 
 
 # endregion

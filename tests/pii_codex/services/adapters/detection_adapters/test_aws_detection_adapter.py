@@ -5,7 +5,7 @@ from assertpy import assert_that
 
 from pii_codex.models.analysis import DetectionResultItem, DetectionResult
 from pii_codex.models.aws_pii import AWSComprehendPIIType
-from pii_codex.services.adapters.aws_detection_adapter import (
+from pii_codex.services.adapters.detection_adapters.aws_detection_adapter import (
     AWSComprehendPIIDetectionAdapter,
 )
 

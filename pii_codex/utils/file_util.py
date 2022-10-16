@@ -1,7 +1,6 @@
 """
 File utils
 """
-
 import json
 import logging
 import os
@@ -22,7 +21,7 @@ def get_relative_path(path_to_file: str):
     return Path(__file__).parent / filename
 
 
-def write_json_file(folder_name: str, file_name: str, json_data: json):
+def write_json_file(folder_name: str, file_name: str, json_data):
     """
     Writes json file given json data, a folder name, and a file name.
 

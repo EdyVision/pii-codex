@@ -1,8 +1,8 @@
 # pylint: disable=too-many-instance-attributes
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import List, Counter
+from dataclasses import dataclass, field
+from typing import List, Counter, Optional
 
 from pii_codex.models.common import RiskLevel, RiskLevelDefinition
 
@@ -12,15 +12,15 @@ from pii_codex.models.common import RiskLevel, RiskLevelDefinition
 
 @dataclass
 class RiskAssessment:
-    pii_type_detected: str = None
+    pii_type_detected: Optional[str] = None
     risk_level: int = RiskLevel.LEVEL_ONE.value
     risk_level_definition: str = (
         RiskLevelDefinition.LEVEL_ONE.value
     )  # Default if it's not semi or fully identifiable
-    cluster_membership_type: str = None
-    hipaa_category: str = None
-    dhs_category: str = None
-    nist_category: str = None
+    cluster_membership_type: Optional[str] = None
+    hipaa_category: Optional[str] = None
+    dhs_category: Optional[str] = None
+    nist_category: Optional[str] = None
 
 
 @dataclass
@@ -37,9 +37,9 @@ class DetectionResultItem:
     """
 
     entity_type: str
-    score: float
-    start: int
-    end: int
+    score: float = 0.0  # metadata detections don't have confidence score values
+    start: int = 0  # metadata detections don't have offset values
+    end: int = 0  # metadata detections don't have offset values
 
 
 @dataclass
@@ -54,7 +54,7 @@ class AnalysisResultItem:
     The results associated to a single detection of a single string (e.g. Social Media Post, SMS, etc.)
     """
 
-    detection: DetectionResultItem
+    detection: Optional[DetectionResultItem]
     risk_assessment: RiskAssessment
 
     def to_dict(self):
@@ -102,17 +102,17 @@ class AnalysisResultSet:
 
     analyses: List[AnalysisResult]
     detection_count: int = 0
-    detected_pii_types: List[str] = None
-    detected_pii_type_frequencies: Counter = (
-        None  # Frequency count of PII types detected in entire collection
-    )
-    risk_scores: List[float] = None
+    detected_pii_types: List[str] = field(default_factory=list)
+    detected_pii_type_frequencies: Counter = None  # type: ignore
+    risk_scores: List[float] = field(default_factory=list)
     risk_score_mean: float = 1.0  # Default is 1 for non-identifiable
     risk_score_mode: float = 0.0
     risk_score_median: float = 0.0
     risk_score_standard_deviation: float = 0.0
     risk_score_variance: float = 0.0
-    collection_name: str = None  # Optional ability for analysts to name a set (see analysis storage step in notebooks)
+    collection_name: Optional[
+        str
+    ] = None  # Optional ability for analysts to name a set (see analysis storage step in notebooks)
     collection_type: str = "POPULATION"  # Other option is SAMPLE
 
     def to_dict(self):

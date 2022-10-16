@@ -7,6 +7,11 @@ test.cov: test.coverage
 
 install:
 	@poetry install
+	$(MAKE) install.extras
+	$(MAKE) install.pre_commit
+
+install.pre_commit:
+	@poetry run pre-commit install
 
 install.extras:
 	@poetry install --extras="detections"
@@ -25,6 +30,9 @@ test.coverage:
 
 lint:
 	@poetry run pylint pii_codex tests
+
+typecheck:
+	@poetry run mypy pii_codex tests
 
 format.check:
 	@black . --check

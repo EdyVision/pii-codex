@@ -3,6 +3,8 @@ name: Release
 
 on:
   workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,7 +16,7 @@ jobs:
         with:
           python-version: 3.9
       - name: Checkout branch "main"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: 'main'
       - name: Install Global Dependencies
