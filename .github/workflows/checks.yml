@@ -1,5 +1,5 @@
 # Runs typecheck and lint process on feature branches only
-name: checks
+name: Checks
 
 on:
     push:

@@ -112,5 +112,4 @@ dmypy.json
 backend/bin
 
 # Temporarily ignored
-.zenodo.json
 joss/

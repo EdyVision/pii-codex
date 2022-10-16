@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pii-codex"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Eidan J. Rosado"]
 license = "BSD 3-Clause"
@@ -48,6 +48,17 @@ detections = [
 name = "pypi-public"
 url = "https://pypi.org/simple/"
 secondary = false
+
+[[tool.poetry_bumpversion.replacements]]
+files = ["CITATION.cff"]
+search = 'version: {current_version}'
+replace = 'version: {new_version}'
+
+[[tool.poetry_bumpversion.replacements]]
+files = [".zenodo.json"]
+search = '"version": "{current_version}"'
+replace = '"version": "{new_version}"'
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
