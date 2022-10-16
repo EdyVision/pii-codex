@@ -40,14 +40,20 @@ format.check:
 format.fix:
 	@black .
 
+bump.citation.date:
+	./scripts/update_citation.sh
+
 version.bump.patch:
 	@poetry version patch
+	$(MAKE) bump.citation.date
 
 version.bump.minor:
 	@poetry version minor
+	$(MAKE) bump.citation.date
 
 version.bump.major:
 	@poetry version major
+	$(MAKE) bump.citation.date
 
 package:
 	@poetry build

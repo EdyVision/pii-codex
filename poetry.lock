@@ -226,7 +226,7 @@ reference = "pypi-public"
 
 [[package]]
 name = "blis"
-version = "0.7.8"
+version = "0.7.9"
 description = "The Blis BLAS-like linear algebra library, as a self-contained C-extension."
 category = "main"
 optional = false
@@ -2907,30 +2907,34 @@ bleach = [
     {file = "bleach-5.0.1.tar.gz", hash = "sha256:0d03255c47eb9bd2f26aa9bb7f2107732e7e8fe195ca2f64709fcf3b0a4a085c"},
 ]
 blis = [
-    {file = "blis-0.7.8-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:ae5b06fe3b94645ac5d93cbc7c0129639cc3e0d50b4efb361a20a9e160277a92"},
-    {file = "blis-0.7.8-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:294421b720c2de904908de841464c667e1a5c5e9f3db6931dfa29cf369d3653a"},
-    {file = "blis-0.7.8-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:354cadff661a1452c886f541b84018770ddb4c134844c56e7c1a30aa4bcc473d"},
-    {file = "blis-0.7.8-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2778fe0ba0e25c157839fdd19ed66b9a340c92d4e92e707b7fa9aa21c51cb254"},
-    {file = "blis-0.7.8-cp310-cp310-win_amd64.whl", hash = "sha256:0f7bfdee74ac695c35360ace00f2630c1b47406dc0b99ba9211bfa8588bfbed9"},
-    {file = "blis-0.7.8-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:159a1a9b32213d99d1415789ac66ed8d23442a696d9d376c66d7b791d3eae575"},
-    {file = "blis-0.7.8-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:25cdb9775699c1b926df514a5d4c28016c11722a66211f1024b2f21373f50de2"},
-    {file = "blis-0.7.8-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1f5fa330ab66d0e92a845b1db361ec8bf3dc4bc7e0dc0ded94f36b8e9f731650"},
-    {file = "blis-0.7.8-cp36-cp36m-win_amd64.whl", hash = "sha256:90f17543e0aa3bc379d139867467df2c365ffaf5b61988de12dbba6dbbc9fab4"},
-    {file = "blis-0.7.8-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:bfa56e7ef14ae607d8444eb344d22f252a2e0b0f9bfa4bdc9b0c48a9f96b5461"},
-    {file = "blis-0.7.8-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0c3245e42c7c6ba0d68d7dff4171d11bb08174e639bc8edd52a1fd831de1d903"},
-    {file = "blis-0.7.8-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:17df5ac7d9a9dbbf0415f8f8392fbdf1790fa394f89d695bae5e2e7e361c852b"},
-    {file = "blis-0.7.8-cp37-cp37m-win_amd64.whl", hash = "sha256:95d22d3007cb454d11a478331690629861f7d40b4668f9fccfd13b6507ed099b"},
-    {file = "blis-0.7.8-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:96ff4c0c1ceab9f94c14b3281f3cef82f593c48c3b5f6169bd51cdcd315e0a6e"},
-    {file = "blis-0.7.8-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:2db369a4f95927be37e11790dd1ccbf99fd6201eaffbcf408546db847b7b5740"},
-    {file = "blis-0.7.8-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cac120e3c0517095d3c39278e8b6b1102b1add0e1f4e161a87f313d8ee7c12e1"},
-    {file = "blis-0.7.8-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:63735128c9cae44dc6cbf7557327385df0c4ed2dc2c45a00dabfde1e4d00802d"},
-    {file = "blis-0.7.8-cp38-cp38-win_amd64.whl", hash = "sha256:1e970ba1eb12ca38fb5d57f379472125bc3f5106c8214dc847fe79b027212135"},
-    {file = "blis-0.7.8-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:f576ad64b772b6fd7df6ef94986235f321983dc870d0f76d78c931bafc41cfa4"},
-    {file = "blis-0.7.8-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:4e7b7b8bc8cf5e82958bbc393e0167318a930d394cbbf04c1ba18cfabaef5818"},
-    {file = "blis-0.7.8-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2056b0d9722f5505cfa94904c6248021197c63ecf45804dcf117f8f1c6160ab6"},
-    {file = "blis-0.7.8-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:66b8ca1a2eb8f1e0563a592aae4b8682b66189ad560e3b8221d93eab0cb76582"},
-    {file = "blis-0.7.8-cp39-cp39-win_amd64.whl", hash = "sha256:bf60f634481c3d0faf831ac4f2d1c75343e98f714dc88e3fb3c329758577e772"},
-    {file = "blis-0.7.8.tar.gz", hash = "sha256:f7d541bb06323aa350163ba4a3ad00e8effb3b53d4c58ee6228224f3928b6c57"},
+    {file = "blis-0.7.9-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:b3ea73707a7938304c08363a0b990600e579bfb52dece7c674eafac4bf2df9f7"},
+    {file = "blis-0.7.9-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:e85993364cae82707bfe7e637bee64ec96e232af31301e5c81a351778cb394b9"},
+    {file = "blis-0.7.9-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d205a7e69523e2bacdd67ea906b82b84034067e0de83b33bd83eb96b9e844ae3"},
+    {file = "blis-0.7.9-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9737035636452fb6d08e7ab79e5a9904be18a0736868a129179cd9f9ab59825"},
+    {file = "blis-0.7.9-cp310-cp310-win_amd64.whl", hash = "sha256:d3882b4f44a33367812b5e287c0690027092830ffb1cce124b02f64e761819a4"},
+    {file = "blis-0.7.9-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:3dbb44311029263a6f65ed55a35f970aeb1d20b18bfac4c025de5aadf7889a8c"},
+    {file = "blis-0.7.9-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:6fd5941bd5a21082b19d1dd0f6d62cd35609c25eb769aa3457d9877ef2ce37a9"},
+    {file = "blis-0.7.9-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:97ad55e9ef36e4ff06b35802d0cf7bfc56f9697c6bc9427f59c90956bb98377d"},
+    {file = "blis-0.7.9-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f7b6315d7b1ac5546bc0350f5f8d7cc064438d23db19a5c21aaa6ae7d93c1ab5"},
+    {file = "blis-0.7.9-cp311-cp311-win_amd64.whl", hash = "sha256:5fd46c649acd1920482b4f5556d1c88693cba9bf6a494a020b00f14b42e1132f"},
+    {file = "blis-0.7.9-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:db2959560dcb34e912dad0e0d091f19b05b61363bac15d78307c01334a4e5d9d"},
+    {file = "blis-0.7.9-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c0521231bc95ab522f280da3bbb096299c910a62cac2376d48d4a1d403c54393"},
+    {file = "blis-0.7.9-cp36-cp36m-win_amd64.whl", hash = "sha256:d811e88480203d75e6e959f313fdbf3326393b4e2b317067d952347f5c56216e"},
+    {file = "blis-0.7.9-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:5cb1db88ab629ccb39eac110b742b98e3511d48ce9caa82ca32609d9169a9c9c"},
+    {file = "blis-0.7.9-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c399a03de4059bf8e700b921f9ff5d72b2a86673616c40db40cd0592051bdd07"},
+    {file = "blis-0.7.9-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d4eb70a79562a211bd2e6b6db63f1e2eed32c0ab3e9ef921d86f657ae8375845"},
+    {file = "blis-0.7.9-cp37-cp37m-win_amd64.whl", hash = "sha256:3e3f95e035c7456a1f5f3b5a3cfe708483a00335a3a8ad2211d57ba4d5f749a5"},
+    {file = "blis-0.7.9-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:179037cb5e6744c2e93b6b5facc6e4a0073776d514933c3db1e1f064a3253425"},
+    {file = "blis-0.7.9-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:d0e82a6e0337d5231129a4e8b36978fa7b973ad3bb0257fd8e3714a9b35ceffd"},
+    {file = "blis-0.7.9-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6d12475e588a322e66a18346a3faa9eb92523504042e665c193d1b9b0b3f0482"},
+    {file = "blis-0.7.9-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4d5755ef37a573647be62684ca1545698879d07321f1e5b89a4fd669ce355eb0"},
+    {file = "blis-0.7.9-cp38-cp38-win_amd64.whl", hash = "sha256:b8a1fcd2eb267301ab13e1e4209c165d172cdf9c0c9e08186a9e234bf91daa16"},
+    {file = "blis-0.7.9-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:8275f6b6eee714b85f00bf882720f508ed6a60974bcde489715d37fd35529da8"},
+    {file = "blis-0.7.9-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:7417667c221e29fe8662c3b2ff9bc201c6a5214bbb5eb6cc290484868802258d"},
+    {file = "blis-0.7.9-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b5f4691bf62013eccc167c38a85c09a0bf0c6e3e80d4c2229cdf2668c1124eb0"},
+    {file = "blis-0.7.9-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f5cec812ee47b29107eb36af9b457be7191163eab65d61775ed63538232c59d5"},
+    {file = "blis-0.7.9-cp39-cp39-win_amd64.whl", hash = "sha256:d81c3f627d33545fc25c9dcb5fee66c476d89288a27d63ac16ea63453401ffd5"},
+    {file = "blis-0.7.9.tar.gz", hash = "sha256:29ef4c25007785a90ffc2f0ab3d3bd3b75cd2d7856a9a482b7d0dac8d511a09d"},
 ]
 catalogue = [
     {file = "catalogue-2.0.8-py3-none-any.whl", hash = "sha256:2d786e229d8d202b4f8a2a059858e45a2331201d831e39746732daa704b99f69"},
