@@ -37,8 +37,14 @@ jobs:
           poetry config virtualenvs.create true
           make install
           make install.extras
-      - name: Lint Check
-        run: make lint
+      - uses: actions/checkout@master
       - name: Run Tests
         run: |
           make test.coverage
+      - uses: codecov/codecov-action@v3  # Coverage report submitted only on merge to main
+        if: {{ github.ref == 'ref/head/main' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella 
+          files: ./coverage.xml
+          verbose: true

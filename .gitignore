@@ -111,5 +111,7 @@ dmypy.json
 
 backend/bin
 
+coverage.xml
+
 # Temporarily ignored
 joss/
