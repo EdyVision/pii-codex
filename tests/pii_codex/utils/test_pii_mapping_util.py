@@ -3,6 +3,7 @@ import pandas as pd
 from assertpy import assert_that
 import pytest
 
+from pii_codex.config import PII_MAPPER
 from pii_codex.models.aws_pii import AWSComprehendPIIType
 from pii_codex.models.azure_pii import AzurePIIType
 from pii_codex.models.common import (
@@ -13,20 +14,13 @@ from pii_codex.models.common import (
     HIPAACategory,
 )
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.utils.pii_mapping_util import (
+
+from pii_codex.utils.file_util import (
     open_pii_type_mapping_csv,
     open_pii_type_mapping_json,
     convert_pii_type_mapping_csv_to_json,
     delete_json_mapping_file,
     delete_json_mapping_folder,
-    map_pii_type,
-    convert_common_pii_to_msft_presidio_type,
-    convert_common_pii_to_azure_pii_type,
-    convert_common_pii_to_aws_comprehend_type,
-    convert_azure_pii_to_common_pii_type,
-    convert_aws_comprehend_pii_to_common_pii_type,
-    convert_metadata_type_to_common_pii_type,
-    convert_msft_presidio_pii_to_common_pii_type,
 )
 
 
@@ -42,7 +36,7 @@ class TestPIIMappingUtil:
         Requires the type mapping to be in the associated version file in pii_codex/data/
         """
         if pii_type is not PIIType.DOCUMENTS.name:
-            mapped_pii = map_pii_type(pii_type)
+            mapped_pii = PII_MAPPER.map_pii_type(pii_type)
             assert_that(mapped_pii.risk_level).is_greater_than(1)
             assert_that(
                 isinstance(
@@ -66,7 +60,9 @@ class TestPIIMappingUtil:
     )
     def test_convert_common_pii_to_msft_presidio_type(self, pii_type):
         try:
-            converted_pii = convert_common_pii_to_msft_presidio_type(pii_type)
+            converted_pii = PII_MAPPER.convert_common_pii_to_msft_presidio_type(
+                pii_type
+            )
             assert_that(isinstance(converted_pii, MSFTPresidioPIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
@@ -79,7 +75,7 @@ class TestPIIMappingUtil:
     )
     def test_convert_common_pii_to_azure_pii_type(self, pii_type):
         try:
-            converted_pii = convert_common_pii_to_azure_pii_type(pii_type)
+            converted_pii = PII_MAPPER.convert_common_pii_to_azure_pii_type(pii_type)
             assert_that(isinstance(converted_pii, AzurePIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
@@ -92,7 +88,7 @@ class TestPIIMappingUtil:
     )
     def test_convert_azure_pii_to_common_pii_type(self, pii_type):
         try:
-            converted_pii = convert_azure_pii_to_common_pii_type(pii_type)
+            converted_pii = PII_MAPPER.convert_azure_pii_to_common_pii_type(pii_type)
             assert_that(isinstance(converted_pii, PIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
@@ -105,7 +101,9 @@ class TestPIIMappingUtil:
     )
     def test_convert_aws_pii_to_common_pii_type(self, pii_type):
         try:
-            converted_pii = convert_aws_comprehend_pii_to_common_pii_type(pii_type)
+            converted_pii = PII_MAPPER.convert_aws_comprehend_pii_to_common_pii_type(
+                pii_type
+            )
             assert_that(isinstance(converted_pii, PIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
@@ -118,7 +116,9 @@ class TestPIIMappingUtil:
     )
     def test_convert_common_pii_to_aws_comprehend_type(self, pii_type):
         try:
-            converted_pii = convert_common_pii_to_aws_comprehend_type(pii_type)
+            converted_pii = PII_MAPPER.convert_common_pii_to_aws_comprehend_type(
+                pii_type
+            )
             assert_that(isinstance(converted_pii, AWSComprehendPIIType)).is_true()
         except Exception as ex:
             assert_that(ex.args[0]).contains(
@@ -127,7 +127,7 @@ class TestPIIMappingUtil:
 
     def test_convert_metadata_to_pii_failure(self):
         with pytest.raises(Exception) as execinfo:
-            convert_metadata_type_to_common_pii_type("other_type")
+            PII_MAPPER.convert_metadata_type_to_common_pii_type("other_type")
 
         assert_that(str(execinfo.value)).contains(
             "The current version does not support this Metadata to PII Type conversion."
@@ -135,7 +135,7 @@ class TestPIIMappingUtil:
 
     def test_convert_msft_presidio_pii_to_common_pii_type_failure(self):
         with pytest.raises(Exception) as execinfo:
-            convert_msft_presidio_pii_to_common_pii_type("other_type")
+            PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type("other_type")
 
         assert_that(str(execinfo.value)).contains(
             "The current version does not support this PII Type conversion."

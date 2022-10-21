@@ -111,7 +111,10 @@ dmypy.json
 
 backend/bin
 
+# Test output
 coverage.xml
+pytest.log
+tests/pii_codex/data
 
 # Temporarily ignored
 joss/

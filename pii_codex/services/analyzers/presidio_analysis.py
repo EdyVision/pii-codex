@@ -1,18 +1,16 @@
 # pylint: disable=broad-except,unused-argument, import-outside-toplevel
-import logging
 from typing import List
 
-
+from ...config import PII_MAPPER, DEFAULT_LANG
 from ...models.analysis import DetectionResultItem, DetectionResult
 from ...utils.package_installer_util import install_spacy_package
-from ...utils.pii_mapping_util import (
-    convert_msft_presidio_pii_to_common_pii_type,
-)
+from ...utils.pii_mapping_util import PIIMapper
+from ...utils.logging import logger, timed_operation
 
 
 class PresidioPIIAnalyzer:
-
     analyzer = None
+    pii_mapper = PIIMapper()
 
     def __init__(self):
         """
@@ -34,7 +32,7 @@ class PresidioPIIAnalyzer:
                 'Missing dependencies from extras. Install the PII-Codex extras: "detections"'
             )
 
-    def get_supported_entities(self, language_code="en") -> List[str]:
+    def get_supported_entities(self, language_code=DEFAULT_LANG) -> List[str]:
         """
         Retrieves a list of supported entities, this will narrow down what is available for a given language
 
@@ -43,7 +41,7 @@ class PresidioPIIAnalyzer:
         """
         return self.analyzer.get_supported_entities(language=language_code)  # type: ignore
 
-    def get_loaded_recognizers(self, language_code="en"):
+    def get_loaded_recognizers(self, language_code: str = DEFAULT_LANG):
         """
         Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
         @param language_code:
@@ -51,8 +49,9 @@ class PresidioPIIAnalyzer:
         """
         return self.analyzer.get_recognizers(language=language_code)  # type: ignore
 
+    @timed_operation
     def analyze_item(
-        self, text: str, language_code: str = "en", entities: List[str] = None
+        self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
     ) -> List[DetectionResultItem]:
         """
         Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
@@ -77,7 +76,7 @@ class PresidioPIIAnalyzer:
             )
 
         except Exception as ex:
-            logging.error(ex)
+            logger.error(ex)
 
         # Return analyzer results in formatted Analysis Result List object
         return [
@@ -90,6 +89,7 @@ class PresidioPIIAnalyzer:
             for result in detections
         ]
 
+    @timed_operation
     def analyze_collection(
         self, texts: List[str], language_code: str = "en", entities: List[str] = None
     ) -> List[DetectionResult]:
@@ -118,7 +118,7 @@ class PresidioPIIAnalyzer:
                 # Every analysis by the analyzer will have a set of detections within
                 detections = [
                     DetectionResultItem(
-                        entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
                             result.entity_type
                         ).name,
                         score=result.score,
@@ -134,12 +134,13 @@ class PresidioPIIAnalyzer:
             # Return analyzer results in formatted Analysis Result List object
 
         except Exception as ex:
-            logging.error(ex)
+            logger.error(ex)
 
         return detection_results
 
-    @staticmethod
-    def convert_analyzed_item(pii_detection) -> List[DetectionResultItem]:
+    @classmethod
+    @timed_operation
+    def convert_analyzed_item(cls, pii_detection) -> List[DetectionResultItem]:
         """
         Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
         analysis by Presidio returns an array of RecognizerResult objects.
@@ -150,7 +151,7 @@ class PresidioPIIAnalyzer:
 
         return [
             DetectionResultItem(
-                entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
                     result.entity_type
                 ).name,
                 score=result.score,
@@ -160,8 +161,9 @@ class PresidioPIIAnalyzer:
             for result in pii_detection
         ]
 
-    @staticmethod
-    def convert_analyzed_collection(pii_detections) -> List[DetectionResult]:
+    @classmethod
+    @timed_operation
+    def convert_analyzed_collection(cls, pii_detections) -> List[DetectionResult]:
         """
         Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
         analysis results ends up being a 2D array.
@@ -177,7 +179,7 @@ class PresidioPIIAnalyzer:
             for entity in result:
                 detections.append(
                     DetectionResultItem(
-                        entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
                             entity.entity_type
                         ).name,
                         score=entity.score,

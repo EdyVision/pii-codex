@@ -4,6 +4,7 @@ from typing import List, Optional
 from multiprocessing import Pool
 import pandas as pd
 
+from pii_codex.config import PII_MAPPER, DEFAULT_ANALYSIS_MODE
 from pii_codex.models.common import (
     AnalysisProviderType,
     RiskLevel,
@@ -21,7 +22,6 @@ from pii_codex.services.analyzers.presidio_analysis import (
     PresidioPIIAnalyzer,
 )
 from pii_codex.services.assessment_service import PIIAssessmentService
-from pii_codex.utils.pii_mapping_util import convert_metadata_type_to_common_pii_type
 from pii_codex.utils.statistics_util import (
     get_mean,
     get_standard_deviation,
@@ -30,6 +30,8 @@ from pii_codex.utils.statistics_util import (
     get_median,
 )
 
+from pii_codex.utils.logging import timed_operation
+
 
 class PIIAnalysisService:
 
@@ -37,6 +39,7 @@ class PIIAnalysisService:
     _analysis_provider = AnalysisProviderType.PRESIDIO.name  # Default to presidio
     _language_code = "en"  # default to English
 
+    @timed_operation
     def analyze_item(
         self,
         analysis_provider: str,
@@ -73,6 +76,7 @@ class PIIAnalysisService:
             ),
         )
 
+    @timed_operation
     def analyze_collection(
         self,
         texts: Optional[List[str]] = None,
@@ -159,6 +163,7 @@ class PIIAnalysisService:
             idx,
         )
 
+    @timed_operation
     def analyze_detection_collection(
         self,
         detection_collection: List[DetectionResult],
@@ -190,6 +195,7 @@ class PIIAnalysisService:
             analysis_set=analysis_set,
         )
 
+    @timed_operation
     def analyze_detection_result(
         self, detection_result: DetectionResult, index: int = 0
     ) -> AnalysisResult:
@@ -213,6 +219,7 @@ class PIIAnalysisService:
             ),
         )
 
+    @timed_operation
     def analyze_detection_result_item(
         self,
         detection_result_item: DetectionResultItem,
@@ -275,6 +282,7 @@ class PIIAnalysisService:
             else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
         )
 
+    @timed_operation
     def analyze_metadata(self, metadata: dict):
         """
         Create an analysis result item per metadata entry
@@ -285,7 +293,9 @@ class PIIAnalysisService:
         analysis_result_items: List[AnalysisResultItem] = []
         for key, value in metadata.items():
             if value is True:
-                metadata_pii_mapping = convert_metadata_type_to_common_pii_type(key)
+                metadata_pii_mapping = (
+                    PII_MAPPER.convert_metadata_type_to_common_pii_type(key)
+                )
                 if metadata_pii_mapping:
                     # Run analyses on supported metadata types only
                     detection = DetectionResultItem(
@@ -306,7 +316,7 @@ class PIIAnalysisService:
         self,
         analysis_set: List[AnalysisResult],
         collection_name: str = "",
-        collection_type: str = "POPULATION",
+        collection_type: str = DEFAULT_ANALYSIS_MODE,
     ):
         (
             detected_types,
