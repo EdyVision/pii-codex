@@ -35,25 +35,6 @@ class PIIAssessmentService:
 
         return ranked_pii
 
-    @timed_operation
-    def assess_and_score_pii_type_list(
-        self,
-        detected_pii_types: List[str],
-    ) -> List[RiskAssessment]:
-        """
-        Assesses a list of detected PII types given an array of type name strings from commmon.PIIType enum
-
-        @param detected_pii_types: array type name strings from commmon.PIIType
-        enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
-        @return: List[RiskAssessment]
-        """
-        ranked_pii: List[RiskAssessment] = []
-
-        for pii_type in detected_pii_types:
-            ranked_pii.append(PII_MAPPER.map_pii_type(pii_type))
-
-        return ranked_pii
-
     @staticmethod
     def calculate_risk_assessment_score_average(
         risk_assessments: List[RiskAssessment],
