@@ -7,8 +7,8 @@ on:
       - main
 
   push:
-#    branches:
-#      - main
+    branches:
+      - main
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
         run: pip install -U pip && pip install poetry wheel
       - name: Build project for distribution
         run: poetry build
-      - name: Get Version
+      - name: Get Current Version
         id: get_version
         run: |
           TAG_NAME=$(poetry version -s)
@@ -40,7 +40,7 @@ jobs:
           LAST_RELEASE=$(git tag --sort=committerdate | tail -1)
           echo "LAST_RELEASE_VERSION=$LAST_RELEASE" >> $GITHUB_ENV
           echo "Last released tag: $LAST_RELEASE"
-      - name: Check for New Version
+      - name: Check for Version Mismatch
         shell: bash
         if: ${{ env.LAST_RELEASE_VERSION != env.TAG_NAME }}
         run: |
