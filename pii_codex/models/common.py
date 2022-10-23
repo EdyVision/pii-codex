@@ -17,13 +17,6 @@ class RiskLevel(Enum):
     LEVEL_TWO: int = 2  # Semi-Identifiable
     LEVEL_THREE: int = 3  # Identifiable
 
-    @staticmethod
-    def get_risk_level_definition(risk_level):
-        if isinstance(risk_level, str):
-            risk_level = RiskLevel[risk_level]
-
-        return RiskLevelDefinition[risk_level.name]
-
 
 class RiskLevelDefinition(Enum):
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
