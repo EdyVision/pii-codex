@@ -1,15 +1,14 @@
 from typing import List
 
+from pii_codex.config import PII_MAPPER
 from pii_codex.models.analysis import DetectionResultItem, DetectionResult
 from pii_codex.services.adapters.detection_adapters.detection_adapter_base import (
     BasePIIDetectionAdapter,
 )
-from pii_codex.utils.pii_mapping_util import (
-    convert_msft_presidio_pii_to_common_pii_type,
-)
 
 
 class PresidioPIIDetectionAdapter(BasePIIDetectionAdapter):
+
     """
     Intended for those that are using their own pre-detected result set from Presidio
     """
@@ -25,7 +24,7 @@ class PresidioPIIDetectionAdapter(BasePIIDetectionAdapter):
 
         return [
             DetectionResultItem(
-                entity_type=convert_msft_presidio_pii_to_common_pii_type(
+                entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
                     result.entity_type
                 ).name,
                 score=result.score,

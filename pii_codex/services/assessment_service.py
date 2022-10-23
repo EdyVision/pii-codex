@@ -2,43 +2,28 @@ from typing import List, Tuple
 from collections import Counter
 from itertools import chain
 
+from ..config import PII_MAPPER
 from ..models.analysis import RiskAssessment, AnalysisResult
-from ..utils.pii_mapping_util import map_pii_type
+from ..utils.logging import timed_operation
 from ..utils.statistics_util import get_mean, get_sum
 
 
 class PIIAssessmentService:
-    @staticmethod
-    def assess_pii_type(detected_pii_type: str) -> RiskAssessment:
+    @timed_operation
+    def assess_pii_type(self, detected_pii_type: str) -> RiskAssessment:
         """
         Assesses a singular detected PII type given a type name string from commmon.PIIType enum
         @param detected_pii_type: type name strings from commmon.PIIType enum
         @return: RiskAssessment
         """
-        return map_pii_type(detected_pii_type)
+        return PII_MAPPER.map_pii_type(detected_pii_type)
 
-    @staticmethod
-    def assess_pii_type_list(detected_pii_types: List[str]) -> List[RiskAssessment]:
-        """
-        Assesses a list of detected PII types given an array of type name strings from commmon.PIIType enum
-        @param detected_pii_types: array type name strings from commmon.PIIType
-        enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
-        @return: List[RiskAssessment]
-        """
-        ranked_pii: List[RiskAssessment] = []
-
-        for pii_type in detected_pii_types:
-            ranked_pii.append(map_pii_type(pii_type))
-
-        return ranked_pii
-
-    @staticmethod
-    def assess_and_score_pii_type_list(
-        detected_pii_types: List[str],
+    @timed_operation
+    def assess_pii_type_list(
+        self, detected_pii_types: List[str]
     ) -> List[RiskAssessment]:
         """
         Assesses a list of detected PII types given an array of type name strings from commmon.PIIType enum
-
         @param detected_pii_types: array type name strings from commmon.PIIType
         enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
         @return: List[RiskAssessment]
@@ -46,7 +31,7 @@ class PIIAssessmentService:
         ranked_pii: List[RiskAssessment] = []
 
         for pii_type in detected_pii_types:
-            ranked_pii.append(map_pii_type(pii_type))
+            ranked_pii.append(PII_MAPPER.map_pii_type(pii_type))
 
         return ranked_pii
 
