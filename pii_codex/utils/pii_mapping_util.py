@@ -177,6 +177,14 @@ class PIIMapper:
         """
 
         try:
+            if metadata_type.lower() == "name":
+                return PIIType.PERSON
+
+            if metadata_type.lower() == "user_id":
+                # If dealing with public data, user_id can be used to pull down
+                # social network profile
+                return PIIType.SOCIAL_NETWORK_PROFILE
+
             return PIIType[MetadataType(metadata_type.lower()).name]
         except Exception as ex:
             raise Exception(

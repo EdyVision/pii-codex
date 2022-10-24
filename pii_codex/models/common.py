@@ -26,8 +26,10 @@ class RiskLevelDefinition(Enum):
 
 class MetadataType(Enum):
     SCREEN_NAME: str = "screen_name"
+    NAME: str = "name"
     LOCATION: str = "location"
     URL: str = "url"
+    USER_ID: str = "user_id"
 
 
 class PIIType(Enum):
