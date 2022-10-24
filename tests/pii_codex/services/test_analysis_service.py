@@ -96,13 +96,55 @@ class TestPIIAnalysisService:
         ]
 
         metadata_to_analyze = [
-            {"location": True, "url": False, "screen_name": True},
-            {"location": False, "url": False, "screen_name": True},
-            {"location": False, "url": False, "screen_name": True},
-            {"location": True, "url": False, "screen_name": True},
-            {"location": True, "url": False, "screen_name": True},
-            {"location": False, "url": False, "screen_name": True},
-            {"location": True, "url": False, "screen_name": True},
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": False,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": False,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": False,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
         ]
 
         test_df = pd.DataFrame.from_dict(
@@ -124,15 +166,15 @@ class TestPIIAnalysisService:
             results.analyses[0].index
         )
         assert_that(results.risk_score_mean).is_greater_than(1)
-        assert_that(results.detection_count).is_equal_to(
-            21
+        assert_that(results.detection_count).is_greater_than(
+            30
         )  # Emails double as domain detections
         assert_that(
             results.detected_pii_type_frequencies.most_common(1)[0][0]
-        ).is_equal_to("SCREEN_NAME")
-        assert_that(results.risk_score_standard_deviation).is_greater_than(0.3)
+        ).is_equal_to("PERSON")
+        assert_that(results.risk_score_standard_deviation).is_greater_than(0.12)
         assert_that(results.detection_count).is_greater_than(10)
-        assert_that(results.risk_score_variance).is_greater_than(0.11)
+        assert_that(results.risk_score_variance).is_greater_than(0.03)
         assert_that(results.to_dict()).is_not_none()
 
     @pytest.mark.parametrize(
@@ -270,3 +312,21 @@ class TestPIIAnalysisService:
                 PIIType,
             )
         ).is_true()
+
+    def test_summarize_analysis_result_items(self):
+
+        result_items = self.pii_analysis_service.analyze_metadata(
+            metadata={
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            }
+        )
+
+        summarized_result = self.pii_analysis_service.summarize_analysis_result_items(
+            analyses=result_items
+        )
+
+        assert_that(isinstance(summarized_result, AnalysisResult)).is_true()

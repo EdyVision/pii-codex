@@ -42,9 +42,9 @@ class PIIAnalysisService:
     @timed_operation
     def analyze_item(
         self,
-        analysis_provider: str,
         text: str,
         metadata: dict = None,
+        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
         language_code: str = "en",
     ) -> AnalysisResult:
         """
@@ -311,6 +311,25 @@ class PIIAnalysisService:
                     )
 
         return analysis_result_items
+
+    @staticmethod
+    def summarize_analysis_result_items(
+        analyses: List[AnalysisResultItem], index=0
+    ) -> AnalysisResult:
+        """
+        Summarize analysis result items into a singular AnalysisResult object
+
+        @param analyses:
+        @param index:
+        @return:
+        """
+        return AnalysisResult(
+            index=index,
+            analysis=analyses,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in analyses]
+            ),
+        )
 
     def _build_analysis_result_set(
         self,
