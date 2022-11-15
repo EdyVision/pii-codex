@@ -169,6 +169,7 @@ class TestPIIAnalysisService:
         assert_that(results.detection_count).is_greater_than(
             30
         )  # Emails double as domain detections
+        assert_that(isinstance(results.detected_pii_types, set)).is_true()
         assert_that(
             results.detected_pii_type_frequencies.most_common(1)[0][0]
         ).is_equal_to("PERSON")

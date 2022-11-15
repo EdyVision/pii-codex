@@ -14,8 +14,9 @@ include = ["LICENSE", "LICENSE-ETHICS"]
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
 dataclasses-json = "^0.5.7"
-pydantic = {extras = ["dotenv"], version = "^1.8.2"}
+pydantic = {extras = ["dotenv"], version = "^1.10.2"}
 pandas = "^1.4.4"
+pillow = "^9.3.0"  # security dependency
 
 # Optional items for analyses - users have the option to use the integrated Presidio analyzer or
 # avoid installing the following and bring their own detector, using the adapters
@@ -33,6 +34,7 @@ Faker = "^14.2.1"
 matplotlib = "^3.6.1"
 ipykernel = "^6.16.0"
 jupyter = "^1.0.0"
+jupyter_core = "^4.11.2"
 importlib-resources = "^5.9.0"
 seaborn = "^0.12.0"
 pre-commit = "^2.20.0"
@@ -60,6 +62,11 @@ search = '"version": "{current_version}"'
 replace = '"version": "{new_version}"'
 
 [tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = [
+    "tests"
+]
+
 log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(message)s"
