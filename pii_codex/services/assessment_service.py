@@ -66,7 +66,7 @@ class PIIAssessmentService:
     @staticmethod
     def get_detected_pii_types(
         analyses: List[AnalysisResult],
-    ) -> Tuple[List[str], Counter]:
+    ) -> Tuple[set[str], Counter]:
         """
         Returns the list of detected PII types and their frequencies for analyses performed on a collection
 
@@ -79,6 +79,4 @@ class PIIAssessmentService:
             )
         )
 
-        return list(set(flattened_list_of_detections)), Counter(
-            flattened_list_of_detections
-        )
+        return set(flattened_list_of_detections), Counter(flattened_list_of_detections)

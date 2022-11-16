@@ -102,7 +102,7 @@ class AnalysisResultSet:
 
     analyses: List[AnalysisResult]
     detection_count: int = 0
-    detected_pii_types: List[str] = field(default_factory=list)
+    detected_pii_types: set[str] = field(default_factory=set)
     detected_pii_type_frequencies: Counter = None  # type: ignore
     risk_scores: List[float] = field(default_factory=list)
     risk_score_mean: float = 1.0  # Default is 1 for non-identifiable

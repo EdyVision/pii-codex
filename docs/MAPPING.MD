@@ -34,24 +34,27 @@ Using the built-in mapper can be a help, just pass in the mapping you'd like to 
 
 ```python
 from pii_codex.models.common import PIIType
-from pii_codex.utils.pii_mapping_util import convert_common_pii_to_azure_pii_type, \
-    convert_common_pii_to_aws_comprehend_type, convert_common_pii_to_msft_presidio_type
-azure_pii = convert_common_pii_to_azure_pii_type(PIIType.EMAIL_ADDRESS.name)
+from pii_codex.utils.pii_mapping_util import PIIMapper
 
-aws_pii = convert_common_pii_to_aws_comprehend_type(PIIType.EMAIL_ADDRESS.name)
-presidio_pii = convert_common_pii_to_msft_presidio_type(PIIType.EMAIL_ADDRESS.name)
+pii_mapper = PIIMapper()
+
+azure_pii = pii_mapper.convert_common_pii_to_azure_pii_type(PIIType.EMAIL_ADDRESS.name)
+
+aws_pii = pii_mapper.convert_common_pii_to_aws_comprehend_type(PIIType.EMAIL_ADDRESS.name)
+presidio_pii = pii_mapper.convert_common_pii_to_msft_presidio_type(PIIType.EMAIL_ADDRESS.name)
 ```
 
 In the case you are using the PII-Codex module for just detection conversions and analysis, there is an inverse set of mappers that will take Presidio, Azure, or AWS Comprehend PII types and convert to the PII-Codex commmon types:
 
 ```python
 from pii_codex.models.common import PIIType
-from pii_codex.utils.pii_mapping_util import convert_msft_presidio_pii_to_common_pii_type, \
-    convert_azure_pii_to_common_pii_type, convert_aws_comprehend_pii_to_common_pii_type
+from pii_codex.utils.pii_mapping_util import PIIMapper
 
-azure_to_common_pii = convert_azure_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
-aws_to_common_pii = convert_aws_comprehend_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
-presidio_to_common_pii = convert_msft_presidio_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
+pii_mapper = PIIMapper()
+
+azure_to_common_pii = pii_mapper.convert_azure_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
+aws_to_common_pii = pii_mapper.convert_aws_comprehend_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
+presidio_to_common_pii = pii_mapper.convert_msft_presidio_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
 ```
 
 ## Importing Updated Files

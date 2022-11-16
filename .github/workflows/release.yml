@@ -1,4 +1,4 @@
-# Creates a new tag and GitHub release based on the output of poetry version
+# Automatically creates a new tag and GitHub release if poetry version doesn't match last release version
 name: Release
 
 on:
@@ -45,8 +45,8 @@ jobs:
         if: ${{ env.LAST_RELEASE_VERSION != env.TAG_NAME }}
         run: |
           echo "New version found. Matching release will be created."
-          echo "${{ env.LAST_RELEASE_VERSION }}"
-          echo "${{ env.TAG_NAME }}"
+          echo "Last version: ${{ env.LAST_RELEASE_VERSION }}"
+          echo "Current version: ${{ env.TAG_NAME }}"
       - name: Tag and Release GitHub Snapshot
         if: ${{ env.LAST_RELEASE_VERSION != env.TAG_NAME }}
         id: release_snapshot

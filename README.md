@@ -1,9 +1,9 @@
-<p align="center">
-<img src="https://github.com/EdyVision/pii-codex/blob/main/docs/PII_Codex_Logo.png" alt="PII Codex logo" width="300px"/>
-</p>
-<hr/>
+<div align="center">
 
-# PII Codex - PII Detection, Categorization, and Severity Assessment
+![alt text](https://github.com/EdyVision/pii-codex/blob/main/docs/PII_Codex_Logo.svg?raw=true)
+
+PII Detection, Categorization, and Severity Assessment
+
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 ![](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/EdyVision/pii-codex/graphs/commit-activity)
@@ -13,7 +13,10 @@
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![DOI](https://zenodo.org/badge/533554671.svg)](https://zenodo.org/badge/latestdoi/533554671)
 
-The PII Codex project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in unstructured text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
+</div>
+
+---
+The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in unstructured text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
 
 The outputs of the primary PII Codex analysis and adapter functions are AnalysisResult or AnalysisResultSet objects that will provide a listing of detections, severities, mean risk scores for each string processed, and summary statistics on the analysis made. The final outputs do not contain the original texts but instead will provide where to find the detections should the end-user care for this information in their analysis.
 
@@ -91,13 +94,13 @@ Sample output (results object converted to `dict` from notebook):
     "risk_score_median": 2,
     "risk_score_standard_deviation": 0.8273115763993905,
     "risk_score_variance": 0.6844444444444444,
-    "detected_pii_types": [
+    "detected_pii_types": {
         "LOCATION",
         "EMAIL_ADDRESS",
         "URL",
         "PHONE_NUMBER",
         "PERSON",
-    ],
+    },
     "detected_pii_type_frequencies": {
         "PERSON": 1,
         "EMAIL_ADDRESS": 1,

@@ -205,13 +205,13 @@ Sample output:
     "risk_score_median": 2,
     "risk_score_standard_deviation": 0.8273115763993905,
     "risk_score_variance": 0.6844444444444444,
-    "detected_pii_types": [
+    "detected_pii_types": {
         "LOCATION",
         "EMAIL_ADDRESS",
         "URL",
         "PHONE_NUMBER",
         "PERSON",
-    ],
+    },
     "detected_pii_type_frequencies": {
         "PERSON": 1,
         "EMAIL_ADDRESS": 1,
