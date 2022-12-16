@@ -246,7 +246,7 @@ class PIIAnalysisService:
         """
 
         if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
-            detections: List[DetectionResultItem] = self._analyzer.analyze_item(
+            detections: List[DetectionResultItem] = self._analyzer.analyze_item(  # type: ignore
                 entities=[pii_type.name for pii_type in MSFTPresidioPIIType],
                 text=text,
                 language_code=language_code,
