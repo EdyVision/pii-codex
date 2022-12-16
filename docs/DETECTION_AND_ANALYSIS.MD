@@ -13,8 +13,10 @@ In the case you are using the built-in Presidio functionality, you can call the 
 ```python
 from pii_codex.services.analysis_service import PIIAnalysisService
 
+pii_analysis_service = PIIAnalysisService()
+
 strings_to_analyze = ["string to analyze", "string to analyze"] # strings to analyze
-results = PIIAnalysisService().analyze_collection(
+results = pii_analysis_service.analyze_collection(
     texts=strings_to_analyze,
     language_code="en",
     collection_name="Data Set Label", # this is optional, geared for those that require labeling of collections
@@ -28,8 +30,10 @@ For those analyzing social media posts, you can also supply metadata per text sa
 import pandas as pd
 from pii_codex.services.analysis_service import PIIAnalysisService
 
+pii_analysis_service = PIIAnalysisService()
+
 strings_to_analyze = ["string to analyze", "string to analyze"] # strings to analyze
-results = PIIAnalysisService().analyze_collection(
+results = pii_analysis_service.analyze_collection(
     data=pd.DataFrame({
         "text": [
             "I attend the University of Central Florida, how about you?",
@@ -67,8 +71,9 @@ list_of_detections: List[RecognizerResult] = [] # your list of MSFT Presidio det
 converted_detections: List[DetectionResult] = presidio_detection_service.convert_analyzed_collection(
                                                     pii_detections=list_of_detections
                                               )
+pii_analysis_service = PIIAnalysisService()
 
-results = PIIAnalysisService().analyze_detection_collection(
+results = pii_analysis_service.analyze_detection_collection(
     detection_collection=converted_detections,
     collection_name="Data Set Label",  # this is more for those that intend to find a way to label collections
     collection_type="SAMPLE"  # defaults to POPULATION, input used for standard deviation and variance calculations

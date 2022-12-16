@@ -1,7 +1,5 @@
 # pylint: disable=too-many-arguments
-import multiprocessing
 from typing import List, Optional
-from multiprocessing import Pool
 import pandas as pd
 
 from pii_codex.config import PII_MAPPER, DEFAULT_ANALYSIS_MODE
@@ -34,24 +32,27 @@ from pii_codex.utils.logging import timed_operation
 
 
 class PIIAnalysisService:
-
-    pii_assessment_service = PIIAssessmentService()
-    _analysis_provider = AnalysisProviderType.PRESIDIO.name  # Default to presidio
-    _language_code = "en"  # default to English
+    def __init__(self, analysis_provider: str = AnalysisProviderType.PRESIDIO.name):
+        self._analysis_provider = analysis_provider
+        self._language_code = "en"
+        self._pii_assessment_service = PIIAssessmentService()
+        self._analyzer = (
+            PresidioPIIAnalyzer()
+            if analysis_provider == AnalysisProviderType.PRESIDIO.name
+            else None
+        )
 
     @timed_operation
     def analyze_item(
         self,
         text: str,
         metadata: dict = None,
-        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
         language_code: str = "en",
     ) -> AnalysisResult:
         """
         Runs an analysis given an analysis provider, text, and language code. This method defaults
         to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
 
-        @param analysis_provider: AnalysisProviderType str - only PRESIDIO supported
         @param text: input text to analyze
         @param language_code: "en" is default value
         @param metadata: dict - {
@@ -61,7 +62,7 @@ class PIIAnalysisService:
         """
 
         analysis: List[AnalysisResultItem] = self._perform_text_analysis(
-            analysis_provider=analysis_provider, text=text, language_code=language_code
+            text=text, language_code=language_code
         )
 
         if metadata is not None:
@@ -81,7 +82,6 @@ class PIIAnalysisService:
         self,
         texts: Optional[List[str]] = None,
         data: Optional[pd.DataFrame] = None,
-        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
         language_code: str = "en",
         collection_name: str = "",
         collection_type: str = "population",
@@ -90,7 +90,6 @@ class PIIAnalysisService:
         Runs an analysis given an analysis provider, text, and language code. This method defaults
         to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
 
-        @param analysis_provider: str - AnalysisProviderType name
         @param texts: List[str] - input texts to analyze
         @param data: dataframe - dataframe of text and metadata where text is a string and metadata is a dict
         @param language_code: str - "en" is default value
@@ -101,25 +100,24 @@ class PIIAnalysisService:
 
         # Will raise exceptions or invalid input
         self._validate_data(texts, data)
-        self._analysis_provider = analysis_provider
         self._language_code = language_code
 
         analysis_set: List[AnalysisResult] = []
-        multiprocessing.cpu_count()
 
-        # Set the pool processes to the CPI count divided by 2 (we don't max out in case other processes are running)
-        # Star map used due to need for ordered results
-        with Pool(processes=int(multiprocessing.cpu_count() / 2)) as worker_pool:
-            if data is not None:
-                data = data.reset_index()
-                analysis_set = worker_pool.starmap(
-                    self._analyze_data_collection, data.iterrows()
-                )
+        if data is not None:
+            data = data.reset_index()
 
-            if texts:
-                analysis_set = worker_pool.starmap(
-                    self._analyze_text_collection, enumerate(texts)
-                )
+            analysis_set = [
+                self._analyze_data_collection(idx, collection_entry)
+                for idx, collection_entry in data.iterrows()
+            ]
+
+        if texts:
+
+            analysis_set = [
+                self._analyze_text_collection(idx, collection_entry)
+                for idx, collection_entry in enumerate(texts)
+            ]
 
         return self._build_analysis_result_set(
             collection_name=collection_name,
@@ -135,7 +133,6 @@ class PIIAnalysisService:
         @return:
         """
         analysis = self._perform_text_analysis(
-            analysis_provider=self._analysis_provider,
             language_code=self._language_code,
             text=collection["text"],
         )
@@ -146,6 +143,7 @@ class PIIAnalysisService:
 
         return self._format_result_set_item(analysis, idx)
 
+    @timed_operation
     def _analyze_text_collection(self, idx, text):
         """
         Parallelized task to text array
@@ -156,7 +154,6 @@ class PIIAnalysisService:
 
         return self._format_result_set_item(
             self._perform_text_analysis(
-                analysis_provider=self._analysis_provider,
                 language_code=self._language_code,
                 text=text,
             ),
@@ -233,32 +230,32 @@ class PIIAnalysisService:
         """
         return AnalysisResultItem(
             detection=detection_result_item,
-            risk_assessment=self.pii_assessment_service.assess_pii_type(
+            risk_assessment=self._pii_assessment_service.assess_pii_type(
                 detected_pii_type=detection_result_item.entity_type.upper()
             ),
         )
 
+    @timed_operation
     def _perform_text_analysis(
-        self, analysis_provider: str, text: str, language_code: str = "en"
+        self, text: str, language_code: str = "en"
     ) -> List[AnalysisResultItem]:
         """
         Transforms detections into AnalysisResult objects
 
-        @param analysis_provider: AnalysisProviderType str
         @param text: input text to analyze
         @param language_code: "en" is default value
         @return: List[AnalysisResult]
         """
 
-        if analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
-            detections: List[DetectionResultItem] = PresidioPIIAnalyzer().analyze_item(
+        if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
+            detections: List[DetectionResultItem] = self._analyzer.analyze_item(
                 entities=[pii_type.name for pii_type in MSFTPresidioPIIType],
                 text=text,
                 language_code=language_code,
             )
         elif (
-            analysis_provider.upper() == AnalysisProviderType.AZURE.name
-            or analysis_provider.upper() == AnalysisProviderType.AWS.name
+            self._analysis_provider.upper() == AnalysisProviderType.AZURE.name
+            or self._analysis_provider.upper() == AnalysisProviderType.AWS.name
         ):
             raise Exception(
                 "Unsupported operation. Use detection converters followed by analyze_detection_result()."
@@ -272,7 +269,7 @@ class PIIAnalysisService:
             [
                 AnalysisResultItem(
                     detection=detection,
-                    risk_assessment=self.pii_assessment_service.assess_pii_type(
+                    risk_assessment=self._pii_assessment_service.assess_pii_type(
                         detected_pii_type=detection.entity_type.upper()
                     ),
                 )
@@ -304,7 +301,7 @@ class PIIAnalysisService:
                     analysis_result_items.append(
                         AnalysisResultItem(
                             detection=detection,
-                            risk_assessment=self.pii_assessment_service.assess_pii_type(
+                            risk_assessment=self._pii_assessment_service.assess_pii_type(
                                 detected_pii_type=detection.entity_type.upper()
                             ),
                         )
@@ -331,6 +328,7 @@ class PIIAnalysisService:
             ),
         )
 
+    @timed_operation
     def _build_analysis_result_set(
         self,
         analysis_set: List[AnalysisResult],
@@ -340,7 +338,7 @@ class PIIAnalysisService:
         (
             detected_types,
             detected_type_frequencies,
-        ) = self.pii_assessment_service.get_detected_pii_types(analysis_set)
+        ) = self._pii_assessment_service.get_detected_pii_types(analysis_set)
 
         collection_risk_score_means = [
             analysis.risk_score_mean for analysis in analysis_set
@@ -359,7 +357,7 @@ class PIIAnalysisService:
             ),
             risk_score_mode=get_mode(collection_risk_score_means),
             risk_score_median=get_median(collection_risk_score_means),
-            detection_count=self.pii_assessment_service.get_detected_pii_count(
+            detection_count=self._pii_assessment_service.get_detected_pii_count(
                 analysis_set
             ),
             detected_pii_type_frequencies=detected_type_frequencies,

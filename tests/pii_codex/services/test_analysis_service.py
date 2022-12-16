@@ -23,7 +23,6 @@ class TestPIIAnalysisService:
 
     def test_analyze_item(self):
         results = self.pii_analysis_service.analyze_item(
-            analysis_provider=AnalysisProviderType.PRESIDIO.name,
             text="Here is my contact information: Phone number 555-555-5555 and my email is example123@email.com",
         )
 
@@ -36,7 +35,6 @@ class TestPIIAnalysisService:
 
     def test_analyze_item_with_metadata(self):
         results = self.pii_analysis_service.analyze_item(
-            analysis_provider=AnalysisProviderType.PRESIDIO.name,
             text="Here is my contact information: Phone number 555-555-5555 and my email is example123@email.com",
             metadata={"location": True},
         )
@@ -59,7 +57,6 @@ class TestPIIAnalysisService:
             "My phone number is 305-555-5555 and email is example@example.com",
         ]
         results = self.pii_analysis_service.analyze_collection(
-            analysis_provider=AnalysisProviderType.PRESIDIO.name,
             texts=texts_to_analyze,
         )
 
@@ -152,7 +149,6 @@ class TestPIIAnalysisService:
         )
 
         results = self.pii_analysis_service.analyze_collection(
-            analysis_provider=AnalysisProviderType.PRESIDIO.name,
             data=test_df,
         )
 
@@ -187,9 +183,9 @@ class TestPIIAnalysisService:
         # detections to DetectionResults to be later used by the analysis module, but AWS and Azure
         # clients are not integrated with this module.
 
+        pii_analysis_service = PIIAnalysisService(analysis_provider=analysis_provider)
         with pytest.raises(Exception) as execinfo:
-            self.pii_analysis_service.analyze_collection(
-                analysis_provider=analysis_provider,
+            pii_analysis_service.analyze_collection(
                 texts=[
                     "Oh his work phone number is 777-777-7777",
                     "My phone number is 305-555-5555 and email is example@example.com",
