@@ -143,7 +143,6 @@ class PIIAnalysisService:
 
         return self._format_result_set_item(analysis, idx)
 
-    @timed_operation
     def _analyze_text_collection(self, idx, text):
         """
         Parallelized task to text array
@@ -235,7 +234,6 @@ class PIIAnalysisService:
             ),
         )
 
-    @timed_operation
     def _perform_text_analysis(
         self, text: str, language_code: str = "en"
     ) -> List[AnalysisResultItem]:
@@ -328,7 +326,6 @@ class PIIAnalysisService:
             ),
         )
 
-    @timed_operation
     def _build_analysis_result_set(
         self,
         analysis_set: List[AnalysisResult],
