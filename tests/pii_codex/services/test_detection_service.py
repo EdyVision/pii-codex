@@ -51,9 +51,7 @@ class TestDetectionService:
     def test_msft_presidio_analysis_single_item(
         self, test_input, pii_types, expected_result
     ):
-        presidio_results: List[
-            DetectionResultItem
-        ] = self.presidio_analyzer.analyze_item(
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
             text=test_input,
             entities=pii_types,
         )
@@ -61,14 +59,13 @@ class TestDetectionService:
         if expected_result:
             assert_that(presidio_results).is_not_empty()
             assert_that(isinstance(presidio_results[0], DetectionResultItem)).is_true()
+            assert_that(sanitized_text).is_not_empty()
         else:
             assert_that(presidio_results).is_empty()
 
     def test_msft_presidio_analysis_collection(self):
 
-        presidio_results: List[
-            DetectionResult
-        ] = self.presidio_analyzer.analyze_collection(
+        presidio_results = self.presidio_analyzer.analyze_collection(
             texts=[
                 "My email is example@example.eu.edu",
                 "My phone number is 305-555-5555 and email is example@example.com",

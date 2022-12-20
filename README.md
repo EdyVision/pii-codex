@@ -70,6 +70,7 @@ Sample output (results object converted to `dict` from notebook):
             "analysis": [
                 {
                     "pii_type_detected": "PERSON",
+                    "sanitized_text: "Hi! My name is <REDACTED>",
                     "risk_level": 3,
                     "risk_level_definition": "Identifiable",
                     "cluster_membership_type": "Financial Information",

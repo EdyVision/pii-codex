@@ -93,6 +93,7 @@ Sample output:
             "analysis": [
                 {
                     "pii_type_detected": "PERSON",
+                    "sanitized_text": "Hi! My name is <REDACTED>",
                     "risk_level": 3,
                     "risk_level_definition": "Identifiable",
                     "cluster_membership_type": "Financial Information",
