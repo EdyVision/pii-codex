@@ -1,5 +1,5 @@
 # pylint: disable=too-many-arguments
-from typing import List, Optional
+from typing import List, Optional, Tuple
 import pandas as pd
 
 from pii_codex.config import PII_MAPPER, DEFAULT_ANALYSIS_MODE
@@ -61,7 +61,7 @@ class PIIAnalysisService:
         @return: AnalysisResult
         """
 
-        analysis: List[AnalysisResultItem] = self._perform_text_analysis(
+        analysis, sanitized_text = self._perform_text_analysis(
             text=text, language_code=language_code
         )
 
@@ -72,6 +72,7 @@ class PIIAnalysisService:
         return AnalysisResult(
             index=0,
             analysis=analysis,
+            sanitized_text=sanitized_text,
             risk_score_mean=get_mean(
                 [item.risk_assessment.risk_level for item in analysis]
             ),
@@ -108,14 +109,14 @@ class PIIAnalysisService:
             data = data.reset_index()
 
             analysis_set = [
-                self._analyze_data_collection(idx, collection_entry)
+                self._analyze_data_collection_row(idx, collection_entry)
                 for idx, collection_entry in data.iterrows()
             ]
 
         if texts:
 
             analysis_set = [
-                self._analyze_text_collection(idx, collection_entry)
+                self._analyze_text_collection_item(idx, collection_entry)
                 for idx, collection_entry in enumerate(texts)
             ]
 
@@ -125,25 +126,27 @@ class PIIAnalysisService:
             analysis_set=analysis_set,
         )
 
-    def _analyze_data_collection(self, idx, collection):
+    def _analyze_data_collection_row(self, idx, collection_row):
         """
         Parallelized task to process dataframe
         @param idx:
-        @param collection:
+        @param collection_row:
         @return:
         """
-        analysis = self._perform_text_analysis(
+        analysis, sanitized_text = self._perform_text_analysis(
             language_code=self._language_code,
-            text=collection["text"],
+            text=collection_row["text"],
         )
 
-        if collection["metadata"] is not None:
+        if collection_row["metadata"] is not None:
             # Perform analyses for metadata entries
-            analysis.extend(self.analyze_metadata(metadata=collection["metadata"]))
+            analysis.extend(self.analyze_metadata(metadata=collection_row["metadata"]))
 
-        return self._format_result_set_item(analysis, idx)
+        return self._format_result_set_item(
+            analysis_items=analysis, sanitized_text=sanitized_text, index=idx
+        )
 
-    def _analyze_text_collection(self, idx, text):
+    def _analyze_text_collection_item(self, idx, text):
         """
         Parallelized task to text array
         @param idx:
@@ -151,12 +154,15 @@ class PIIAnalysisService:
         @return:
         """
 
+        analysis, sanitized_text = self._perform_text_analysis(
+            language_code=self._language_code,
+            text=text,
+        )
+
         return self._format_result_set_item(
-            self._perform_text_analysis(
-                language_code=self._language_code,
-                text=text,
-            ),
-            idx,
+            analysis_items=analysis,
+            sanitized_text=sanitized_text,
+            index=idx,
         )
 
     @timed_operation
@@ -236,17 +242,17 @@ class PIIAnalysisService:
 
     def _perform_text_analysis(
         self, text: str, language_code: str = "en"
-    ) -> List[AnalysisResultItem]:
+    ) -> Tuple[List[AnalysisResultItem], str]:
         """
         Transforms detections into AnalysisResult objects
 
         @param text: input text to analyze
         @param language_code: "en" is default value
-        @return: List[AnalysisResult]
+        @return: Tuple[List[AnalysisResult], str]
         """
 
         if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
-            detections: List[DetectionResultItem] = self._analyzer.analyze_item(  # type: ignore
+            detections, sanitized_text = self._analyzer.analyze_item(  # type: ignore
                 entities=[pii_type.name for pii_type in MSFTPresidioPIIType],
                 text=text,
                 language_code=language_code,
@@ -275,7 +281,7 @@ class PIIAnalysisService:
             ]
             if detections
             else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
-        )
+        ), sanitized_text
 
     @timed_operation
     def analyze_metadata(self, metadata: dict):
@@ -363,7 +369,9 @@ class PIIAnalysisService:
 
     @staticmethod
     def _format_result_set_item(
-        analysis_items: List[AnalysisResultItem], index: int = 0
+        analysis_items: List[AnalysisResultItem],
+        sanitized_text: str = "",
+        index: int = 0,
     ) -> AnalysisResult:
         """
         Formats the analysis items for a single row in a collection to an AnalysisResult object
@@ -374,6 +382,7 @@ class PIIAnalysisService:
         return AnalysisResult(
             index=index,
             analysis=analysis_items,
+            sanitized_text=sanitized_text,
             risk_score_mean=get_mean(
                 [analysis.risk_assessment.risk_level for analysis in analysis_items]
             )

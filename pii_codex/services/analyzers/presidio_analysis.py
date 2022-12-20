@@ -1,5 +1,5 @@
-# pylint: disable=broad-except,unused-argument, import-outside-toplevel
-from typing import List
+# pylint: disable=broad-except,unused-argument,import-outside-toplevel,unused-variable
+from typing import List, Tuple
 
 from ...config import PII_MAPPER, DEFAULT_LANG
 from ...models.analysis import DetectionResultItem, DetectionResult
@@ -9,9 +9,6 @@ from ...utils.logging import logger, timed_operation
 
 
 class PresidioPIIAnalyzer:
-    analyzer = None
-    pii_mapper = PIIMapper()
-
     def __init__(self):
         """
         Since installing Spacy, the en_core_web_lg model, and the MSFT Presidio package are optional installs
@@ -20,12 +17,21 @@ class PresidioPIIAnalyzer:
         try:
             import spacy
             from presidio_analyzer import AnalyzerEngine
+            from presidio_anonymizer import AnonymizerEngine
+            from presidio_anonymizer.entities import OperatorConfig
 
             if not spacy.util.is_package("en_core_web_lg"):
                 # Last resort. Will install the en_core_web_lg package if end-user hadn't already.
                 install_spacy_package("en_core_web_lg")
 
             self.analyzer = AnalyzerEngine()
+            self.anonymizer = AnonymizerEngine()
+            self.pii_mapper = PIIMapper()
+
+            self.operators = {
+                "DEFAULT": OperatorConfig("replace", {"new_value": "<REDACTED>"}),
+                "TITLE": OperatorConfig("redact", {}),
+            }
 
         except ImportError:
             raise Exception(
@@ -52,16 +58,16 @@ class PresidioPIIAnalyzer:
     @timed_operation
     def analyze_item(
         self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
-    ) -> List[DetectionResultItem]:
+    ) -> Tuple[List[DetectionResultItem], str]:
         """
         Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
         Will log an error if the identifier or entity recognizer is not added to Presidio's base recognizers or
-        a custom recognizer created.
+        a custom recognizer created. Returns the list of detected items and the sanitized string
 
         @param language_code: str "en" is default
         @param entities: str - List[MSFTPresidioPIIType.name]
         @param text: str
-        @return: List[DetectionResultItem]
+        @return: Tuple[List[DetectionResultItem], str]
         """
 
         detections = []
@@ -87,7 +93,27 @@ class PresidioPIIAnalyzer:
                 end=result.end,
             )
             for result in detections
-        ]
+        ], self.sanitize_text(text=text, analysis_items=detections)
+
+    def sanitize_text(
+        self, text: str, analysis_items: List[DetectionResultItem]
+    ) -> str:
+        """
+        Sanitizes the text analyzed with MSFT Presidio's Anonymizer
+        @param text:
+        @param analysis_items:
+        @return:
+        """
+        try:
+            anonymization_result = self.anonymizer.anonymize(
+                text=text, analyzer_results=analysis_items, operators=self.operators
+            )
+
+            return anonymization_result.text
+
+        except Exception as ex:
+            logger.error("An error occurred sanitizing the string")
+            return ""
 
     @timed_operation
     def analyze_collection(

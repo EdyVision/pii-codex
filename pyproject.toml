@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pii-codex"
-version = "0.4.0"
+version = "0.4.1"
 description = ""
 authors = ["Eidan J. Rosado"]
 license = "BSD 3-Clause"
@@ -8,7 +8,11 @@ readme = "README.md"
 homepage = "https://github.com/EdyVision/pii-codex"
 repository = "https://github.com/EdyVision/pii-codex"
 keywords = ["PII", "PII topology", "risk categories", "personal identifiable information"]
-classifiers = ["Development Status :: 1 - Planning", "Intended Audience :: Science/Research", "License :: OSI Approved :: BSD License","Programming Language :: Python :: 3", ]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3", ]
 include = ["LICENSE", "LICENSE-ETHICS"]
 
 [tool.poetry.dependencies]
@@ -22,6 +26,7 @@ pillow = "^9.3.0"  # security dependency
 # avoid installing the following and bring their own detector, using the adapters
 spacy = { version = "^3.4.1", optional = true }
 presidio-analyzer = { version = "^2.2.29", optional = true }
+presidio-anonymizer = { version ="^2.2.31", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.3"
@@ -44,6 +49,7 @@ en_core_web_lg = {url="https://github.com/explosion/spacy-models/releases/downlo
 detections = [
     "spacy",
     "presidio-analyzer",
+    "presidio-anonymizer"
 ]
 
 [[tool.poetry.source]]

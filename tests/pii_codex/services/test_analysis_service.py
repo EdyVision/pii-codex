@@ -46,6 +46,11 @@ class TestPIIAnalysisService:
         )  # It counts email as a URL since it contains domain
         assert_that(results.risk_score_mean).is_equal_to(2.5)
 
+        # Make sure phone and email from above are anonymized
+        assert_that(results.sanitized_text).is_equal_to(
+            "Here is my contact information: Phone number <REDACTED> and my email is <REDACTED>"
+        )
+
     def test_collection_analysis(self):
         texts_to_analyze = [
             "Hi, my name is Donnie",
@@ -80,6 +85,7 @@ class TestPIIAnalysisService:
         assert_that(results.detection_count).is_greater_than(3)
         assert_that(results.risk_score_variance).is_greater_than(0.5)
         assert_that(results.to_dict()).is_not_none()
+        assert_that(results.analyses[0].sanitized_text).is_not_empty()
 
     def test_collection_analysis_with_metadata(self):
         texts_to_analyze = [

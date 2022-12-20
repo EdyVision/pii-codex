@@ -81,12 +81,14 @@ class AnalysisResult:
     analysis: List[AnalysisResultItem]
     index: int = 0
     risk_score_mean: float = 0.0
+    sanitized_text: str = ""
 
     def to_dict(self):
         return {
             "analysis": [item.to_flattened_dict() for item in self.analysis],
             "index": self.index,
             "risk_score_mean": self.risk_score_mean,
+            "sanitized_text": self.sanitized_text,
         }
 
     def get_detected_types(self) -> List[str]:

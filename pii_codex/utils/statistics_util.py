@@ -37,24 +37,8 @@ def get_mean(values) -> float:
     return statistics.mean(values)
 
 
-def get_geometric_mean(values) -> float:
-    return statistics.geometric_mean(values)
-
-
-def get_harmonic_mean(values) -> float:
-    return statistics.harmonic_mean(values)
-
-
 def get_median(values) -> float:
     return statistics.median(values)
-
-
-def get_median_low(values):
-    return statistics.median_low(values)
-
-
-def get_median_high(values):
-    return statistics.median_high(values)
 
 
 def get_mode(values):
