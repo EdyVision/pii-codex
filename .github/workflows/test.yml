@@ -47,4 +47,4 @@ jobs:
           name: codecov-umbrella 
           files: ./coverage.xml
           verbose: true
-          threshold: 90%
+          target: 90%
