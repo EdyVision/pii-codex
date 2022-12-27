@@ -780,7 +780,7 @@ reference = "pypi-public"
 
 [[package]]
 name = "ipykernel"
-version = "6.20.0"
+version = "6.19.4"
 description = "IPython Kernel for Jupyter"
 category = "dev"
 optional = false
@@ -802,9 +802,7 @@ traitlets = ">=5.4.0"
 
 [package.extras]
 cov = ["coverage[toml]", "curio", "matplotlib", "pytest-cov", "trio"]
-docs = ["myst-parser", "pydata-sphinx-theme", "sphinx", "sphinxcontrib-github-alt", "sphinxcontrib-spelling"]
-pyqt5 = ["pyqt5"]
-pyside6 = ["pyside6"]
+docs = ["myst-parser", "pydata-sphinx-theme", "sphinx", "sphinxcontrib-github-alt"]
 test = ["flaky", "ipyparallel", "pre-commit", "pytest (>=7.0)", "pytest-asyncio", "pytest-cov", "pytest-timeout"]
 
 [package.source]
@@ -3068,7 +3066,7 @@ detections = ["spacy", "presidio-analyzer", "presidio-anonymizer"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.11"
-content-hash = "5806b5f8fdc026dd8e71e3a4486c6e24511ec5864aecf3bf4ffe126452a3b5e7"
+content-hash = "abc61344575231fea69ed52a7bf9a6aaa78871a81afb805aa7cc1d39df389a93"
 
 [metadata.files]
 anyio = [
@@ -3530,8 +3528,8 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 ipykernel = [
-    {file = "ipykernel-6.20.0-py3-none-any.whl", hash = "sha256:7614640d703f052fc92e719b1c397a5e62dfdee8d946e136edbf016805475c01"},
-    {file = "ipykernel-6.20.0.tar.gz", hash = "sha256:7dfafaec645300710c41479c0b0bdc13a9ea6639bee6e3ad042757674e9a9a29"},
+    {file = "ipykernel-6.19.4-py3-none-any.whl", hash = "sha256:0ecdae0060da61c5222ad221681f3b99b5bef739e11a3b1eb5778aa47f056f1f"},
+    {file = "ipykernel-6.19.4.tar.gz", hash = "sha256:4140c282a6c71cdde59abe5eae2c71bf1eeb4a69316ab76e1c4c25150a49722b"},
 ]
 ipython = [
     {file = "ipython-8.7.0-py3-none-any.whl", hash = "sha256:352042ddcb019f7c04e48171b4dd78e4c4bb67bf97030d170e154aac42b656d9"},
