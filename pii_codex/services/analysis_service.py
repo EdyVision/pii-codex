@@ -2,12 +2,12 @@
 from typing import List, Optional, Tuple
 import pandas as pd
 
-from pii_codex.config import PII_MAPPER, DEFAULT_ANALYSIS_MODE
-from pii_codex.models.common import (
+from ..config import PII_MAPPER, DEFAULT_ANALYSIS_MODE, DEFAULT_TOKEN_REPLACEMENT_VALUE
+from ..models.common import (
     AnalysisProviderType,
     RiskLevel,
 )
-from pii_codex.models.analysis import (
+from ..models.analysis import (
     DetectionResultItem,
     AnalysisResultItem,
     AnalysisResult,
@@ -15,12 +15,12 @@ from pii_codex.models.analysis import (
     DetectionResult,
     RiskAssessment,
 )
-from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
-from pii_codex.services.analyzers.presidio_analysis import (
+from ..models.microsoft_presidio_pii import MSFTPresidioPIIType
+from ..services.analyzers.presidio_analysis import (
     PresidioPIIAnalyzer,
 )
-from pii_codex.services.assessment_service import PIIAssessmentService
-from pii_codex.utils.statistics_util import (
+from ..services.assessment_service import PIIAssessmentService
+from ..utils.statistics_util import (
     get_mean,
     get_standard_deviation,
     get_variance,
@@ -28,16 +28,20 @@ from pii_codex.utils.statistics_util import (
     get_median,
 )
 
-from pii_codex.utils.logging import timed_operation
+from ..utils.logging import timed_operation
 
 
 class PIIAnalysisService:
-    def __init__(self, analysis_provider: str = AnalysisProviderType.PRESIDIO.name):
+    def __init__(
+        self,
+        pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE,
+        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
+    ):
         self._analysis_provider = analysis_provider
         self._language_code = "en"
         self._pii_assessment_service = PIIAssessmentService()
         self._analyzer = (
-            PresidioPIIAnalyzer()
+            PresidioPIIAnalyzer(pii_token_replacement_value=pii_token_replacement_value)
             if analysis_provider == AnalysisProviderType.PRESIDIO.name
             else None
         )
@@ -253,7 +257,7 @@ class PIIAnalysisService:
 
         if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
             detections, sanitized_text = self._analyzer.analyze_item(  # type: ignore
-                entities=[pii_type.name for pii_type in MSFTPresidioPIIType],
+                entities=[pii_type.value for pii_type in MSFTPresidioPIIType],
                 text=text,
                 language_code=language_code,
             )

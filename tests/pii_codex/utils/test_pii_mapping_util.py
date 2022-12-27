@@ -151,12 +151,6 @@ class TestPIIMappingUtil:
         assert_that(csv_file_dataframe).is_not_none()
         assert_that(isinstance(csv_file_dataframe, pd.DataFrame)).is_true()
 
-    def test_open_mappings_json_v1(self):
-        json_file_dataframe = open_pii_type_mapping_json("v1")
-
-        assert_that(json_file_dataframe).is_not_none()
-        assert_that(isinstance(json_file_dataframe, pd.DataFrame)).is_true()
-
     def test_mappings_json_create_delete(self):
         new_version = "test"
         csv_file_dataframe = open_pii_type_mapping_csv("v1")
@@ -165,6 +159,8 @@ class TestPIIMappingUtil:
         convert_pii_type_mapping_csv_to_json(
             data_frame=csv_file_dataframe, mapping_file_version=new_version
         )
+
+        open_pii_type_mapping_json(new_version)
 
         json_file_dataframe = open_pii_type_mapping_json(
             mapping_file_version=new_version, mapping_file_name="pii_type_mappings"

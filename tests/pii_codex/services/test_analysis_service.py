@@ -51,6 +51,26 @@ class TestPIIAnalysisService:
             "Here is my contact information: Phone number <REDACTED> and my email is <REDACTED>"
         )
 
+    def test_analyze_item_with_custom_token_replacement(self):
+        results = PIIAnalysisService(
+            pii_token_replacement_value="<PII_TOKEN>"
+        ).analyze_item(
+            text="Here is my contact information: Phone number 555-555-5555 and my email is example123@email.com",
+            metadata={"location": True},
+        )
+
+        assert_that(results).is_not_none()
+        assert_that(isinstance(results, AnalysisResult)).is_true()
+        assert_that(len(results.analysis)).is_equal_to(
+            4
+        )  # It counts email as a URL since it contains domain
+        assert_that(results.risk_score_mean).is_equal_to(2.5)
+
+        # Make sure phone and email from above are anonymized
+        assert_that(results.sanitized_text).is_equal_to(
+            "Here is my contact information: Phone number <PII_TOKEN> and my email is <PII_TOKEN>"
+        )
+
     def test_collection_analysis(self):
         texts_to_analyze = [
             "Hi, my name is Donnie",
@@ -90,6 +110,9 @@ class TestPIIAnalysisService:
     def test_collection_analysis_with_metadata(self):
         texts_to_analyze = [
             "Hi, my name is Donnie",
+            "As a democrat, I promise to uphold....",
+            "As a Canadian, I can tell you that....",
+            "As a Catholic, I can tell you that....",
             "See you there!",
             "This is cool...",
             "example@example.com",
@@ -99,6 +122,27 @@ class TestPIIAnalysisService:
         ]
 
         metadata_to_analyze = [
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
+            {
+                "location": True,
+                "url": False,
+                "screen_name": True,
+                "name": True,
+                "user_id": True,
+            },
             {
                 "location": True,
                 "url": False,
@@ -175,9 +219,14 @@ class TestPIIAnalysisService:
         assert_that(
             results.detected_pii_type_frequencies.most_common(1)[0][0]
         ).is_equal_to("PERSON")
+        assert_that(
+            results.detected_pii_type_frequencies[
+                "NRP"
+            ]  # political affiliation, religion, and nationality
+        ).is_equal_to(3)
         assert_that(results.risk_score_standard_deviation).is_greater_than(0.12)
         assert_that(results.detection_count).is_greater_than(10)
-        assert_that(results.risk_score_variance).is_greater_than(0.03)
+        assert_that(results.risk_score_variance).is_greater_than(0.02)
         assert_that(results.to_dict()).is_not_none()
 
     @pytest.mark.parametrize(

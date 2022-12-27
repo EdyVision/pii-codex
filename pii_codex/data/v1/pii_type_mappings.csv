@@ -15,8 +15,7 @@ Occupation,OCCUPATION,Basic Demographics,Linkable,Not Mentioned,NON_PHI,Semi-Ide
 Gender,GENDER,Basic Demographics,Linkable,Not Mentioned,PHI,Semi-Identifiable
 Birth Date,DATE,Basic Demographics,Linkable,Linkable,PHI,Semi-Identifiable
 Online Screen Name,SCREEN_NAME,Personal Preferences,Directly PII,Not Mentioned,NON_PHI,Identifiable
-Religion,RELIGION,Personal Preferences,Linkable,Not Mentioned,NON_PHI,Semi-Identifiable
-Political Affiliation,POLITICAL_AFFILIATION,Personal Preferences,Linkable,Not Mentioned,NON_PHI,Semi-Identifiable
+"Nationality, Religion, Political Affiliation",NRP,Personal Preferences,Linkable,Not Mentioned,NON_PHI,Semi-Identifiable
 Sexual Preference,SEXUAL_PREFERENCE,Personal Preferences,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Email Address,EMAIL_ADDRESS,Personal Preferences,Directly PII,Stand Alone PII,PHI,Identifiable
 Voice Print,VOICE_PRINT,Contact Information,Directly PII,Stand Alone PII,PHI,Identifiable
@@ -49,7 +48,7 @@ GPS Location,LOCATION,Secure Identifiers,Linkable,Not Mentioned,PHI,Semi-Identif
 Security/Access Codes,SECURITY_ACCESS_CODES,Secure Identifiers,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Passwords,PASSWORD,Secure Identifiers,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Health Insurance ID,HEALTH_INSURANCE_ID,Secure Identifiers,Directly PII,Not Mentioned,PHI,Identifiable
-Passport Number,USUK_PASSPORT_NUMBER,Secure Identifiers,Directly PII,Stand Alone PII,PHI,Identifiable
+Passport Number,US_PASSPORT_NUMBER,Secure Identifiers,Directly PII,Stand Alone PII,PHI,Identifiable
 Age,AGE,Basic Demographics,Linkable,Linkable,NON_PHI,Semi-Identifiable
 Person,PERSON,Financial Information,Directly PII,Linkable,PHI,Identifiable
 Crypto (Financial Accounts),CRYPTO,Financial Information,Directly PII,Linkable,NON_PHI,Semi-Identifiable

@@ -1,7 +1,7 @@
 # pylint: disable=broad-except,unused-argument,import-outside-toplevel,unused-variable
 from typing import List, Tuple
 
-from ...config import PII_MAPPER, DEFAULT_LANG
+from ...config import PII_MAPPER, DEFAULT_LANG, DEFAULT_TOKEN_REPLACEMENT_VALUE
 from ...models.analysis import DetectionResultItem, DetectionResult
 from ...utils.package_installer_util import install_spacy_package
 from ...utils.pii_mapping_util import PIIMapper
@@ -9,10 +9,13 @@ from ...utils.logging import logger, timed_operation
 
 
 class PresidioPIIAnalyzer:
-    def __init__(self):
+    def __init__(
+        self, pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE
+    ):
         """
         Since installing Spacy, the en_core_web_lg model, and the MSFT Presidio package are optional installs
         the imports are wrapped to prevent any failures
+        @param pii_token_replacement_value: str to replace detected pii token with (e.g. <REDACTED>)
         """
         try:
             import spacy
@@ -29,7 +32,9 @@ class PresidioPIIAnalyzer:
             self.pii_mapper = PIIMapper()
 
             self.operators = {
-                "DEFAULT": OperatorConfig("replace", {"new_value": "<REDACTED>"}),
+                "DEFAULT": OperatorConfig(
+                    "replace", {"new_value": pii_token_replacement_value}
+                ),
                 "TITLE": OperatorConfig("redact", {}),
             }
 

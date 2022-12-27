@@ -16,15 +16,14 @@ from pii_codex.models.common import (
 from pii_codex.models.analysis import RiskAssessment
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 
-from pii_codex.utils.file_util import open_pii_type_mapping_json
+from pii_codex.utils.file_util import open_pii_type_mapping_csv
 
 
 class PIIMapper:
+    def __init__(self):
+        self._pii_mapping_data_frame = open_pii_type_mapping_csv("v1")
 
-    pii_mapping_data_frame = open_pii_type_mapping_json("v1")
-
-    @classmethod
-    def map_pii_type(cls, pii_type: str) -> RiskAssessment:
+    def map_pii_type(self, pii_type: str) -> RiskAssessment:
         """
         Maps the PII Type to a full RiskAssessment including categories it belongs to, risk level, and
         its location in the text.
@@ -33,11 +32,16 @@ class PIIMapper:
         @return:
         """
 
-        information_detail_lookup = cls.pii_mapping_data_frame[
-            cls.pii_mapping_data_frame.PII_Type == pii_type
+        information_detail_lookup = self._pii_mapping_data_frame[
+            self._pii_mapping_data_frame.PII_Type == pii_type
         ]
 
         # Retrieve the risk_level name by the value of the risk definition enum entry
+        if information_detail_lookup.empty:
+            raise Exception(
+                f"An error occurred while processing the detected entity {pii_type}"
+            )
+
         risk_level_definition = RiskLevelDefinition(
             information_detail_lookup.Risk_Level.item()
         )
@@ -118,6 +122,10 @@ class PIIMapper:
         @return:
         """
         try:
+            if pii_type == AzurePIIType.USUK_PASSPORT_NUMBER.value:
+                # Special case, map to USUK for all US and UK Passport types
+                return PIIType.US_PASSPORT_NUMBER
+
             return PIIType[AzurePIIType(pii_type).name]
         except Exception as ex:
             raise Exception(
@@ -135,10 +143,6 @@ class PIIMapper:
         @return:
         """
         try:
-            if pii_type == AWSComprehendPIIType.US_PASSPORT_NUMBER.value:
-                # Special case, map to USUK for all US and UK Passport types
-                return PIIType.USUK_PASSPORT_NUMBER
-
             return PIIType[AWSComprehendPIIType(pii_type).name]
         except Exception as ex:
             raise Exception(
@@ -156,10 +160,6 @@ class PIIMapper:
         @return:
         """
         try:
-            if pii_type == MSFTPresidioPIIType.US_PASSPORT_NUMBER.value:
-                # Special case, map to USUK for all US and UK Passport types
-                return PIIType.USUK_PASSPORT_NUMBER
-
             return PIIType[MSFTPresidioPIIType(pii_type).name]
         except Exception as ex:
             raise Exception(
