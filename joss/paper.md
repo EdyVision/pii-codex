@@ -54,7 +54,7 @@ For end-users that still require detections to be carried out, Microsoft Presidi
 
 The Analysis and Assessment services expose functions for those defining their own detectors and enables the conversion to a common detection type so that the full Analysis Result set can be built.
 
-## Examples
+## Example Usage
 
 The collection analysis permits a list of strings under `texts` parameter or a dataframe with a text column under the `data` parameter.
 
@@ -91,7 +91,7 @@ results = pii_analysis_service.analyze_collection(
         ],
         "metadata": [
             {"location": True, "url": False, "screen_name": True},
-            {"location": False, "url": False, "screen_name": True} # Not all social media posts will have location metadata
+            {"location": False, "url": False, "screen_name": True}
         ]
     }),
     collection_name="Social Media Example",
@@ -121,7 +121,7 @@ The AnalysisResultSet object will show individual detections and their risk asse
 Each analysis is provided with the sanitized input text when using the default analysis service. Unless provided with another replacement token, sanitized input text will contain `<REDACTED>` in place of detected PII tokens:
 
 ```
-"sanitized_text": "Hi! My phone number is <REDACTED>. You can also reach me by email at <REDACTED>"
+"sanitized_text": "Hi! My phone number is <REDACTED>."
 ```
 
 ## Availability
