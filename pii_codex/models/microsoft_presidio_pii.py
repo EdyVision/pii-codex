@@ -12,7 +12,7 @@ class MSFTPresidioPIIType(Enum):
     ABA_ROUTING_NUMBER: str = "ABA_ROUTING_NUMBER"
     IP_ADDRESS: str = "IP_ADDRESS"
     DATE: str = "DATE_TIME"
-    ADDRESS: str = "ADDRESS"
+    ADDRESS: str = "LOCATION"
     AGE: str = "AGE"
     PERSON: str = "PERSON"
     CREDIT_CARD_NUMBER: str = "CREDIT_CARD"
