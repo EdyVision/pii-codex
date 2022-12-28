@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "pii-codex"
-version = "0.4.2"
+version = "0.4.3"
 description = ""
 authors = ["Eidan J. Rosado"]
 license = "BSD 3-Clause"
 readme = "README.md"
 homepage = "https://github.com/EdyVision/pii-codex"
 repository = "https://github.com/EdyVision/pii-codex"
-keywords = ["PII", "PII topology", "risk categories", "personal identifiable information"]
+keywords = ["PII", "PII topology", "risk categories", "personal identifiable information", "risk assessment"]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Intended Audience :: Science/Research",

@@ -12,8 +12,8 @@ class PIIAssessmentService:
     @timed_operation
     def assess_pii_type(self, detected_pii_type: str) -> RiskAssessment:
         """
-        Assesses a singular detected PII type given a type name string from commmon.PIIType enum
-        @param detected_pii_type: type name strings from commmon.PIIType enum
+        Assesses a singular detected PII type given a type name string from common.PIIType enum
+        @param detected_pii_type: type name strings from common.PIIType enum
         @return: RiskAssessment
         """
         return PII_MAPPER.map_pii_type(detected_pii_type)
@@ -23,8 +23,8 @@ class PIIAssessmentService:
         self, detected_pii_types: List[str]
     ) -> List[RiskAssessment]:
         """
-        Assesses a list of detected PII types given an array of type name strings from commmon.PIIType enum
-        @param detected_pii_types: array type name strings from commmon.PIIType
+        Assesses a list of detected PII types given an array of type name strings from common.PIIType enum
+        @param detected_pii_types: array type name strings from common.PIIType
         enum (e.g. ["PHONE_NUMBER", "US_SOCIAL_SECURITY_NUMBER"])
         @return: List[RiskAssessment]
         """

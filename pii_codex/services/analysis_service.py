@@ -37,6 +37,12 @@ class PIIAnalysisService:
         pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE,
         analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
     ):
+        """
+        PIIAnalysisService constructor.
+        @param pii_token_replacement_value: PII Token replacement string (default is <REDACTED>)
+        @param analysis_provider: Default provider is PRESIDIO, pass in another analysis provider
+        when using the adapters.
+        """
         self._analysis_provider = analysis_provider
         self._language_code = "en"
         self._pii_assessment_service = PIIAssessmentService()
