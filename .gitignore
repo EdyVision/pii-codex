@@ -115,6 +115,3 @@ backend/bin
 coverage.xml
 pytest.log
 tests/pii_codex/data
-
-# Temporarily ignored
-joss/

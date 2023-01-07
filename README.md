@@ -12,6 +12,7 @@ PII Detection, Categorization, and Severity Assessment
 [![License: Hippocratic 3.0](https://img.shields.io/badge/License-Hippocratic_3.0-green.svg)](https://firstdonoharm.dev)
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![DOI](https://zenodo.org/badge/533554671.svg)](https://zenodo.org/badge/latestdoi/533554671)
+[![status](https://joss.theoj.org/papers/5296a84bba0925e682dcddf14bec5880/status.svg)](https://joss.theoj.org/papers/5296a84bba0925e682dcddf14bec5880)
 
 </div>
 

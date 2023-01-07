@@ -74,7 +74,6 @@ from pii_codex.services.analysis_service import PIIAnalysisService
 
 pii_analysis_service = PIIAnalysisService()
 
-strings_to_analyze = ["string to analyze", "string to analyze"] # strings to analyze
 results = pii_analysis_service.analyze_collection(
     data=pd.DataFrame({
         "text": [
@@ -169,7 +168,7 @@ Sample output:
             ],
             "index": 1,
             "risk_score_mean": 2.6666666666666665,
-            "sanitized_text": "Hi! My phone number is 555-555-5555. You can also reach me by email at email@example.com",
+            "sanitized_text": "Hi! My phone number is <REDACTED>. You can also reach me by email at <REDACTED>",
         },
         {
             "analysis": [
