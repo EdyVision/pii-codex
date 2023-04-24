@@ -6,6 +6,7 @@ test: lint test.all
 test.cov: test.coverage
 
 install:
+	@poetry update
 	@poetry install
 	$(MAKE) install.extras
 	$(MAKE) install.pre_commit

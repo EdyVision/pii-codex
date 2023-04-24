@@ -15,33 +15,55 @@ PII Detection, Categorization, and Severity Assessment
 </div>
 
 ---
-The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
+The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment (to be publicly released later in 2023). There was a need to not only detect PII in text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
 
 The outputs of the primary PII Codex analysis and adapter functions are AnalysisResult or AnalysisResultSet objects that will provide a listing of detections, severities, mean risk scores for each string processed, and summary statistics on the analysis made. The final outputs do not contain the original texts but instead will provide where to find the detections should the end-user care for this information in their analysis.
 
+## Statement of Need
+
+The general knowledge base of identifiable data, the usage restrictions of this data, and the associated policies surrounding it have shifted drastically over the years. The tech industry has had to adjust to many policy changes regarding the tracking of individuals, the usage of data from online profiles and platforms, and the right to be forgotten entirely from a service or platform (GDPR). While the shift has provided data protections around the globe, the majority of technology users continue to have little to no control over their personal information with third-party data consumers (Trepte, 2020). 
+
+Understanding if identifiable data types exist in a data set can prevent accidental sharing of such data by allowing its detection in the first place and, in the case of this software package, present sanitized strings, the reasons to why the token was considered to be PII, and permit for the results to be publishable.
+
+## Potential Usages
+Potential usages include sanitizing of dataset strings (e.g. a collection of social media posts), presenting results to users for software examining their interactions (e.g. UX research on user-awareness in cybersecurity applications), etc.
+
 <hr/>
 
-## Importing
-The repository releases are hosted on PyPi.
+## Running Locally
+This project uses Poetry. To run this project, install `poetry` and proceed to follow the instructions under `/docs/LOCAL_SETUP.md`.
 
-Using pip:
+`Note: This project has only been tested with Ubuntu and MacOS.`
+
+## Importing
+Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
 
 ```bash
-pip3 install -i pii-codex
+python3 -m spacy download en_core_web_lg
+```
+
+
+The repository releases are hosted on PyPi.
+
+Using pip (must have latest pip version and running Python 3.9 or 3.10):
+
+```bash
+pip install --upgrade pip
+pip install pii-codex
+pip install pii-codex[detections]
 ```
 
 Using Poetry:
 
 ```bash
+poetry update
 poetry add pii-codex
-```
-
-If you are in need of the integrated Microsoft Presidio Analyzer, you'll also need to install the `en_core_web_lg` and the PII-Codex extras:
-
-```bash
 poetry install pii-codex --extras="detections"
-python3 -m spacy download en_core_web_lg
 ```
+
+For those using Google Collab, check out the example notebook:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/EdyVision/802ce21aab21eb5d9afa9e43d301eef7/pii-codex-sample-notebook.ipynb)
 
 ## Usage
 

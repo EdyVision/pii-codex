@@ -1,0 +1,38 @@
+# PII-Codex Community Guidelines
+The following aims to highlight ways to contribute to PII-Codex. Code reviews, documentation updates, and pull requests are always welcome. To the source code directly by forking the project, modify the code, and create a pull requests for review. 
+
+Please use clear and organized descriptions when creating issues and pull requests and leverage the templates when possible.
+
+### Bug Report and Support Requests
+You can use issues to report bugs and seek support. Before creating any new issues, please check for similar ones in the issue list first.
+
+### Submission Checklist
+When submitting a pull request, please check the following:
+
+Unit tests, documentation, and code style are in order. The GitHub action `test.yml` will automatically run tests and check whether the coverage threshold is still being met. 
+
+Other checks such as the typechecker and linter will also run with every feature branch push. These checks can also be performed with the following commands:
+
+```bash
+make typecheck
+make lint
+make test.coverage
+```
+
+Works in progress will be considered if you're unsure of what this exactly means, in which case you'll likely be asked to make some further changes.
+
+### Creating Releases
+With any change (non-breaking dependency upgrades, bug fixes, etc), the version will need to be updated to the next value and a new release created. Using the command listing below, run the one associated with the changes:
+
+```bash
+make version.bump.patch # use this for bug fixes, test coverage, non-breaking dependency upgrades
+
+make version.bump.minor # use this for minor business logic changes - must be non-breaking
+
+make version.bump.major # use this for anything that is not backwards compatible
+```
+
+Upon merging the changes into main, the `releases.yml` will automatically compare the releases and the version noted in the CITATION.cff and pyproject.toml. In the case a mismatch is found, a release will be created.
+
+### Licensing
+The contributed code will be licensed under PII-Codex's license, https://github.com/EdyVision/pii-codex/blob/main/LICENSE. If you did not write the code yourself, you must ensure the existing license is compatible and include the license information in the contributed files, or obtain permission from the original author to relicense the contributed code.
