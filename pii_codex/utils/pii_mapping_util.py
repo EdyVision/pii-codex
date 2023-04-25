@@ -26,7 +26,7 @@ class PIIMapper:
     def map_pii_type(self, pii_type: str) -> RiskAssessment:
         """
         Maps the PII Type to a full RiskAssessment including categories it belongs to, risk level, and
-        its location in the text.
+        its location in the text. This cross-references some of the types listed by Milne et al. (2016)
 
         @param pii_type:
         @return:

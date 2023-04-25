@@ -5,13 +5,9 @@ from pii_codex.models.analysis import DetectionResultItem, DetectionResult
 from pii_codex.services.adapters.detection_adapters.detection_adapter_base import (
     BasePIIDetectionAdapter,
 )
-from pii_codex.utils.pii_mapping_util import PIIMapper
 
 
 class AzurePIIDetectionAdapter(BasePIIDetectionAdapter):
-
-    pii_mapper = PIIMapper()
-
     def convert_analyzed_item(self, pii_detection: dict):
         """
         Converts a detection result into a collection of DetectionResultItem
