@@ -145,12 +145,5 @@ For more information on usage, check out the respective documentation for guidan
 
 <hr/>
 
-## Community Guidelines
-### Contributions
-In general, you can contribute to this project by creating issues. You are also welcome to contribute to the source code directly by forking the project, modifying the code, and creating pull requests. Please use clear and organized descriptions when creating issues and pull requests and leverage the templates when possible.
-
-### Bug Report and Support Requests
-You can use issues to report bugs and seek support. Before creating any new issues, please check for similar ones in the issue list first.
-
 ## Attributions
 This project benefited greatly from a number of PII research works like that from Milne et al (2016), Schwartz and Solove (2012), and the documentation by NIST, DHS, and HIPAA. A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like Poetry, Microsoft Presidio, spaCy, Jupyter, and several others.
