@@ -19,6 +19,7 @@ class RiskLevel(Enum):
 
 
 class RiskLevelDefinition(Enum):
+    # Levels on the continuum presented by Schwartz and Solove (2011)
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
     LEVEL_TWO: str = "Semi-Identifiable"
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
