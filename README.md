@@ -16,17 +16,22 @@ PII Detection, Categorization, and Severity Assessment
 </div>
 
 ---
+
+Author: Eidan Rosado - [@EdyVision](https://github.com/EdyVision)  <br/>
+Affiliation: Nova Southeastern University, College of Computing and Engineering
+
+## Project Background
 The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment (to be publicly released later in 2023). There was a need to not only detect PII in text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
 
 The outputs of the primary PII Codex analysis and adapter functions are AnalysisResult or AnalysisResultSet objects that will provide a listing of detections, severities, mean risk scores for each string processed, and summary statistics on the analysis made. The final outputs do not contain the original texts but instead will provide where to find the detections should the end-user care for this information in their analysis.
 
-## Statement of Need
+### Statement of Need
 
 The general knowledge base of identifiable data, the usage restrictions of this data, and the associated policies surrounding it have shifted drastically over the years. The tech industry has had to adjust to many policy changes regarding the tracking of individuals, the usage of data from online profiles and platforms, and the right to be forgotten entirely from a service or platform (GDPR). While the shift has provided data protections around the globe, the majority of technology users continue to have little to no control over their personal information with third-party data consumers (Trepte, 2020). 
 
 Understanding if identifiable data types exist in a data set can prevent accidental sharing of such data by allowing its detection in the first place and, in the case of this software package, present sanitized strings, the reasons to why the token was considered to be PII, and permit for the results to be publishable.
 
-## Potential Usages
+### Potential Usages
 Potential usages include sanitizing of dataset strings (e.g. a collection of social media posts), presenting results to users for software examining their interactions (e.g. UX research on user-awareness in cybersecurity applications), etc.
 
 <hr/>
@@ -148,3 +153,7 @@ For more information on usage, check out the respective documentation for guidan
 
 ## Attributions
 This project benefited greatly from a number of PII research works like that from Milne et al (2016) with the definition of the types and categories, Schwartz and Solove (2012) with the severity levels of Non-Identifiable, Semi-Identifiable, and Identifiable, and the documentation by NIST, DHS (2012), and HIPAA. A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like Poetry, Microsoft Presidio, spaCy (2017), Jupyter, and several others.
+
+
+## Community Guidelines
+For community guidelines and contribution instructions, please view the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
