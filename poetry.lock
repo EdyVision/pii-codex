@@ -1179,14 +1179,14 @@ reference = "pypi-public"
 
 [[package]]
 name = "identify"
-version = "2.5.22"
+version = "2.5.23"
 description = "File identification library for Python"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "identify-2.5.22-py2.py3-none-any.whl", hash = "sha256:f0faad595a4687053669c112004178149f6c326db71ee999ae4636685753ad2f"},
-    {file = "identify-2.5.22.tar.gz", hash = "sha256:f7a93d6cf98e29bd07663c60728e7a4057615068d7a639d132dc883b2d54d31e"},
+    {file = "identify-2.5.23-py2.py3-none-any.whl", hash = "sha256:17d9351c028a781456965e781ed2a435755cac655df1ebd930f7186b54399312"},
+    {file = "identify-2.5.23.tar.gz", hash = "sha256:50b01b9d5f73c6b53e5fa2caf9f543d3e657a9d0bbdeb203ebb8d45960ba7433"},
 ]
 
 [package.extras]
@@ -2327,14 +2327,14 @@ reference = "pypi-public"
 
 [[package]]
 name = "nbclient"
-version = "0.7.3"
+version = "0.7.4"
 description = "A client library for executing notebooks. Formerly nbconvert's ExecutePreprocessor."
 category = "dev"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "nbclient-0.7.3-py3-none-any.whl", hash = "sha256:8fa96f7e36693d5e83408f5e840f113c14a45c279befe609904dbe05dad646d1"},
-    {file = "nbclient-0.7.3.tar.gz", hash = "sha256:26e41c6dca4d76701988bc34f64e1bfc2413ae6d368f13d7b5ac407efb08c755"},
+    {file = "nbclient-0.7.4-py3-none-any.whl", hash = "sha256:c817c0768c5ff0d60e468e017613e6eae27b6fa31e43f905addd2d24df60c125"},
+    {file = "nbclient-0.7.4.tar.gz", hash = "sha256:d447f0e5a4cfe79d462459aec1b3dc5c2e9152597262be8ee27f7d4c02566a0d"},
 ]
 
 [package.dependencies]
@@ -2721,6 +2721,31 @@ url = "https://pypi.org/simple"
 reference = "pypi-public"
 
 [[package]]
+name = "pdoc"
+version = "13.1.1"
+description = "API Documentation for Python Projects"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pdoc-13.1.1-py3-none-any.whl", hash = "sha256:9025c6cd2448b18662e88eacf84c6eb050dcbdc8ee5259aee5e40a1c2b417840"},
+    {file = "pdoc-13.1.1.tar.gz", hash = "sha256:2b8e341b1882ed8217e95c1f3f1f11d34f9ef93a5796287590162e2035296815"},
+]
+
+[package.dependencies]
+Jinja2 = ">=2.11.0"
+MarkupSafe = "*"
+pygments = ">=2.12.0"
+
+[package.extras]
+dev = ["black", "hypothesis", "mypy", "pygments (>=2.14.0)", "pytest", "pytest-cov", "pytest-timeout", "ruff", "tox", "types-pygments"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.org/simple"
+reference = "pypi-public"
+
+[[package]]
 name = "pexpect"
 version = "4.8.0"
 description = "Pexpect allows easy control of interactive console applications."
@@ -2861,19 +2886,19 @@ reference = "pypi-public"
 
 [[package]]
 name = "platformdirs"
-version = "3.2.0"
+version = "3.4.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "platformdirs-3.2.0-py3-none-any.whl", hash = "sha256:ebe11c0d7a805086e99506aa331612429a72ca7cd52a1f0d277dc4adc20cb10e"},
-    {file = "platformdirs-3.2.0.tar.gz", hash = "sha256:d5b638ca397f25f979350ff789db335903d7ea010ab28903f57b27e1b16c2b08"},
+    {file = "platformdirs-3.4.0-py3-none-any.whl", hash = "sha256:01437886022decaf285d8972f9526397bfae2ac55480ed372ed6d9eca048870a"},
+    {file = "platformdirs-3.4.0.tar.gz", hash = "sha256:a5e1536e5ea4b1c238a1364da17ff2993d5bd28e15600c2c8224008aff6bbcad"},
 ]
 
 [package.extras]
-docs = ["furo (>=2022.12.7)", "proselint (>=0.13)", "sphinx (>=6.1.3)", "sphinx-autodoc-typehints (>=1.22,!=1.23.4)"]
-test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.2.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
+docs = ["furo (>=2023.3.27)", "proselint (>=0.13)", "sphinx (>=6.1.3)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.3.1)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
 
 [package.source]
 type = "legacy"
@@ -3254,7 +3279,7 @@ reference = "pypi-public"
 name = "pygments"
 version = "2.15.1"
 description = "Pygments is a syntax highlighting package written in Python."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -3798,14 +3823,14 @@ reference = "pypi-public"
 
 [[package]]
 name = "requests"
-version = "2.28.2"
+version = "2.29.0"
 description = "Python HTTP for Humans."
 category = "main"
 optional = false
-python-versions = ">=3.7, <4"
+python-versions = ">=3.7"
 files = [
-    {file = "requests-2.28.2-py3-none-any.whl", hash = "sha256:64299f4909223da747622c030b781c0d7811e359c37124b4bd368fb8c6518baa"},
-    {file = "requests-2.28.2.tar.gz", hash = "sha256:98b1b2782e3c6c4904938b84c0eb932721069dfdb9134313beff7c83c2df24bf"},
+    {file = "requests-2.29.0-py3-none-any.whl", hash = "sha256:e8f3c9be120d3333921d213eef078af392fba3933ab7ed2d1cba3b56f2568c3b"},
+    {file = "requests-2.29.0.tar.gz", hash = "sha256:f2e34a75f4749019bb0e3effb66683630e4ffeaf75819fb51bebef1bf5aef059"},
 ]
 
 [package.dependencies]
@@ -4360,14 +4385,14 @@ reference = "pypi-public"
 
 [[package]]
 name = "tldextract"
-version = "3.4.0"
+version = "3.4.1"
 description = "Accurately separates a URL's subdomain, domain, and public suffix, using the Public Suffix List (PSL). By default, this includes the public ICANN TLDs and their exceptions. You can optionally support the Public Suffix List's private domains as well."
 category = "main"
 optional = true
 python-versions = ">=3.7"
 files = [
-    {file = "tldextract-3.4.0-py3-none-any.whl", hash = "sha256:47aa4d8f1a4da79a44529c9a2ddc518663b25d371b805194ec5ce2a5f615ccd2"},
-    {file = "tldextract-3.4.0.tar.gz", hash = "sha256:78aef13ac1459d519b457a03f1f74c1bf1c2808122a6bcc0e6840f81ba55ad73"},
+    {file = "tldextract-3.4.1-py3-none-any.whl", hash = "sha256:26f646987b01ae2946e7491cce4aaf54129f3489a196a274e6c843ec72968313"},
+    {file = "tldextract-3.4.1.tar.gz", hash = "sha256:fa9e50c4a03bede2a1d95dca620d661678484626858ccf388cf9671a0dd497a4"},
 ]
 
 [package.dependencies]
@@ -4851,4 +4876,4 @@ detections = ["presidio-analyzer", "presidio-anonymizer", "spacy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "d04150ffd2a25a9863721e4d5d79e643f1d3a5c57872401676642e976e333cd9"
+content-hash = "ab5523ac5b71ee4dae3678b0171fb6356044972b4b16f34993a5627f8b795fe3"
