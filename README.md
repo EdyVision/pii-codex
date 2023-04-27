@@ -142,18 +142,33 @@ Sample output (results object converted to `dict` from notebook):
 ### Docs
 For more information on usage, check out the respective documentation for guidance on using PII-Codex.
 
-| Topic                       | Document                                                     | Description                                                                              |
-|-----------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| PII Type Mappings           | [PII Mappings](docs/MAPPING.md)                              | Overview of how to perform mappings between PII types and how to review store PII types. |
-| PII Detections and Analysis | [PII Detection and Analysis](docs/DETECTION_AND_ANALYSIS.md) | Overview of how to detect and analyze strings                                            |
-| Local Repo Setup            | [Local Repo Setup](docs/LOCAL_SETUP.md)                      | Instructions for local repository setup                                                  |
-| Example Analysis            | [Example Analysis Notebook](notebooks/pii-analysis-ms-presidio.ipynb)  | Notebook with example analysis using MSFT Presidio                             |
+| Topic                       | Document                                                              | Description                                                                              |
+|-----------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| PII Type Mappings           | [PII Mappings](docs/MAPPING.md)                                       | Overview of how to perform mappings between PII types and how to review store PII types. |
+| PII Detections and Analysis | [PII Detection and Analysis](docs/DETECTION_AND_ANALYSIS.md)          | Overview of how to detect and analyze strings                                            |
+| Local Repo Setup            | [Local Repo Setup](docs/LOCAL_SETUP.md)                               | Instructions for local repository setup                                                  |
+| Example Analysis            | [Example Analysis Notebook](notebooks/pii-analysis-ms-presidio.ipynb) | Notebook with example analysis using MSFT Presidio                                       |
 
 <hr/>
 
 ## Attributions
-This project benefited greatly from a number of PII research works like that from Milne et al (2016) with the definition of the types and categories, Schwartz and Solove (2012) with the severity levels of Non-Identifiable, Semi-Identifiable, and Identifiable, and the documentation by NIST, DHS (2012), and HIPAA. A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like Poetry, Microsoft Presidio, spaCy (2017), Jupyter, and several others.
+This project benefited greatly from a number of PII research works like that from Milne et al (2016) with the definition of the types and categories, Schwartz and Solove (2012) with the severity levels of Non-Identifiable, Semi-Identifiable, and Identifiable, and the documentation by NIST, DHS (2012), and HIPAA (full list of foundational publications provided below). A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like Poetry, Microsoft Presidio, spaCy (2017), Jupyter, and several others.
 
+### Foundational Publications
+The following publications that inspired and provided a foundation for this repository:
+
+| Concept                                   | Document                                                                                                                                          | Description                                                                    |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| PII Type Mappings                         | [Milne et al., (2016)](https://onlinelibrary.wiley.com/doi/abs/10.1111/joca.12111)                                                                | PII token categories and NIST and DHS categorizations.                         |
+| Risk Continuum                            | [Schwartz & Solove, (2011)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1909366)                                                          | Risk continuum concept and definition (what lead to the ranking in PII-Codex). |
+| Privacy and Affordances                   | [Trepte, (2020)](https://academic.oup.com/ct/article-abstract/31/4/549/5828289?redirectedFrom=fulltext)                                           | Third-Party data consumption and user control (lack thereof) background.       |
+| Social Media and Privacy                  | [Beigi & Liu, (2010)](https://dl.acm.org/doi/10.1145/3343038)                                                                                     | Privacy issues with social media and third-party data consumption.             |
+| Privacy Settings and Data Access          | [Moura & Serrão, (2016)](https://www.researchgate.net/publication/332996823_Security_and_Privacy_Issues_of_Big_Data)                              | Privacy settings, data access, and unauthorized usage.                         |
+| Information Privacy Review                | [Bélanger & Crossler, (2011)](https://www.jstor.org/stable/41409971)                                                                              | Concept of aggregation of data to identify individuals.                        |
+| Big Data and Third Party Data Consumption | [Tene & Polonetsky, (2013)](https://www.researchgate.net/publication/256035043_Big_Data_for_All_Privacy_and_User_Control_in_the_Age_of_Analytics) | Third-party data usage, user control, and privacy.                             |
+| PII and Confidentiality                   | [McCallister et al., (2010)](https://csrc.nist.gov/publications/detail/sp/800-122/final)                                                          | NIST guidance on PII confidentiality protections for federal agencies.         |
+
+The remaining resources such as python library citations, cloud service provider docs, and cybersecurity guidelines are included in the paper.bib file.
 
 ## Community Guidelines
 For community guidelines and contribution instructions, please view the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
