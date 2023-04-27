@@ -9,6 +9,10 @@ from enum import Enum
 
 
 class AWSComprehendPIIType(Enum):
+    """
+    AWS Comprehend-Supported PII types
+    """
+
     EMAIL_ADDRESS: str = "EMAIL"
     ADDRESS: str = "ADDRESS"
     PERSON: str = "NAME"

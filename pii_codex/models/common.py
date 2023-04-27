@@ -7,25 +7,40 @@ from enum import Enum
 
 
 class AnalysisProviderType(Enum):
+    """
+    Analysis Provider Types - software and cloud service APIs providing PII detection results
+    """
+
     AZURE: str = "AZURE"
     AWS: str = "AWS"
     PRESIDIO: str = "PRESIDIO"
 
 
 class RiskLevel(Enum):
+    """
+    Numerical values assigned to the levels on the continuum presented by Schwartz and Solove (2011)
+    """
+
     LEVEL_ONE: int = 1  # Not-Identifiable
     LEVEL_TWO: int = 2  # Semi-Identifiable
     LEVEL_THREE: int = 3  # Identifiable
 
 
 class RiskLevelDefinition(Enum):
-    # Levels on the continuum presented by Schwartz and Solove (2011)
+    """
+    Levels on the continuum presented by Schwartz and Solove (2011)
+    """
+
     LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
     LEVEL_TWO: str = "Semi-Identifiable"
     LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
 class MetadataType(Enum):
+    """
+    Common metadata types associated with social media posts and other online platforms
+    """
+
     SCREEN_NAME: str = "screen_name"
     NAME: str = "name"
     LOCATION: str = "location"
@@ -34,6 +49,10 @@ class MetadataType(Enum):
 
 
 class PIIType(Enum):
+    """
+    Commonly observed PII types across services and software
+    """
+
     PHONE_NUMBER: str = "PHONE"
     WORK_PHONE_NUMBER: str = "PHONE"
     EMAIL_ADDRESS: str = "EMAIL"
@@ -91,22 +110,38 @@ class PIIType(Enum):
 
 
 class NISTCategory(Enum):
+    """
+    Information Categories presented by NIST as noted in Milne et al., 2016
+    """
+
     LINKABLE: str = "Linkable"
     DIRECTLY_PII: str = "Directly PII"
 
 
 class DHSCategory(Enum):
+    """
+    Information Categories presented by DHS as noted in Milne et al., 2016
+    """
+
     NOT_MENTIONED: str = "Not Mentioned"
     LINKABLE: str = "Linkable"
     STAND_ALONE_PII: str = "Stand Alone PII"
 
 
 class HIPAACategory(Enum):
+    """
+    Information Categories presented by HIPAA guidelines
+    """
+
     NON_PHI: str = "Not Protected Health Information"
     PHI: str = "Protected Health Information"
 
 
 class ClusterMembershipType(Enum):
+    """
+    Information Cluster Memberships presented by Milne et al., 2016
+    """
+
     BASIC_DEMOGRAPHICS: str = "Basic Demographics"
     PERSONAL_PREFERENCES: str = "Personal Preferences"
     CONTACT_INFORMATION: str = "Contact Information"

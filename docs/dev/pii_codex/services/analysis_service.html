@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pii_codex.services.analysis_service API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pii_codex.services.analysis_service</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># pylint: disable=too-many-arguments
+from typing import List, Optional, Tuple
+import pandas as pd
+
+from ..config import PII_MAPPER, DEFAULT_ANALYSIS_MODE, DEFAULT_TOKEN_REPLACEMENT_VALUE
+from ..models.common import (
+    AnalysisProviderType,
+    RiskLevel,
+)
+from ..models.analysis import (
+    DetectionResultItem,
+    AnalysisResultItem,
+    AnalysisResult,
+    AnalysisResultSet,
+    DetectionResult,
+    RiskAssessment,
+)
+from ..models.microsoft_presidio_pii import MSFTPresidioPIIType
+from ..services.analyzers.presidio_analysis import (
+    PresidioPIIAnalyzer,
+)
+from ..services.assessment_service import PIIAssessmentService
+from ..utils.statistics_util import (
+    get_mean,
+    get_standard_deviation,
+    get_variance,
+    get_mode,
+    get_median,
+)
+
+
+class PIIAnalysisService:
+    &#34;&#34;&#34;
+    Class for PII analysis of singular text strings or collections thereof.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE,
+        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
+    ):
+        &#34;&#34;&#34;
+        PIIAnalysisService constructor.
+        @param pii_token_replacement_value: PII Token replacement string (default is &lt;REDACTED&gt;)
+        @param analysis_provider: Default provider is PRESIDIO, pass in another analysis provider
+        when using the adapters.
+        &#34;&#34;&#34;
+        self._analysis_provider = analysis_provider
+        self._language_code = &#34;en&#34;
+        self._pii_assessment_service = PIIAssessmentService()
+        self._analyzer = (
+            PresidioPIIAnalyzer(pii_token_replacement_value=pii_token_replacement_value)
+            if analysis_provider == AnalysisProviderType.PRESIDIO.name
+            else None
+        )
+
+    def analyze_item(
+        self,
+        text: str,
+        metadata: dict = None,
+        language_code: str = &#34;en&#34;,
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Runs an analysis given an analysis provider, text, and language code. This method defaults
+        to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+        @param text: input text to analyze
+        @param language_code: &#34;en&#34; is default value
+        @param metadata: dict - {
+                                    &#34;location&#34;: True
+                                }
+        @return: AnalysisResult
+        &#34;&#34;&#34;
+
+        analysis, sanitized_text = self._perform_text_analysis(
+            text=text, language_code=language_code
+        )
+
+        if metadata is not None:
+            # Retrieve analyses for metadata entries
+            analysis.extend(self.analyze_metadata(metadata=metadata))
+
+        return AnalysisResult(
+            index=0,
+            analysis=analysis,
+            sanitized_text=sanitized_text,
+            risk_score_mean=get_mean(
+                [item.risk_assessment.risk_level for item in analysis]
+            ),
+        )
+
+    def analyze_collection(
+        self,
+        texts: Optional[List[str]] = None,
+        data: Optional[pd.DataFrame] = None,
+        language_code: str = &#34;en&#34;,
+        collection_name: str = &#34;&#34;,
+        collection_type: str = &#34;population&#34;,
+    ) -&gt; AnalysisResultSet:
+        &#34;&#34;&#34;
+        Runs an analysis given an analysis provider, text, and language code. This method defaults
+        to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+        @param texts: List[str] - input texts to analyze
+        @param data: dataframe - dataframe of text and metadata where text is a string and metadata is a dict
+        @param language_code: str - &#34;en&#34; is default value
+        @param collection_name: str - name of population or collection
+        @param collection_type: str - population or sample
+        @return: AnalysisResultList
+        &#34;&#34;&#34;
+
+        # Will raise exceptions or invalid input
+        self._validate_data(texts, data)
+        self._language_code = language_code
+
+        analysis_set: List[AnalysisResult] = []
+
+        if data is not None:
+            data = data.reset_index()
+
+            analysis_set = [
+                self._analyze_data_collection_row(idx, collection_entry)
+                for idx, collection_entry in data.iterrows()
+            ]
+
+        if texts:
+
+            analysis_set = [
+                self._analyze_text_collection_item(idx, collection_entry)
+                for idx, collection_entry in enumerate(texts)
+            ]
+
+        return self._build_analysis_result_set(
+            collection_name=collection_name,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
+        )
+
+    def _analyze_data_collection_row(self, idx, collection_row):
+        &#34;&#34;&#34;
+        Parallelized task to process dataframe
+        @param idx:
+        @param collection_row:
+        @return:
+        &#34;&#34;&#34;
+        analysis, sanitized_text = self._perform_text_analysis(
+            language_code=self._language_code,
+            text=collection_row[&#34;text&#34;],
+        )
+
+        if collection_row[&#34;metadata&#34;] is not None:
+            # Perform analyses for metadata entries
+            analysis.extend(self.analyze_metadata(metadata=collection_row[&#34;metadata&#34;]))
+
+        return self._format_result_set_item(
+            analysis_items=analysis, sanitized_text=sanitized_text, index=idx
+        )
+
+    def _analyze_text_collection_item(self, idx, text):
+        &#34;&#34;&#34;
+        Parallelized task to text array
+        @param idx:
+        @param text:
+        @return:
+        &#34;&#34;&#34;
+
+        analysis, sanitized_text = self._perform_text_analysis(
+            language_code=self._language_code,
+            text=text,
+        )
+
+        return self._format_result_set_item(
+            analysis_items=analysis,
+            sanitized_text=sanitized_text,
+            index=idx,
+        )
+
+    def analyze_detection_collection(
+        self,
+        detection_collection: List[DetectionResult],
+        collection_name: str = &#34;&#34;,
+        collection_type: str = &#34;population&#34;,
+    ) -&gt; AnalysisResultSet:
+        &#34;&#34;&#34;
+        Transforms a set of Detection Results to an AnalysisResultSet with RiskAssessments for all detections
+        found for every string/document. Each analysis result is provided an index to aid in tracking the
+        string/document transformed.
+
+        @param detection_collection: List[DetectionResult] - Set of detection results
+        @param collection_name: str - name of collection
+        @param collection_type: str - population(default) or sample
+        @return: AnalysisResultList
+        &#34;&#34;&#34;
+
+        analysis_set: List[AnalysisResult] = []
+        for i, detection_result in enumerate(detection_collection):
+            analysis_set.append(
+                self.analyze_detection_result(
+                    detection_result=detection_result, index=i
+                )
+            )
+
+        return self._build_analysis_result_set(
+            collection_name=collection_name,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
+        )
+
+    def analyze_detection_result(
+        self, detection_result: DetectionResult, index: int = 0
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Transforms a Detection Result to an AnalysisResult with RiskAssessments for all detections
+        found in a string/document.
+
+        @param detection_result:
+        @param index: (Optional) the current index of the detection result to transform
+        @return: AnalysisResult
+        &#34;&#34;&#34;
+        detection_analyses = [
+            self.analyze_detection_result_item(detection_result_item=detection)
+            for detection in detection_result.detections
+        ]
+        return AnalysisResult(
+            index=index,
+            analysis=detection_analyses,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in detection_analyses]
+            ),
+        )
+
+    def analyze_detection_result_item(
+        self,
+        detection_result_item: DetectionResultItem,
+    ) -&gt; AnalysisResultItem:
+        &#34;&#34;&#34;
+        Transforms a Detection Result Item to an AnalysisResultItem with its associated RiskAssessment for the singular
+        detection within a string/document.
+
+        @param detection_result_item:
+        @return:  AnalysisResultItem
+        &#34;&#34;&#34;
+        return AnalysisResultItem(
+            detection=detection_result_item,
+            risk_assessment=self._pii_assessment_service.assess_pii_type(
+                detected_pii_type=detection_result_item.entity_type.upper()
+            ),
+        )
+
+    def _perform_text_analysis(
+        self, text: str, language_code: str = &#34;en&#34;
+    ) -&gt; Tuple[List[AnalysisResultItem], str]:
+        &#34;&#34;&#34;
+        Transforms detections into AnalysisResult objects
+
+        @param text: input text to analyze
+        @param language_code: &#34;en&#34; is default value
+        @return: Tuple[List[AnalysisResult], str]
+        &#34;&#34;&#34;
+
+        if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
+            detections, sanitized_text = self._analyzer.analyze_item(  # type: ignore
+                entities=[pii_type.value for pii_type in MSFTPresidioPIIType],
+                text=text,
+                language_code=language_code,
+            )
+        elif (
+            self._analysis_provider.upper() == AnalysisProviderType.AZURE.name
+            or self._analysis_provider.upper() == AnalysisProviderType.AWS.name
+        ):
+            raise Exception(
+                &#34;Unsupported operation. Use detection converters followed by analyze_detection_result().&#34;
+            )
+        else:
+            raise Exception(
+                &#34;Unsupported operation. Only the Presidio analyzer is supported at this time.&#34;
+            )
+
+        return (
+            [
+                AnalysisResultItem(
+                    detection=detection,
+                    risk_assessment=self._pii_assessment_service.assess_pii_type(
+                        detected_pii_type=detection.entity_type.upper()
+                    ),
+                )
+                for detection in detections
+            ]
+            if detections
+            else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
+        ), sanitized_text
+
+    def analyze_metadata(self, metadata: dict):
+        &#34;&#34;&#34;
+        Create an analysis result item per metadata entry
+
+        @param metadata:
+        @return:
+        &#34;&#34;&#34;
+        analysis_result_items: List[AnalysisResultItem] = []
+        for key, value in metadata.items():
+            if value is True:
+                metadata_pii_mapping = (
+                    PII_MAPPER.convert_metadata_type_to_common_pii_type(key)
+                )
+                if metadata_pii_mapping:
+                    # Run analyses on supported metadata types only
+                    detection = DetectionResultItem(
+                        entity_type=metadata_pii_mapping.name
+                    )
+                    analysis_result_items.append(
+                        AnalysisResultItem(
+                            detection=detection,
+                            risk_assessment=self._pii_assessment_service.assess_pii_type(
+                                detected_pii_type=detection.entity_type.upper()
+                            ),
+                        )
+                    )
+
+        return analysis_result_items
+
+    @staticmethod
+    def summarize_analysis_result_items(
+        analyses: List[AnalysisResultItem], index=0
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Summarize analysis result items into a singular AnalysisResult object
+
+        @param analyses:
+        @param index:
+        @return:
+        &#34;&#34;&#34;
+        return AnalysisResult(
+            index=index,
+            analysis=analyses,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in analyses]
+            ),
+        )
+
+    def _build_analysis_result_set(
+        self,
+        analysis_set: List[AnalysisResult],
+        collection_name: str = &#34;&#34;,
+        collection_type: str = DEFAULT_ANALYSIS_MODE,
+    ):
+        (
+            detected_types,
+            detected_type_frequencies,
+        ) = self._pii_assessment_service.get_detected_pii_types(analysis_set)
+
+        collection_risk_score_means = [
+            analysis.risk_score_mean for analysis in analysis_set
+        ]
+
+        return AnalysisResultSet(
+            collection_name=collection_name,
+            analyses=analysis_set,
+            risk_score_mean=get_mean(collection_risk_score_means),
+            risk_scores=collection_risk_score_means,
+            risk_score_standard_deviation=get_standard_deviation(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_variance=get_variance(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_mode=get_mode(collection_risk_score_means),
+            risk_score_median=get_median(collection_risk_score_means),
+            detection_count=self._pii_assessment_service.get_detected_pii_count(
+                analysis_set
+            ),
+            detected_pii_type_frequencies=detected_type_frequencies,
+            detected_pii_types=detected_types,
+        )
+
+    @staticmethod
+    def _format_result_set_item(
+        analysis_items: List[AnalysisResultItem],
+        sanitized_text: str = &#34;&#34;,
+        index: int = 0,
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Formats the analysis items for a single row in a collection to an AnalysisResult object
+        @param analysis_items:
+        @param index:
+        @return:
+        &#34;&#34;&#34;
+        return AnalysisResult(
+            index=index,
+            analysis=analysis_items,
+            sanitized_text=sanitized_text,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in analysis_items]
+            )
+            if analysis_items
+            else float(RiskLevel.LEVEL_ONE.value),
+        )
+
+    @staticmethod
+    def _validate_data(texts, data):
+        &#34;&#34;&#34;
+        Validates text and data types and shapes passed in for collection analyses
+        @param texts:
+        @param data:
+        @return:
+        &#34;&#34;&#34;
+        if texts and data is not None:
+            raise Exception(&#34;Cannot supply both &#39;texts&#39; and &#39;data&#39; params.&#34;)
+
+        if texts and not isinstance(texts, list):
+            raise Exception(&#34;&#39;texts&#39; param must be a list of strings.&#34;)
+
+        if data is not None and isinstance(data, pd.DataFrame):
+            if not &#34;text&#34; in data and not &#34;metadata&#34; in data:
+                raise Exception(
+                    &#34;Data shape error. &#39;text&#39; and &#39;metadata&#39; columns are required.&#34;
+                )
+
+        if data is not None and not isinstance(data, pd.DataFrame):
+            raise Exception(&#34;Data param must be a dataframe.&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService"><code class="flex name class">
+<span>class <span class="ident">PIIAnalysisService</span></span>
+<span>(</span><span>pii_token_replacement_value: str = &#x27;&lt;REDACTED&gt;&#x27;, analysis_provider: str = 'PRESIDIO')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class for PII analysis of singular text strings or collections thereof.</p>
+<p>PIIAnalysisService constructor.
+@param pii_token_replacement_value: PII Token replacement string (default is <REDACTED>)
+@param analysis_provider: Default provider is PRESIDIO, pass in another analysis provider
+when using the adapters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PIIAnalysisService:
+    &#34;&#34;&#34;
+    Class for PII analysis of singular text strings or collections thereof.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE,
+        analysis_provider: str = AnalysisProviderType.PRESIDIO.name,
+    ):
+        &#34;&#34;&#34;
+        PIIAnalysisService constructor.
+        @param pii_token_replacement_value: PII Token replacement string (default is &lt;REDACTED&gt;)
+        @param analysis_provider: Default provider is PRESIDIO, pass in another analysis provider
+        when using the adapters.
+        &#34;&#34;&#34;
+        self._analysis_provider = analysis_provider
+        self._language_code = &#34;en&#34;
+        self._pii_assessment_service = PIIAssessmentService()
+        self._analyzer = (
+            PresidioPIIAnalyzer(pii_token_replacement_value=pii_token_replacement_value)
+            if analysis_provider == AnalysisProviderType.PRESIDIO.name
+            else None
+        )
+
+    def analyze_item(
+        self,
+        text: str,
+        metadata: dict = None,
+        language_code: str = &#34;en&#34;,
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Runs an analysis given an analysis provider, text, and language code. This method defaults
+        to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+        @param text: input text to analyze
+        @param language_code: &#34;en&#34; is default value
+        @param metadata: dict - {
+                                    &#34;location&#34;: True
+                                }
+        @return: AnalysisResult
+        &#34;&#34;&#34;
+
+        analysis, sanitized_text = self._perform_text_analysis(
+            text=text, language_code=language_code
+        )
+
+        if metadata is not None:
+            # Retrieve analyses for metadata entries
+            analysis.extend(self.analyze_metadata(metadata=metadata))
+
+        return AnalysisResult(
+            index=0,
+            analysis=analysis,
+            sanitized_text=sanitized_text,
+            risk_score_mean=get_mean(
+                [item.risk_assessment.risk_level for item in analysis]
+            ),
+        )
+
+    def analyze_collection(
+        self,
+        texts: Optional[List[str]] = None,
+        data: Optional[pd.DataFrame] = None,
+        language_code: str = &#34;en&#34;,
+        collection_name: str = &#34;&#34;,
+        collection_type: str = &#34;population&#34;,
+    ) -&gt; AnalysisResultSet:
+        &#34;&#34;&#34;
+        Runs an analysis given an analysis provider, text, and language code. This method defaults
+        to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+        @param texts: List[str] - input texts to analyze
+        @param data: dataframe - dataframe of text and metadata where text is a string and metadata is a dict
+        @param language_code: str - &#34;en&#34; is default value
+        @param collection_name: str - name of population or collection
+        @param collection_type: str - population or sample
+        @return: AnalysisResultList
+        &#34;&#34;&#34;
+
+        # Will raise exceptions or invalid input
+        self._validate_data(texts, data)
+        self._language_code = language_code
+
+        analysis_set: List[AnalysisResult] = []
+
+        if data is not None:
+            data = data.reset_index()
+
+            analysis_set = [
+                self._analyze_data_collection_row(idx, collection_entry)
+                for idx, collection_entry in data.iterrows()
+            ]
+
+        if texts:
+
+            analysis_set = [
+                self._analyze_text_collection_item(idx, collection_entry)
+                for idx, collection_entry in enumerate(texts)
+            ]
+
+        return self._build_analysis_result_set(
+            collection_name=collection_name,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
+        )
+
+    def _analyze_data_collection_row(self, idx, collection_row):
+        &#34;&#34;&#34;
+        Parallelized task to process dataframe
+        @param idx:
+        @param collection_row:
+        @return:
+        &#34;&#34;&#34;
+        analysis, sanitized_text = self._perform_text_analysis(
+            language_code=self._language_code,
+            text=collection_row[&#34;text&#34;],
+        )
+
+        if collection_row[&#34;metadata&#34;] is not None:
+            # Perform analyses for metadata entries
+            analysis.extend(self.analyze_metadata(metadata=collection_row[&#34;metadata&#34;]))
+
+        return self._format_result_set_item(
+            analysis_items=analysis, sanitized_text=sanitized_text, index=idx
+        )
+
+    def _analyze_text_collection_item(self, idx, text):
+        &#34;&#34;&#34;
+        Parallelized task to text array
+        @param idx:
+        @param text:
+        @return:
+        &#34;&#34;&#34;
+
+        analysis, sanitized_text = self._perform_text_analysis(
+            language_code=self._language_code,
+            text=text,
+        )
+
+        return self._format_result_set_item(
+            analysis_items=analysis,
+            sanitized_text=sanitized_text,
+            index=idx,
+        )
+
+    def analyze_detection_collection(
+        self,
+        detection_collection: List[DetectionResult],
+        collection_name: str = &#34;&#34;,
+        collection_type: str = &#34;population&#34;,
+    ) -&gt; AnalysisResultSet:
+        &#34;&#34;&#34;
+        Transforms a set of Detection Results to an AnalysisResultSet with RiskAssessments for all detections
+        found for every string/document. Each analysis result is provided an index to aid in tracking the
+        string/document transformed.
+
+        @param detection_collection: List[DetectionResult] - Set of detection results
+        @param collection_name: str - name of collection
+        @param collection_type: str - population(default) or sample
+        @return: AnalysisResultList
+        &#34;&#34;&#34;
+
+        analysis_set: List[AnalysisResult] = []
+        for i, detection_result in enumerate(detection_collection):
+            analysis_set.append(
+                self.analyze_detection_result(
+                    detection_result=detection_result, index=i
+                )
+            )
+
+        return self._build_analysis_result_set(
+            collection_name=collection_name,
+            collection_type=collection_type,
+            analysis_set=analysis_set,
+        )
+
+    def analyze_detection_result(
+        self, detection_result: DetectionResult, index: int = 0
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Transforms a Detection Result to an AnalysisResult with RiskAssessments for all detections
+        found in a string/document.
+
+        @param detection_result:
+        @param index: (Optional) the current index of the detection result to transform
+        @return: AnalysisResult
+        &#34;&#34;&#34;
+        detection_analyses = [
+            self.analyze_detection_result_item(detection_result_item=detection)
+            for detection in detection_result.detections
+        ]
+        return AnalysisResult(
+            index=index,
+            analysis=detection_analyses,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in detection_analyses]
+            ),
+        )
+
+    def analyze_detection_result_item(
+        self,
+        detection_result_item: DetectionResultItem,
+    ) -&gt; AnalysisResultItem:
+        &#34;&#34;&#34;
+        Transforms a Detection Result Item to an AnalysisResultItem with its associated RiskAssessment for the singular
+        detection within a string/document.
+
+        @param detection_result_item:
+        @return:  AnalysisResultItem
+        &#34;&#34;&#34;
+        return AnalysisResultItem(
+            detection=detection_result_item,
+            risk_assessment=self._pii_assessment_service.assess_pii_type(
+                detected_pii_type=detection_result_item.entity_type.upper()
+            ),
+        )
+
+    def _perform_text_analysis(
+        self, text: str, language_code: str = &#34;en&#34;
+    ) -&gt; Tuple[List[AnalysisResultItem], str]:
+        &#34;&#34;&#34;
+        Transforms detections into AnalysisResult objects
+
+        @param text: input text to analyze
+        @param language_code: &#34;en&#34; is default value
+        @return: Tuple[List[AnalysisResult], str]
+        &#34;&#34;&#34;
+
+        if self._analysis_provider.upper() == AnalysisProviderType.PRESIDIO.name:
+            detections, sanitized_text = self._analyzer.analyze_item(  # type: ignore
+                entities=[pii_type.value for pii_type in MSFTPresidioPIIType],
+                text=text,
+                language_code=language_code,
+            )
+        elif (
+            self._analysis_provider.upper() == AnalysisProviderType.AZURE.name
+            or self._analysis_provider.upper() == AnalysisProviderType.AWS.name
+        ):
+            raise Exception(
+                &#34;Unsupported operation. Use detection converters followed by analyze_detection_result().&#34;
+            )
+        else:
+            raise Exception(
+                &#34;Unsupported operation. Only the Presidio analyzer is supported at this time.&#34;
+            )
+
+        return (
+            [
+                AnalysisResultItem(
+                    detection=detection,
+                    risk_assessment=self._pii_assessment_service.assess_pii_type(
+                        detected_pii_type=detection.entity_type.upper()
+                    ),
+                )
+                for detection in detections
+            ]
+            if detections
+            else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
+        ), sanitized_text
+
+    def analyze_metadata(self, metadata: dict):
+        &#34;&#34;&#34;
+        Create an analysis result item per metadata entry
+
+        @param metadata:
+        @return:
+        &#34;&#34;&#34;
+        analysis_result_items: List[AnalysisResultItem] = []
+        for key, value in metadata.items():
+            if value is True:
+                metadata_pii_mapping = (
+                    PII_MAPPER.convert_metadata_type_to_common_pii_type(key)
+                )
+                if metadata_pii_mapping:
+                    # Run analyses on supported metadata types only
+                    detection = DetectionResultItem(
+                        entity_type=metadata_pii_mapping.name
+                    )
+                    analysis_result_items.append(
+                        AnalysisResultItem(
+                            detection=detection,
+                            risk_assessment=self._pii_assessment_service.assess_pii_type(
+                                detected_pii_type=detection.entity_type.upper()
+                            ),
+                        )
+                    )
+
+        return analysis_result_items
+
+    @staticmethod
+    def summarize_analysis_result_items(
+        analyses: List[AnalysisResultItem], index=0
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Summarize analysis result items into a singular AnalysisResult object
+
+        @param analyses:
+        @param index:
+        @return:
+        &#34;&#34;&#34;
+        return AnalysisResult(
+            index=index,
+            analysis=analyses,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in analyses]
+            ),
+        )
+
+    def _build_analysis_result_set(
+        self,
+        analysis_set: List[AnalysisResult],
+        collection_name: str = &#34;&#34;,
+        collection_type: str = DEFAULT_ANALYSIS_MODE,
+    ):
+        (
+            detected_types,
+            detected_type_frequencies,
+        ) = self._pii_assessment_service.get_detected_pii_types(analysis_set)
+
+        collection_risk_score_means = [
+            analysis.risk_score_mean for analysis in analysis_set
+        ]
+
+        return AnalysisResultSet(
+            collection_name=collection_name,
+            analyses=analysis_set,
+            risk_score_mean=get_mean(collection_risk_score_means),
+            risk_scores=collection_risk_score_means,
+            risk_score_standard_deviation=get_standard_deviation(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_variance=get_variance(
+                collection_risk_score_means, collection_type
+            ),
+            risk_score_mode=get_mode(collection_risk_score_means),
+            risk_score_median=get_median(collection_risk_score_means),
+            detection_count=self._pii_assessment_service.get_detected_pii_count(
+                analysis_set
+            ),
+            detected_pii_type_frequencies=detected_type_frequencies,
+            detected_pii_types=detected_types,
+        )
+
+    @staticmethod
+    def _format_result_set_item(
+        analysis_items: List[AnalysisResultItem],
+        sanitized_text: str = &#34;&#34;,
+        index: int = 0,
+    ) -&gt; AnalysisResult:
+        &#34;&#34;&#34;
+        Formats the analysis items for a single row in a collection to an AnalysisResult object
+        @param analysis_items:
+        @param index:
+        @return:
+        &#34;&#34;&#34;
+        return AnalysisResult(
+            index=index,
+            analysis=analysis_items,
+            sanitized_text=sanitized_text,
+            risk_score_mean=get_mean(
+                [analysis.risk_assessment.risk_level for analysis in analysis_items]
+            )
+            if analysis_items
+            else float(RiskLevel.LEVEL_ONE.value),
+        )
+
+    @staticmethod
+    def _validate_data(texts, data):
+        &#34;&#34;&#34;
+        Validates text and data types and shapes passed in for collection analyses
+        @param texts:
+        @param data:
+        @return:
+        &#34;&#34;&#34;
+        if texts and data is not None:
+            raise Exception(&#34;Cannot supply both &#39;texts&#39; and &#39;data&#39; params.&#34;)
+
+        if texts and not isinstance(texts, list):
+            raise Exception(&#34;&#39;texts&#39; param must be a list of strings.&#34;)
+
+        if data is not None and isinstance(data, pd.DataFrame):
+            if not &#34;text&#34; in data and not &#34;metadata&#34; in data:
+                raise Exception(
+                    &#34;Data shape error. &#39;text&#39; and &#39;metadata&#39; columns are required.&#34;
+                )
+
+        if data is not None and not isinstance(data, pd.DataFrame):
+            raise Exception(&#34;Data param must be a dataframe.&#34;)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.summarize_analysis_result_items"><code class="name flex">
+<span>def <span class="ident">summarize_analysis_result_items</span></span>(<span>analyses: List[<a title="pii_codex.models.analysis.AnalysisResultItem" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResultItem">AnalysisResultItem</a>], index=0) ‑> <a title="pii_codex.models.analysis.AnalysisResult" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResult">AnalysisResult</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Summarize analysis result items into a singular AnalysisResult object</p>
+<p>@param analyses:
+@param index:
+@return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def summarize_analysis_result_items(
+    analyses: List[AnalysisResultItem], index=0
+) -&gt; AnalysisResult:
+    &#34;&#34;&#34;
+    Summarize analysis result items into a singular AnalysisResult object
+
+    @param analyses:
+    @param index:
+    @return:
+    &#34;&#34;&#34;
+    return AnalysisResult(
+        index=index,
+        analysis=analyses,
+        risk_score_mean=get_mean(
+            [analysis.risk_assessment.risk_level for analysis in analyses]
+        ),
+    )</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_collection"><code class="name flex">
+<span>def <span class="ident">analyze_collection</span></span>(<span>self, texts: Optional[List[str]] = None, data: Optional[pandas.core.frame.DataFrame] = None, language_code: str = 'en', collection_name: str = '', collection_type: str = 'population') ‑> <a title="pii_codex.models.analysis.AnalysisResultSet" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResultSet">AnalysisResultSet</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs an analysis given an analysis provider, text, and language code. This method defaults
+to all entity types when using presidio analyzer. Will return an AnalysisResultList object.</p>
+<p>@param texts: List[str] - input texts to analyze
+@param data: dataframe - dataframe of text and metadata where text is a string and metadata is a dict
+@param language_code: str - "en" is default value
+@param collection_name: str - name of population or collection
+@param collection_type: str - population or sample
+@return: AnalysisResultList</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_collection(
+    self,
+    texts: Optional[List[str]] = None,
+    data: Optional[pd.DataFrame] = None,
+    language_code: str = &#34;en&#34;,
+    collection_name: str = &#34;&#34;,
+    collection_type: str = &#34;population&#34;,
+) -&gt; AnalysisResultSet:
+    &#34;&#34;&#34;
+    Runs an analysis given an analysis provider, text, and language code. This method defaults
+    to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+    @param texts: List[str] - input texts to analyze
+    @param data: dataframe - dataframe of text and metadata where text is a string and metadata is a dict
+    @param language_code: str - &#34;en&#34; is default value
+    @param collection_name: str - name of population or collection
+    @param collection_type: str - population or sample
+    @return: AnalysisResultList
+    &#34;&#34;&#34;
+
+    # Will raise exceptions or invalid input
+    self._validate_data(texts, data)
+    self._language_code = language_code
+
+    analysis_set: List[AnalysisResult] = []
+
+    if data is not None:
+        data = data.reset_index()
+
+        analysis_set = [
+            self._analyze_data_collection_row(idx, collection_entry)
+            for idx, collection_entry in data.iterrows()
+        ]
+
+    if texts:
+
+        analysis_set = [
+            self._analyze_text_collection_item(idx, collection_entry)
+            for idx, collection_entry in enumerate(texts)
+        ]
+
+    return self._build_analysis_result_set(
+        collection_name=collection_name,
+        collection_type=collection_type,
+        analysis_set=analysis_set,
+    )</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_collection"><code class="name flex">
+<span>def <span class="ident">analyze_detection_collection</span></span>(<span>self, detection_collection: List[<a title="pii_codex.models.analysis.DetectionResult" href="../models/analysis.html#pii_codex.models.analysis.DetectionResult">DetectionResult</a>], collection_name: str = '', collection_type: str = 'population') ‑> <a title="pii_codex.models.analysis.AnalysisResultSet" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResultSet">AnalysisResultSet</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Transforms a set of Detection Results to an AnalysisResultSet with RiskAssessments for all detections
+found for every string/document. Each analysis result is provided an index to aid in tracking the
+string/document transformed.</p>
+<p>@param detection_collection: List[DetectionResult] - Set of detection results
+@param collection_name: str - name of collection
+@param collection_type: str - population(default) or sample
+@return: AnalysisResultList</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_detection_collection(
+    self,
+    detection_collection: List[DetectionResult],
+    collection_name: str = &#34;&#34;,
+    collection_type: str = &#34;population&#34;,
+) -&gt; AnalysisResultSet:
+    &#34;&#34;&#34;
+    Transforms a set of Detection Results to an AnalysisResultSet with RiskAssessments for all detections
+    found for every string/document. Each analysis result is provided an index to aid in tracking the
+    string/document transformed.
+
+    @param detection_collection: List[DetectionResult] - Set of detection results
+    @param collection_name: str - name of collection
+    @param collection_type: str - population(default) or sample
+    @return: AnalysisResultList
+    &#34;&#34;&#34;
+
+    analysis_set: List[AnalysisResult] = []
+    for i, detection_result in enumerate(detection_collection):
+        analysis_set.append(
+            self.analyze_detection_result(
+                detection_result=detection_result, index=i
+            )
+        )
+
+    return self._build_analysis_result_set(
+        collection_name=collection_name,
+        collection_type=collection_type,
+        analysis_set=analysis_set,
+    )</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result"><code class="name flex">
+<span>def <span class="ident">analyze_detection_result</span></span>(<span>self, detection_result: <a title="pii_codex.models.analysis.DetectionResult" href="../models/analysis.html#pii_codex.models.analysis.DetectionResult">DetectionResult</a>, index: int = 0) ‑> <a title="pii_codex.models.analysis.AnalysisResult" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResult">AnalysisResult</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Transforms a Detection Result to an AnalysisResult with RiskAssessments for all detections
+found in a string/document.</p>
+<p>@param detection_result:
+@param index: (Optional) the current index of the detection result to transform
+@return: AnalysisResult</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_detection_result(
+    self, detection_result: DetectionResult, index: int = 0
+) -&gt; AnalysisResult:
+    &#34;&#34;&#34;
+    Transforms a Detection Result to an AnalysisResult with RiskAssessments for all detections
+    found in a string/document.
+
+    @param detection_result:
+    @param index: (Optional) the current index of the detection result to transform
+    @return: AnalysisResult
+    &#34;&#34;&#34;
+    detection_analyses = [
+        self.analyze_detection_result_item(detection_result_item=detection)
+        for detection in detection_result.detections
+    ]
+    return AnalysisResult(
+        index=index,
+        analysis=detection_analyses,
+        risk_score_mean=get_mean(
+            [analysis.risk_assessment.risk_level for analysis in detection_analyses]
+        ),
+    )</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result_item"><code class="name flex">
+<span>def <span class="ident">analyze_detection_result_item</span></span>(<span>self, detection_result_item: <a title="pii_codex.models.analysis.DetectionResultItem" href="../models/analysis.html#pii_codex.models.analysis.DetectionResultItem">DetectionResultItem</a>) ‑> <a title="pii_codex.models.analysis.AnalysisResultItem" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResultItem">AnalysisResultItem</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Transforms a Detection Result Item to an AnalysisResultItem with its associated RiskAssessment for the singular
+detection within a string/document.</p>
+<p>@param detection_result_item:
+@return:
+AnalysisResultItem</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_detection_result_item(
+    self,
+    detection_result_item: DetectionResultItem,
+) -&gt; AnalysisResultItem:
+    &#34;&#34;&#34;
+    Transforms a Detection Result Item to an AnalysisResultItem with its associated RiskAssessment for the singular
+    detection within a string/document.
+
+    @param detection_result_item:
+    @return:  AnalysisResultItem
+    &#34;&#34;&#34;
+    return AnalysisResultItem(
+        detection=detection_result_item,
+        risk_assessment=self._pii_assessment_service.assess_pii_type(
+            detected_pii_type=detection_result_item.entity_type.upper()
+        ),
+    )</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_item"><code class="name flex">
+<span>def <span class="ident">analyze_item</span></span>(<span>self, text: str, metadata: dict = None, language_code: str = 'en') ‑> <a title="pii_codex.models.analysis.AnalysisResult" href="../models/analysis.html#pii_codex.models.analysis.AnalysisResult">AnalysisResult</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs an analysis given an analysis provider, text, and language code. This method defaults
+to all entity types when using presidio analyzer. Will return an AnalysisResultList object.</p>
+<p>@param text: input text to analyze
+@param language_code: "en" is default value
+@param metadata: dict - {
+"location": True
+}
+@return: AnalysisResult</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_item(
+    self,
+    text: str,
+    metadata: dict = None,
+    language_code: str = &#34;en&#34;,
+) -&gt; AnalysisResult:
+    &#34;&#34;&#34;
+    Runs an analysis given an analysis provider, text, and language code. This method defaults
+    to all entity types when using presidio analyzer. Will return an AnalysisResultList object.
+
+    @param text: input text to analyze
+    @param language_code: &#34;en&#34; is default value
+    @param metadata: dict - {
+                                &#34;location&#34;: True
+                            }
+    @return: AnalysisResult
+    &#34;&#34;&#34;
+
+    analysis, sanitized_text = self._perform_text_analysis(
+        text=text, language_code=language_code
+    )
+
+    if metadata is not None:
+        # Retrieve analyses for metadata entries
+        analysis.extend(self.analyze_metadata(metadata=metadata))
+
+    return AnalysisResult(
+        index=0,
+        analysis=analysis,
+        sanitized_text=sanitized_text,
+        risk_score_mean=get_mean(
+            [item.risk_assessment.risk_level for item in analysis]
+        ),
+    )</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analysis_service.PIIAnalysisService.analyze_metadata"><code class="name flex">
+<span>def <span class="ident">analyze_metadata</span></span>(<span>self, metadata: dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create an analysis result item per metadata entry</p>
+<p>@param metadata:
+@return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_metadata(self, metadata: dict):
+    &#34;&#34;&#34;
+    Create an analysis result item per metadata entry
+
+    @param metadata:
+    @return:
+    &#34;&#34;&#34;
+    analysis_result_items: List[AnalysisResultItem] = []
+    for key, value in metadata.items():
+        if value is True:
+            metadata_pii_mapping = (
+                PII_MAPPER.convert_metadata_type_to_common_pii_type(key)
+            )
+            if metadata_pii_mapping:
+                # Run analyses on supported metadata types only
+                detection = DetectionResultItem(
+                    entity_type=metadata_pii_mapping.name
+                )
+                analysis_result_items.append(
+                    AnalysisResultItem(
+                        detection=detection,
+                        risk_assessment=self._pii_assessment_service.assess_pii_type(
+                            detected_pii_type=detection.entity_type.upper()
+                        ),
+                    )
+                )
+
+    return analysis_result_items</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pii_codex.services" href="index.html">pii_codex.services</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pii_codex.services.analysis_service.PIIAnalysisService" href="#pii_codex.services.analysis_service.PIIAnalysisService">PIIAnalysisService</a></code></h4>
+<ul class="">
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_collection" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_collection">analyze_collection</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_collection" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_collection">analyze_detection_collection</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result">analyze_detection_result</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result_item" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_detection_result_item">analyze_detection_result_item</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_item" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_item">analyze_item</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.analyze_metadata" href="#pii_codex.services.analysis_service.PIIAnalysisService.analyze_metadata">analyze_metadata</a></code></li>
+<li><code><a title="pii_codex.services.analysis_service.PIIAnalysisService.summarize_analysis_result_items" href="#pii_codex.services.analysis_service.PIIAnalysisService.summarize_analysis_result_items">summarize_analysis_result_items</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

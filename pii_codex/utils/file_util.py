@@ -15,8 +15,8 @@ def get_relative_path(path_to_file: str):
     """
     Returns the file_path relative to the project
 
-    @param path_to_file:
-    @return:
+    @param path_to_file: str
+    @return: Path
     """
     filename = os.path.join(dirname, path_to_file)
 
@@ -27,8 +27,8 @@ def write_json_file(folder_name: str, file_name: str, json_data):
     """
     Writes json file given json data, a folder name, and a file name.
 
-    @param folder_name:
-    @param file_name:
+    @param folder_name: str
+    @param file_name: str
     @param json_data:
     """
     # Create a new directory because it does not exist
@@ -52,8 +52,7 @@ def delete_file(
     """
     Deletes a version file if it exists
 
-    @param file_path:
-    @return:
+    @param file_path: str
     """
 
     # Delete file if it exists
@@ -71,7 +70,7 @@ def delete_folder(
     """
     Deletes a folder if it exists and nothing is within it
 
-    @param folder_path:
+    @param folder_path: str
     """
 
     # Delete folder if it exists
@@ -90,9 +89,10 @@ def open_pii_type_mapping_csv(
     mapping_file_version: str = "v1", mapping_file_name: str = "pii_type_mappings"
 ):
     """
+    Opens the PII type mappings CSV file and returns a Pandas DataFrame
 
-    @param mapping_file_name:
-    @param mapping_file_version:
+    @param mapping_file_name: str
+    @param mapping_file_version: str
     """
     file_path = get_relative_path(
         f"../data/{mapping_file_version}/{mapping_file_name}.csv"
@@ -105,10 +105,10 @@ def open_pii_type_mapping_json(
     mapping_file_version: str = "v1", mapping_file_name: str = "pii_type_mappings"
 ):
     """
+    Opens the PII type mappings JSON file and returns a Pandas DataFrame
 
-    @param mapping_file_name:
-    @param mapping_file_version:
-    @return:
+    @param mapping_file_name: str
+    @param mapping_file_version: str
     """
 
     file_path = get_relative_path(
@@ -129,9 +129,9 @@ def convert_pii_type_mapping_csv_to_json(
     """
     Writes JSON mapping file given a dataframe. Used primarily to update data folder with new versions
 
-    @param data_frame:
-    @param mapping_file_version:
-    @param json_file_name:
+    @param data_frame: DataFrame
+    @param mapping_file_version: str
+    @param json_file_name: str
     """
 
     folder_path = get_relative_path(f"../data/{mapping_file_version}")
@@ -154,8 +154,8 @@ def delete_json_mapping_file(
     """
     Deletes a version file within a data version folder
 
-    @param mapping_file_version:
-    @param json_file_name:
+    @param mapping_file_version: str
+    @param json_file_name: str
     """
 
     file_path = get_relative_path(
@@ -171,7 +171,7 @@ def delete_json_mapping_folder(
     """
     Deletes a version folder within the data folder
 
-    @param mapping_file_version:
+    @param mapping_file_version: str
     """
 
     folder_path = get_relative_path(f"../data/{mapping_file_version}")

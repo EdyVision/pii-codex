@@ -12,6 +12,13 @@ def timed_operation(func):
     """
 
     def wrapper_function(*args, **kwargs):
+        """
+        Logs the function execution time
+
+        @param args:
+        @param kwargs:
+        @return:
+        """
         start_time = time()
         result = func(*args, **kwargs)
         end_time = time()
