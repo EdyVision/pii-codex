@@ -48,14 +48,13 @@ jobs:
           echo "Last version: ${{ env.LAST_RELEASE_VERSION }}"
           echo "Current version: ${{ env.TAG_NAME }}"
       - name: Tag and Release GitHub Snapshot
-        if: ${{ env.LAST_RELEASE_VERSION != env.TAG_NAME }}
-        id: release_snapshot
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: release-snapshot
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ env.TAG_NAME }}
-          release_name: ${{ env.TAG_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit: main
+          tag: ${{ env.TAG_NAME }}
+          skipIfReleaseExists: true
           draft: false
           prerelease: false
       - name: Publish to PyPI
