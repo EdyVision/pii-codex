@@ -36,28 +36,36 @@ Potential usages include sanitizing of dataset strings (e.g. a collection of soc
 
 <hr/>
 
-## Running Locally
+## Running Locally with Poetry
 This project uses Poetry. To run this project, install `poetry` and proceed to follow the instructions under `/docs/LOCAL_SETUP.md`.
 
-`Note: This project has only been tested with Ubuntu and MacOS.`
+`Note: This project has only been tested with Ubuntu and MacOS and with Python versions 3.9 and 3.10. You may need to upgrade pip ahead of installation.`
 
-## Importing
-Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
-
-```bash
-python3 -m spacy download en_core_web_lg
-```
-
-
-The repository releases are hosted on PyPi.
-
-Using pip (must have latest pip version and running Python 3.9 or 3.10):
+## Installing with PIP
+Make sure you set up a virtual environment with either python 3.9 or 3.10 and upgrade pip with:
 
 ```bash
 pip install --upgrade pip
+pip install -U pip setuptools wheel # only need if you haven't already done so 
+```
+
+Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
+
+```bash
+pip install -U spacy
+python3 -m spacy download en_core_web_lg
+```
+
+For more details on spaCy installation and usage, refer to their <a href="https://spacy.io/usage">docs</a>.
+
+The repository releases are hosted on PyPi and can be installed with:
+
+```bash
 pip install pii-codex
 pip install pii-codex[detections]
 ```
+
+`Note: The extras installed with pii-codex[detections] are the spaCy, Micrisoft Presidio Analyzer, and Microsoft Anonymzer packages.`
 
 Using Poetry:
 
