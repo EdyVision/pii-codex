@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pii-codex"
-version = "0.4.4"
+version = "0.4.5"
 description = "PII Detection, Categorization, and Severity Assessment"
 authors = ["Eidan J. Rosado"]
 license = "BSD 3-Clause"
