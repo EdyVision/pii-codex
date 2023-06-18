@@ -58,7 +58,6 @@ jobs:
           draft: false
           prerelease: false
       - name: Publish to PyPI
-        if: steps.release_snapshot.outcome == 'success'
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PII_CODEX_PYPI_TOKEN }}
         run: poetry publish
