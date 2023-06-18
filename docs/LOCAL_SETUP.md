@@ -1,3 +1,15 @@
+# New Project Setup
+See README.md for step-by-step details on installing the pii-codex package as an import.
+
+Video Demo of package import and usage:
+<div align="center">
+
+[![PII-Codex Video Demo](https://img.youtube.com/vi/51TP2I5SNlo/0.jpg)](https://youtu.be/51TP2I5SNlo)
+
+</div>
+
+`Note: This video has no sound, it just shows steps taken to install the package and use it in a file.`
+
 # Local Repo Setup
 For those contributing or modifying the source, use the following to set up locally.
 

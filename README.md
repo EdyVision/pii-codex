@@ -42,11 +42,11 @@ This project uses Poetry. To run this project, install `poetry` and proceed to f
 `Note: This project has only been tested with Ubuntu and MacOS and with Python versions 3.9 and 3.10. You may need to upgrade pip ahead of installation.`
 
 ## Installing with PIP
-Make sure you set up a virtual environment with either python 3.9 or 3.10 and upgrade pip with:
+Video capture of install provided in LOCAL_SETUP.md file. Make sure you set up a virtual environment with either python 3.9 or 3.10 and upgrade pip with:
 
 ```bash
 pip install --upgrade pip
-pip install -U pip setuptools wheel # only need if you haven't already done so 
+pip install -U pip setuptools wheel # only needed if you haven't already done so 
 ```
 
 Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
@@ -62,7 +62,7 @@ The repository releases are hosted on PyPi and can be installed with:
 
 ```bash
 pip install pii-codex
-pip install pii-codex[detections]
+pip install "pii-codex[detections]"
 ```
 
 `Note: The extras installed with pii-codex[detections] are the spaCy, Micrisoft Presidio Analyzer, and Microsoft Anonymzer packages.`
@@ -80,6 +80,7 @@ For those using Google Collab, check out the example notebook:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/EdyVision/802ce21aab21eb5d9afa9e43d301eef7/pii-codex-sample-notebook.ipynb)
 
 ## Usage
+Video capture of usage provided in LOCAL_SETUP.md.
 
 ### Sample Input / Output
 The built-in analyzer uses Microsoft Presidio. Feed in a collection of strings with analyze_collection() or just a single string with analyze_item(). Those analyzing a collection of strings will also be provided with statistics calculated on the risk scores for detected items.
@@ -176,6 +177,7 @@ The following publications that inspired and provided a foundation for this repo
 | Information Privacy Review                | [Bélanger & Crossler, (2011)](https://www.jstor.org/stable/41409971)                                                                              | Concept of aggregation of data to identify individuals.                        |
 | Big Data and Third Party Data Consumption | [Tene & Polonetsky, (2013)](https://www.researchgate.net/publication/256035043_Big_Data_for_All_Privacy_and_User_Control_in_the_Age_of_Analytics) | Third-party data usage, user control, and privacy.                             |
 | PII and Confidentiality                   | [McCallister et al., (2010)](https://csrc.nist.gov/publications/detail/sp/800-122/final)                                                          | NIST guidance on PII confidentiality protections for federal agencies.         |
+| Data Capitalism and Privacy               | [West, (2017)](https://journals.sagepub.com/doi/pdf/10.1177/0007650317718185)                                                                     | Data capitalism, surveillance, and privacy.                |
 
 The remaining resources such as python library citations, cloud service provider docs, and cybersecurity guidelines are included in the paper.bib file.
 
