@@ -45,6 +45,9 @@ format.fix:
 bump.citation.date:
 	./scripts/update_citation.sh
 
+docs:
+	@pdoc --html pii_codex --force -o ./docs/dev
+
 version.bump.patch:
 	@poetry version patch
 	$(MAKE) bump.citation.date

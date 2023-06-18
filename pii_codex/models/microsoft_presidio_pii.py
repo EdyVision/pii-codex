@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from enum import Enum
 
-# PII Types associated with Microsoft Presidio Analyzer
-# Supported Entities: https://microsoft.github.io/presidio/supported_entities/
-
 
 class MSFTPresidioPIIType(Enum):
+    """
+    PII Types associated with Microsoft Presidio Analyzer
+    Supported Entities: https://microsoft.github.io/presidio/supported_entities/
+    """
+
     PHONE_NUMBER: str = "PHONE_NUMBER"
     EMAIL_ADDRESS: str = "EMAIL_ADDRESS"
     ABA_ROUTING_NUMBER: str = "ABA_ROUTING_NUMBER"

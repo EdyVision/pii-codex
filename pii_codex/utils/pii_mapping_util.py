@@ -20,6 +20,10 @@ from pii_codex.utils.file_util import open_pii_type_mapping_csv
 
 
 class PIIMapper:
+    """
+    Class to map PII types listed as Common Types, Azure Types, AWS Comprehend Types, and Presidio Types
+    """
+
     def __init__(self):
         self._pii_mapping_data_frame = open_pii_type_mapping_csv("v1")
 

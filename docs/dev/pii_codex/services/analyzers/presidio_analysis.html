@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pii_codex.services.analyzers.presidio_analysis API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pii_codex.services.analyzers.presidio_analysis</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># pylint: disable=broad-except,unused-argument,import-outside-toplevel,unused-variable
+from typing import List, Tuple
+
+from ...config import PII_MAPPER, DEFAULT_LANG, DEFAULT_TOKEN_REPLACEMENT_VALUE
+from ...models.analysis import DetectionResultItem, DetectionResult
+from ...utils.package_installer_util import install_spacy_package
+from ...utils.pii_mapping_util import PIIMapper
+from ...utils.logging import logger
+
+
+class PresidioPIIAnalyzer:
+    &#34;&#34;&#34;
+    Presidio PII Analyzer - a wrapper for the Microsoft Presidio Analyzer and Anonymization functions
+    &#34;&#34;&#34;
+
+    def __init__(
+        self, pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE
+    ):
+        &#34;&#34;&#34;
+        Since installing Spacy, the en_core_web_lg model, and the MSFT Presidio package are optional installs
+        the imports are wrapped to prevent any failures
+        @param pii_token_replacement_value: str to replace detected pii token with (e.g. &lt;REDACTED&gt;)
+        &#34;&#34;&#34;
+
+        try:
+            import spacy
+            from presidio_analyzer import AnalyzerEngine
+            from presidio_anonymizer import AnonymizerEngine
+            from presidio_anonymizer.entities import OperatorConfig
+
+            if not spacy.util.is_package(&#34;en_core_web_lg&#34;):
+                # Last resort. Will install the en_core_web_lg package if end-user hadn&#39;t already.
+                install_spacy_package(&#34;en_core_web_lg&#34;)
+
+            self.analyzer = AnalyzerEngine()
+            self.anonymizer = AnonymizerEngine()
+            self.pii_mapper = PIIMapper()
+
+            self.operators = {
+                &#34;DEFAULT&#34;: OperatorConfig(
+                    &#34;replace&#34;, {&#34;new_value&#34;: pii_token_replacement_value}
+                ),
+                &#34;TITLE&#34;: OperatorConfig(&#34;redact&#34;, {}),
+            }
+
+        except ImportError:
+            raise Exception(
+                &#39;Missing dependencies from extras. Install the PII-Codex extras: &#34;detections&#34;&#39;
+            )
+
+    def get_supported_entities(self, language_code=DEFAULT_LANG) -&gt; List[str]:
+        &#34;&#34;&#34;
+        Retrieves a list of supported entities, this will narrow down what is available for a given language
+
+        @param language_code: str - defaults to &#34;en&#34;
+        @return: List[str]
+        &#34;&#34;&#34;
+        return self.analyzer.get_supported_entities(language=language_code)  # type: ignore
+
+    def get_loaded_recognizers(self, language_code: str = DEFAULT_LANG):
+        &#34;&#34;&#34;
+        Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
+        @param language_code:
+        @return:
+        &#34;&#34;&#34;
+        return self.analyzer.get_recognizers(language=language_code)  # type: ignore
+
+    def analyze_item(
+        self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
+    ) -&gt; Tuple[List[DetectionResultItem], str]:
+        &#34;&#34;&#34;
+        Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+        Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+        a custom recognizer created. Returns the list of detected items and the sanitized string
+
+        @param language_code: str &#34;en&#34; is default
+        @param entities: str - List[MSFTPresidioPIIType.name]
+        @param text: str
+        @return: Tuple[List[DetectionResultItem], str]
+        &#34;&#34;&#34;
+
+        detections = []
+
+        if not entities:
+            entities = self.get_supported_entities(language_code)
+
+        try:
+            # Engine Setup - spaCy model setup and PII recognizers
+            detections = self.analyzer.analyze(  # type: ignore
+                text=text, entities=entities, language=language_code
+            )
+
+        except Exception as ex:
+            logger.error(ex)
+
+        # Return analyzer results in formatted Analysis Result List object
+        return [
+            DetectionResultItem(
+                entity_type=result.entity_type,
+                score=result.score,
+                start=result.start,
+                end=result.end,
+            )
+            for result in detections
+        ], self.sanitize_text(text=text, analysis_items=detections)
+
+    def sanitize_text(
+        self, text: str, analysis_items: List[DetectionResultItem]
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Sanitizes the text analyzed with MSFT Presidio&#39;s Anonymizer
+        @param text:
+        @param analysis_items:
+        @return:
+        &#34;&#34;&#34;
+        try:
+            anonymization_result = self.anonymizer.anonymize(
+                text=text, analyzer_results=analysis_items, operators=self.operators
+            )
+
+            return anonymization_result.text
+
+        except Exception as ex:
+            logger.error(&#34;An error occurred sanitizing the string&#34;)
+            return &#34;&#34;
+
+    def analyze_collection(
+        self, texts: List[str], language_code: str = &#34;en&#34;, entities: List[str] = None
+    ) -&gt; List[DetectionResult]:
+        &#34;&#34;&#34;
+        Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+        Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+        a custom recognizer created.
+
+        @param language_code: str &#34;en&#34; is default
+        @param entities: List[MSFTPresidioPIIType.name] defaults to all possible entities for selected language
+        @param texts: List[str]
+        @return: List[DetectionResult]
+        &#34;&#34;&#34;
+
+        detection_results = []
+        try:
+            if not entities:
+                entities = self.get_supported_entities(language_code)
+
+            # Engine Setup - spaCy model setup and PII recognizers
+            for i, text in enumerate(texts):
+                text_analysis = self.analyzer.analyze(  # type: ignore
+                    text=text, entities=entities, language=language_code
+                )
+
+                # Every analysis by the analyzer will have a set of detections within
+                detections = [
+                    DetectionResultItem(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                            result.entity_type
+                        ).name,
+                        score=result.score,
+                        start=result.start,
+                        end=result.end,
+                    )
+                    for result in text_analysis
+                ]
+                detection_results.append(
+                    DetectionResult(index=i, detections=detections)
+                )
+
+            # Return analyzer results in formatted Analysis Result List object
+
+        except Exception as ex:
+            logger.error(ex)
+
+        return detection_results
+
+    @classmethod
+    def convert_analyzed_item(cls, pii_detection) -&gt; List[DetectionResultItem]:
+        &#34;&#34;&#34;
+        Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
+        analysis by Presidio returns an array of RecognizerResult objects.
+
+        @param pii_detection: RecognizerResult from presidio analyzer
+        @return: List[DetectionResultItem]
+        &#34;&#34;&#34;
+
+        return [
+            DetectionResultItem(
+                entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                    result.entity_type
+                ).name,
+                score=result.score,
+                start=result.start,
+                end=result.end,
+            )
+            for result in pii_detection
+        ]
+
+    @classmethod
+    def convert_analyzed_collection(cls, pii_detections) -&gt; List[DetectionResult]:
+        &#34;&#34;&#34;
+        Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
+        analysis results ends up being a 2D array.
+
+        @param pii_detections: List[RecognizerResult] from Presidio analyzer
+        @return: List[DetectionResult]
+        &#34;&#34;&#34;
+
+        detection_results: List[DetectionResult] = []
+        for i, result in enumerate(pii_detections):
+            # Return results in formatted Analysis Result List object
+            detections = []
+            for entity in result:
+                detections.append(
+                    DetectionResultItem(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                            entity.entity_type
+                        ).name,
+                        score=entity.score,
+                        start=entity.start,
+                        end=entity.end,
+                    )
+                )
+
+            detection_results.append(DetectionResult(index=i, detections=detections))
+
+        return detection_results</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer"><code class="flex name class">
+<span>class <span class="ident">PresidioPIIAnalyzer</span></span>
+<span>(</span><span>pii_token_replacement_value: str = &#x27;&lt;REDACTED&gt;&#x27;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Presidio PII Analyzer - a wrapper for the Microsoft Presidio Analyzer and Anonymization functions</p>
+<p>Since installing Spacy, the en_core_web_lg model, and the MSFT Presidio package are optional installs
+the imports are wrapped to prevent any failures
+@param pii_token_replacement_value: str to replace detected pii token with (e.g. <REDACTED>)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PresidioPIIAnalyzer:
+    &#34;&#34;&#34;
+    Presidio PII Analyzer - a wrapper for the Microsoft Presidio Analyzer and Anonymization functions
+    &#34;&#34;&#34;
+
+    def __init__(
+        self, pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE
+    ):
+        &#34;&#34;&#34;
+        Since installing Spacy, the en_core_web_lg model, and the MSFT Presidio package are optional installs
+        the imports are wrapped to prevent any failures
+        @param pii_token_replacement_value: str to replace detected pii token with (e.g. &lt;REDACTED&gt;)
+        &#34;&#34;&#34;
+
+        try:
+            import spacy
+            from presidio_analyzer import AnalyzerEngine
+            from presidio_anonymizer import AnonymizerEngine
+            from presidio_anonymizer.entities import OperatorConfig
+
+            if not spacy.util.is_package(&#34;en_core_web_lg&#34;):
+                # Last resort. Will install the en_core_web_lg package if end-user hadn&#39;t already.
+                install_spacy_package(&#34;en_core_web_lg&#34;)
+
+            self.analyzer = AnalyzerEngine()
+            self.anonymizer = AnonymizerEngine()
+            self.pii_mapper = PIIMapper()
+
+            self.operators = {
+                &#34;DEFAULT&#34;: OperatorConfig(
+                    &#34;replace&#34;, {&#34;new_value&#34;: pii_token_replacement_value}
+                ),
+                &#34;TITLE&#34;: OperatorConfig(&#34;redact&#34;, {}),
+            }
+
+        except ImportError:
+            raise Exception(
+                &#39;Missing dependencies from extras. Install the PII-Codex extras: &#34;detections&#34;&#39;
+            )
+
+    def get_supported_entities(self, language_code=DEFAULT_LANG) -&gt; List[str]:
+        &#34;&#34;&#34;
+        Retrieves a list of supported entities, this will narrow down what is available for a given language
+
+        @param language_code: str - defaults to &#34;en&#34;
+        @return: List[str]
+        &#34;&#34;&#34;
+        return self.analyzer.get_supported_entities(language=language_code)  # type: ignore
+
+    def get_loaded_recognizers(self, language_code: str = DEFAULT_LANG):
+        &#34;&#34;&#34;
+        Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
+        @param language_code:
+        @return:
+        &#34;&#34;&#34;
+        return self.analyzer.get_recognizers(language=language_code)  # type: ignore
+
+    def analyze_item(
+        self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
+    ) -&gt; Tuple[List[DetectionResultItem], str]:
+        &#34;&#34;&#34;
+        Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+        Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+        a custom recognizer created. Returns the list of detected items and the sanitized string
+
+        @param language_code: str &#34;en&#34; is default
+        @param entities: str - List[MSFTPresidioPIIType.name]
+        @param text: str
+        @return: Tuple[List[DetectionResultItem], str]
+        &#34;&#34;&#34;
+
+        detections = []
+
+        if not entities:
+            entities = self.get_supported_entities(language_code)
+
+        try:
+            # Engine Setup - spaCy model setup and PII recognizers
+            detections = self.analyzer.analyze(  # type: ignore
+                text=text, entities=entities, language=language_code
+            )
+
+        except Exception as ex:
+            logger.error(ex)
+
+        # Return analyzer results in formatted Analysis Result List object
+        return [
+            DetectionResultItem(
+                entity_type=result.entity_type,
+                score=result.score,
+                start=result.start,
+                end=result.end,
+            )
+            for result in detections
+        ], self.sanitize_text(text=text, analysis_items=detections)
+
+    def sanitize_text(
+        self, text: str, analysis_items: List[DetectionResultItem]
+    ) -&gt; str:
+        &#34;&#34;&#34;
+        Sanitizes the text analyzed with MSFT Presidio&#39;s Anonymizer
+        @param text:
+        @param analysis_items:
+        @return:
+        &#34;&#34;&#34;
+        try:
+            anonymization_result = self.anonymizer.anonymize(
+                text=text, analyzer_results=analysis_items, operators=self.operators
+            )
+
+            return anonymization_result.text
+
+        except Exception as ex:
+            logger.error(&#34;An error occurred sanitizing the string&#34;)
+            return &#34;&#34;
+
+    def analyze_collection(
+        self, texts: List[str], language_code: str = &#34;en&#34;, entities: List[str] = None
+    ) -&gt; List[DetectionResult]:
+        &#34;&#34;&#34;
+        Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+        Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+        a custom recognizer created.
+
+        @param language_code: str &#34;en&#34; is default
+        @param entities: List[MSFTPresidioPIIType.name] defaults to all possible entities for selected language
+        @param texts: List[str]
+        @return: List[DetectionResult]
+        &#34;&#34;&#34;
+
+        detection_results = []
+        try:
+            if not entities:
+                entities = self.get_supported_entities(language_code)
+
+            # Engine Setup - spaCy model setup and PII recognizers
+            for i, text in enumerate(texts):
+                text_analysis = self.analyzer.analyze(  # type: ignore
+                    text=text, entities=entities, language=language_code
+                )
+
+                # Every analysis by the analyzer will have a set of detections within
+                detections = [
+                    DetectionResultItem(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                            result.entity_type
+                        ).name,
+                        score=result.score,
+                        start=result.start,
+                        end=result.end,
+                    )
+                    for result in text_analysis
+                ]
+                detection_results.append(
+                    DetectionResult(index=i, detections=detections)
+                )
+
+            # Return analyzer results in formatted Analysis Result List object
+
+        except Exception as ex:
+            logger.error(ex)
+
+        return detection_results
+
+    @classmethod
+    def convert_analyzed_item(cls, pii_detection) -&gt; List[DetectionResultItem]:
+        &#34;&#34;&#34;
+        Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
+        analysis by Presidio returns an array of RecognizerResult objects.
+
+        @param pii_detection: RecognizerResult from presidio analyzer
+        @return: List[DetectionResultItem]
+        &#34;&#34;&#34;
+
+        return [
+            DetectionResultItem(
+                entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                    result.entity_type
+                ).name,
+                score=result.score,
+                start=result.start,
+                end=result.end,
+            )
+            for result in pii_detection
+        ]
+
+    @classmethod
+    def convert_analyzed_collection(cls, pii_detections) -&gt; List[DetectionResult]:
+        &#34;&#34;&#34;
+        Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
+        analysis results ends up being a 2D array.
+
+        @param pii_detections: List[RecognizerResult] from Presidio analyzer
+        @return: List[DetectionResult]
+        &#34;&#34;&#34;
+
+        detection_results: List[DetectionResult] = []
+        for i, result in enumerate(pii_detections):
+            # Return results in formatted Analysis Result List object
+            detections = []
+            for entity in result:
+                detections.append(
+                    DetectionResultItem(
+                        entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                            entity.entity_type
+                        ).name,
+                        score=entity.score,
+                        start=entity.start,
+                        end=entity.end,
+                    )
+                )
+
+            detection_results.append(DetectionResult(index=i, detections=detections))
+
+        return detection_results</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_collection"><code class="name flex">
+<span>def <span class="ident">convert_analyzed_collection</span></span>(<span>pii_detections) ‑> List[<a title="pii_codex.models.analysis.DetectionResult" href="../../models/analysis.html#pii_codex.models.analysis.DetectionResult">DetectionResult</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
+analysis results ends up being a 2D array.</p>
+<p>@param pii_detections: List[RecognizerResult] from Presidio analyzer
+@return: List[DetectionResult]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def convert_analyzed_collection(cls, pii_detections) -&gt; List[DetectionResult]:
+    &#34;&#34;&#34;
+    Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
+    analysis results ends up being a 2D array.
+
+    @param pii_detections: List[RecognizerResult] from Presidio analyzer
+    @return: List[DetectionResult]
+    &#34;&#34;&#34;
+
+    detection_results: List[DetectionResult] = []
+    for i, result in enumerate(pii_detections):
+        # Return results in formatted Analysis Result List object
+        detections = []
+        for entity in result:
+            detections.append(
+                DetectionResultItem(
+                    entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                        entity.entity_type
+                    ).name,
+                    score=entity.score,
+                    start=entity.start,
+                    end=entity.end,
+                )
+            )
+
+        detection_results.append(DetectionResult(index=i, detections=detections))
+
+    return detection_results</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_item"><code class="name flex">
+<span>def <span class="ident">convert_analyzed_item</span></span>(<span>pii_detection) ‑> List[<a title="pii_codex.models.analysis.DetectionResultItem" href="../../models/analysis.html#pii_codex.models.analysis.DetectionResultItem">DetectionResultItem</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
+analysis by Presidio returns an array of RecognizerResult objects.</p>
+<p>@param pii_detection: RecognizerResult from presidio analyzer
+@return: List[DetectionResultItem]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def convert_analyzed_item(cls, pii_detection) -&gt; List[DetectionResultItem]:
+    &#34;&#34;&#34;
+    Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
+    analysis by Presidio returns an array of RecognizerResult objects.
+
+    @param pii_detection: RecognizerResult from presidio analyzer
+    @return: List[DetectionResultItem]
+    &#34;&#34;&#34;
+
+    return [
+        DetectionResultItem(
+            entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                result.entity_type
+            ).name,
+            score=result.score,
+            start=result.start,
+            end=result.end,
+        )
+        for result in pii_detection
+    ]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_collection"><code class="name flex">
+<span>def <span class="ident">analyze_collection</span></span>(<span>self, texts: List[str], language_code: str = 'en', entities: List[str] = None) ‑> List[<a title="pii_codex.models.analysis.DetectionResult" href="../../models/analysis.html#pii_codex.models.analysis.DetectionResult">DetectionResult</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+Will log an error if the identifier or entity recognizer is not added to Presidio's base recognizers or
+a custom recognizer created.</p>
+<p>@param language_code: str "en" is default
+@param entities: List[MSFTPresidioPIIType.name] defaults to all possible entities for selected language
+@param texts: List[str]
+@return: List[DetectionResult]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_collection(
+    self, texts: List[str], language_code: str = &#34;en&#34;, entities: List[str] = None
+) -&gt; List[DetectionResult]:
+    &#34;&#34;&#34;
+    Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+    Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+    a custom recognizer created.
+
+    @param language_code: str &#34;en&#34; is default
+    @param entities: List[MSFTPresidioPIIType.name] defaults to all possible entities for selected language
+    @param texts: List[str]
+    @return: List[DetectionResult]
+    &#34;&#34;&#34;
+
+    detection_results = []
+    try:
+        if not entities:
+            entities = self.get_supported_entities(language_code)
+
+        # Engine Setup - spaCy model setup and PII recognizers
+        for i, text in enumerate(texts):
+            text_analysis = self.analyzer.analyze(  # type: ignore
+                text=text, entities=entities, language=language_code
+            )
+
+            # Every analysis by the analyzer will have a set of detections within
+            detections = [
+                DetectionResultItem(
+                    entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                        result.entity_type
+                    ).name,
+                    score=result.score,
+                    start=result.start,
+                    end=result.end,
+                )
+                for result in text_analysis
+            ]
+            detection_results.append(
+                DetectionResult(index=i, detections=detections)
+            )
+
+        # Return analyzer results in formatted Analysis Result List object
+
+    except Exception as ex:
+        logger.error(ex)
+
+    return detection_results</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_item"><code class="name flex">
+<span>def <span class="ident">analyze_item</span></span>(<span>self, text: str, language_code: str = 'en', entities: List[str] = None) ‑> Tuple[List[<a title="pii_codex.models.analysis.DetectionResultItem" href="../../models/analysis.html#pii_codex.models.analysis.DetectionResultItem">DetectionResultItem</a>], str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+Will log an error if the identifier or entity recognizer is not added to Presidio's base recognizers or
+a custom recognizer created. Returns the list of detected items and the sanitized string</p>
+<p>@param language_code: str "en" is default
+@param entities: str - List[MSFTPresidioPIIType.name]
+@param text: str
+@return: Tuple[List[DetectionResultItem], str]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyze_item(
+    self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
+) -&gt; Tuple[List[DetectionResultItem], str]:
+    &#34;&#34;&#34;
+    Uses Microsoft Presidio (spaCy module) to analyze given a set of entities to analyze the provided text against.
+    Will log an error if the identifier or entity recognizer is not added to Presidio&#39;s base recognizers or
+    a custom recognizer created. Returns the list of detected items and the sanitized string
+
+    @param language_code: str &#34;en&#34; is default
+    @param entities: str - List[MSFTPresidioPIIType.name]
+    @param text: str
+    @return: Tuple[List[DetectionResultItem], str]
+    &#34;&#34;&#34;
+
+    detections = []
+
+    if not entities:
+        entities = self.get_supported_entities(language_code)
+
+    try:
+        # Engine Setup - spaCy model setup and PII recognizers
+        detections = self.analyzer.analyze(  # type: ignore
+            text=text, entities=entities, language=language_code
+        )
+
+    except Exception as ex:
+        logger.error(ex)
+
+    # Return analyzer results in formatted Analysis Result List object
+    return [
+        DetectionResultItem(
+            entity_type=result.entity_type,
+            score=result.score,
+            start=result.start,
+            end=result.end,
+        )
+        for result in detections
+    ], self.sanitize_text(text=text, analysis_items=detections)</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_loaded_recognizers"><code class="name flex">
+<span>def <span class="ident">get_loaded_recognizers</span></span>(<span>self, language_code: str = 'en')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
+@param language_code:
+@return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_loaded_recognizers(self, language_code: str = DEFAULT_LANG):
+    &#34;&#34;&#34;
+    Retrieves a list of loaded recognizers, narrowing down the list of what is available for a given language
+    @param language_code:
+    @return:
+    &#34;&#34;&#34;
+    return self.analyzer.get_recognizers(language=language_code)  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_supported_entities"><code class="name flex">
+<span>def <span class="ident">get_supported_entities</span></span>(<span>self, language_code='en') ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieves a list of supported entities, this will narrow down what is available for a given language</p>
+<p>@param language_code: str - defaults to "en"
+@return: List[str]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_supported_entities(self, language_code=DEFAULT_LANG) -&gt; List[str]:
+    &#34;&#34;&#34;
+    Retrieves a list of supported entities, this will narrow down what is available for a given language
+
+    @param language_code: str - defaults to &#34;en&#34;
+    @return: List[str]
+    &#34;&#34;&#34;
+    return self.analyzer.get_supported_entities(language=language_code)  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.sanitize_text"><code class="name flex">
+<span>def <span class="ident">sanitize_text</span></span>(<span>self, text: str, analysis_items: List[<a title="pii_codex.models.analysis.DetectionResultItem" href="../../models/analysis.html#pii_codex.models.analysis.DetectionResultItem">DetectionResultItem</a>]) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sanitizes the text analyzed with MSFT Presidio's Anonymizer
+@param text:
+@param analysis_items:
+@return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sanitize_text(
+    self, text: str, analysis_items: List[DetectionResultItem]
+) -&gt; str:
+    &#34;&#34;&#34;
+    Sanitizes the text analyzed with MSFT Presidio&#39;s Anonymizer
+    @param text:
+    @param analysis_items:
+    @return:
+    &#34;&#34;&#34;
+    try:
+        anonymization_result = self.anonymizer.anonymize(
+            text=text, analyzer_results=analysis_items, operators=self.operators
+        )
+
+        return anonymization_result.text
+
+    except Exception as ex:
+        logger.error(&#34;An error occurred sanitizing the string&#34;)
+        return &#34;&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pii_codex.services.analyzers" href="index.html">pii_codex.services.analyzers</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer">PresidioPIIAnalyzer</a></code></h4>
+<ul class="">
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_collection" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_collection">analyze_collection</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_item" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.analyze_item">analyze_item</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_collection" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_collection">convert_analyzed_collection</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_item" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.convert_analyzed_item">convert_analyzed_item</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_loaded_recognizers" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_loaded_recognizers">get_loaded_recognizers</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_supported_entities" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.get_supported_entities">get_supported_entities</a></code></li>
+<li><code><a title="pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.sanitize_text" href="#pii_codex.services.analyzers.presidio_analysis.PresidioPIIAnalyzer.sanitize_text">sanitize_text</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

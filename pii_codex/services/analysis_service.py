@@ -28,10 +28,12 @@ from ..utils.statistics_util import (
     get_median,
 )
 
-from ..utils.logging import timed_operation
-
 
 class PIIAnalysisService:
+    """
+    Class for PII analysis of singular text strings or collections thereof.
+    """
+
     def __init__(
         self,
         pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE,
@@ -52,7 +54,6 @@ class PIIAnalysisService:
             else None
         )
 
-    @timed_operation
     def analyze_item(
         self,
         text: str,
@@ -88,7 +89,6 @@ class PIIAnalysisService:
             ),
         )
 
-    @timed_operation
     def analyze_collection(
         self,
         texts: Optional[List[str]] = None,
@@ -175,7 +175,6 @@ class PIIAnalysisService:
             index=idx,
         )
 
-    @timed_operation
     def analyze_detection_collection(
         self,
         detection_collection: List[DetectionResult],
@@ -207,7 +206,6 @@ class PIIAnalysisService:
             analysis_set=analysis_set,
         )
 
-    @timed_operation
     def analyze_detection_result(
         self, detection_result: DetectionResult, index: int = 0
     ) -> AnalysisResult:
@@ -231,7 +229,6 @@ class PIIAnalysisService:
             ),
         )
 
-    @timed_operation
     def analyze_detection_result_item(
         self,
         detection_result_item: DetectionResultItem,
@@ -293,7 +290,6 @@ class PIIAnalysisService:
             else [AnalysisResultItem(detection=None, risk_assessment=RiskAssessment())]
         ), sanitized_text
 
-    @timed_operation
     def analyze_metadata(self, metadata: dict):
         """
         Create an analysis result item per metadata entry

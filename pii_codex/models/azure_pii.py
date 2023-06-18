@@ -11,7 +11,7 @@ from enum import Enum
 
 class AzureDetectionType(Enum):
     """
-    The values fed into the Azure service for detection
+    Azure-supported PII Types: The values fed into the Azure service for detection
     """
 
     ABA_ROUTING_NUMBER: str = "ABARoutingNumber"
@@ -201,7 +201,7 @@ class AzureDetectionType(Enum):
 
 class AzurePIIType(Enum):
     """
-    The values of types returned from the Azure Cognition PII Detection API
+    Azure-supported PII Types: The values of types returned from the Azure Cognition PII Detection API
     """
 
     ABA_ROUTING_NUMBER: str = "ABA Routing Number"

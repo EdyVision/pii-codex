@@ -4,12 +4,14 @@ from itertools import chain
 
 from ..config import PII_MAPPER
 from ..models.analysis import RiskAssessment, AnalysisResult
-from ..utils.logging import timed_operation
 from ..utils.statistics_util import get_mean, get_sum
 
 
 class PIIAssessmentService:
-    @timed_operation
+    """
+    Class for mapping PII types to categories and extracting them.
+    """
+
     def assess_pii_type(self, detected_pii_type: str) -> RiskAssessment:
         """
         Assesses a singular detected PII type given a type name string from common.PIIType enum
@@ -18,7 +20,6 @@ class PIIAssessmentService:
         """
         return PII_MAPPER.map_pii_type(detected_pii_type)
 
-    @timed_operation
     def assess_pii_type_list(
         self, detected_pii_types: List[str]
     ) -> List[RiskAssessment]:

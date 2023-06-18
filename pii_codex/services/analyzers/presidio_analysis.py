@@ -5,10 +5,14 @@ from ...config import PII_MAPPER, DEFAULT_LANG, DEFAULT_TOKEN_REPLACEMENT_VALUE
 from ...models.analysis import DetectionResultItem, DetectionResult
 from ...utils.package_installer_util import install_spacy_package
 from ...utils.pii_mapping_util import PIIMapper
-from ...utils.logging import logger, timed_operation
+from ...utils.logging import logger
 
 
 class PresidioPIIAnalyzer:
+    """
+    Presidio PII Analyzer - a wrapper for the Microsoft Presidio Analyzer and Anonymization functions
+    """
+
     def __init__(
         self, pii_token_replacement_value: str = DEFAULT_TOKEN_REPLACEMENT_VALUE
     ):
@@ -17,6 +21,7 @@ class PresidioPIIAnalyzer:
         the imports are wrapped to prevent any failures
         @param pii_token_replacement_value: str to replace detected pii token with (e.g. <REDACTED>)
         """
+
         try:
             import spacy
             from presidio_analyzer import AnalyzerEngine
@@ -60,7 +65,6 @@ class PresidioPIIAnalyzer:
         """
         return self.analyzer.get_recognizers(language=language_code)  # type: ignore
 
-    @timed_operation
     def analyze_item(
         self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
     ) -> Tuple[List[DetectionResultItem], str]:
@@ -120,7 +124,6 @@ class PresidioPIIAnalyzer:
             logger.error("An error occurred sanitizing the string")
             return ""
 
-    @timed_operation
     def analyze_collection(
         self, texts: List[str], language_code: str = "en", entities: List[str] = None
     ) -> List[DetectionResult]:
@@ -170,7 +173,6 @@ class PresidioPIIAnalyzer:
         return detection_results
 
     @classmethod
-    @timed_operation
     def convert_analyzed_item(cls, pii_detection) -> List[DetectionResultItem]:
         """
         Converts a single Presidio analysis attempt into a collection of DetectionResultItem objects. One string
@@ -193,14 +195,13 @@ class PresidioPIIAnalyzer:
         ]
 
     @classmethod
-    @timed_operation
     def convert_analyzed_collection(cls, pii_detections) -> List[DetectionResult]:
         """
         Converts a collection of Presidio analysis results to a collection of DetectionResult. A collection of Presidio
         analysis results ends up being a 2D array.
 
         @param pii_detections: List[RecognizerResult] from Presidio analyzer
-
+        @return: List[DetectionResult]
         """
 
         detection_results: List[DetectionResult] = []

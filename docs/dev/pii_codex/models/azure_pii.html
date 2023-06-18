@@ -1,0 +1,2601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pii_codex.models.azure_pii API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pii_codex.models.azure_pii</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from __future__ import annotations
+
+from enum import Enum
+
+
+# Azure PII Types
+# Research Page:
+# https://azuresdkdocs.blob.core.windows.net/$web/python/azure-ai-textanalytics/latest/
+# azure.ai.textanalytics.html#azure.ai.textanalytics.TextAnalyticsClient.recognize_pii_entities
+
+
+class AzureDetectionType(Enum):
+    &#34;&#34;&#34;
+    Azure-supported PII Types: The values fed into the Azure service for detection
+    &#34;&#34;&#34;
+
+    ABA_ROUTING_NUMBER: str = &#34;ABARoutingNumber&#34;
+    ADDRESS: str = &#34;Address&#34;
+    AGE: str = &#34;Age&#34;
+    AR_NATIONAL_IDENTITY_NUMBER: str = &#34;ARNationalIdentityNumber&#34;
+    AT_IDENTITY_CARD: str = &#34;ATIdentityCard&#34;
+    AT_TAX_IDENTIFICATION_NUMBER: str = &#34;ATTaxIdentificationNumber&#34;
+    AT_VALUE_ADDED_TAX_NUMBER: str = &#34;ATValueAddedTaxNumber&#34;
+    AU_BANK_ACCOUNT_NUMBER: str = &#34;AUBankAccountNumber&#34;
+    AU_BUSINESS_NUMBER: str = &#34;AUBusinessNumber&#34;
+    AU_COMPANY_NUMBER: str = &#34;AUCompanyNumber&#34;
+    AU_DRIVERS_LICENSE_NUMBER: str = &#34;AUDriversLicenseNumber&#34;
+    AU_MEDICAL_ACCOUNT_NUMBER: str = &#34;AUMedicalAccountNumber&#34;
+    AU_PASSPORT_NUMBER: str = &#34;AUPassportNumber&#34;
+    AU_TAX_FILE_NUMBER: str = &#34;AUTaxFileNumber&#34;
+    AZURE_DOCUMENT_DB_AUTH_KEY: str = &#34;AzureDocumentDBAuthKey&#34;
+    AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING: str = (
+        &#34;AzureIAASDatabaseConnectionAndSQLString&#34;
+    )
+    AZURE_IO_T_CONNECTION_STRING: str = &#34;AzureIoTConnectionString&#34;
+    AZURE_PUBLISH_SETTING_PASSWORD: str = &#34;AzurePublishSettingPassword&#34;
+    AZURE_REDIS_CACHE_STRING: str = &#34;AzureRedisCacheString&#34;
+    AZURE_SAS: str = &#34;AzureSAS&#34;
+    AZURE_SERVICE_BUS_STRING: str = &#34;AzureServiceBusString&#34;
+    AZURE_STORAGE_ACCOUNT_GENERIC: str = &#34;AzureStorageAccountGeneric&#34;
+    AZURE_STORAGE_ACCOUNT_KEY: str = &#34;AzureStorageAccountKey&#34;
+    BE_NATIONAL_NUMBER: str = &#34;BENationalNumber&#34;
+    BE_NATIONAL_NUMBER_V2: str = &#34;BENationalNumberV2&#34;
+    BE_VALUE_ADDED_TAX_NUMBER: str = &#34;BEValueAddedTaxNumber&#34;
+    BG_UNIFORM_CIVIL_NUMBER: str = &#34;BGUniformCivilNumber&#34;
+    BRCPF_NUMBER: str = &#34;BRCPFNumber&#34;
+    BR_LEGAL_ENTITY_NUMBER: str = &#34;BRLegalEntityNumber&#34;
+    BR_NATIONAL_IDRG: str = &#34;BRNationalIDRG&#34;
+    CA_BANK_ACCOUNT_NUMBER: str = &#34;CABankAccountNumber&#34;
+    CA_DRIVERS_LICENSE_NUMBER: str = &#34;CADriversLicenseNumber&#34;
+    CA_HEALTH_SERVICE_NUMBER: str = &#34;CAHealthServiceNumber&#34;
+    CA_PASSPORT_NUMBER: str = &#34;CAPassportNumber&#34;
+    CA_PERSONAL_HEALTH_IDENTIFICATION: str = &#34;CAPersonalHealthIdentification&#34;
+    CA_SOCIAL_INSURANCE_NUMBER: str = &#34;CASocialInsuranceNumber&#34;
+    CH_SOCIAL_SECURITY_NUMBER: str = &#34;CHSocialSecurityNumber&#34;
+    CL_IDENTITY_CARD_NUMBER: str = &#34;CLIdentityCardNumber&#34;
+    CN_RESIDENT_IDENTITY_CARD_NUMBER: str = &#34;CNResidentIdentityCardNumber&#34;
+    CREDIT_CARD_NUMBER: str = &#34;CreditCardNumber&#34;
+    CY_IDENTITY_CARD: str = &#34;CYIdentityCard&#34;
+    CY_TAX_IDENTIFICATION_NUMBER: str = &#34;CYTaxIdentificationNumber&#34;
+    CZ_PERSONAL_IDENTITY_NUMBER: str = &#34;CZPersonalIdentityNumber&#34;
+    CZ_PERSONAL_IDENTITY_V2: str = &#34;CZPersonalIdentityV2&#34;
+    DATE: str = &#34;Date&#34;
+    DEFAULT: str = &#34;Default&#34;
+    DE_DRIVERS_LICENSE_NUMBER: str = &#34;DEDriversLicenseNumber&#34;
+    DE_IDENTITY_CARD_NUMBER: str = &#34;DEIdentityCardNumber&#34;
+    DE_PASSPORT_NUMBER: str = &#34;DEPassportNumber&#34;
+    DE_TAX_IDENTIFICATION_NUMBER: str = &#34;DETaxIdentificationNumber&#34;
+    DE_VALUE_ADDED_NUMBER: str = &#34;DEValueAddedNumber&#34;
+    DK_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;DKPersonalIdentificationNumber&#34;
+    DK_PERSONAL_IDENTIFICATION_V2: str = &#34;DKPersonalIdentificationV2&#34;
+    DRUG_ENFORCEMENT_AGENCY_NUMBER: str = &#34;DrugEnforcementAgencyNumber&#34;
+    EE_PERSONAL_IDENTIFICATION_CODE: str = &#34;EEPersonalIdentificationCode&#34;
+    EMAIL_ADDRESS: str = &#34;Email&#34;
+    ES_DNI: str = &#34;ESDNI&#34;
+    ES_SOCIAL_SECURITY_NUMBER: str = &#34;ESSocialSecurityNumber&#34;
+    ES_TAX_IDENTIFICATION_NUMBER: str = &#34;ESTaxIdentificationNumber&#34;
+    EUGPS_COORDINATES: str = &#34;EUGPSCoordinates&#34;
+    EU_DEBIT_CARD_NUMBER: str = &#34;EUDebitCardNumber&#34;
+    EU_DRIVERS_LICENSE_NUMBER: str = &#34;EUDriversLicenseNumber&#34;
+    EU_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;EUNationalIdentificationNumber&#34;
+    EU_PASSPORT_NUMBER: str = &#34;EUPassportNumber&#34;
+    EU_SOCIAL_SECURITY_NUMBER: str = &#34;EUSocialSecurityNumber&#34;
+    EU_TAX_IDENTIFICATION_NUMBER: str = &#34;EUTaxIdentificationNumber&#34;
+    FI_EUROPEAN_HEALTH_NUMBER: str = &#34;FIEuropeanHealthNumber&#34;
+    FI_NATIONAL_ID: str = &#34;FINationalID&#34;
+    FI_NATIONAL_IDV2: str = &#34;FINationalIDV2&#34;
+    FI_PASSPORT_NUMBER: str = &#34;FIPassportNumber&#34;
+    FR_DRIVERS_LICENSE_NUMBER: str = &#34;FRDriversLicenseNumber&#34;
+    FR_HEALTH_INSURANCE_NUMBER: str = &#34;FRHealthInsuranceNumber&#34;
+    FR_NATIONAL_ID: str = &#34;FRNationalID&#34;
+    FR_PASSPORT_NUMBER: str = &#34;FRPassportNumber&#34;
+    FR_SOCIAL_SECURITY_NUMBER: str = &#34;FRSocialSecurityNumber&#34;
+    FR_TAX_IDENTIFICATION_NUMBER: str = &#34;FRTaxIdentificationNumber&#34;
+    FR_VALUE_ADDED_TAX_NUMBER: str = &#34;FRValueAddedTaxNumber&#34;
+    GR_NATIONAL_IDV2: str = &#34;GRNationalIDV2&#34;
+    GR_NATIONAL_ID_CARD: str = &#34;GRNationalIDCard&#34;
+    GR_TAX_IDENTIFICATION_NUMBER: str = &#34;GRTaxIdentificationNumber&#34;
+    HK_IDENTITY_CARD_NUMBER: str = &#34;HKIdentityCardNumber&#34;
+    HR_IDENTITY_CARD_NUMBER: str = &#34;HRIdentityCardNumber&#34;
+    HR_NATIONAL_ID_NUMBER: str = &#34;HRNationalIDNumber&#34;
+    HR_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HRPersonalIdentificationNumber&#34;
+    HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2: str = (
+        &#34;HRPersonalIdentificationOIBNumberV2&#34;
+    )
+    HU_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HUPersonalIdentificationNumber&#34;
+    HU_TAX_IDENTIFICATION_NUMBER: str = &#34;HUTaxIdentificationNumber&#34;
+    HU_VALUE_ADDED_NUMBER: str = &#34;HUValueAddedNumber&#34;
+    ID_IDENTITY_CARD_NUMBER: str = &#34;IDIdentityCardNumber&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER: str = &#34;IEPersonalPublicServiceNumber&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2: str = &#34;IEPersonalPublicServiceNumberV2&#34;
+    IL_BANK_ACCOUNT_NUMBER: str = &#34;ILBankAccountNumber&#34;
+    IL_NATIONAL_ID: str = &#34;ILNationalID&#34;
+    INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = &#34;InternationalBankingAccountNumber&#34;
+    IN_PERMANENT_ACCOUNT: str = &#34;INPermanentAccount&#34;
+    IN_UNIQUE_IDENTIFICATION_NUMBER: str = &#34;INUniqueIdentificationNumber&#34;
+    IP_ADDRESS: str = &#34;IPAddress&#34;
+    IT_DRIVERS_LICENSE_NUMBER: str = &#34;ITDriversLicenseNumber&#34;
+    IT_FISCAL_CODE: str = &#34;ITFiscalCode&#34;
+    IT_VALUE_ADDED_TAX_NUMBER: str = &#34;ITValueAddedTaxNumber&#34;
+    JP_BANK_ACCOUNT_NUMBER: str = &#34;JPBankAccountNumber&#34;
+    JP_DRIVERS_LICENSE_NUMBER: str = &#34;JPDriversLicenseNumber&#34;
+    JP_MY_NUMBER_CORPORATE: str = &#34;JPMyNumberCorporate&#34;
+    JP_MY_NUMBER_PERSONAL: str = &#34;JPMyNumberPersonal&#34;
+    JP_PASSPORT_NUMBER: str = &#34;JPPassportNumber&#34;
+    JP_RESIDENCE_CARD_NUMBER: str = &#34;JPResidenceCardNumber&#34;
+    JP_RESIDENT_REGISTRATION_NUMBER: str = &#34;JPResidentRegistrationNumber&#34;
+    JP_SOCIAL_INSURANCE_NUMBER: str = &#34;JPSocialInsuranceNumber&#34;
+    KR_RESIDENT_REGISTRATION_NUMBER: str = &#34;KRResidentRegistrationNumber&#34;
+    LT_PERSONAL_CODE: str = &#34;LTPersonalCode&#34;
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL: str = (
+        &#34;LUNationalIdentificationNumberNatural&#34;
+    )
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL: str = (
+        &#34;LUNationalIdentificationNumberNonNatural&#34;
+    )
+    LV_PERSONAL_CODE: str = &#34;LVPersonalCode&#34;
+    MT_IDENTITY_CARD_NUMBER: str = &#34;MTIdentityCardNumber&#34;
+    MT_TAX_ID_NUMBER: str = &#34;MTTaxIDNumber&#34;
+    MY_IDENTITY_CARD_NUMBER: str = &#34;MYIdentityCardNumber&#34;
+    NL_CITIZENS_SERVICE_NUMBER: str = &#34;NLCitizensServiceNumber&#34;
+    NL_CITIZENS_SERVICE_NUMBER_V2: str = &#34;NLCitizensServiceNumberV2&#34;
+    NL_TAX_IDENTIFICATION_NUMBER: str = &#34;NLTaxIdentificationNumber&#34;
+    NL_VALUE_ADDED_TAX_NUMBER: str = &#34;NLValueAddedTaxNumber&#34;
+    NO_IDENTITY_NUMBER: str = &#34;NOIdentityNumber&#34;
+    NZ_BANK_ACCOUNT_NUMBER: str = &#34;NZBankAccountNumber&#34;
+    NZ_DRIVERS_LICENSE_NUMBER: str = &#34;NZDriversLicenseNumber&#34;
+    NZ_INLAND_REVENUE_NUMBER: str = &#34;NZInlandRevenueNumber&#34;
+    NZ_MINISTRY_OF_HEALTH_NUMBER: str = &#34;NZMinistryOfHealthNumber&#34;
+    NZ_SOCIAL_WELFARE_NUMBER: str = &#34;NZSocialWelfareNumber&#34;
+    ORGANIZATION: str = &#34;Organization&#34;
+    PERSON: str = &#34;Person&#34;
+    PHONE_NUMBER: str = &#34;PhoneNumber&#34;
+    PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER: str = &#34;PHUnifiedMultiPurposeIDNumber&#34;
+    PLREGON_NUMBER: str = &#34;PLREGONNumber&#34;
+    PL_IDENTITY_CARD: str = &#34;PLIdentityCard&#34;
+    PL_NATIONAL_ID: str = &#34;PLNationalID&#34;
+    PL_NATIONAL_IDV2: str = &#34;PLNationalIDV2&#34;
+    PL_PASSPORT_NUMBER: str = &#34;PLPassportNumber&#34;
+    PL_TAX_IDENTIFICATION_NUMBER: str = &#34;PLTaxIdentificationNumber&#34;
+    PT_CITIZEN_CARD_NUMBER: str = &#34;PTCitizenCardNumber&#34;
+    PT_CITIZEN_CARD_NUMBER_V2: str = &#34;PTCitizenCardNumberV2&#34;
+    PT_TAX_IDENTIFICATION_NUMBER: str = &#34;PTTaxIdentificationNumber&#34;
+    RO_PERSONAL_NUMERICAL_CODE: str = &#34;ROPersonalNumericalCode&#34;
+    RU_PASSPORT_NUMBER_DOMESTIC: str = &#34;RUPassportNumberDomestic&#34;
+    RU_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;RUPassportNumberInternational&#34;
+    SA_NATIONAL_ID: str = &#34;SANationalID&#34;
+    SE_NATIONAL_ID: str = &#34;SENationalID&#34;
+    SE_NATIONAL_IDV2: str = &#34;SENationalIDV2&#34;
+    SE_PASSPORT_NUMBER: str = &#34;SEPassportNumber&#34;
+    SE_TAX_IDENTIFICATION_NUMBER: str = &#34;SETaxIdentificationNumber&#34;
+    SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = (
+        &#34;SGNationalRegistrationIdentityCardNumber&#34;
+    )
+    SI_TAX_IDENTIFICATION_NUMBER: str = &#34;SITaxIdentificationNumber&#34;
+    SI_UNIQUE_MASTER_CITIZEN_NUMBER: str = &#34;SIUniqueMasterCitizenNumber&#34;
+    SK_PERSONAL_NUMBER: str = &#34;SKPersonalNumber&#34;
+    SQL_SERVER_CONNECTION_STRING: str = &#34;SQLServerConnectionString&#34;
+    SWIFT_CODE: str = &#34;SWIFTCode&#34;
+    TH_POPULATION_IDENTIFICATION_CODE: str = &#34;THPopulationIdentificationCode&#34;
+    TR_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;TRNationalIdentificationNumber&#34;
+    TW_NATIONAL_ID: str = &#34;TWNationalID&#34;
+    TW_PASSPORT_NUMBER: str = &#34;TWPassportNumber&#34;
+    TW_RESIDENT_CERTIFICATE: str = &#34;TWResidentCertificate&#34;
+    UA_PASSPORT_NUMBER_DOMESTIC: str = &#34;UAPassportNumberDomestic&#34;
+    UA_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;UAPassportNumberInternational&#34;
+    UK_DRIVERS_LICENSE_NUMBER: str = &#34;UKDriversLicenseNumber&#34;
+    UK_ELECTORAL_ROLL_NUMBER: str = &#34;UKElectoralRollNumber&#34;
+    UK_NATIONAL_HEALTH_NUMBER: str = &#34;UKNationalHealthNumber&#34;
+    UK_NATIONAL_INSURANCE_NUMBER: str = &#34;UKNationalInsuranceNumber&#34;
+    UK_UNIQUE_TAXPAYER_NUMBER: str = &#34;UKUniqueTaxpayerNumber&#34;
+    URL: str = &#34;URL&#34;
+    USUK_PASSPORT_NUMBER: str = &#34;USUKPassportNumber&#34;
+    US_BANK_ACCOUNT_NUMBER: str = &#34;USBankAccountNumber&#34;
+    US_DRIVERS_LICENSE_NUMBER: str = &#34;USDriversLicenseNumber&#34;
+    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = &#34;USIndividualTaxpayerIdentification&#34;
+    US_SOCIAL_SECURITY_NUMBER: str = &#34;USSocialSecurityNumber&#34;
+    ZA_IDENTIFICATION_NUMBER: str = &#34;ZAIdentificationNumber&#34;
+    ALL: str = &#34;All&#34;
+
+
+class AzurePIIType(Enum):
+    &#34;&#34;&#34;
+    Azure-supported PII Types: The values of types returned from the Azure Cognition PII Detection API
+    &#34;&#34;&#34;
+
+    ABA_ROUTING_NUMBER: str = &#34;ABA Routing Number&#34;
+    ADDRESS: str = &#34;Address&#34;
+    AGE: str = &#34;Age&#34;
+    AR_NATIONAL_IDENTITY_NUMBER: str = &#34;AR National Identity Number&#34;
+    AT_IDENTITY_CARD: str = &#34;ATIdentityCard&#34;
+    AT_TAX_IDENTIFICATION_NUMBER: str = &#34;AT Tax Identification Number&#34;
+    AT_VALUE_ADDED_TAX_NUMBER: str = &#34;AT Value Added Tax Number&#34;
+    AU_BANK_ACCOUNT_NUMBER: str = &#34;AU Bank Account Number&#34;
+    AU_BUSINESS_NUMBER: str = &#34;AU Business Number&#34;
+    AU_COMPANY_NUMBER: str = &#34;AU Company Number&#34;
+    AU_DRIVERS_LICENSE_NUMBER: str = &#34;AU Drivers License Number&#34;
+    AU_MEDICAL_ACCOUNT_NUMBER: str = &#34;AU Medical Account Number&#34;
+    AU_PASSPORT_NUMBER: str = &#34;AU Passport Number&#34;
+    AU_TAX_FILE_NUMBER: str = &#34;AU Tax File Number&#34;
+    AZURE_DOCUMENT_DB_AUTH_KEY: str = &#34;Azure Document DB Auth Key&#34;
+    AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING: str = (
+        &#34;Azure IAAS Database Connection And SQL String&#34;
+    )
+    AZURE_IO_T_CONNECTION_STRING: str = &#34;Azure IoT Connection String&#34;
+    AZURE_PUBLISH_SETTING_PASSWORD: str = &#34;Azure Publish Setting Password&#34;
+    AZURE_REDIS_CACHE_STRING: str = &#34;Azure Redis Cache String&#34;
+    AZURE_SAS: str = &#34;Azure SAS&#34;
+    AZURE_SERVICE_BUS_STRING: str = &#34;Azure Service Bus String&#34;
+    AZURE_STORAGE_ACCOUNT_GENERIC: str = &#34;Azure Storage Account Generic&#34;
+    AZURE_STORAGE_ACCOUNT_KEY: str = &#34;Azure Storage Account Key&#34;
+    BE_NATIONAL_NUMBER: str = &#34;BE National Number&#34;
+    BE_NATIONAL_NUMBER_V2: str = &#34;BE National Number V2&#34;
+    BE_VALUE_ADDED_TAX_NUMBER: str = &#34;BE Value Added Tax Number&#34;
+    BG_UNIFORM_CIVIL_NUMBER: str = &#34;BG Uniform Civil Number&#34;
+    BRCPF_NUMBER: str = &#34;BR CPF Number&#34;
+    BR_LEGAL_ENTITY_NUMBER: str = &#34;BR Legal Entity Number&#34;
+    BR_NATIONAL_IDRG: str = &#34;BR National IDRG&#34;
+    CA_BANK_ACCOUNT_NUMBER: str = &#34;CA Bank Account Number&#34;
+    CA_DRIVERS_LICENSE_NUMBER: str = &#34;CA Drivers License Number&#34;
+    CA_HEALTH_SERVICE_NUMBER: str = &#34;CA Health Service Number&#34;
+    CA_PASSPORT_NUMBER: str = &#34;CA Passport Number&#34;
+    CA_PERSONAL_HEALTH_IDENTIFICATION: str = &#34;CA Personal Health Identification&#34;
+    CA_SOCIAL_INSURANCE_NUMBER: str = &#34;CA Social Insuranc eNumber&#34;
+    CH_SOCIAL_SECURITY_NUMBER: str = &#34;CH Social Security Number&#34;
+    CL_IDENTITY_CARD_NUMBER: str = &#34;CL Identity Card Number&#34;
+    CN_RESIDENT_IDENTITY_CARD_NUMBER: str = &#34;CN Resident Identity Card Number&#34;
+    CREDIT_CARD_NUMBER: str = &#34;Credit Card Number&#34;
+    CY_IDENTITY_CARD: str = &#34;CY Identity Card&#34;
+    CY_TAX_IDENTIFICATION_NUMBER: str = &#34;CY Tax Identification Number&#34;
+    CZ_PERSONAL_IDENTITY_NUMBER: str = &#34;CZ Personal Identity Number&#34;
+    CZ_PERSONAL_IDENTITY_V2: str = &#34;CZ Personal Identity V2&#34;
+    DATE: str = &#34;Date&#34;
+    DEFAULT: str = &#34;Default&#34;
+    DE_DRIVERS_LICENSE_NUMBER: str = &#34;DE Drivers License Number&#34;
+    DE_IDENTITY_CARD_NUMBER: str = &#34;DE Identity Card Number&#34;
+    DE_PASSPORT_NUMBER: str = &#34;DE Passport Number&#34;
+    DE_TAX_IDENTIFICATION_NUMBER: str = &#34;DE Tax Identification Number&#34;
+    DE_VALUE_ADDED_NUMBER: str = &#34;DE Value Added Number&#34;
+    DK_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;DK Personal Identification Number&#34;
+    DK_PERSONAL_IDENTIFICATION_V2: str = &#34;DK Personal Identification V2&#34;
+    DRUG_ENFORCEMENT_AGENCY_NUMBER: str = &#34;Drug Enforcement Agency Number&#34;
+    EE_PERSONAL_IDENTIFICATION_CODE: str = &#34;EE Personal Identification Code&#34;
+    EMAIL_ADDRESS: str = &#34;Email&#34;
+    ESDNI: str = &#34;ESDNI&#34;
+    ES_SOCIAL_SECURITY_NUMBER: str = &#34;ES Social Security Number&#34;
+    ES_TAX_IDENTIFICATION_NUMBER: str = &#34;ES Tax Identification Number&#34;
+    EUGPS_COORDINATES: str = &#34;EU GPS Coordinates&#34;
+    EU_DEBIT_CARD_NUMBER: str = &#34;EU Debit Card Number&#34;
+    EU_DRIVERS_LICENSE_NUMBER: str = &#34;EU Drivers License Number&#34;
+    EU_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;EU National Identification Number&#34;
+    EU_PASSPORT_NUMBER: str = &#34;EU Passport Number&#34;
+    EU_SOCIAL_SECURITY_NUMBER: str = &#34;EU Social Security Number&#34;
+    EU_TAX_IDENTIFICATION_NUMBER: str = &#34;EU Tax Identification Number&#34;
+    FI_EUROPEAN_HEALTH_NUMBER: str = &#34;FI European Health Number&#34;
+    FI_NATIONAL_ID: str = &#34;FI National ID&#34;
+    FI_NATIONAL_IDV2: str = &#34;FI National IDV2&#34;
+    FI_PASSPORT_NUMBER: str = &#34;FI Passport Number&#34;
+    FR_DRIVERS_LICENSE_NUMBER: str = &#34;FR Drivers License Number&#34;
+    FR_HEALTH_INSURANCE_NUMBER: str = &#34;FR Health Insurance Number&#34;
+    FR_NATIONAL_ID: str = &#34;FR National ID&#34;
+    FR_PASSPORT_NUMBER: str = &#34;FR Passport Number&#34;
+    FR_SOCIAL_SECURITY_NUMBER: str = &#34;FR Social Security Number&#34;
+    FR_TAX_IDENTIFICATION_NUMBER: str = &#34;FR Tax Identification Number&#34;
+    FR_VALUE_ADDED_TAX_NUMBER: str = &#34;FR Value Added Tax Number&#34;
+    GR_NATIONAL_IDV2: str = &#34;GR National ID V2&#34;
+    GR_NATIONAL_ID_CARD: str = &#34;GR National ID Card&#34;
+    GR_TAX_IDENTIFICATION_NUMBER: str = &#34;GR Tax Identification Number&#34;
+    HK_IDENTITY_CARD_NUMBER: str = &#34;HK Identity Card Number&#34;
+    HR_IDENTITY_CARD_NUMBER: str = &#34;HR Identity Card Number&#34;
+    HR_NATIONAL_ID_NUMBER: str = &#34;HR National ID Number&#34;
+    HR_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HR Personal Identification Number&#34;
+    HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2: str = (
+        &#34;HR Personal Identification OIB Number V2&#34;
+    )
+    HU_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HU Personal Identification Number&#34;
+    HU_TAX_IDENTIFICATION_NUMBER: str = &#34;HU Tax Identification Number&#34;
+    HU_VALUE_ADDED_NUMBER: str = &#34;HU Value Added Number&#34;
+    ID_IDENTITY_CARD_NUMBER: str = &#34;ID Identity Card Number&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER: str = &#34;IE Personal Public Service Number&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2: str = &#34;IE Personal Public Service Number V2&#34;
+    IL_BANK_ACCOUNT_NUMBER: str = &#34;IL Bank Account Number&#34;
+    IL_NATIONAL_ID: str = &#34;IL National ID&#34;
+    INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = &#34;International Banking Account Number&#34;
+    IN_PERMANENT_ACCOUNT: str = &#34;IN Permanent Account&#34;
+    IN_UNIQUE_IDENTIFICATION_NUMBER: str = &#34;IN Unique Identification Number&#34;
+    IP_ADDRESS: str = &#34;IP Address&#34;
+    IT_DRIVERS_LICENSE_NUMBER: str = &#34;IT Drivers License Number&#34;
+    IT_FISCAL_CODE: str = &#34;IT Fiscal Code&#34;
+    IT_VALUE_ADDED_TAX_NUMBER: str = &#34;IT Value Added Tax Number&#34;
+    JP_BANK_ACCOUNT_NUMBER: str = &#34;JP Bank Account Number&#34;
+    JP_DRIVERS_LICENSE_NUMBER: str = &#34;JP Drivers License Number&#34;
+    JP_MY_NUMBER_CORPORATE: str = &#34;JP MyNumber Corporate&#34;
+    JP_MY_NUMBER_PERSONAL: str = &#34;JP MyNumber Personal&#34;
+    JP_PASSPORT_NUMBER: str = &#34;JP Passport Number&#34;
+    JP_RESIDENCE_CARD_NUMBER: str = &#34;JP Residence Card Number&#34;
+    JP_RESIDENT_REGISTRATION_NUMBER: str = &#34;JP Resident Registration Number&#34;
+    JP_SOCIAL_INSURANCE_NUMBER: str = &#34;JP Social Insurance Number&#34;
+    KR_RESIDENT_REGISTRATION_NUMBER: str = &#34;KR Resident Registration Number&#34;
+    LT_PERSONAL_CODE: str = &#34;LT Personal Code&#34;
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL: str = (
+        &#34;LU National Identification Number Natural&#34;
+    )
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL: str = (
+        &#34;LU National Identification Number Non Natural&#34;
+    )
+    LV_PERSONAL_CODE: str = &#34;LV Personal Code&#34;
+    MT_IDENTITY_CARD_NUMBER: str = &#34;MT Identity Card Number&#34;
+    MT_TAX_ID_NUMBER: str = &#34;MT Tax ID Number&#34;
+    MY_IDENTITY_CARD_NUMBER: str = &#34;MY Identity Card Number&#34;
+    NL_CITIZENS_SERVICE_NUMBER: str = &#34;NL Citizens Service Number&#34;
+    NL_CITIZENS_SERVICE_NUMBER_V2: str = &#34;NL Citizens Service Number V2&#34;
+    NL_TAX_IDENTIFICATION_NUMBER: str = &#34;NL Tax Identification Number&#34;
+    NL_VALUE_ADDED_TAX_NUMBER: str = &#34;NL Value Added Tax Number&#34;
+    NO_IDENTITY_NUMBER: str = &#34;NO Identity Number&#34;
+    NZ_BANK_ACCOUNT_NUMBER: str = &#34;NZ Bank Account Number&#34;
+    NZ_DRIVERS_LICENSE_NUMBER: str = &#34;NZ Drivers License Number&#34;
+    NZ_INLAND_REVENUE_NUMBER: str = &#34;NZ Inland Revenue Number&#34;
+    NZ_MINISTRY_OF_HEALTH_NUMBER: str = &#34;NZ Ministry Of Health Number&#34;
+    NZ_SOCIAL_WELFARE_NUMBER: str = &#34;NZ Social Welfare Number&#34;
+    ORGANIZATION: str = &#34;Organization&#34;
+    PERSON: str = &#34;Person&#34;
+    PHONE_NUMBER: str = &#34;Phone Number&#34;
+    PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER: str = &#34;PH Unified Multi Purpose ID Number&#34;
+    PLREGON_NUMBER: str = &#34;PL REGON Number&#34;
+    PL_IDENTITY_CARD: str = &#34;PL Identity Card&#34;
+    PL_NATIONAL_ID: str = &#34;PL National ID&#34;
+    PL_NATIONAL_IDV2: str = &#34;PL National IDV2&#34;
+    PL_PASSPORT_NUMBER: str = &#34;PL Passport Number&#34;
+    PL_TAX_IDENTIFICATION_NUMBER: str = &#34;PL Tax Identification Number&#34;
+    PT_CITIZEN_CARD_NUMBER: str = &#34;PT Citizen Card Number&#34;
+    PT_CITIZEN_CARD_NUMBER_V2: str = &#34;PT Citizen Card Number V2&#34;
+    PT_TAX_IDENTIFICATION_NUMBER: str = &#34;PT Tax Identification Number&#34;
+    RO_PERSONAL_NUMERICAL_CODE: str = &#34;RO Personal NumericalCode&#34;
+    RU_PASSPORT_NUMBER_DOMESTIC: str = &#34;RU Passport Number Domestic&#34;
+    RU_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;RU Passport Number International&#34;
+    SA_NATIONAL_ID: str = &#34;SA National ID&#34;
+    SE_NATIONAL_ID: str = &#34;SE National ID&#34;
+    SE_NATIONAL_IDV2: str = &#34;SE National IDV2&#34;
+    SE_PASSPORT_NUMBER: str = &#34;SE Passport Number&#34;
+    SE_TAX_IDENTIFICATION_NUMBER: str = &#34;SE Tax Identification Number&#34;
+    SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = (
+        &#34;SG National Registration Identity Card Number&#34;
+    )
+    SI_TAX_IDENTIFICATION_NUMBER: str = &#34;SI Tax Identification Number&#34;
+    SI_UNIQUE_MASTER_CITIZEN_NUMBER: str = &#34;SI Unique Master Citizen Number&#34;
+    SK_PERSONAL_NUMBER: str = &#34;SK Personal Number&#34;
+    SQL_SERVER_CONNECTION_STRING: str = &#34;SQL Server Connection String&#34;
+    SWIFT_CODE: str = &#34;SWIFT Code&#34;
+    TH_POPULATION_IDENTIFICATION_CODE: str = &#34;TH Population Identification Code&#34;
+    TR_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;TR National Identification Number&#34;
+    TW_NATIONAL_ID: str = &#34;TW National ID&#34;
+    TW_PASSPORT_NUMBER: str = &#34;TW Passport Number&#34;
+    TW_RESIDENT_CERTIFICATE: str = &#34;TW Resident Certificate&#34;
+    UA_PASSPORT_NUMBER_DOMESTIC: str = &#34;UA Passport Number Domestic&#34;
+    UA_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;UA Passport Number International&#34;
+    UK_DRIVERS_LICENSE_NUMBER: str = &#34;UK Drivers License Number&#34;
+    UK_ELECTORAL_ROLL_NUMBER: str = &#34;UK Electoral Roll Number&#34;
+    UK_NATIONAL_HEALTH_NUMBER: str = &#34;UK National Health Number&#34;
+    UK_NATIONAL_INSURANCE_NUMBER: str = &#34;UK National Insurance Number&#34;
+    UK_UNIQUE_TAXPAYER_NUMBER: str = &#34;UK Unique Taxpayer Number&#34;
+    URL: str = &#34;URL&#34;
+    USUK_PASSPORT_NUMBER: str = &#34;US UK Passport Number&#34;
+    US_BANK_ACCOUNT_NUMBER: str = &#34;US Bank Account Number&#34;
+    US_DRIVERS_LICENSE_NUMBER: str = &#34;US Drivers License Number&#34;
+    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = &#34;US Individual Taxpayer Identification&#34;
+    US_SOCIAL_SECURITY_NUMBER: str = &#34;US Social Security Number&#34;
+    ZA_IDENTIFICATION_NUMBER: str = &#34;ZA Identification Number&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType"><code class="flex name class">
+<span>class <span class="ident">AzureDetectionType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Azure-supported PII Types: The values fed into the Azure service for detection</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AzureDetectionType(Enum):
+    &#34;&#34;&#34;
+    Azure-supported PII Types: The values fed into the Azure service for detection
+    &#34;&#34;&#34;
+
+    ABA_ROUTING_NUMBER: str = &#34;ABARoutingNumber&#34;
+    ADDRESS: str = &#34;Address&#34;
+    AGE: str = &#34;Age&#34;
+    AR_NATIONAL_IDENTITY_NUMBER: str = &#34;ARNationalIdentityNumber&#34;
+    AT_IDENTITY_CARD: str = &#34;ATIdentityCard&#34;
+    AT_TAX_IDENTIFICATION_NUMBER: str = &#34;ATTaxIdentificationNumber&#34;
+    AT_VALUE_ADDED_TAX_NUMBER: str = &#34;ATValueAddedTaxNumber&#34;
+    AU_BANK_ACCOUNT_NUMBER: str = &#34;AUBankAccountNumber&#34;
+    AU_BUSINESS_NUMBER: str = &#34;AUBusinessNumber&#34;
+    AU_COMPANY_NUMBER: str = &#34;AUCompanyNumber&#34;
+    AU_DRIVERS_LICENSE_NUMBER: str = &#34;AUDriversLicenseNumber&#34;
+    AU_MEDICAL_ACCOUNT_NUMBER: str = &#34;AUMedicalAccountNumber&#34;
+    AU_PASSPORT_NUMBER: str = &#34;AUPassportNumber&#34;
+    AU_TAX_FILE_NUMBER: str = &#34;AUTaxFileNumber&#34;
+    AZURE_DOCUMENT_DB_AUTH_KEY: str = &#34;AzureDocumentDBAuthKey&#34;
+    AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING: str = (
+        &#34;AzureIAASDatabaseConnectionAndSQLString&#34;
+    )
+    AZURE_IO_T_CONNECTION_STRING: str = &#34;AzureIoTConnectionString&#34;
+    AZURE_PUBLISH_SETTING_PASSWORD: str = &#34;AzurePublishSettingPassword&#34;
+    AZURE_REDIS_CACHE_STRING: str = &#34;AzureRedisCacheString&#34;
+    AZURE_SAS: str = &#34;AzureSAS&#34;
+    AZURE_SERVICE_BUS_STRING: str = &#34;AzureServiceBusString&#34;
+    AZURE_STORAGE_ACCOUNT_GENERIC: str = &#34;AzureStorageAccountGeneric&#34;
+    AZURE_STORAGE_ACCOUNT_KEY: str = &#34;AzureStorageAccountKey&#34;
+    BE_NATIONAL_NUMBER: str = &#34;BENationalNumber&#34;
+    BE_NATIONAL_NUMBER_V2: str = &#34;BENationalNumberV2&#34;
+    BE_VALUE_ADDED_TAX_NUMBER: str = &#34;BEValueAddedTaxNumber&#34;
+    BG_UNIFORM_CIVIL_NUMBER: str = &#34;BGUniformCivilNumber&#34;
+    BRCPF_NUMBER: str = &#34;BRCPFNumber&#34;
+    BR_LEGAL_ENTITY_NUMBER: str = &#34;BRLegalEntityNumber&#34;
+    BR_NATIONAL_IDRG: str = &#34;BRNationalIDRG&#34;
+    CA_BANK_ACCOUNT_NUMBER: str = &#34;CABankAccountNumber&#34;
+    CA_DRIVERS_LICENSE_NUMBER: str = &#34;CADriversLicenseNumber&#34;
+    CA_HEALTH_SERVICE_NUMBER: str = &#34;CAHealthServiceNumber&#34;
+    CA_PASSPORT_NUMBER: str = &#34;CAPassportNumber&#34;
+    CA_PERSONAL_HEALTH_IDENTIFICATION: str = &#34;CAPersonalHealthIdentification&#34;
+    CA_SOCIAL_INSURANCE_NUMBER: str = &#34;CASocialInsuranceNumber&#34;
+    CH_SOCIAL_SECURITY_NUMBER: str = &#34;CHSocialSecurityNumber&#34;
+    CL_IDENTITY_CARD_NUMBER: str = &#34;CLIdentityCardNumber&#34;
+    CN_RESIDENT_IDENTITY_CARD_NUMBER: str = &#34;CNResidentIdentityCardNumber&#34;
+    CREDIT_CARD_NUMBER: str = &#34;CreditCardNumber&#34;
+    CY_IDENTITY_CARD: str = &#34;CYIdentityCard&#34;
+    CY_TAX_IDENTIFICATION_NUMBER: str = &#34;CYTaxIdentificationNumber&#34;
+    CZ_PERSONAL_IDENTITY_NUMBER: str = &#34;CZPersonalIdentityNumber&#34;
+    CZ_PERSONAL_IDENTITY_V2: str = &#34;CZPersonalIdentityV2&#34;
+    DATE: str = &#34;Date&#34;
+    DEFAULT: str = &#34;Default&#34;
+    DE_DRIVERS_LICENSE_NUMBER: str = &#34;DEDriversLicenseNumber&#34;
+    DE_IDENTITY_CARD_NUMBER: str = &#34;DEIdentityCardNumber&#34;
+    DE_PASSPORT_NUMBER: str = &#34;DEPassportNumber&#34;
+    DE_TAX_IDENTIFICATION_NUMBER: str = &#34;DETaxIdentificationNumber&#34;
+    DE_VALUE_ADDED_NUMBER: str = &#34;DEValueAddedNumber&#34;
+    DK_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;DKPersonalIdentificationNumber&#34;
+    DK_PERSONAL_IDENTIFICATION_V2: str = &#34;DKPersonalIdentificationV2&#34;
+    DRUG_ENFORCEMENT_AGENCY_NUMBER: str = &#34;DrugEnforcementAgencyNumber&#34;
+    EE_PERSONAL_IDENTIFICATION_CODE: str = &#34;EEPersonalIdentificationCode&#34;
+    EMAIL_ADDRESS: str = &#34;Email&#34;
+    ES_DNI: str = &#34;ESDNI&#34;
+    ES_SOCIAL_SECURITY_NUMBER: str = &#34;ESSocialSecurityNumber&#34;
+    ES_TAX_IDENTIFICATION_NUMBER: str = &#34;ESTaxIdentificationNumber&#34;
+    EUGPS_COORDINATES: str = &#34;EUGPSCoordinates&#34;
+    EU_DEBIT_CARD_NUMBER: str = &#34;EUDebitCardNumber&#34;
+    EU_DRIVERS_LICENSE_NUMBER: str = &#34;EUDriversLicenseNumber&#34;
+    EU_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;EUNationalIdentificationNumber&#34;
+    EU_PASSPORT_NUMBER: str = &#34;EUPassportNumber&#34;
+    EU_SOCIAL_SECURITY_NUMBER: str = &#34;EUSocialSecurityNumber&#34;
+    EU_TAX_IDENTIFICATION_NUMBER: str = &#34;EUTaxIdentificationNumber&#34;
+    FI_EUROPEAN_HEALTH_NUMBER: str = &#34;FIEuropeanHealthNumber&#34;
+    FI_NATIONAL_ID: str = &#34;FINationalID&#34;
+    FI_NATIONAL_IDV2: str = &#34;FINationalIDV2&#34;
+    FI_PASSPORT_NUMBER: str = &#34;FIPassportNumber&#34;
+    FR_DRIVERS_LICENSE_NUMBER: str = &#34;FRDriversLicenseNumber&#34;
+    FR_HEALTH_INSURANCE_NUMBER: str = &#34;FRHealthInsuranceNumber&#34;
+    FR_NATIONAL_ID: str = &#34;FRNationalID&#34;
+    FR_PASSPORT_NUMBER: str = &#34;FRPassportNumber&#34;
+    FR_SOCIAL_SECURITY_NUMBER: str = &#34;FRSocialSecurityNumber&#34;
+    FR_TAX_IDENTIFICATION_NUMBER: str = &#34;FRTaxIdentificationNumber&#34;
+    FR_VALUE_ADDED_TAX_NUMBER: str = &#34;FRValueAddedTaxNumber&#34;
+    GR_NATIONAL_IDV2: str = &#34;GRNationalIDV2&#34;
+    GR_NATIONAL_ID_CARD: str = &#34;GRNationalIDCard&#34;
+    GR_TAX_IDENTIFICATION_NUMBER: str = &#34;GRTaxIdentificationNumber&#34;
+    HK_IDENTITY_CARD_NUMBER: str = &#34;HKIdentityCardNumber&#34;
+    HR_IDENTITY_CARD_NUMBER: str = &#34;HRIdentityCardNumber&#34;
+    HR_NATIONAL_ID_NUMBER: str = &#34;HRNationalIDNumber&#34;
+    HR_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HRPersonalIdentificationNumber&#34;
+    HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2: str = (
+        &#34;HRPersonalIdentificationOIBNumberV2&#34;
+    )
+    HU_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HUPersonalIdentificationNumber&#34;
+    HU_TAX_IDENTIFICATION_NUMBER: str = &#34;HUTaxIdentificationNumber&#34;
+    HU_VALUE_ADDED_NUMBER: str = &#34;HUValueAddedNumber&#34;
+    ID_IDENTITY_CARD_NUMBER: str = &#34;IDIdentityCardNumber&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER: str = &#34;IEPersonalPublicServiceNumber&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2: str = &#34;IEPersonalPublicServiceNumberV2&#34;
+    IL_BANK_ACCOUNT_NUMBER: str = &#34;ILBankAccountNumber&#34;
+    IL_NATIONAL_ID: str = &#34;ILNationalID&#34;
+    INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = &#34;InternationalBankingAccountNumber&#34;
+    IN_PERMANENT_ACCOUNT: str = &#34;INPermanentAccount&#34;
+    IN_UNIQUE_IDENTIFICATION_NUMBER: str = &#34;INUniqueIdentificationNumber&#34;
+    IP_ADDRESS: str = &#34;IPAddress&#34;
+    IT_DRIVERS_LICENSE_NUMBER: str = &#34;ITDriversLicenseNumber&#34;
+    IT_FISCAL_CODE: str = &#34;ITFiscalCode&#34;
+    IT_VALUE_ADDED_TAX_NUMBER: str = &#34;ITValueAddedTaxNumber&#34;
+    JP_BANK_ACCOUNT_NUMBER: str = &#34;JPBankAccountNumber&#34;
+    JP_DRIVERS_LICENSE_NUMBER: str = &#34;JPDriversLicenseNumber&#34;
+    JP_MY_NUMBER_CORPORATE: str = &#34;JPMyNumberCorporate&#34;
+    JP_MY_NUMBER_PERSONAL: str = &#34;JPMyNumberPersonal&#34;
+    JP_PASSPORT_NUMBER: str = &#34;JPPassportNumber&#34;
+    JP_RESIDENCE_CARD_NUMBER: str = &#34;JPResidenceCardNumber&#34;
+    JP_RESIDENT_REGISTRATION_NUMBER: str = &#34;JPResidentRegistrationNumber&#34;
+    JP_SOCIAL_INSURANCE_NUMBER: str = &#34;JPSocialInsuranceNumber&#34;
+    KR_RESIDENT_REGISTRATION_NUMBER: str = &#34;KRResidentRegistrationNumber&#34;
+    LT_PERSONAL_CODE: str = &#34;LTPersonalCode&#34;
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL: str = (
+        &#34;LUNationalIdentificationNumberNatural&#34;
+    )
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL: str = (
+        &#34;LUNationalIdentificationNumberNonNatural&#34;
+    )
+    LV_PERSONAL_CODE: str = &#34;LVPersonalCode&#34;
+    MT_IDENTITY_CARD_NUMBER: str = &#34;MTIdentityCardNumber&#34;
+    MT_TAX_ID_NUMBER: str = &#34;MTTaxIDNumber&#34;
+    MY_IDENTITY_CARD_NUMBER: str = &#34;MYIdentityCardNumber&#34;
+    NL_CITIZENS_SERVICE_NUMBER: str = &#34;NLCitizensServiceNumber&#34;
+    NL_CITIZENS_SERVICE_NUMBER_V2: str = &#34;NLCitizensServiceNumberV2&#34;
+    NL_TAX_IDENTIFICATION_NUMBER: str = &#34;NLTaxIdentificationNumber&#34;
+    NL_VALUE_ADDED_TAX_NUMBER: str = &#34;NLValueAddedTaxNumber&#34;
+    NO_IDENTITY_NUMBER: str = &#34;NOIdentityNumber&#34;
+    NZ_BANK_ACCOUNT_NUMBER: str = &#34;NZBankAccountNumber&#34;
+    NZ_DRIVERS_LICENSE_NUMBER: str = &#34;NZDriversLicenseNumber&#34;
+    NZ_INLAND_REVENUE_NUMBER: str = &#34;NZInlandRevenueNumber&#34;
+    NZ_MINISTRY_OF_HEALTH_NUMBER: str = &#34;NZMinistryOfHealthNumber&#34;
+    NZ_SOCIAL_WELFARE_NUMBER: str = &#34;NZSocialWelfareNumber&#34;
+    ORGANIZATION: str = &#34;Organization&#34;
+    PERSON: str = &#34;Person&#34;
+    PHONE_NUMBER: str = &#34;PhoneNumber&#34;
+    PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER: str = &#34;PHUnifiedMultiPurposeIDNumber&#34;
+    PLREGON_NUMBER: str = &#34;PLREGONNumber&#34;
+    PL_IDENTITY_CARD: str = &#34;PLIdentityCard&#34;
+    PL_NATIONAL_ID: str = &#34;PLNationalID&#34;
+    PL_NATIONAL_IDV2: str = &#34;PLNationalIDV2&#34;
+    PL_PASSPORT_NUMBER: str = &#34;PLPassportNumber&#34;
+    PL_TAX_IDENTIFICATION_NUMBER: str = &#34;PLTaxIdentificationNumber&#34;
+    PT_CITIZEN_CARD_NUMBER: str = &#34;PTCitizenCardNumber&#34;
+    PT_CITIZEN_CARD_NUMBER_V2: str = &#34;PTCitizenCardNumberV2&#34;
+    PT_TAX_IDENTIFICATION_NUMBER: str = &#34;PTTaxIdentificationNumber&#34;
+    RO_PERSONAL_NUMERICAL_CODE: str = &#34;ROPersonalNumericalCode&#34;
+    RU_PASSPORT_NUMBER_DOMESTIC: str = &#34;RUPassportNumberDomestic&#34;
+    RU_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;RUPassportNumberInternational&#34;
+    SA_NATIONAL_ID: str = &#34;SANationalID&#34;
+    SE_NATIONAL_ID: str = &#34;SENationalID&#34;
+    SE_NATIONAL_IDV2: str = &#34;SENationalIDV2&#34;
+    SE_PASSPORT_NUMBER: str = &#34;SEPassportNumber&#34;
+    SE_TAX_IDENTIFICATION_NUMBER: str = &#34;SETaxIdentificationNumber&#34;
+    SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = (
+        &#34;SGNationalRegistrationIdentityCardNumber&#34;
+    )
+    SI_TAX_IDENTIFICATION_NUMBER: str = &#34;SITaxIdentificationNumber&#34;
+    SI_UNIQUE_MASTER_CITIZEN_NUMBER: str = &#34;SIUniqueMasterCitizenNumber&#34;
+    SK_PERSONAL_NUMBER: str = &#34;SKPersonalNumber&#34;
+    SQL_SERVER_CONNECTION_STRING: str = &#34;SQLServerConnectionString&#34;
+    SWIFT_CODE: str = &#34;SWIFTCode&#34;
+    TH_POPULATION_IDENTIFICATION_CODE: str = &#34;THPopulationIdentificationCode&#34;
+    TR_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;TRNationalIdentificationNumber&#34;
+    TW_NATIONAL_ID: str = &#34;TWNationalID&#34;
+    TW_PASSPORT_NUMBER: str = &#34;TWPassportNumber&#34;
+    TW_RESIDENT_CERTIFICATE: str = &#34;TWResidentCertificate&#34;
+    UA_PASSPORT_NUMBER_DOMESTIC: str = &#34;UAPassportNumberDomestic&#34;
+    UA_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;UAPassportNumberInternational&#34;
+    UK_DRIVERS_LICENSE_NUMBER: str = &#34;UKDriversLicenseNumber&#34;
+    UK_ELECTORAL_ROLL_NUMBER: str = &#34;UKElectoralRollNumber&#34;
+    UK_NATIONAL_HEALTH_NUMBER: str = &#34;UKNationalHealthNumber&#34;
+    UK_NATIONAL_INSURANCE_NUMBER: str = &#34;UKNationalInsuranceNumber&#34;
+    UK_UNIQUE_TAXPAYER_NUMBER: str = &#34;UKUniqueTaxpayerNumber&#34;
+    URL: str = &#34;URL&#34;
+    USUK_PASSPORT_NUMBER: str = &#34;USUKPassportNumber&#34;
+    US_BANK_ACCOUNT_NUMBER: str = &#34;USBankAccountNumber&#34;
+    US_DRIVERS_LICENSE_NUMBER: str = &#34;USDriversLicenseNumber&#34;
+    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = &#34;USIndividualTaxpayerIdentification&#34;
+    US_SOCIAL_SECURITY_NUMBER: str = &#34;USSocialSecurityNumber&#34;
+    ZA_IDENTIFICATION_NUMBER: str = &#34;ZAIdentificationNumber&#34;
+    ALL: str = &#34;All&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ABA_ROUTING_NUMBER"><code class="name">var <span class="ident">ABA_ROUTING_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ADDRESS"><code class="name">var <span class="ident">ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AGE"><code class="name">var <span class="ident">AGE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ALL"><code class="name">var <span class="ident">ALL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AR_NATIONAL_IDENTITY_NUMBER"><code class="name">var <span class="ident">AR_NATIONAL_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AT_IDENTITY_CARD"><code class="name">var <span class="ident">AT_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AT_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">AT_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AT_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">AT_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">AU_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_BUSINESS_NUMBER"><code class="name">var <span class="ident">AU_BUSINESS_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_COMPANY_NUMBER"><code class="name">var <span class="ident">AU_COMPANY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">AU_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_MEDICAL_ACCOUNT_NUMBER"><code class="name">var <span class="ident">AU_MEDICAL_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_PASSPORT_NUMBER"><code class="name">var <span class="ident">AU_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AU_TAX_FILE_NUMBER"><code class="name">var <span class="ident">AU_TAX_FILE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_DOCUMENT_DB_AUTH_KEY"><code class="name">var <span class="ident">AZURE_DOCUMENT_DB_AUTH_KEY</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING"><code class="name">var <span class="ident">AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_IO_T_CONNECTION_STRING"><code class="name">var <span class="ident">AZURE_IO_T_CONNECTION_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_PUBLISH_SETTING_PASSWORD"><code class="name">var <span class="ident">AZURE_PUBLISH_SETTING_PASSWORD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_REDIS_CACHE_STRING"><code class="name">var <span class="ident">AZURE_REDIS_CACHE_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_SAS"><code class="name">var <span class="ident">AZURE_SAS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_SERVICE_BUS_STRING"><code class="name">var <span class="ident">AZURE_SERVICE_BUS_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_GENERIC"><code class="name">var <span class="ident">AZURE_STORAGE_ACCOUNT_GENERIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_KEY"><code class="name">var <span class="ident">AZURE_STORAGE_ACCOUNT_KEY</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER"><code class="name">var <span class="ident">BE_NATIONAL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER_V2"><code class="name">var <span class="ident">BE_NATIONAL_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BE_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">BE_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BG_UNIFORM_CIVIL_NUMBER"><code class="name">var <span class="ident">BG_UNIFORM_CIVIL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BRCPF_NUMBER"><code class="name">var <span class="ident">BRCPF_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BR_LEGAL_ENTITY_NUMBER"><code class="name">var <span class="ident">BR_LEGAL_ENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.BR_NATIONAL_IDRG"><code class="name">var <span class="ident">BR_NATIONAL_IDRG</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">CA_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">CA_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_HEALTH_SERVICE_NUMBER"><code class="name">var <span class="ident">CA_HEALTH_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_PASSPORT_NUMBER"><code class="name">var <span class="ident">CA_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_PERSONAL_HEALTH_IDENTIFICATION"><code class="name">var <span class="ident">CA_PERSONAL_HEALTH_IDENTIFICATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CA_SOCIAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">CA_SOCIAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CH_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">CH_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CL_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">CL_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CN_RESIDENT_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">CN_RESIDENT_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CREDIT_CARD_NUMBER"><code class="name">var <span class="ident">CREDIT_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CY_IDENTITY_CARD"><code class="name">var <span class="ident">CY_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CY_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">CY_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_NUMBER"><code class="name">var <span class="ident">CZ_PERSONAL_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_V2"><code class="name">var <span class="ident">CZ_PERSONAL_IDENTITY_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DATE"><code class="name">var <span class="ident">DATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DEFAULT"><code class="name">var <span class="ident">DEFAULT</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DE_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">DE_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DE_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">DE_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DE_PASSPORT_NUMBER"><code class="name">var <span class="ident">DE_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DE_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">DE_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DE_VALUE_ADDED_NUMBER"><code class="name">var <span class="ident">DE_VALUE_ADDED_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">DK_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_V2"><code class="name">var <span class="ident">DK_PERSONAL_IDENTIFICATION_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.DRUG_ENFORCEMENT_AGENCY_NUMBER"><code class="name">var <span class="ident">DRUG_ENFORCEMENT_AGENCY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EE_PERSONAL_IDENTIFICATION_CODE"><code class="name">var <span class="ident">EE_PERSONAL_IDENTIFICATION_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EMAIL_ADDRESS"><code class="name">var <span class="ident">EMAIL_ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ES_DNI"><code class="name">var <span class="ident">ES_DNI</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ES_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">ES_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ES_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">ES_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EUGPS_COORDINATES"><code class="name">var <span class="ident">EUGPS_COORDINATES</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_DEBIT_CARD_NUMBER"><code class="name">var <span class="ident">EU_DEBIT_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">EU_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_NATIONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">EU_NATIONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_PASSPORT_NUMBER"><code class="name">var <span class="ident">EU_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">EU_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.EU_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">EU_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FI_EUROPEAN_HEALTH_NUMBER"><code class="name">var <span class="ident">FI_EUROPEAN_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_ID"><code class="name">var <span class="ident">FI_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_IDV2"><code class="name">var <span class="ident">FI_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FI_PASSPORT_NUMBER"><code class="name">var <span class="ident">FI_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">FR_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_HEALTH_INSURANCE_NUMBER"><code class="name">var <span class="ident">FR_HEALTH_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_NATIONAL_ID"><code class="name">var <span class="ident">FR_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_PASSPORT_NUMBER"><code class="name">var <span class="ident">FR_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">FR_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">FR_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.FR_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">FR_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_IDV2"><code class="name">var <span class="ident">GR_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_ID_CARD"><code class="name">var <span class="ident">GR_NATIONAL_ID_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.GR_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">GR_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HK_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">HK_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HR_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">HR_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HR_NATIONAL_ID_NUMBER"><code class="name">var <span class="ident">HR_NATIONAL_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HR_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2"><code class="name">var <span class="ident">HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HU_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HU_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HU_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HU_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.HU_VALUE_ADDED_NUMBER"><code class="name">var <span class="ident">HU_VALUE_ADDED_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ID_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">ID_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER"><code class="name">var <span class="ident">IE_PERSONAL_PUBLIC_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2"><code class="name">var <span class="ident">IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IL_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">IL_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IL_NATIONAL_ID"><code class="name">var <span class="ident">IL_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER"><code class="name">var <span class="ident">INTERNATIONAL_BANKING_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IN_PERMANENT_ACCOUNT"><code class="name">var <span class="ident">IN_PERMANENT_ACCOUNT</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IN_UNIQUE_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">IN_UNIQUE_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IP_ADDRESS"><code class="name">var <span class="ident">IP_ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IT_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">IT_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IT_FISCAL_CODE"><code class="name">var <span class="ident">IT_FISCAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.IT_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">IT_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">JP_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">JP_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_CORPORATE"><code class="name">var <span class="ident">JP_MY_NUMBER_CORPORATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_PERSONAL"><code class="name">var <span class="ident">JP_MY_NUMBER_PERSONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_PASSPORT_NUMBER"><code class="name">var <span class="ident">JP_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENCE_CARD_NUMBER"><code class="name">var <span class="ident">JP_RESIDENCE_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENT_REGISTRATION_NUMBER"><code class="name">var <span class="ident">JP_RESIDENT_REGISTRATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.JP_SOCIAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">JP_SOCIAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.KR_RESIDENT_REGISTRATION_NUMBER"><code class="name">var <span class="ident">KR_RESIDENT_REGISTRATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.LT_PERSONAL_CODE"><code class="name">var <span class="ident">LT_PERSONAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL"><code class="name">var <span class="ident">LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL"><code class="name">var <span class="ident">LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.LV_PERSONAL_CODE"><code class="name">var <span class="ident">LV_PERSONAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.MT_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">MT_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.MT_TAX_ID_NUMBER"><code class="name">var <span class="ident">MT_TAX_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.MY_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">MY_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER"><code class="name">var <span class="ident">NL_CITIZENS_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER_V2"><code class="name">var <span class="ident">NL_CITIZENS_SERVICE_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NL_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">NL_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NL_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">NL_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NO_IDENTITY_NUMBER"><code class="name">var <span class="ident">NO_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NZ_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">NZ_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NZ_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">NZ_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NZ_INLAND_REVENUE_NUMBER"><code class="name">var <span class="ident">NZ_INLAND_REVENUE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NZ_MINISTRY_OF_HEALTH_NUMBER"><code class="name">var <span class="ident">NZ_MINISTRY_OF_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.NZ_SOCIAL_WELFARE_NUMBER"><code class="name">var <span class="ident">NZ_SOCIAL_WELFARE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ORGANIZATION"><code class="name">var <span class="ident">ORGANIZATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PERSON"><code class="name">var <span class="ident">PERSON</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PHONE_NUMBER"><code class="name">var <span class="ident">PHONE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER"><code class="name">var <span class="ident">PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PLREGON_NUMBER"><code class="name">var <span class="ident">PLREGON_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PL_IDENTITY_CARD"><code class="name">var <span class="ident">PL_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_ID"><code class="name">var <span class="ident">PL_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_IDV2"><code class="name">var <span class="ident">PL_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PL_PASSPORT_NUMBER"><code class="name">var <span class="ident">PL_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PL_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">PL_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER"><code class="name">var <span class="ident">PT_CITIZEN_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER_V2"><code class="name">var <span class="ident">PT_CITIZEN_CARD_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.PT_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">PT_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.RO_PERSONAL_NUMERICAL_CODE"><code class="name">var <span class="ident">RO_PERSONAL_NUMERICAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_DOMESTIC"><code class="name">var <span class="ident">RU_PASSPORT_NUMBER_DOMESTIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_INTERNATIONAL"><code class="name">var <span class="ident">RU_PASSPORT_NUMBER_INTERNATIONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SA_NATIONAL_ID"><code class="name">var <span class="ident">SA_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_ID"><code class="name">var <span class="ident">SE_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_IDV2"><code class="name">var <span class="ident">SE_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SE_PASSPORT_NUMBER"><code class="name">var <span class="ident">SE_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SE_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">SE_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SI_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">SI_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SI_UNIQUE_MASTER_CITIZEN_NUMBER"><code class="name">var <span class="ident">SI_UNIQUE_MASTER_CITIZEN_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SK_PERSONAL_NUMBER"><code class="name">var <span class="ident">SK_PERSONAL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SQL_SERVER_CONNECTION_STRING"><code class="name">var <span class="ident">SQL_SERVER_CONNECTION_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.SWIFT_CODE"><code class="name">var <span class="ident">SWIFT_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.TH_POPULATION_IDENTIFICATION_CODE"><code class="name">var <span class="ident">TH_POPULATION_IDENTIFICATION_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.TR_NATIONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">TR_NATIONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.TW_NATIONAL_ID"><code class="name">var <span class="ident">TW_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.TW_PASSPORT_NUMBER"><code class="name">var <span class="ident">TW_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.TW_RESIDENT_CERTIFICATE"><code class="name">var <span class="ident">TW_RESIDENT_CERTIFICATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_DOMESTIC"><code class="name">var <span class="ident">UA_PASSPORT_NUMBER_DOMESTIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_INTERNATIONAL"><code class="name">var <span class="ident">UA_PASSPORT_NUMBER_INTERNATIONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UK_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">UK_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UK_ELECTORAL_ROLL_NUMBER"><code class="name">var <span class="ident">UK_ELECTORAL_ROLL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_HEALTH_NUMBER"><code class="name">var <span class="ident">UK_NATIONAL_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">UK_NATIONAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.UK_UNIQUE_TAXPAYER_NUMBER"><code class="name">var <span class="ident">UK_UNIQUE_TAXPAYER_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.URL"><code class="name">var <span class="ident">URL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.USUK_PASSPORT_NUMBER"><code class="name">var <span class="ident">USUK_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.US_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">US_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.US_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">US_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION"><code class="name">var <span class="ident">US_INDIVIDUAL_TAXPAYER_IDENTIFICATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.US_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">US_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzureDetectionType.ZA_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">ZA_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType"><code class="flex name class">
+<span>class <span class="ident">AzurePIIType</span></span>
+<span>(</span><span>*args, **kwds)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Azure-supported PII Types: The values of types returned from the Azure Cognition PII Detection API</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AzurePIIType(Enum):
+    &#34;&#34;&#34;
+    Azure-supported PII Types: The values of types returned from the Azure Cognition PII Detection API
+    &#34;&#34;&#34;
+
+    ABA_ROUTING_NUMBER: str = &#34;ABA Routing Number&#34;
+    ADDRESS: str = &#34;Address&#34;
+    AGE: str = &#34;Age&#34;
+    AR_NATIONAL_IDENTITY_NUMBER: str = &#34;AR National Identity Number&#34;
+    AT_IDENTITY_CARD: str = &#34;ATIdentityCard&#34;
+    AT_TAX_IDENTIFICATION_NUMBER: str = &#34;AT Tax Identification Number&#34;
+    AT_VALUE_ADDED_TAX_NUMBER: str = &#34;AT Value Added Tax Number&#34;
+    AU_BANK_ACCOUNT_NUMBER: str = &#34;AU Bank Account Number&#34;
+    AU_BUSINESS_NUMBER: str = &#34;AU Business Number&#34;
+    AU_COMPANY_NUMBER: str = &#34;AU Company Number&#34;
+    AU_DRIVERS_LICENSE_NUMBER: str = &#34;AU Drivers License Number&#34;
+    AU_MEDICAL_ACCOUNT_NUMBER: str = &#34;AU Medical Account Number&#34;
+    AU_PASSPORT_NUMBER: str = &#34;AU Passport Number&#34;
+    AU_TAX_FILE_NUMBER: str = &#34;AU Tax File Number&#34;
+    AZURE_DOCUMENT_DB_AUTH_KEY: str = &#34;Azure Document DB Auth Key&#34;
+    AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING: str = (
+        &#34;Azure IAAS Database Connection And SQL String&#34;
+    )
+    AZURE_IO_T_CONNECTION_STRING: str = &#34;Azure IoT Connection String&#34;
+    AZURE_PUBLISH_SETTING_PASSWORD: str = &#34;Azure Publish Setting Password&#34;
+    AZURE_REDIS_CACHE_STRING: str = &#34;Azure Redis Cache String&#34;
+    AZURE_SAS: str = &#34;Azure SAS&#34;
+    AZURE_SERVICE_BUS_STRING: str = &#34;Azure Service Bus String&#34;
+    AZURE_STORAGE_ACCOUNT_GENERIC: str = &#34;Azure Storage Account Generic&#34;
+    AZURE_STORAGE_ACCOUNT_KEY: str = &#34;Azure Storage Account Key&#34;
+    BE_NATIONAL_NUMBER: str = &#34;BE National Number&#34;
+    BE_NATIONAL_NUMBER_V2: str = &#34;BE National Number V2&#34;
+    BE_VALUE_ADDED_TAX_NUMBER: str = &#34;BE Value Added Tax Number&#34;
+    BG_UNIFORM_CIVIL_NUMBER: str = &#34;BG Uniform Civil Number&#34;
+    BRCPF_NUMBER: str = &#34;BR CPF Number&#34;
+    BR_LEGAL_ENTITY_NUMBER: str = &#34;BR Legal Entity Number&#34;
+    BR_NATIONAL_IDRG: str = &#34;BR National IDRG&#34;
+    CA_BANK_ACCOUNT_NUMBER: str = &#34;CA Bank Account Number&#34;
+    CA_DRIVERS_LICENSE_NUMBER: str = &#34;CA Drivers License Number&#34;
+    CA_HEALTH_SERVICE_NUMBER: str = &#34;CA Health Service Number&#34;
+    CA_PASSPORT_NUMBER: str = &#34;CA Passport Number&#34;
+    CA_PERSONAL_HEALTH_IDENTIFICATION: str = &#34;CA Personal Health Identification&#34;
+    CA_SOCIAL_INSURANCE_NUMBER: str = &#34;CA Social Insuranc eNumber&#34;
+    CH_SOCIAL_SECURITY_NUMBER: str = &#34;CH Social Security Number&#34;
+    CL_IDENTITY_CARD_NUMBER: str = &#34;CL Identity Card Number&#34;
+    CN_RESIDENT_IDENTITY_CARD_NUMBER: str = &#34;CN Resident Identity Card Number&#34;
+    CREDIT_CARD_NUMBER: str = &#34;Credit Card Number&#34;
+    CY_IDENTITY_CARD: str = &#34;CY Identity Card&#34;
+    CY_TAX_IDENTIFICATION_NUMBER: str = &#34;CY Tax Identification Number&#34;
+    CZ_PERSONAL_IDENTITY_NUMBER: str = &#34;CZ Personal Identity Number&#34;
+    CZ_PERSONAL_IDENTITY_V2: str = &#34;CZ Personal Identity V2&#34;
+    DATE: str = &#34;Date&#34;
+    DEFAULT: str = &#34;Default&#34;
+    DE_DRIVERS_LICENSE_NUMBER: str = &#34;DE Drivers License Number&#34;
+    DE_IDENTITY_CARD_NUMBER: str = &#34;DE Identity Card Number&#34;
+    DE_PASSPORT_NUMBER: str = &#34;DE Passport Number&#34;
+    DE_TAX_IDENTIFICATION_NUMBER: str = &#34;DE Tax Identification Number&#34;
+    DE_VALUE_ADDED_NUMBER: str = &#34;DE Value Added Number&#34;
+    DK_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;DK Personal Identification Number&#34;
+    DK_PERSONAL_IDENTIFICATION_V2: str = &#34;DK Personal Identification V2&#34;
+    DRUG_ENFORCEMENT_AGENCY_NUMBER: str = &#34;Drug Enforcement Agency Number&#34;
+    EE_PERSONAL_IDENTIFICATION_CODE: str = &#34;EE Personal Identification Code&#34;
+    EMAIL_ADDRESS: str = &#34;Email&#34;
+    ESDNI: str = &#34;ESDNI&#34;
+    ES_SOCIAL_SECURITY_NUMBER: str = &#34;ES Social Security Number&#34;
+    ES_TAX_IDENTIFICATION_NUMBER: str = &#34;ES Tax Identification Number&#34;
+    EUGPS_COORDINATES: str = &#34;EU GPS Coordinates&#34;
+    EU_DEBIT_CARD_NUMBER: str = &#34;EU Debit Card Number&#34;
+    EU_DRIVERS_LICENSE_NUMBER: str = &#34;EU Drivers License Number&#34;
+    EU_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;EU National Identification Number&#34;
+    EU_PASSPORT_NUMBER: str = &#34;EU Passport Number&#34;
+    EU_SOCIAL_SECURITY_NUMBER: str = &#34;EU Social Security Number&#34;
+    EU_TAX_IDENTIFICATION_NUMBER: str = &#34;EU Tax Identification Number&#34;
+    FI_EUROPEAN_HEALTH_NUMBER: str = &#34;FI European Health Number&#34;
+    FI_NATIONAL_ID: str = &#34;FI National ID&#34;
+    FI_NATIONAL_IDV2: str = &#34;FI National IDV2&#34;
+    FI_PASSPORT_NUMBER: str = &#34;FI Passport Number&#34;
+    FR_DRIVERS_LICENSE_NUMBER: str = &#34;FR Drivers License Number&#34;
+    FR_HEALTH_INSURANCE_NUMBER: str = &#34;FR Health Insurance Number&#34;
+    FR_NATIONAL_ID: str = &#34;FR National ID&#34;
+    FR_PASSPORT_NUMBER: str = &#34;FR Passport Number&#34;
+    FR_SOCIAL_SECURITY_NUMBER: str = &#34;FR Social Security Number&#34;
+    FR_TAX_IDENTIFICATION_NUMBER: str = &#34;FR Tax Identification Number&#34;
+    FR_VALUE_ADDED_TAX_NUMBER: str = &#34;FR Value Added Tax Number&#34;
+    GR_NATIONAL_IDV2: str = &#34;GR National ID V2&#34;
+    GR_NATIONAL_ID_CARD: str = &#34;GR National ID Card&#34;
+    GR_TAX_IDENTIFICATION_NUMBER: str = &#34;GR Tax Identification Number&#34;
+    HK_IDENTITY_CARD_NUMBER: str = &#34;HK Identity Card Number&#34;
+    HR_IDENTITY_CARD_NUMBER: str = &#34;HR Identity Card Number&#34;
+    HR_NATIONAL_ID_NUMBER: str = &#34;HR National ID Number&#34;
+    HR_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HR Personal Identification Number&#34;
+    HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2: str = (
+        &#34;HR Personal Identification OIB Number V2&#34;
+    )
+    HU_PERSONAL_IDENTIFICATION_NUMBER: str = &#34;HU Personal Identification Number&#34;
+    HU_TAX_IDENTIFICATION_NUMBER: str = &#34;HU Tax Identification Number&#34;
+    HU_VALUE_ADDED_NUMBER: str = &#34;HU Value Added Number&#34;
+    ID_IDENTITY_CARD_NUMBER: str = &#34;ID Identity Card Number&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER: str = &#34;IE Personal Public Service Number&#34;
+    IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2: str = &#34;IE Personal Public Service Number V2&#34;
+    IL_BANK_ACCOUNT_NUMBER: str = &#34;IL Bank Account Number&#34;
+    IL_NATIONAL_ID: str = &#34;IL National ID&#34;
+    INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = &#34;International Banking Account Number&#34;
+    IN_PERMANENT_ACCOUNT: str = &#34;IN Permanent Account&#34;
+    IN_UNIQUE_IDENTIFICATION_NUMBER: str = &#34;IN Unique Identification Number&#34;
+    IP_ADDRESS: str = &#34;IP Address&#34;
+    IT_DRIVERS_LICENSE_NUMBER: str = &#34;IT Drivers License Number&#34;
+    IT_FISCAL_CODE: str = &#34;IT Fiscal Code&#34;
+    IT_VALUE_ADDED_TAX_NUMBER: str = &#34;IT Value Added Tax Number&#34;
+    JP_BANK_ACCOUNT_NUMBER: str = &#34;JP Bank Account Number&#34;
+    JP_DRIVERS_LICENSE_NUMBER: str = &#34;JP Drivers License Number&#34;
+    JP_MY_NUMBER_CORPORATE: str = &#34;JP MyNumber Corporate&#34;
+    JP_MY_NUMBER_PERSONAL: str = &#34;JP MyNumber Personal&#34;
+    JP_PASSPORT_NUMBER: str = &#34;JP Passport Number&#34;
+    JP_RESIDENCE_CARD_NUMBER: str = &#34;JP Residence Card Number&#34;
+    JP_RESIDENT_REGISTRATION_NUMBER: str = &#34;JP Resident Registration Number&#34;
+    JP_SOCIAL_INSURANCE_NUMBER: str = &#34;JP Social Insurance Number&#34;
+    KR_RESIDENT_REGISTRATION_NUMBER: str = &#34;KR Resident Registration Number&#34;
+    LT_PERSONAL_CODE: str = &#34;LT Personal Code&#34;
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL: str = (
+        &#34;LU National Identification Number Natural&#34;
+    )
+    LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL: str = (
+        &#34;LU National Identification Number Non Natural&#34;
+    )
+    LV_PERSONAL_CODE: str = &#34;LV Personal Code&#34;
+    MT_IDENTITY_CARD_NUMBER: str = &#34;MT Identity Card Number&#34;
+    MT_TAX_ID_NUMBER: str = &#34;MT Tax ID Number&#34;
+    MY_IDENTITY_CARD_NUMBER: str = &#34;MY Identity Card Number&#34;
+    NL_CITIZENS_SERVICE_NUMBER: str = &#34;NL Citizens Service Number&#34;
+    NL_CITIZENS_SERVICE_NUMBER_V2: str = &#34;NL Citizens Service Number V2&#34;
+    NL_TAX_IDENTIFICATION_NUMBER: str = &#34;NL Tax Identification Number&#34;
+    NL_VALUE_ADDED_TAX_NUMBER: str = &#34;NL Value Added Tax Number&#34;
+    NO_IDENTITY_NUMBER: str = &#34;NO Identity Number&#34;
+    NZ_BANK_ACCOUNT_NUMBER: str = &#34;NZ Bank Account Number&#34;
+    NZ_DRIVERS_LICENSE_NUMBER: str = &#34;NZ Drivers License Number&#34;
+    NZ_INLAND_REVENUE_NUMBER: str = &#34;NZ Inland Revenue Number&#34;
+    NZ_MINISTRY_OF_HEALTH_NUMBER: str = &#34;NZ Ministry Of Health Number&#34;
+    NZ_SOCIAL_WELFARE_NUMBER: str = &#34;NZ Social Welfare Number&#34;
+    ORGANIZATION: str = &#34;Organization&#34;
+    PERSON: str = &#34;Person&#34;
+    PHONE_NUMBER: str = &#34;Phone Number&#34;
+    PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER: str = &#34;PH Unified Multi Purpose ID Number&#34;
+    PLREGON_NUMBER: str = &#34;PL REGON Number&#34;
+    PL_IDENTITY_CARD: str = &#34;PL Identity Card&#34;
+    PL_NATIONAL_ID: str = &#34;PL National ID&#34;
+    PL_NATIONAL_IDV2: str = &#34;PL National IDV2&#34;
+    PL_PASSPORT_NUMBER: str = &#34;PL Passport Number&#34;
+    PL_TAX_IDENTIFICATION_NUMBER: str = &#34;PL Tax Identification Number&#34;
+    PT_CITIZEN_CARD_NUMBER: str = &#34;PT Citizen Card Number&#34;
+    PT_CITIZEN_CARD_NUMBER_V2: str = &#34;PT Citizen Card Number V2&#34;
+    PT_TAX_IDENTIFICATION_NUMBER: str = &#34;PT Tax Identification Number&#34;
+    RO_PERSONAL_NUMERICAL_CODE: str = &#34;RO Personal NumericalCode&#34;
+    RU_PASSPORT_NUMBER_DOMESTIC: str = &#34;RU Passport Number Domestic&#34;
+    RU_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;RU Passport Number International&#34;
+    SA_NATIONAL_ID: str = &#34;SA National ID&#34;
+    SE_NATIONAL_ID: str = &#34;SE National ID&#34;
+    SE_NATIONAL_IDV2: str = &#34;SE National IDV2&#34;
+    SE_PASSPORT_NUMBER: str = &#34;SE Passport Number&#34;
+    SE_TAX_IDENTIFICATION_NUMBER: str = &#34;SE Tax Identification Number&#34;
+    SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER: str = (
+        &#34;SG National Registration Identity Card Number&#34;
+    )
+    SI_TAX_IDENTIFICATION_NUMBER: str = &#34;SI Tax Identification Number&#34;
+    SI_UNIQUE_MASTER_CITIZEN_NUMBER: str = &#34;SI Unique Master Citizen Number&#34;
+    SK_PERSONAL_NUMBER: str = &#34;SK Personal Number&#34;
+    SQL_SERVER_CONNECTION_STRING: str = &#34;SQL Server Connection String&#34;
+    SWIFT_CODE: str = &#34;SWIFT Code&#34;
+    TH_POPULATION_IDENTIFICATION_CODE: str = &#34;TH Population Identification Code&#34;
+    TR_NATIONAL_IDENTIFICATION_NUMBER: str = &#34;TR National Identification Number&#34;
+    TW_NATIONAL_ID: str = &#34;TW National ID&#34;
+    TW_PASSPORT_NUMBER: str = &#34;TW Passport Number&#34;
+    TW_RESIDENT_CERTIFICATE: str = &#34;TW Resident Certificate&#34;
+    UA_PASSPORT_NUMBER_DOMESTIC: str = &#34;UA Passport Number Domestic&#34;
+    UA_PASSPORT_NUMBER_INTERNATIONAL: str = &#34;UA Passport Number International&#34;
+    UK_DRIVERS_LICENSE_NUMBER: str = &#34;UK Drivers License Number&#34;
+    UK_ELECTORAL_ROLL_NUMBER: str = &#34;UK Electoral Roll Number&#34;
+    UK_NATIONAL_HEALTH_NUMBER: str = &#34;UK National Health Number&#34;
+    UK_NATIONAL_INSURANCE_NUMBER: str = &#34;UK National Insurance Number&#34;
+    UK_UNIQUE_TAXPAYER_NUMBER: str = &#34;UK Unique Taxpayer Number&#34;
+    URL: str = &#34;URL&#34;
+    USUK_PASSPORT_NUMBER: str = &#34;US UK Passport Number&#34;
+    US_BANK_ACCOUNT_NUMBER: str = &#34;US Bank Account Number&#34;
+    US_DRIVERS_LICENSE_NUMBER: str = &#34;US Drivers License Number&#34;
+    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = &#34;US Individual Taxpayer Identification&#34;
+    US_SOCIAL_SECURITY_NUMBER: str = &#34;US Social Security Number&#34;
+    ZA_IDENTIFICATION_NUMBER: str = &#34;ZA Identification Number&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ABA_ROUTING_NUMBER"><code class="name">var <span class="ident">ABA_ROUTING_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ADDRESS"><code class="name">var <span class="ident">ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AGE"><code class="name">var <span class="ident">AGE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AR_NATIONAL_IDENTITY_NUMBER"><code class="name">var <span class="ident">AR_NATIONAL_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AT_IDENTITY_CARD"><code class="name">var <span class="ident">AT_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AT_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">AT_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AT_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">AT_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">AU_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_BUSINESS_NUMBER"><code class="name">var <span class="ident">AU_BUSINESS_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_COMPANY_NUMBER"><code class="name">var <span class="ident">AU_COMPANY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">AU_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_MEDICAL_ACCOUNT_NUMBER"><code class="name">var <span class="ident">AU_MEDICAL_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_PASSPORT_NUMBER"><code class="name">var <span class="ident">AU_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AU_TAX_FILE_NUMBER"><code class="name">var <span class="ident">AU_TAX_FILE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_DOCUMENT_DB_AUTH_KEY"><code class="name">var <span class="ident">AZURE_DOCUMENT_DB_AUTH_KEY</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING"><code class="name">var <span class="ident">AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_IO_T_CONNECTION_STRING"><code class="name">var <span class="ident">AZURE_IO_T_CONNECTION_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_PUBLISH_SETTING_PASSWORD"><code class="name">var <span class="ident">AZURE_PUBLISH_SETTING_PASSWORD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_REDIS_CACHE_STRING"><code class="name">var <span class="ident">AZURE_REDIS_CACHE_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_SAS"><code class="name">var <span class="ident">AZURE_SAS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_SERVICE_BUS_STRING"><code class="name">var <span class="ident">AZURE_SERVICE_BUS_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_GENERIC"><code class="name">var <span class="ident">AZURE_STORAGE_ACCOUNT_GENERIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_KEY"><code class="name">var <span class="ident">AZURE_STORAGE_ACCOUNT_KEY</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER"><code class="name">var <span class="ident">BE_NATIONAL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER_V2"><code class="name">var <span class="ident">BE_NATIONAL_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BE_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">BE_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BG_UNIFORM_CIVIL_NUMBER"><code class="name">var <span class="ident">BG_UNIFORM_CIVIL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BRCPF_NUMBER"><code class="name">var <span class="ident">BRCPF_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BR_LEGAL_ENTITY_NUMBER"><code class="name">var <span class="ident">BR_LEGAL_ENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.BR_NATIONAL_IDRG"><code class="name">var <span class="ident">BR_NATIONAL_IDRG</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">CA_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">CA_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_HEALTH_SERVICE_NUMBER"><code class="name">var <span class="ident">CA_HEALTH_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_PASSPORT_NUMBER"><code class="name">var <span class="ident">CA_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_PERSONAL_HEALTH_IDENTIFICATION"><code class="name">var <span class="ident">CA_PERSONAL_HEALTH_IDENTIFICATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CA_SOCIAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">CA_SOCIAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CH_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">CH_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CL_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">CL_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CN_RESIDENT_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">CN_RESIDENT_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CREDIT_CARD_NUMBER"><code class="name">var <span class="ident">CREDIT_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CY_IDENTITY_CARD"><code class="name">var <span class="ident">CY_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CY_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">CY_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_NUMBER"><code class="name">var <span class="ident">CZ_PERSONAL_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_V2"><code class="name">var <span class="ident">CZ_PERSONAL_IDENTITY_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DATE"><code class="name">var <span class="ident">DATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DEFAULT"><code class="name">var <span class="ident">DEFAULT</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DE_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">DE_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DE_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">DE_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DE_PASSPORT_NUMBER"><code class="name">var <span class="ident">DE_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DE_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">DE_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DE_VALUE_ADDED_NUMBER"><code class="name">var <span class="ident">DE_VALUE_ADDED_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">DK_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_V2"><code class="name">var <span class="ident">DK_PERSONAL_IDENTIFICATION_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.DRUG_ENFORCEMENT_AGENCY_NUMBER"><code class="name">var <span class="ident">DRUG_ENFORCEMENT_AGENCY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EE_PERSONAL_IDENTIFICATION_CODE"><code class="name">var <span class="ident">EE_PERSONAL_IDENTIFICATION_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EMAIL_ADDRESS"><code class="name">var <span class="ident">EMAIL_ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ESDNI"><code class="name">var <span class="ident">ESDNI</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ES_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">ES_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ES_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">ES_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EUGPS_COORDINATES"><code class="name">var <span class="ident">EUGPS_COORDINATES</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_DEBIT_CARD_NUMBER"><code class="name">var <span class="ident">EU_DEBIT_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">EU_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_NATIONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">EU_NATIONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_PASSPORT_NUMBER"><code class="name">var <span class="ident">EU_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">EU_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.EU_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">EU_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FI_EUROPEAN_HEALTH_NUMBER"><code class="name">var <span class="ident">FI_EUROPEAN_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_ID"><code class="name">var <span class="ident">FI_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_IDV2"><code class="name">var <span class="ident">FI_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FI_PASSPORT_NUMBER"><code class="name">var <span class="ident">FI_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">FR_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_HEALTH_INSURANCE_NUMBER"><code class="name">var <span class="ident">FR_HEALTH_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_NATIONAL_ID"><code class="name">var <span class="ident">FR_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_PASSPORT_NUMBER"><code class="name">var <span class="ident">FR_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">FR_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">FR_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.FR_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">FR_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_IDV2"><code class="name">var <span class="ident">GR_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_ID_CARD"><code class="name">var <span class="ident">GR_NATIONAL_ID_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.GR_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">GR_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HK_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">HK_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HR_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">HR_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HR_NATIONAL_ID_NUMBER"><code class="name">var <span class="ident">HR_NATIONAL_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HR_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2"><code class="name">var <span class="ident">HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HU_PERSONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HU_PERSONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HU_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">HU_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.HU_VALUE_ADDED_NUMBER"><code class="name">var <span class="ident">HU_VALUE_ADDED_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ID_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">ID_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER"><code class="name">var <span class="ident">IE_PERSONAL_PUBLIC_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2"><code class="name">var <span class="ident">IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IL_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">IL_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IL_NATIONAL_ID"><code class="name">var <span class="ident">IL_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER"><code class="name">var <span class="ident">INTERNATIONAL_BANKING_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IN_PERMANENT_ACCOUNT"><code class="name">var <span class="ident">IN_PERMANENT_ACCOUNT</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IN_UNIQUE_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">IN_UNIQUE_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IP_ADDRESS"><code class="name">var <span class="ident">IP_ADDRESS</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IT_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">IT_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IT_FISCAL_CODE"><code class="name">var <span class="ident">IT_FISCAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.IT_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">IT_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">JP_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">JP_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_CORPORATE"><code class="name">var <span class="ident">JP_MY_NUMBER_CORPORATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_PERSONAL"><code class="name">var <span class="ident">JP_MY_NUMBER_PERSONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_PASSPORT_NUMBER"><code class="name">var <span class="ident">JP_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENCE_CARD_NUMBER"><code class="name">var <span class="ident">JP_RESIDENCE_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENT_REGISTRATION_NUMBER"><code class="name">var <span class="ident">JP_RESIDENT_REGISTRATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.JP_SOCIAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">JP_SOCIAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.KR_RESIDENT_REGISTRATION_NUMBER"><code class="name">var <span class="ident">KR_RESIDENT_REGISTRATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.LT_PERSONAL_CODE"><code class="name">var <span class="ident">LT_PERSONAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL"><code class="name">var <span class="ident">LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL"><code class="name">var <span class="ident">LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.LV_PERSONAL_CODE"><code class="name">var <span class="ident">LV_PERSONAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.MT_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">MT_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.MT_TAX_ID_NUMBER"><code class="name">var <span class="ident">MT_TAX_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.MY_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">MY_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER"><code class="name">var <span class="ident">NL_CITIZENS_SERVICE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER_V2"><code class="name">var <span class="ident">NL_CITIZENS_SERVICE_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NL_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">NL_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NL_VALUE_ADDED_TAX_NUMBER"><code class="name">var <span class="ident">NL_VALUE_ADDED_TAX_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NO_IDENTITY_NUMBER"><code class="name">var <span class="ident">NO_IDENTITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NZ_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">NZ_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NZ_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">NZ_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NZ_INLAND_REVENUE_NUMBER"><code class="name">var <span class="ident">NZ_INLAND_REVENUE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NZ_MINISTRY_OF_HEALTH_NUMBER"><code class="name">var <span class="ident">NZ_MINISTRY_OF_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.NZ_SOCIAL_WELFARE_NUMBER"><code class="name">var <span class="ident">NZ_SOCIAL_WELFARE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ORGANIZATION"><code class="name">var <span class="ident">ORGANIZATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PERSON"><code class="name">var <span class="ident">PERSON</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PHONE_NUMBER"><code class="name">var <span class="ident">PHONE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER"><code class="name">var <span class="ident">PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PLREGON_NUMBER"><code class="name">var <span class="ident">PLREGON_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PL_IDENTITY_CARD"><code class="name">var <span class="ident">PL_IDENTITY_CARD</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_ID"><code class="name">var <span class="ident">PL_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_IDV2"><code class="name">var <span class="ident">PL_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PL_PASSPORT_NUMBER"><code class="name">var <span class="ident">PL_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PL_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">PL_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER"><code class="name">var <span class="ident">PT_CITIZEN_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER_V2"><code class="name">var <span class="ident">PT_CITIZEN_CARD_NUMBER_V2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.PT_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">PT_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.RO_PERSONAL_NUMERICAL_CODE"><code class="name">var <span class="ident">RO_PERSONAL_NUMERICAL_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_DOMESTIC"><code class="name">var <span class="ident">RU_PASSPORT_NUMBER_DOMESTIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_INTERNATIONAL"><code class="name">var <span class="ident">RU_PASSPORT_NUMBER_INTERNATIONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SA_NATIONAL_ID"><code class="name">var <span class="ident">SA_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_ID"><code class="name">var <span class="ident">SE_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_IDV2"><code class="name">var <span class="ident">SE_NATIONAL_IDV2</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SE_PASSPORT_NUMBER"><code class="name">var <span class="ident">SE_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SE_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">SE_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER"><code class="name">var <span class="ident">SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SI_TAX_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">SI_TAX_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SI_UNIQUE_MASTER_CITIZEN_NUMBER"><code class="name">var <span class="ident">SI_UNIQUE_MASTER_CITIZEN_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SK_PERSONAL_NUMBER"><code class="name">var <span class="ident">SK_PERSONAL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SQL_SERVER_CONNECTION_STRING"><code class="name">var <span class="ident">SQL_SERVER_CONNECTION_STRING</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.SWIFT_CODE"><code class="name">var <span class="ident">SWIFT_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.TH_POPULATION_IDENTIFICATION_CODE"><code class="name">var <span class="ident">TH_POPULATION_IDENTIFICATION_CODE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.TR_NATIONAL_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">TR_NATIONAL_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.TW_NATIONAL_ID"><code class="name">var <span class="ident">TW_NATIONAL_ID</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.TW_PASSPORT_NUMBER"><code class="name">var <span class="ident">TW_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.TW_RESIDENT_CERTIFICATE"><code class="name">var <span class="ident">TW_RESIDENT_CERTIFICATE</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_DOMESTIC"><code class="name">var <span class="ident">UA_PASSPORT_NUMBER_DOMESTIC</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_INTERNATIONAL"><code class="name">var <span class="ident">UA_PASSPORT_NUMBER_INTERNATIONAL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UK_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">UK_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UK_ELECTORAL_ROLL_NUMBER"><code class="name">var <span class="ident">UK_ELECTORAL_ROLL_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_HEALTH_NUMBER"><code class="name">var <span class="ident">UK_NATIONAL_HEALTH_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_INSURANCE_NUMBER"><code class="name">var <span class="ident">UK_NATIONAL_INSURANCE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.UK_UNIQUE_TAXPAYER_NUMBER"><code class="name">var <span class="ident">UK_UNIQUE_TAXPAYER_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.URL"><code class="name">var <span class="ident">URL</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.USUK_PASSPORT_NUMBER"><code class="name">var <span class="ident">USUK_PASSPORT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.US_BANK_ACCOUNT_NUMBER"><code class="name">var <span class="ident">US_BANK_ACCOUNT_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.US_DRIVERS_LICENSE_NUMBER"><code class="name">var <span class="ident">US_DRIVERS_LICENSE_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION"><code class="name">var <span class="ident">US_INDIVIDUAL_TAXPAYER_IDENTIFICATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.US_SOCIAL_SECURITY_NUMBER"><code class="name">var <span class="ident">US_SOCIAL_SECURITY_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pii_codex.models.azure_pii.AzurePIIType.ZA_IDENTIFICATION_NUMBER"><code class="name">var <span class="ident">ZA_IDENTIFICATION_NUMBER</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pii_codex.models" href="index.html">pii_codex.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pii_codex.models.azure_pii.AzureDetectionType" href="#pii_codex.models.azure_pii.AzureDetectionType">AzureDetectionType</a></code></h4>
+<ul class="">
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ABA_ROUTING_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.ABA_ROUTING_NUMBER">ABA_ROUTING_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ADDRESS" href="#pii_codex.models.azure_pii.AzureDetectionType.ADDRESS">ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AGE" href="#pii_codex.models.azure_pii.AzureDetectionType.AGE">AGE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ALL" href="#pii_codex.models.azure_pii.AzureDetectionType.ALL">ALL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AR_NATIONAL_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AR_NATIONAL_IDENTITY_NUMBER">AR_NATIONAL_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AT_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzureDetectionType.AT_IDENTITY_CARD">AT_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AT_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AT_TAX_IDENTIFICATION_NUMBER">AT_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AT_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AT_VALUE_ADDED_TAX_NUMBER">AT_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_BANK_ACCOUNT_NUMBER">AU_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_BUSINESS_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_BUSINESS_NUMBER">AU_BUSINESS_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_COMPANY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_COMPANY_NUMBER">AU_COMPANY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_DRIVERS_LICENSE_NUMBER">AU_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_MEDICAL_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_MEDICAL_ACCOUNT_NUMBER">AU_MEDICAL_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_PASSPORT_NUMBER">AU_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AU_TAX_FILE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.AU_TAX_FILE_NUMBER">AU_TAX_FILE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_DOCUMENT_DB_AUTH_KEY" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_DOCUMENT_DB_AUTH_KEY">AZURE_DOCUMENT_DB_AUTH_KEY</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING">AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_IO_T_CONNECTION_STRING" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_IO_T_CONNECTION_STRING">AZURE_IO_T_CONNECTION_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_PUBLISH_SETTING_PASSWORD" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_PUBLISH_SETTING_PASSWORD">AZURE_PUBLISH_SETTING_PASSWORD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_REDIS_CACHE_STRING" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_REDIS_CACHE_STRING">AZURE_REDIS_CACHE_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_SAS" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_SAS">AZURE_SAS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_SERVICE_BUS_STRING" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_SERVICE_BUS_STRING">AZURE_SERVICE_BUS_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_GENERIC" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_GENERIC">AZURE_STORAGE_ACCOUNT_GENERIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_KEY" href="#pii_codex.models.azure_pii.AzureDetectionType.AZURE_STORAGE_ACCOUNT_KEY">AZURE_STORAGE_ACCOUNT_KEY</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER">BE_NATIONAL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.BE_NATIONAL_NUMBER_V2">BE_NATIONAL_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BE_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.BE_VALUE_ADDED_TAX_NUMBER">BE_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BG_UNIFORM_CIVIL_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.BG_UNIFORM_CIVIL_NUMBER">BG_UNIFORM_CIVIL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BRCPF_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.BRCPF_NUMBER">BRCPF_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BR_LEGAL_ENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.BR_LEGAL_ENTITY_NUMBER">BR_LEGAL_ENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.BR_NATIONAL_IDRG" href="#pii_codex.models.azure_pii.AzureDetectionType.BR_NATIONAL_IDRG">BR_NATIONAL_IDRG</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_BANK_ACCOUNT_NUMBER">CA_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_DRIVERS_LICENSE_NUMBER">CA_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_HEALTH_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_HEALTH_SERVICE_NUMBER">CA_HEALTH_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_PASSPORT_NUMBER">CA_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_PERSONAL_HEALTH_IDENTIFICATION" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_PERSONAL_HEALTH_IDENTIFICATION">CA_PERSONAL_HEALTH_IDENTIFICATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CA_SOCIAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CA_SOCIAL_INSURANCE_NUMBER">CA_SOCIAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CH_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CH_SOCIAL_SECURITY_NUMBER">CH_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CL_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CL_IDENTITY_CARD_NUMBER">CL_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CN_RESIDENT_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CN_RESIDENT_IDENTITY_CARD_NUMBER">CN_RESIDENT_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CREDIT_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CREDIT_CARD_NUMBER">CREDIT_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CY_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzureDetectionType.CY_IDENTITY_CARD">CY_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CY_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CY_TAX_IDENTIFICATION_NUMBER">CY_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_NUMBER">CZ_PERSONAL_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.CZ_PERSONAL_IDENTITY_V2">CZ_PERSONAL_IDENTITY_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DATE" href="#pii_codex.models.azure_pii.AzureDetectionType.DATE">DATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DEFAULT" href="#pii_codex.models.azure_pii.AzureDetectionType.DEFAULT">DEFAULT</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DE_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DE_DRIVERS_LICENSE_NUMBER">DE_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DE_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DE_IDENTITY_CARD_NUMBER">DE_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DE_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DE_PASSPORT_NUMBER">DE_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DE_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DE_TAX_IDENTIFICATION_NUMBER">DE_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DE_VALUE_ADDED_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DE_VALUE_ADDED_NUMBER">DE_VALUE_ADDED_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_NUMBER">DK_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.DK_PERSONAL_IDENTIFICATION_V2">DK_PERSONAL_IDENTIFICATION_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.DRUG_ENFORCEMENT_AGENCY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.DRUG_ENFORCEMENT_AGENCY_NUMBER">DRUG_ENFORCEMENT_AGENCY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EE_PERSONAL_IDENTIFICATION_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.EE_PERSONAL_IDENTIFICATION_CODE">EE_PERSONAL_IDENTIFICATION_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EMAIL_ADDRESS" href="#pii_codex.models.azure_pii.AzureDetectionType.EMAIL_ADDRESS">EMAIL_ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ES_DNI" href="#pii_codex.models.azure_pii.AzureDetectionType.ES_DNI">ES_DNI</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ES_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.ES_SOCIAL_SECURITY_NUMBER">ES_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ES_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.ES_TAX_IDENTIFICATION_NUMBER">ES_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EUGPS_COORDINATES" href="#pii_codex.models.azure_pii.AzureDetectionType.EUGPS_COORDINATES">EUGPS_COORDINATES</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_DEBIT_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_DEBIT_CARD_NUMBER">EU_DEBIT_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_DRIVERS_LICENSE_NUMBER">EU_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_NATIONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_NATIONAL_IDENTIFICATION_NUMBER">EU_NATIONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_PASSPORT_NUMBER">EU_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_SOCIAL_SECURITY_NUMBER">EU_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.EU_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.EU_TAX_IDENTIFICATION_NUMBER">EU_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FI_EUROPEAN_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FI_EUROPEAN_HEALTH_NUMBER">FI_EUROPEAN_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_ID">FI_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzureDetectionType.FI_NATIONAL_IDV2">FI_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FI_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FI_PASSPORT_NUMBER">FI_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_DRIVERS_LICENSE_NUMBER">FR_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_HEALTH_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_HEALTH_INSURANCE_NUMBER">FR_HEALTH_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_NATIONAL_ID">FR_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_PASSPORT_NUMBER">FR_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_SOCIAL_SECURITY_NUMBER">FR_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_TAX_IDENTIFICATION_NUMBER">FR_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.FR_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.FR_VALUE_ADDED_TAX_NUMBER">FR_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_IDV2">GR_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_ID_CARD" href="#pii_codex.models.azure_pii.AzureDetectionType.GR_NATIONAL_ID_CARD">GR_NATIONAL_ID_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.GR_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.GR_TAX_IDENTIFICATION_NUMBER">GR_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HK_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HK_IDENTITY_CARD_NUMBER">HK_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HR_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HR_IDENTITY_CARD_NUMBER">HR_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HR_NATIONAL_ID_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HR_NATIONAL_ID_NUMBER">HR_NATIONAL_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_NUMBER">HR_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2">HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HU_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HU_PERSONAL_IDENTIFICATION_NUMBER">HU_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HU_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HU_TAX_IDENTIFICATION_NUMBER">HU_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.HU_VALUE_ADDED_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.HU_VALUE_ADDED_NUMBER">HU_VALUE_ADDED_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ID_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.ID_IDENTITY_CARD_NUMBER">ID_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER">IE_PERSONAL_PUBLIC_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2">IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IL_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.IL_BANK_ACCOUNT_NUMBER">IL_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IL_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.IL_NATIONAL_ID">IL_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER">INTERNATIONAL_BANKING_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IN_PERMANENT_ACCOUNT" href="#pii_codex.models.azure_pii.AzureDetectionType.IN_PERMANENT_ACCOUNT">IN_PERMANENT_ACCOUNT</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IN_UNIQUE_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.IN_UNIQUE_IDENTIFICATION_NUMBER">IN_UNIQUE_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IP_ADDRESS" href="#pii_codex.models.azure_pii.AzureDetectionType.IP_ADDRESS">IP_ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IT_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.IT_DRIVERS_LICENSE_NUMBER">IT_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IT_FISCAL_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.IT_FISCAL_CODE">IT_FISCAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.IT_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.IT_VALUE_ADDED_TAX_NUMBER">IT_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_BANK_ACCOUNT_NUMBER">JP_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_DRIVERS_LICENSE_NUMBER">JP_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_CORPORATE" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_CORPORATE">JP_MY_NUMBER_CORPORATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_PERSONAL" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_MY_NUMBER_PERSONAL">JP_MY_NUMBER_PERSONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_PASSPORT_NUMBER">JP_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENCE_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENCE_CARD_NUMBER">JP_RESIDENCE_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENT_REGISTRATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_RESIDENT_REGISTRATION_NUMBER">JP_RESIDENT_REGISTRATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.JP_SOCIAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.JP_SOCIAL_INSURANCE_NUMBER">JP_SOCIAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.KR_RESIDENT_REGISTRATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.KR_RESIDENT_REGISTRATION_NUMBER">KR_RESIDENT_REGISTRATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.LT_PERSONAL_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.LT_PERSONAL_CODE">LT_PERSONAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL" href="#pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL">LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL" href="#pii_codex.models.azure_pii.AzureDetectionType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL">LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.LV_PERSONAL_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.LV_PERSONAL_CODE">LV_PERSONAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.MT_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.MT_IDENTITY_CARD_NUMBER">MT_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.MT_TAX_ID_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.MT_TAX_ID_NUMBER">MT_TAX_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.MY_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.MY_IDENTITY_CARD_NUMBER">MY_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER">NL_CITIZENS_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.NL_CITIZENS_SERVICE_NUMBER_V2">NL_CITIZENS_SERVICE_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NL_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NL_TAX_IDENTIFICATION_NUMBER">NL_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NL_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NL_VALUE_ADDED_TAX_NUMBER">NL_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NO_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NO_IDENTITY_NUMBER">NO_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NZ_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NZ_BANK_ACCOUNT_NUMBER">NZ_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NZ_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NZ_DRIVERS_LICENSE_NUMBER">NZ_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NZ_INLAND_REVENUE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NZ_INLAND_REVENUE_NUMBER">NZ_INLAND_REVENUE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NZ_MINISTRY_OF_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NZ_MINISTRY_OF_HEALTH_NUMBER">NZ_MINISTRY_OF_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.NZ_SOCIAL_WELFARE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.NZ_SOCIAL_WELFARE_NUMBER">NZ_SOCIAL_WELFARE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ORGANIZATION" href="#pii_codex.models.azure_pii.AzureDetectionType.ORGANIZATION">ORGANIZATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PERSON" href="#pii_codex.models.azure_pii.AzureDetectionType.PERSON">PERSON</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PHONE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PHONE_NUMBER">PHONE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER">PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PLREGON_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PLREGON_NUMBER">PLREGON_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PL_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzureDetectionType.PL_IDENTITY_CARD">PL_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_ID">PL_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzureDetectionType.PL_NATIONAL_IDV2">PL_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PL_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PL_PASSPORT_NUMBER">PL_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PL_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PL_TAX_IDENTIFICATION_NUMBER">PL_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER">PT_CITIZEN_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER_V2" href="#pii_codex.models.azure_pii.AzureDetectionType.PT_CITIZEN_CARD_NUMBER_V2">PT_CITIZEN_CARD_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.PT_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.PT_TAX_IDENTIFICATION_NUMBER">PT_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.RO_PERSONAL_NUMERICAL_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.RO_PERSONAL_NUMERICAL_CODE">RO_PERSONAL_NUMERICAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_DOMESTIC" href="#pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_DOMESTIC">RU_PASSPORT_NUMBER_DOMESTIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_INTERNATIONAL" href="#pii_codex.models.azure_pii.AzureDetectionType.RU_PASSPORT_NUMBER_INTERNATIONAL">RU_PASSPORT_NUMBER_INTERNATIONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SA_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.SA_NATIONAL_ID">SA_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_ID">SE_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzureDetectionType.SE_NATIONAL_IDV2">SE_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SE_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SE_PASSPORT_NUMBER">SE_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SE_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SE_TAX_IDENTIFICATION_NUMBER">SE_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER">SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SI_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SI_TAX_IDENTIFICATION_NUMBER">SI_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SI_UNIQUE_MASTER_CITIZEN_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SI_UNIQUE_MASTER_CITIZEN_NUMBER">SI_UNIQUE_MASTER_CITIZEN_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SK_PERSONAL_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.SK_PERSONAL_NUMBER">SK_PERSONAL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SQL_SERVER_CONNECTION_STRING" href="#pii_codex.models.azure_pii.AzureDetectionType.SQL_SERVER_CONNECTION_STRING">SQL_SERVER_CONNECTION_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.SWIFT_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.SWIFT_CODE">SWIFT_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.TH_POPULATION_IDENTIFICATION_CODE" href="#pii_codex.models.azure_pii.AzureDetectionType.TH_POPULATION_IDENTIFICATION_CODE">TH_POPULATION_IDENTIFICATION_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.TR_NATIONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.TR_NATIONAL_IDENTIFICATION_NUMBER">TR_NATIONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.TW_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzureDetectionType.TW_NATIONAL_ID">TW_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.TW_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.TW_PASSPORT_NUMBER">TW_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.TW_RESIDENT_CERTIFICATE" href="#pii_codex.models.azure_pii.AzureDetectionType.TW_RESIDENT_CERTIFICATE">TW_RESIDENT_CERTIFICATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_DOMESTIC" href="#pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_DOMESTIC">UA_PASSPORT_NUMBER_DOMESTIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_INTERNATIONAL" href="#pii_codex.models.azure_pii.AzureDetectionType.UA_PASSPORT_NUMBER_INTERNATIONAL">UA_PASSPORT_NUMBER_INTERNATIONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UK_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.UK_DRIVERS_LICENSE_NUMBER">UK_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UK_ELECTORAL_ROLL_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.UK_ELECTORAL_ROLL_NUMBER">UK_ELECTORAL_ROLL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_HEALTH_NUMBER">UK_NATIONAL_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.UK_NATIONAL_INSURANCE_NUMBER">UK_NATIONAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.UK_UNIQUE_TAXPAYER_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.UK_UNIQUE_TAXPAYER_NUMBER">UK_UNIQUE_TAXPAYER_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.URL" href="#pii_codex.models.azure_pii.AzureDetectionType.URL">URL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.USUK_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.USUK_PASSPORT_NUMBER">USUK_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.US_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.US_BANK_ACCOUNT_NUMBER">US_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.US_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.US_DRIVERS_LICENSE_NUMBER">US_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION" href="#pii_codex.models.azure_pii.AzureDetectionType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION">US_INDIVIDUAL_TAXPAYER_IDENTIFICATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.US_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.US_SOCIAL_SECURITY_NUMBER">US_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzureDetectionType.ZA_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzureDetectionType.ZA_IDENTIFICATION_NUMBER">ZA_IDENTIFICATION_NUMBER</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pii_codex.models.azure_pii.AzurePIIType" href="#pii_codex.models.azure_pii.AzurePIIType">AzurePIIType</a></code></h4>
+<ul class="">
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ABA_ROUTING_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.ABA_ROUTING_NUMBER">ABA_ROUTING_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ADDRESS" href="#pii_codex.models.azure_pii.AzurePIIType.ADDRESS">ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AGE" href="#pii_codex.models.azure_pii.AzurePIIType.AGE">AGE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AR_NATIONAL_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AR_NATIONAL_IDENTITY_NUMBER">AR_NATIONAL_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AT_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzurePIIType.AT_IDENTITY_CARD">AT_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AT_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AT_TAX_IDENTIFICATION_NUMBER">AT_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AT_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AT_VALUE_ADDED_TAX_NUMBER">AT_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_BANK_ACCOUNT_NUMBER">AU_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_BUSINESS_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_BUSINESS_NUMBER">AU_BUSINESS_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_COMPANY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_COMPANY_NUMBER">AU_COMPANY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_DRIVERS_LICENSE_NUMBER">AU_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_MEDICAL_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_MEDICAL_ACCOUNT_NUMBER">AU_MEDICAL_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_PASSPORT_NUMBER">AU_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AU_TAX_FILE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.AU_TAX_FILE_NUMBER">AU_TAX_FILE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_DOCUMENT_DB_AUTH_KEY" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_DOCUMENT_DB_AUTH_KEY">AZURE_DOCUMENT_DB_AUTH_KEY</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING">AZURE_IAAS_DATABASE_CONNECTION_AND_SQL_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_IO_T_CONNECTION_STRING" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_IO_T_CONNECTION_STRING">AZURE_IO_T_CONNECTION_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_PUBLISH_SETTING_PASSWORD" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_PUBLISH_SETTING_PASSWORD">AZURE_PUBLISH_SETTING_PASSWORD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_REDIS_CACHE_STRING" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_REDIS_CACHE_STRING">AZURE_REDIS_CACHE_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_SAS" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_SAS">AZURE_SAS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_SERVICE_BUS_STRING" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_SERVICE_BUS_STRING">AZURE_SERVICE_BUS_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_GENERIC" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_GENERIC">AZURE_STORAGE_ACCOUNT_GENERIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_KEY" href="#pii_codex.models.azure_pii.AzurePIIType.AZURE_STORAGE_ACCOUNT_KEY">AZURE_STORAGE_ACCOUNT_KEY</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER">BE_NATIONAL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER_V2" href="#pii_codex.models.azure_pii.AzurePIIType.BE_NATIONAL_NUMBER_V2">BE_NATIONAL_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BE_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.BE_VALUE_ADDED_TAX_NUMBER">BE_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BG_UNIFORM_CIVIL_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.BG_UNIFORM_CIVIL_NUMBER">BG_UNIFORM_CIVIL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BRCPF_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.BRCPF_NUMBER">BRCPF_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BR_LEGAL_ENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.BR_LEGAL_ENTITY_NUMBER">BR_LEGAL_ENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.BR_NATIONAL_IDRG" href="#pii_codex.models.azure_pii.AzurePIIType.BR_NATIONAL_IDRG">BR_NATIONAL_IDRG</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CA_BANK_ACCOUNT_NUMBER">CA_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CA_DRIVERS_LICENSE_NUMBER">CA_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_HEALTH_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CA_HEALTH_SERVICE_NUMBER">CA_HEALTH_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CA_PASSPORT_NUMBER">CA_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_PERSONAL_HEALTH_IDENTIFICATION" href="#pii_codex.models.azure_pii.AzurePIIType.CA_PERSONAL_HEALTH_IDENTIFICATION">CA_PERSONAL_HEALTH_IDENTIFICATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CA_SOCIAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CA_SOCIAL_INSURANCE_NUMBER">CA_SOCIAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CH_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CH_SOCIAL_SECURITY_NUMBER">CH_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CL_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CL_IDENTITY_CARD_NUMBER">CL_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CN_RESIDENT_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CN_RESIDENT_IDENTITY_CARD_NUMBER">CN_RESIDENT_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CREDIT_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CREDIT_CARD_NUMBER">CREDIT_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CY_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzurePIIType.CY_IDENTITY_CARD">CY_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CY_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CY_TAX_IDENTIFICATION_NUMBER">CY_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_NUMBER">CZ_PERSONAL_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_V2" href="#pii_codex.models.azure_pii.AzurePIIType.CZ_PERSONAL_IDENTITY_V2">CZ_PERSONAL_IDENTITY_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DATE" href="#pii_codex.models.azure_pii.AzurePIIType.DATE">DATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DEFAULT" href="#pii_codex.models.azure_pii.AzurePIIType.DEFAULT">DEFAULT</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DE_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DE_DRIVERS_LICENSE_NUMBER">DE_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DE_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DE_IDENTITY_CARD_NUMBER">DE_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DE_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DE_PASSPORT_NUMBER">DE_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DE_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DE_TAX_IDENTIFICATION_NUMBER">DE_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DE_VALUE_ADDED_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DE_VALUE_ADDED_NUMBER">DE_VALUE_ADDED_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_NUMBER">DK_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_V2" href="#pii_codex.models.azure_pii.AzurePIIType.DK_PERSONAL_IDENTIFICATION_V2">DK_PERSONAL_IDENTIFICATION_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.DRUG_ENFORCEMENT_AGENCY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.DRUG_ENFORCEMENT_AGENCY_NUMBER">DRUG_ENFORCEMENT_AGENCY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EE_PERSONAL_IDENTIFICATION_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.EE_PERSONAL_IDENTIFICATION_CODE">EE_PERSONAL_IDENTIFICATION_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EMAIL_ADDRESS" href="#pii_codex.models.azure_pii.AzurePIIType.EMAIL_ADDRESS">EMAIL_ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ESDNI" href="#pii_codex.models.azure_pii.AzurePIIType.ESDNI">ESDNI</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ES_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.ES_SOCIAL_SECURITY_NUMBER">ES_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ES_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.ES_TAX_IDENTIFICATION_NUMBER">ES_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EUGPS_COORDINATES" href="#pii_codex.models.azure_pii.AzurePIIType.EUGPS_COORDINATES">EUGPS_COORDINATES</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_DEBIT_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_DEBIT_CARD_NUMBER">EU_DEBIT_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_DRIVERS_LICENSE_NUMBER">EU_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_NATIONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_NATIONAL_IDENTIFICATION_NUMBER">EU_NATIONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_PASSPORT_NUMBER">EU_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_SOCIAL_SECURITY_NUMBER">EU_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.EU_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.EU_TAX_IDENTIFICATION_NUMBER">EU_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FI_EUROPEAN_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FI_EUROPEAN_HEALTH_NUMBER">FI_EUROPEAN_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_ID">FI_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzurePIIType.FI_NATIONAL_IDV2">FI_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FI_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FI_PASSPORT_NUMBER">FI_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_DRIVERS_LICENSE_NUMBER">FR_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_HEALTH_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_HEALTH_INSURANCE_NUMBER">FR_HEALTH_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.FR_NATIONAL_ID">FR_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_PASSPORT_NUMBER">FR_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_SOCIAL_SECURITY_NUMBER">FR_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_TAX_IDENTIFICATION_NUMBER">FR_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.FR_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.FR_VALUE_ADDED_TAX_NUMBER">FR_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_IDV2">GR_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_ID_CARD" href="#pii_codex.models.azure_pii.AzurePIIType.GR_NATIONAL_ID_CARD">GR_NATIONAL_ID_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.GR_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.GR_TAX_IDENTIFICATION_NUMBER">GR_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HK_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HK_IDENTITY_CARD_NUMBER">HK_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HR_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HR_IDENTITY_CARD_NUMBER">HR_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HR_NATIONAL_ID_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HR_NATIONAL_ID_NUMBER">HR_NATIONAL_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_NUMBER">HR_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2" href="#pii_codex.models.azure_pii.AzurePIIType.HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2">HR_PERSONAL_IDENTIFICATION_OIB_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HU_PERSONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HU_PERSONAL_IDENTIFICATION_NUMBER">HU_PERSONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HU_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HU_TAX_IDENTIFICATION_NUMBER">HU_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.HU_VALUE_ADDED_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.HU_VALUE_ADDED_NUMBER">HU_VALUE_ADDED_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ID_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.ID_IDENTITY_CARD_NUMBER">ID_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER">IE_PERSONAL_PUBLIC_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2" href="#pii_codex.models.azure_pii.AzurePIIType.IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2">IE_PERSONAL_PUBLIC_SERVICE_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IL_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.IL_BANK_ACCOUNT_NUMBER">IL_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IL_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.IL_NATIONAL_ID">IL_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.INTERNATIONAL_BANKING_ACCOUNT_NUMBER">INTERNATIONAL_BANKING_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IN_PERMANENT_ACCOUNT" href="#pii_codex.models.azure_pii.AzurePIIType.IN_PERMANENT_ACCOUNT">IN_PERMANENT_ACCOUNT</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IN_UNIQUE_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.IN_UNIQUE_IDENTIFICATION_NUMBER">IN_UNIQUE_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IP_ADDRESS" href="#pii_codex.models.azure_pii.AzurePIIType.IP_ADDRESS">IP_ADDRESS</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IT_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.IT_DRIVERS_LICENSE_NUMBER">IT_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IT_FISCAL_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.IT_FISCAL_CODE">IT_FISCAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.IT_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.IT_VALUE_ADDED_TAX_NUMBER">IT_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_BANK_ACCOUNT_NUMBER">JP_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_DRIVERS_LICENSE_NUMBER">JP_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_CORPORATE" href="#pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_CORPORATE">JP_MY_NUMBER_CORPORATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_PERSONAL" href="#pii_codex.models.azure_pii.AzurePIIType.JP_MY_NUMBER_PERSONAL">JP_MY_NUMBER_PERSONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_PASSPORT_NUMBER">JP_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENCE_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENCE_CARD_NUMBER">JP_RESIDENCE_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENT_REGISTRATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_RESIDENT_REGISTRATION_NUMBER">JP_RESIDENT_REGISTRATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.JP_SOCIAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.JP_SOCIAL_INSURANCE_NUMBER">JP_SOCIAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.KR_RESIDENT_REGISTRATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.KR_RESIDENT_REGISTRATION_NUMBER">KR_RESIDENT_REGISTRATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.LT_PERSONAL_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.LT_PERSONAL_CODE">LT_PERSONAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL" href="#pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL">LU_NATIONAL_IDENTIFICATION_NUMBER_NATURAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL" href="#pii_codex.models.azure_pii.AzurePIIType.LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL">LU_NATIONAL_IDENTIFICATION_NUMBER_NON_NATURAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.LV_PERSONAL_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.LV_PERSONAL_CODE">LV_PERSONAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.MT_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.MT_IDENTITY_CARD_NUMBER">MT_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.MT_TAX_ID_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.MT_TAX_ID_NUMBER">MT_TAX_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.MY_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.MY_IDENTITY_CARD_NUMBER">MY_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER">NL_CITIZENS_SERVICE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER_V2" href="#pii_codex.models.azure_pii.AzurePIIType.NL_CITIZENS_SERVICE_NUMBER_V2">NL_CITIZENS_SERVICE_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NL_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NL_TAX_IDENTIFICATION_NUMBER">NL_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NL_VALUE_ADDED_TAX_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NL_VALUE_ADDED_TAX_NUMBER">NL_VALUE_ADDED_TAX_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NO_IDENTITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NO_IDENTITY_NUMBER">NO_IDENTITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NZ_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NZ_BANK_ACCOUNT_NUMBER">NZ_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NZ_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NZ_DRIVERS_LICENSE_NUMBER">NZ_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NZ_INLAND_REVENUE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NZ_INLAND_REVENUE_NUMBER">NZ_INLAND_REVENUE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NZ_MINISTRY_OF_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NZ_MINISTRY_OF_HEALTH_NUMBER">NZ_MINISTRY_OF_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.NZ_SOCIAL_WELFARE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.NZ_SOCIAL_WELFARE_NUMBER">NZ_SOCIAL_WELFARE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ORGANIZATION" href="#pii_codex.models.azure_pii.AzurePIIType.ORGANIZATION">ORGANIZATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PERSON" href="#pii_codex.models.azure_pii.AzurePIIType.PERSON">PERSON</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PHONE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PHONE_NUMBER">PHONE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER">PH_UNIFIED_MULTI_PURPOSE_ID_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PLREGON_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PLREGON_NUMBER">PLREGON_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PL_IDENTITY_CARD" href="#pii_codex.models.azure_pii.AzurePIIType.PL_IDENTITY_CARD">PL_IDENTITY_CARD</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_ID">PL_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzurePIIType.PL_NATIONAL_IDV2">PL_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PL_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PL_PASSPORT_NUMBER">PL_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PL_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PL_TAX_IDENTIFICATION_NUMBER">PL_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER">PT_CITIZEN_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER_V2" href="#pii_codex.models.azure_pii.AzurePIIType.PT_CITIZEN_CARD_NUMBER_V2">PT_CITIZEN_CARD_NUMBER_V2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.PT_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.PT_TAX_IDENTIFICATION_NUMBER">PT_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.RO_PERSONAL_NUMERICAL_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.RO_PERSONAL_NUMERICAL_CODE">RO_PERSONAL_NUMERICAL_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_DOMESTIC" href="#pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_DOMESTIC">RU_PASSPORT_NUMBER_DOMESTIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_INTERNATIONAL" href="#pii_codex.models.azure_pii.AzurePIIType.RU_PASSPORT_NUMBER_INTERNATIONAL">RU_PASSPORT_NUMBER_INTERNATIONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SA_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.SA_NATIONAL_ID">SA_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_ID">SE_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_IDV2" href="#pii_codex.models.azure_pii.AzurePIIType.SE_NATIONAL_IDV2">SE_NATIONAL_IDV2</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SE_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SE_PASSPORT_NUMBER">SE_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SE_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SE_TAX_IDENTIFICATION_NUMBER">SE_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER">SG_NATIONAL_REGISTRATION_IDENTITY_CARD_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SI_TAX_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SI_TAX_IDENTIFICATION_NUMBER">SI_TAX_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SI_UNIQUE_MASTER_CITIZEN_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SI_UNIQUE_MASTER_CITIZEN_NUMBER">SI_UNIQUE_MASTER_CITIZEN_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SK_PERSONAL_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.SK_PERSONAL_NUMBER">SK_PERSONAL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SQL_SERVER_CONNECTION_STRING" href="#pii_codex.models.azure_pii.AzurePIIType.SQL_SERVER_CONNECTION_STRING">SQL_SERVER_CONNECTION_STRING</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.SWIFT_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.SWIFT_CODE">SWIFT_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.TH_POPULATION_IDENTIFICATION_CODE" href="#pii_codex.models.azure_pii.AzurePIIType.TH_POPULATION_IDENTIFICATION_CODE">TH_POPULATION_IDENTIFICATION_CODE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.TR_NATIONAL_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.TR_NATIONAL_IDENTIFICATION_NUMBER">TR_NATIONAL_IDENTIFICATION_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.TW_NATIONAL_ID" href="#pii_codex.models.azure_pii.AzurePIIType.TW_NATIONAL_ID">TW_NATIONAL_ID</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.TW_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.TW_PASSPORT_NUMBER">TW_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.TW_RESIDENT_CERTIFICATE" href="#pii_codex.models.azure_pii.AzurePIIType.TW_RESIDENT_CERTIFICATE">TW_RESIDENT_CERTIFICATE</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_DOMESTIC" href="#pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_DOMESTIC">UA_PASSPORT_NUMBER_DOMESTIC</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_INTERNATIONAL" href="#pii_codex.models.azure_pii.AzurePIIType.UA_PASSPORT_NUMBER_INTERNATIONAL">UA_PASSPORT_NUMBER_INTERNATIONAL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UK_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.UK_DRIVERS_LICENSE_NUMBER">UK_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UK_ELECTORAL_ROLL_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.UK_ELECTORAL_ROLL_NUMBER">UK_ELECTORAL_ROLL_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_HEALTH_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_HEALTH_NUMBER">UK_NATIONAL_HEALTH_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_INSURANCE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.UK_NATIONAL_INSURANCE_NUMBER">UK_NATIONAL_INSURANCE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.UK_UNIQUE_TAXPAYER_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.UK_UNIQUE_TAXPAYER_NUMBER">UK_UNIQUE_TAXPAYER_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.URL" href="#pii_codex.models.azure_pii.AzurePIIType.URL">URL</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.USUK_PASSPORT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.USUK_PASSPORT_NUMBER">USUK_PASSPORT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.US_BANK_ACCOUNT_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.US_BANK_ACCOUNT_NUMBER">US_BANK_ACCOUNT_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.US_DRIVERS_LICENSE_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.US_DRIVERS_LICENSE_NUMBER">US_DRIVERS_LICENSE_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION" href="#pii_codex.models.azure_pii.AzurePIIType.US_INDIVIDUAL_TAXPAYER_IDENTIFICATION">US_INDIVIDUAL_TAXPAYER_IDENTIFICATION</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.US_SOCIAL_SECURITY_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.US_SOCIAL_SECURITY_NUMBER">US_SOCIAL_SECURITY_NUMBER</a></code></li>
+<li><code><a title="pii_codex.models.azure_pii.AzurePIIType.ZA_IDENTIFICATION_NUMBER" href="#pii_codex.models.azure_pii.AzurePIIType.ZA_IDENTIFICATION_NUMBER">ZA_IDENTIFICATION_NUMBER</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

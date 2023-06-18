@@ -12,6 +12,10 @@ from pii_codex.models.common import RiskLevel, RiskLevelDefinition
 
 @dataclass
 class RiskAssessment:
+    """
+    Singular risk assessment for a string token
+    """
+
     pii_type_detected: Optional[str] = None
     risk_level: int = RiskLevel.LEVEL_ONE.value
     risk_level_definition: str = (
@@ -25,6 +29,10 @@ class RiskAssessment:
 
 @dataclass
 class RiskAssessmentList:
+    """
+    Risk Assessments and the average risk score of all list items
+    """
+
     risk_assessments: List[RiskAssessment]
     average_risk_score: float
 
@@ -44,6 +52,10 @@ class DetectionResultItem:
 
 @dataclass
 class DetectionResult:
+    """
+    List of detection results and the index of the string they pertain to
+    """
+
     detections: List[DetectionResultItem]
     index: int = 0
 
