@@ -10,13 +10,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
             - name: setup - python
-              uses: actions/setup-python@v3
+              uses: actions/setup-python@v4
               with:
-                  python-version: 3.9
+                  python-version: 3.12
             - name: Install Global Dependencies
-              run: pip install -U pip && pip install poetry wheel
+              run: pip install -U pip && pip install uv
             - name: install
               run: make install
             - name: typecheck

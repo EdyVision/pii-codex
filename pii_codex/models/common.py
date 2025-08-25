@@ -11,9 +11,9 @@ class AnalysisProviderType(Enum):
     Analysis Provider Types - software and cloud service APIs providing PII detection results
     """
 
-    AZURE: str = "AZURE"
-    AWS: str = "AWS"
-    PRESIDIO: str = "PRESIDIO"
+    AZURE = "AZURE"
+    AWS = "AWS"
+    PRESIDIO = "PRESIDIO"
 
 
 class RiskLevel(Enum):
@@ -21,9 +21,9 @@ class RiskLevel(Enum):
     Numerical values assigned to the levels on the continuum presented by Schwartz and Solove (2011)
     """
 
-    LEVEL_ONE: int = 1  # Not-Identifiable
-    LEVEL_TWO: int = 2  # Semi-Identifiable
-    LEVEL_THREE: int = 3  # Identifiable
+    LEVEL_ONE = 1  # Not-Identifiable
+    LEVEL_TWO = 2  # Semi-Identifiable
+    LEVEL_THREE = 3  # Identifiable
 
 
 class RiskLevelDefinition(Enum):
@@ -31,9 +31,9 @@ class RiskLevelDefinition(Enum):
     Levels on the continuum presented by Schwartz and Solove (2011)
     """
 
-    LEVEL_ONE: str = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
-    LEVEL_TWO: str = "Semi-Identifiable"
-    LEVEL_THREE: str = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
+    LEVEL_ONE = "Non-Identifiable"  # Default if no entities were detected, risk level is set to this
+    LEVEL_TWO = "Semi-Identifiable"
+    LEVEL_THREE = "Identifiable"  # Level associated with Directly PII, PHI, and Standalone PII info types
 
 
 class MetadataType(Enum):
@@ -41,11 +41,11 @@ class MetadataType(Enum):
     Common metadata types associated with social media posts and other online platforms
     """
 
-    SCREEN_NAME: str = "screen_name"
-    NAME: str = "name"
-    LOCATION: str = "location"
-    URL: str = "url"
-    USER_ID: str = "user_id"
+    SCREEN_NAME = "screen_name"
+    NAME = "name"
+    LOCATION = "location"
+    URL = "url"
+    USER_ID = "user_id"
 
 
 class PIIType(Enum):
@@ -53,60 +53,65 @@ class PIIType(Enum):
     Commonly observed PII types across services and software
     """
 
-    PHONE_NUMBER: str = "PHONE"
-    WORK_PHONE_NUMBER: str = "PHONE"
-    EMAIL_ADDRESS: str = "EMAIL"
-    ABA_ROUTING_NUMBER: str = "ABA_ROUTING_NUMBER"
-    IP_ADDRESS: str = "IP_ADDRESS"
-    DATE: str = "DATE"
-    ADDRESS: str = "ADDRESS"
-    HOME_ADDRESS: str = "ADDRESS"
-    WORK_ADDRESS: str = "ADDRESS"
-    AGE: str = "AGE"
-    PERSON: str = "PERSON"
-    CREDIT_CARD_NUMBER: str = "CREDIT_CARD_NUMBER"
-    CREDIT_SCORE: str = "CREDIT_SCORE"
-    CRYPTO: str = "CRYPTO"
-    URL: str = "URL"
-    DATE_TIME: str = "DATE_TIME"
-    LOCATION: str = "LOCATION"
-    ZIPCODE: str = "ZIPCODE"
-    RACE: str = "RACE"
-    HEIGHT: str = "HEIGHT"
-    WEIGHT: str = "WEIGHT"
-    GENDER: str = "GENDER"
-    HOMETOWN: str = "HOMETOWN"
-    SCREEN_NAME: str = "SCREEN_NAME"
-    MARITAL_STATUS: str = "MARITAL_STATUS"
-    NUMBER_OF_CHILDREN: str = "NUMBER_OF_CHILDREN"
-    COUNTRY_OF_CITIZENSHIP: str = "COUNTRY_OF_CITIZENSHIP"
-    VOICE_PRINT: str = "VOICE_PRINT"
-    FINGERPRINT: str = "FINGERPRINT"
-    DNA_PROFILE: str = "DNA_PROFILE"
-    PICTURE_FACE: str = "PICTURE_FACE"
-    HANDWRITING_SAMPLE: str = "HANDWRITING_SAMPLE"
-    MOTHERS_MAIDEN_NAME: str = "MOTHERS_MAIDEN_NAME"
-    DIGITAL_SIGNATURE: str = "DIGITAL_SIGNATURE"
-    HEALTH_INSURANCE_ID: str = "HEALTH_INSURANCE_ID"
-    SHOPPING_BEHAVIOR: str = "SHOPPING_BEHAVIOR"
-    SEXUAL_PREFERENCE: str = "SEXUAL_PREFERENCE"
-    SOCIAL_NETWORK_PROFILE: str = "SOCIAL_NETWORK_PROFILE"
-    JOB_TITLE: str = "JOB_TITLE"
-    INCOME_LEVEL: str = "INCOME_LEVEL"
-    OCCUPATION: str = "OCCUPATION"
-    DOCUMENTS: str = "DOCUMENTS"
-    MEDICAL_LICENSE: str = "MEDICAL_LICENSE"
-    LICENSE_PLATE_NUMBER: str = "LICENSE_PLATE_NUMBER"
-    SECURITY_ACCESS_CODES: str = "SECURITY_ACCESS_CODES"
-    PASSWORD: str = "PASSWORD"
-    US_SOCIAL_SECURITY_NUMBER: str = "US_SOCIAL_SECURITY_NUMBER"
-    US_BANK_ACCOUNT_NUMBER: str = "US_BANK_ACCOUNT_NUMBER"
-    US_DRIVERS_LICENSE_NUMBER: str = "US_DRIVERS_LICENSE_NUMBER"
-    US_PASSPORT_NUMBER: str = "US_PASSPORT_NUMBER"
-    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION: str = "US_INDIVIDUAL_TAXPAYER_IDENTIFICATION"
-    INTERNATIONAL_BANKING_ACCOUNT_NUMBER: str = "INTERNATIONAL_BANKING_ACCOUNT_NUMBER"
-    SWIFT_CODE: str = "SWIFTCode"
-    NRP: str = "NRP"  # A person's nationality, religion, or political group
+    PHONE_NUMBER = "PHONE"
+    WORK_PHONE_NUMBER = "PHONE"
+    EMAIL_ADDRESS = "EMAIL"
+    ABA_ROUTING_NUMBER = "ABA_ROUTING_NUMBER"
+    IP_ADDRESS = "IP_ADDRESS"
+    DATE = "DATE"
+    ADDRESS = "ADDRESS"
+    HOME_ADDRESS = "ADDRESS"
+    WORK_ADDRESS = "ADDRESS"
+    AGE = "AGE"
+    PERSON = "PERSON"
+    CREDIT_CARD_NUMBER = "CREDIT_CARD_NUMBER"
+    CREDIT_SCORE = "CREDIT_SCORE"
+    CRYPTO = "CRYPTO"
+    URL = "URL"
+    DATE_TIME = "DATE_TIME"
+    LOCATION = "LOCATION"
+    ZIPCODE = "ZIPCODE"
+    RACE = "RACE"
+    HEIGHT = "HEIGHT"
+    WEIGHT = "WEIGHT"
+    GENDER = "GENDER"
+    HOMETOWN = "HOMETOWN"
+    SCREEN_NAME = "SCREEN_NAME"
+    MARITAL_STATUS = "MARITAL_STATUS"
+    NUMBER_OF_CHILDREN = "NUMBER_OF_CHILDREN"
+    COUNTRY_OF_CITIZENSHIP = "COUNTRY_OF_CITIZENSHIP"
+    VOICE_PRINT = "VOICE_PRINT"
+    FINGERPRINT = "FINGERPRINT"
+    DNA_PROFILE = "DNA_PROFILE"
+    PICTURE_FACE = "PICTURE_FACE"
+    HANDWRITING_SAMPLE = "HANDWRITING_SAMPLE"
+    MOTHERS_MAIDEN_NAME = "MOTHERS_MAIDEN_NAME"
+    DIGITAL_SIGNATURE = "DIGITAL_SIGNATURE"
+    HEALTH_INSURANCE_ID = "HEALTH_INSURANCE_ID"
+    SHOPPING_BEHAVIOR = "SHOPPING_BEHAVIOR"
+    SEXUAL_PREFERENCE = "SEXUAL_PREFERENCE"
+    SOCIAL_NETWORK_PROFILE = "SOCIAL_NETWORK_PROFILE"
+    JOB_TITLE = "JOB_TITLE"
+    INCOME_LEVEL = "INCOME_LEVEL"
+    OCCUPATION = "OCCUPATION"
+    DOCUMENTS = "DOCUMENTS"
+    MEDICAL_LICENSE = "MEDICAL_LICENSE"
+    LICENSE_PLATE_NUMBER = "LICENSE_PLATE_NUMBER"
+    SECURITY_ACCESS_CODES = "SECURITY_ACCESS_CODES"
+    PASSWORD = "PASSWORD"
+    US_SOCIAL_SECURITY_NUMBER = "US_SOCIAL_SECURITY_NUMBER"
+    US_BANK_ACCOUNT_NUMBER = "US_BANK_ACCOUNT_NUMBER"
+    US_DRIVERS_LICENSE_NUMBER = "US_DRIVERS_LICENSE_NUMBER"
+    US_PASSPORT_NUMBER = "US_PASSPORT_NUMBER"
+    US_INDIVIDUAL_TAXPAYER_IDENTIFICATION = "US_INDIVIDUAL_TAXPAYER_IDENTIFICATION"
+    INTERNATIONAL_BANKING_ACCOUNT_NUMBER = "INTERNATIONAL_BANKING_ACCOUNT_NUMBER"
+    SWIFT_CODE = "SWIFTCode"
+    NRP = "NRP"  # A person's nationality, religion, or political group
+    # Australian PII types
+    AU_BUSINESS_NUMBER = "AU_BUSINESS_NUMBER"
+    AU_COMPANY_NUMBER = "AU_COMPANY_NUMBER"
+    AU_MEDICAL_ACCOUNT_NUMBER = "AU_MEDICAL_ACCOUNT_NUMBER"
+    AU_TAX_FILE_NUMBER = "AU_TAX_FILE_NUMBER"
 
 
 class NISTCategory(Enum):
@@ -114,8 +119,8 @@ class NISTCategory(Enum):
     Information Categories presented by NIST as noted in Milne et al., 2016
     """
 
-    LINKABLE: str = "Linkable"
-    DIRECTLY_PII: str = "Directly PII"
+    LINKABLE = "Linkable"
+    DIRECTLY_PII = "Directly PII"
 
 
 class DHSCategory(Enum):
@@ -123,9 +128,9 @@ class DHSCategory(Enum):
     Information Categories presented by DHS as noted in Milne et al., 2016
     """
 
-    NOT_MENTIONED: str = "Not Mentioned"
-    LINKABLE: str = "Linkable"
-    STAND_ALONE_PII: str = "Stand Alone PII"
+    NOT_MENTIONED = "Not Mentioned"
+    LINKABLE = "Linkable"
+    STAND_ALONE_PII = "Stand Alone PII"
 
 
 class HIPAACategory(Enum):
@@ -133,8 +138,8 @@ class HIPAACategory(Enum):
     Information Categories presented by HIPAA guidelines
     """
 
-    NON_PHI: str = "Not Protected Health Information"
-    PHI: str = "Protected Health Information"
+    NON_PHI = "Not Protected Health Information"
+    PHI = "Protected Health Information"
 
 
 class ClusterMembershipType(Enum):
@@ -142,9 +147,9 @@ class ClusterMembershipType(Enum):
     Information Cluster Memberships presented by Milne et al., 2016
     """
 
-    BASIC_DEMOGRAPHICS: str = "Basic Demographics"
-    PERSONAL_PREFERENCES: str = "Personal Preferences"
-    CONTACT_INFORMATION: str = "Contact Information"
-    COMMUNITY_INTERACTION: str = "Community Interaction"
-    FINANCIAL_INFORMATION: str = "Financial Information"
-    SECURE_IDENTIFIERS: str = "Secure Identifiers"
+    BASIC_DEMOGRAPHICS = "Basic Demographics"
+    PERSONAL_PREFERENCES = "Personal Preferences"
+    CONTACT_INFORMATION = "Contact Information"
+    COMMUNITY_INTERACTION = "Community Interaction"
+    FINANCIAL_INFORMATION = "Financial Information"
+    SECURE_IDENTIFIERS = "Secure Identifiers"

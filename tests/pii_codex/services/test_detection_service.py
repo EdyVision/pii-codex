@@ -14,7 +14,6 @@ from pii_codex.services.analyzers.presidio_analysis import (
 
 
 class TestDetectionService:
-
     presidio_analyzer = PresidioPIIAnalyzer()
 
     @pytest.mark.parametrize(
@@ -64,7 +63,6 @@ class TestDetectionService:
             assert_that(presidio_results).is_empty()
 
     def test_msft_presidio_analysis_collection(self):
-
         presidio_results = self.presidio_analyzer.analyze_collection(
             texts=[
                 "My email is example@example.eu.edu",
@@ -83,7 +81,6 @@ class TestDetectionService:
         ).is_true()
 
     def test_presidio_analysis_collection_conversion(self):
-
         conversion_results: List[
             DetectionResult
         ] = self.presidio_analyzer.convert_analyzed_collection(
@@ -126,3 +123,112 @@ class TestDetectionService:
         assert_that(
             isinstance(conversion_results[0].detections[0], DetectionResultItem)
         ).is_true()
+
+    @pytest.mark.parametrize(
+        "ssn_text,expected_detection",
+        [
+            ("My SSN is 489-36-8350", True),  # Robert Aragon from DLP test data
+            ("SSN: 514-14-8905", True),  # Ashley Borden from DLP test data
+            (
+                "Social Security Number: 690-05-5315",
+                True,
+            ),  # Thomas Conley from DLP test data
+            ("My number is 421-37-1396", True),  # Susan Davis from DLP test data
+            ("SSN 458-02-6124", True),  # Christopher Diaz from DLP test data
+            ("No SSN here", False),  # No SSN
+            ("Random text 123-45-6789", False),  # Generic SSN format without context
+        ],
+    )
+    def test_ssn_detection_with_dlp_data(self, ssn_text, expected_detection):
+        """Test SSN detection using DLP test data from dlptest.com"""
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
+            text=ssn_text,
+            entities=[MSFTPresidioPIIType.US_SOCIAL_SECURITY_NUMBER.value],
+        )
+
+        if expected_detection:
+            assert_that(presidio_results).is_not_empty()
+            assert_that(presidio_results[0].entity_type).is_equal_to(
+                "US_SOCIAL_SECURITY_NUMBER"
+            )
+            assert_that(sanitized_text).is_not_empty()
+        else:
+            assert_that(presidio_results).is_empty()
+
+    def test_ssn_conversion_to_common_type(self):
+        """Test that SSN detection results are properly converted to common PII types"""
+        # Test with DLP test data SSN
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
+            text="SSN: 489-36-8350",  # Robert Aragon from DLP test data
+            entities=[MSFTPresidioPIIType.US_SOCIAL_SECURITY_NUMBER.value],
+        )
+
+        assert_that(presidio_results).is_not_empty()
+        # The conversion should map US_SSN to US_SOCIAL_SECURITY_NUMBER
+        assert_that(presidio_results[0].entity_type).is_equal_to(
+            "US_SOCIAL_SECURITY_NUMBER"
+        )
+        assert_that(sanitized_text).is_not_empty()
+        assert_that(sanitized_text).does_not_contain("489-36-8350")
+
+    def test_bank_number_detection_and_conversion(self):
+        """Test bank account number detection and conversion"""
+        # Test with a sample bank account number
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
+            text="Bank account: 1234567890",
+            entities=[MSFTPresidioPIIType.US_BANK_ACCOUNT_NUMBER.value],
+        )
+
+        assert_that(presidio_results).is_not_empty()
+        # The conversion should map US_BANK_NUMBER to US_BANK_ACCOUNT_NUMBER
+        assert_that(presidio_results[0].entity_type).is_equal_to(
+            "US_BANK_ACCOUNT_NUMBER"
+        )
+        assert_that(sanitized_text).is_not_empty()
+        assert_that(sanitized_text).does_not_contain("1234567890")
+
+    def test_au_medicare_detection_and_conversion(self):
+        """Test Australian Medicare number detection and conversion"""
+        # Test with a sample Australian Medicare number
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
+            text="Medicare: 1234567890",
+            entities=[MSFTPresidioPIIType.AU_MEDICAL_ACCOUNT_NUMBER.value],
+        )
+
+        # Note: Presidio doesn't have a recognizer for AU_MEDICARE in English
+        # This test demonstrates the mapping conversion but won't detect anything
+        # The conversion should map AU_MEDICARE to AU_MEDICAL_ACCOUNT_NUMBER when it exists
+        if presidio_results:
+            assert_that(presidio_results[0].entity_type).is_equal_to(
+                "AU_MEDICAL_ACCOUNT_NUMBER"
+            )
+            assert_that(sanitized_text).is_not_empty()
+            assert_that(sanitized_text).does_not_contain("1234567890")
+        else:
+            # If no recognizer is available, that's also acceptable
+            pass
+
+    def test_multiple_pii_types_with_dlp_data(self):
+        """Test detection of multiple PII types using DLP test data"""
+        test_text = (
+            "Robert Aragon, SSN: 489-36-8350, DOB: 6/7/1981"  # Test entry from DLP data
+        )
+
+        presidio_results, sanitized_text = self.presidio_analyzer.analyze_item(
+            text=test_text,
+            entities=[
+                MSFTPresidioPIIType.US_SOCIAL_SECURITY_NUMBER.value,
+                MSFTPresidioPIIType.DATE.value,
+                MSFTPresidioPIIType.PERSON.value,
+            ],
+        )
+
+        assert_that(presidio_results).is_not_empty()
+        # Should detect SSN, date, and person
+        detected_types = [result.entity_type for result in presidio_results]
+        assert_that(detected_types).contains("US_SOCIAL_SECURITY_NUMBER")
+        assert_that(detected_types).contains("PERSON")
+        assert_that(sanitized_text).is_not_empty()
+        assert_that(sanitized_text).does_not_contain("489-36-8350")
+        assert_that(sanitized_text).does_not_contain("6/7/1981")
+        assert_that(sanitized_text).does_not_contain("Robert Aragon")

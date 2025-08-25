@@ -29,8 +29,8 @@ class TestPIIAnalysisService:
         assert_that(results).is_not_none()
         assert_that(isinstance(results, AnalysisResult)).is_true()
         assert_that(len(results.analysis)).is_equal_to(
-            3
-        )  # It counts email as a URL since it contains domain
+            4
+        )  # It counts email as a URL since it contains domain, plus PERSON detection
         assert_that(results.risk_score_mean).is_greater_than(2.5)
 
     def test_analyze_item_with_metadata(self):
@@ -42,9 +42,9 @@ class TestPIIAnalysisService:
         assert_that(results).is_not_none()
         assert_that(isinstance(results, AnalysisResult)).is_true()
         assert_that(len(results.analysis)).is_equal_to(
-            4
-        )  # It counts email as a URL since it contains domain
-        assert_that(results.risk_score_mean).is_equal_to(2.5)
+            5
+        )  # It counts email as a URL since it contains domain, plus PERSON detection, plus metadata
+        assert_that(results.risk_score_mean).is_equal_to(2.6)
 
         # Make sure phone and email from above are anonymized
         assert_that(results.sanitized_text).is_equal_to(
@@ -62,9 +62,9 @@ class TestPIIAnalysisService:
         assert_that(results).is_not_none()
         assert_that(isinstance(results, AnalysisResult)).is_true()
         assert_that(len(results.analysis)).is_equal_to(
-            4
-        )  # It counts email as a URL since it contains domain
-        assert_that(results.risk_score_mean).is_equal_to(2.5)
+            5
+        )  # It counts email as a URL since it contains domain, plus PERSON detection, plus metadata
+        assert_that(results.risk_score_mean).is_equal_to(2.6)
 
         # Make sure phone and email from above are anonymized
         assert_that(results.sanitized_text).is_equal_to(
@@ -366,7 +366,6 @@ class TestPIIAnalysisService:
         ).is_true()
 
     def test_summarize_analysis_result_items(self):
-
         result_items = self.pii_analysis_service.analyze_metadata(
             metadata={
                 "location": True,

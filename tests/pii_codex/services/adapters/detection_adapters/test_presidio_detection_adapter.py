@@ -14,7 +14,6 @@ presidio_adapter = PresidioPIIDetectionAdapter()
 
 
 def test_presidio_analysis_single_item_conversion():
-
     conversion_results: List[
         DetectionResultItem
     ] = presidio_adapter.convert_analyzed_item(
@@ -39,7 +38,6 @@ def test_presidio_analysis_single_item_conversion():
 
 
 def test_presidio_analysis_collection_conversion():
-
     conversion_results: List[
         DetectionResult
     ] = presidio_adapter.convert_analyzed_collection(

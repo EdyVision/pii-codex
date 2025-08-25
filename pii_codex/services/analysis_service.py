@@ -1,4 +1,4 @@
-# pylint: disable=too-many-arguments
+# pylint: disable=too-many-arguments, too-many-positional-arguments
 from typing import List, Optional, Tuple
 import pandas as pd
 
@@ -124,7 +124,6 @@ class PIIAnalysisService:
             ]
 
         if texts:
-
             analysis_set = [
                 self._analyze_text_collection_item(idx, collection_entry)
                 for idx, collection_entry in enumerate(texts)

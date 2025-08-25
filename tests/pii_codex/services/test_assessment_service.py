@@ -6,7 +6,6 @@ from pii_codex.utils.statistics_util import get_mean
 
 
 class TestPIIAssessmentService:
-
     pii_assessment_service = PIIAssessmentService()
 
     def test_assess_pii_type(self):

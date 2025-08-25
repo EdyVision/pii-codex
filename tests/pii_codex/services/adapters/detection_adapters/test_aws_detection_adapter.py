@@ -35,7 +35,6 @@ from pii_codex.services.adapters.detection_adapters.aws_detection_adapter import
     ],
 )
 def test_aws_comprehend_analysis_single_item_conversion(expected_result, expected_pii):
-
     conversion_results: List[
         DetectionResultItem
     ] = AWSComprehendPIIDetectionAdapter().convert_analyzed_item(
@@ -60,7 +59,6 @@ def test_aws_comprehend_analysis_single_item_conversion(expected_result, expecte
 
 
 def test_aws_comprehend_analysis_collection_conversion():
-
     conversion_results: List[
         DetectionResult
     ] = AWSComprehendPIIDetectionAdapter().convert_analyzed_collection(
