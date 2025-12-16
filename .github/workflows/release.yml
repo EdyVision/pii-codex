@@ -52,6 +52,7 @@ jobs:
           echo "Current version: ${{ env.TAG_NAME }}"
       - name: Tag and Release GitHub Snapshot
         id: release-snapshot
+        if: ${{ github.event_name == 'workflow_dispatch' || env.LAST_RELEASE_VERSION != env.TAG_NAME }}
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -61,6 +62,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Publish to PyPI
+        if: ${{ github.event_name == 'workflow_dispatch' || env.LAST_RELEASE_VERSION != env.TAG_NAME }}
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PII_CODEX_PYPI_TOKEN }}
