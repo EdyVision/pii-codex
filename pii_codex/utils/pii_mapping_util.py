@@ -1,14 +1,10 @@
-# pylint: disable=broad-except, unused-variable
+# pylint: disable=broad-except, unused-variable, no-else-return
 from typing import Optional
 
 from pii_codex.models.aws_pii import AWSComprehendPIIType
-from pii_codex.models.azure_pii import AzurePIIType
+from pii_codex.models.azure_pii import AzureDetectionType
 from pii_codex.models.common import (
     RiskLevel,
-    ClusterMembershipType,
-    HIPAACategory,
-    DHSCategory,
-    NISTCategory,
     PIIType,
     MetadataType,
     RiskLevelDefinition,
@@ -16,7 +12,7 @@ from pii_codex.models.common import (
 from pii_codex.models.analysis import RiskAssessment
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
 
-from pii_codex.utils.file_util import open_pii_type_mapping_csv
+from pii_codex.services.pii_type_mappings import get_pii_mapping
 
 
 class PIIMapper:
@@ -25,7 +21,8 @@ class PIIMapper:
     """
 
     def __init__(self):
-        self._pii_mapping_data_frame = open_pii_type_mapping_csv("v1")
+        # No need to load CSV anymore - using Python structure
+        pass
 
     def map_pii_type(self, pii_type: str) -> RiskAssessment:
         """
@@ -36,37 +33,30 @@ class PIIMapper:
         @return:
         """
 
-        information_detail_lookup = self._pii_mapping_data_frame[
-            self._pii_mapping_data_frame.PII_Type == pii_type
-        ]
+        try:
+            mapping = get_pii_mapping(pii_type)
 
-        # Retrieve the risk_level name by the value of the risk definition enum entry
-        if information_detail_lookup.empty:
+            # Get the risk level definition string based on the risk level
+            risk_level_to_definition = {
+                RiskLevel.LEVEL_ONE: RiskLevelDefinition.LEVEL_ONE.value,
+                RiskLevel.LEVEL_TWO: RiskLevelDefinition.LEVEL_TWO.value,
+                RiskLevel.LEVEL_THREE: RiskLevelDefinition.LEVEL_THREE.value,
+            }
+            risk_level_definition = risk_level_to_definition[mapping.risk_level]
+
+            return RiskAssessment(
+                pii_type_detected=pii_type,
+                risk_level=mapping.risk_level.value,
+                risk_level_definition=risk_level_definition,
+                cluster_membership_type=mapping.cluster_membership_type.value,
+                hipaa_category=mapping.hipaa_category.value,
+                dhs_category=mapping.dhs_category.value,
+                nist_category=mapping.nist_category.value,
+            )
+        except KeyError:
             raise Exception(
                 f"An error occurred while processing the detected entity {pii_type}"
             )
-
-        risk_level_definition = RiskLevelDefinition(
-            information_detail_lookup.Risk_Level.item()
-        )
-
-        return RiskAssessment(
-            pii_type_detected=pii_type,
-            risk_level=RiskLevel[risk_level_definition.name].value,
-            risk_level_definition=risk_level_definition.value,
-            cluster_membership_type=ClusterMembershipType(
-                information_detail_lookup.Cluster_Membership_Type.item()
-            ).value,
-            hipaa_category=HIPAACategory[
-                information_detail_lookup.HIPAA_Protected_Health_Information_Category.item()
-            ].value,
-            dhs_category=DHSCategory(
-                information_detail_lookup.DHS_Category.item()
-            ).value,
-            nist_category=NISTCategory(
-                information_detail_lookup.NIST_Category.item()
-            ).value,
-        )
 
     @classmethod
     def convert_common_pii_to_msft_presidio_type(
@@ -88,14 +78,16 @@ class PIIMapper:
         return converted_type
 
     @classmethod
-    def convert_common_pii_to_azure_pii_type(cls, pii_type: PIIType) -> AzurePIIType:
+    def convert_common_pii_to_azure_pii_type(
+        cls, pii_type: PIIType
+    ) -> AzureDetectionType:
         """
         Converts a common PII Type to an Azure PII Type
         @param pii_type:
         @return:
         """
         try:
-            return AzurePIIType[pii_type.name]
+            return AzureDetectionType[pii_type.name]
         except Exception as ex:
             raise Exception(
                 "The current version does not support this PII Type conversion."
@@ -126,11 +118,11 @@ class PIIMapper:
         @return:
         """
         try:
-            if pii_type == AzurePIIType.USUK_PASSPORT_NUMBER.value:
+            if pii_type == AzureDetectionType.USUK_PASSPORT_NUMBER.value:
                 # Special case, map to USUK for all US and UK Passport types
                 return PIIType.US_PASSPORT_NUMBER
 
-            return PIIType[AzurePIIType(pii_type).name]
+            return PIIType[AzureDetectionType(pii_type).name]
         except Exception as ex:
             raise Exception(
                 "The current version does not support this PII Type conversion."
@@ -164,10 +156,22 @@ class PIIMapper:
         @return:
         """
         try:
+            # Handle specific cases where Presidio returns different values than enum names
+            if pii_type == "US_SSN":
+                return PIIType.US_SOCIAL_SECURITY_NUMBER
+            if pii_type == "US_BANK_NUMBER":
+                return PIIType.US_BANK_ACCOUNT_NUMBER
+            if pii_type == "AU_MEDICARE":
+                return PIIType.AU_MEDICAL_ACCOUNT_NUMBER
+            if pii_type == "DATE":
+                return PIIType.DATE_TIME
+
+            # For everything else, use the original approach that was working
             return PIIType[MSFTPresidioPIIType(pii_type).name]
+
         except Exception as ex:
             raise Exception(
-                "The current version does not support this PII Type conversion."
+                f"The current version does not support this PII Type conversion: {pii_type}. Error: {str(ex)}"
             )
 
     @classmethod

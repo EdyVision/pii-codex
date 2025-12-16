@@ -23,6 +23,8 @@ Each module or cloud resource will have its own string labeling for the PII Type
 ```python
 from pii_codex.models.common import PIIType
 from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
+from pii_codex.models.azure_pii import AzureDetectionType
+from pii_codex.models.aws_pii import AWSComprehendPIIType
 
 presidio_pii_type = MSFTPresidioPIIType[PIIType.EMAIL_ADDRESS.name] # MSFT Presidio enum entry
 
@@ -38,23 +40,59 @@ from pii_codex.utils.pii_mapping_util import PIIMapper
 
 pii_mapper = PIIMapper()
 
-azure_pii = pii_mapper.convert_common_pii_to_azure_pii_type(PIIType.EMAIL_ADDRESS.name)
+azure_pii = pii_mapper.convert_common_pii_to_azure_pii_type(PIIType.EMAIL_ADDRESS)
 
-aws_pii = pii_mapper.convert_common_pii_to_aws_comprehend_type(PIIType.EMAIL_ADDRESS.name)
-presidio_pii = pii_mapper.convert_common_pii_to_msft_presidio_type(PIIType.EMAIL_ADDRESS.name)
+aws_pii = pii_mapper.convert_common_pii_to_aws_comprehend_type(PIIType.EMAIL_ADDRESS)
+presidio_pii = pii_mapper.convert_common_pii_to_msft_presidio_type(PIIType.EMAIL_ADDRESS)
 ```
 
 In the case you are using the PII-Codex module for just detection conversions and analysis, there is an inverse set of mappers that will take Presidio, Azure, or AWS Comprehend PII types and convert to the PII-Codex commmon types:
 
 ```python
 from pii_codex.models.common import PIIType
+from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
+from pii_codex.models.azure_pii import AzureDetectionType
+from pii_codex.models.aws_pii import AWSComprehendPIIType
 from pii_codex.utils.pii_mapping_util import PIIMapper
 
 pii_mapper = PIIMapper()
 
-azure_to_common_pii = pii_mapper.convert_azure_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
-aws_to_common_pii = pii_mapper.convert_aws_comprehend_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
-presidio_to_common_pii = pii_mapper.convert_msft_presidio_pii_to_common_pii_type(PIIType.EMAIL_ADDRESS.name)
+azure_to_common_pii = pii_mapper.convert_azure_pii_to_common_pii_type(
+    AzureDetectionType.EMAIL_ADDRESS.value
+)
+aws_to_common_pii = pii_mapper.convert_aws_comprehend_pii_to_common_pii_type(
+    AWSComprehendPIIType.EMAIL_ADDRESS.value
+)
+presidio_to_common_pii = pii_mapper.convert_msft_presidio_pii_to_common_pii_type(
+    MSFTPresidioPIIType.US_SOCIAL_SECURITY_NUMBER.value  # e.g. "US_SSN"
+)
+```
+
+### Example: provider‑specific labels vs common PII types
+
+Some providers use compact or region‑encoded labels which do **not** match the human‑readable common PII type names. For example:
+
+```python
+from pii_codex.models.common import PIIType
+from pii_codex.models.microsoft_presidio_pii import MSFTPresidioPIIType
+from pii_codex.utils.pii_mapping_util import PIIMapper
+
+pii_mapper = PIIMapper()
+
+# Presidio emits "US_SSN", which we represent as:
+assert MSFTPresidioPIIType.US_SOCIAL_SECURITY_NUMBER.value == "US_SSN"
+
+# PII Codex maps this back to the canonical common type:
+common_type = pii_mapper.convert_msft_presidio_pii_to_common_pii_type("US_SSN")
+assert common_type is PIIType.US_SOCIAL_SECURITY_NUMBER
+
+# Likewise for AU tax identifiers:
+assert MSFTPresidioPIIType.AU_TAX_FILE_NUMBER.value == "AU_TFN"
+common_au_tfn = pii_mapper.convert_msft_presidio_pii_to_common_pii_type("AU_TFN")
+assert common_au_tfn is PIIType.AU_TAX_FILE_NUMBER
+
+# The key idea: provider enums mirror the provider's own labels,
+# and PIIType is the canonical, provider‑independent surface.
 ```
 
 ## Importing Updated Files

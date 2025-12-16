@@ -9,7 +9,7 @@ PII Detection, Categorization, and Severity Assessment
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/EdyVision/pii-codex/graphs/commit-activity)
 [![codecov](https://codecov.io/gh/EdyVision/pii-codex/branch/main/graph/badge.svg?token=QO7DNMP87X)](https://codecov.io/gh/EdyVision/pii-codex)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![Python 3.9-3.12](https://img.shields.io/badge/python-3.9--3.12-blue.svg)](https://www.python.org/downloads/)
 [![DOI](https://zenodo.org/badge/533554671.svg)](https://zenodo.org/badge/latestdoi/533554671)
 [![status](https://joss.theoj.org/papers/5296a84bba0925e682dcddf14bec5880/status.svg)](https://joss.theoj.org/papers/5296a84bba0925e682dcddf14bec5880)
 
@@ -36,17 +36,17 @@ Potential usages include sanitizing of dataset strings (e.g. a collection of soc
 
 <hr/>
 
-## Running Locally with Poetry
-This project uses Poetry. To run this project, install `poetry` and proceed to follow the instructions under `/docs/LOCAL_SETUP.md`.
+## Running Locally with uv
+This project uses `uv` for dependency management. To run this project, install `uv` and proceed to follow the instructions under `/docs/LOCAL_SETUP.md`.
 
-`Note: This project has only been tested with Ubuntu and MacOS and with Python versions 3.9 and 3.10. You may need to upgrade pip ahead of installation.`
+`Note: This project has only been tested with Ubuntu and MacOS and with Python versions 3.11 and 3.12. You may need to upgrade pip ahead of installation.`
 
 ## Installing with PIP
-Video capture of install provided in LOCAL_SETUP.md file. Make sure you set up a virtual environment with either python 3.9 or 3.10 and upgrade pip with:
+Video capture of install provided in LOCAL_SETUP.md file. Make sure you set up a virtual environment with either python 3.11 or 3.12 and upgrade pip with:
 
 ```bash
 pip install --upgrade pip
-pip install -U pip setuptools wheel # only needed if you haven't already done so 
+pip install -U pip uv # only needed if you haven't already done so 
 ```
 
 Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
@@ -67,12 +67,12 @@ pip install "pii-codex[detections]"
 
 `Note: The extras installed with pii-codex[detections] are the spaCy, Micrisoft Presidio Analyzer, and Microsoft Anonymzer packages.`
 
-Using Poetry:
+Using uv:
 
 ```bash
-poetry update
-poetry add pii-codex
-poetry install pii-codex --extras="detections"
+uv sync
+uv add pii-codex
+uv add "pii-codex[detections]"
 ```
 
 For those using Google Collab, check out the example notebook:
@@ -162,7 +162,7 @@ For more information on usage, check out the respective documentation for guidan
 <hr/>
 
 ## Attributions
-This project benefited greatly from a number of PII research works like that from Milne et al (2016) with the definition of the types and categories, Schwartz and Solove (2012) with the severity levels of Non-Identifiable, Semi-Identifiable, and Identifiable, and the documentation by NIST, DHS (2012), and HIPAA (full list of foundational publications provided below). A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like Poetry, Microsoft Presidio, spaCy (2017), Jupyter, and several others.
+This project benefited greatly from a number of PII research works like that from Milne et al (2016) with the definition of the types and categories, Schwartz and Solove (2012) with the severity levels of Non-Identifiable, Semi-Identifiable, and Identifiable, and the documentation by NIST, DHS (2012), and HIPAA (full list of foundational publications provided below). A special thanks to all the open source projects, and frameworks that made the setup and structuring of this project much easier like uv, Microsoft Presidio, spaCy (2017), Jupyter, and several others.
 
 ### Foundational Publications
 The following publications that inspired and provided a foundation for this repository:

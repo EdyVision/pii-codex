@@ -1,6 +1,8 @@
 # pylint: disable=broad-except,unused-argument,import-outside-toplevel,unused-variable
 from typing import List, Tuple
 
+from presidio_anonymizer.entities.engine.recognizer_result import RecognizerResult
+
 from ...config import PII_MAPPER, DEFAULT_LANG, DEFAULT_TOKEN_REPLACEMENT_VALUE
 from ...models.analysis import DetectionResultItem, DetectionResult
 from ...utils.package_installer_util import install_spacy_package
@@ -55,7 +57,7 @@ class PresidioPIIAnalyzer:
         @param language_code: str - defaults to "en"
         @return: List[str]
         """
-        return self.analyzer.get_supported_entities(language=language_code)  # type: ignore
+        return self.analyzer.get_supported_entities(language=language_code)
 
     def get_loaded_recognizers(self, language_code: str = DEFAULT_LANG):
         """
@@ -63,7 +65,7 @@ class PresidioPIIAnalyzer:
         @param language_code:
         @return:
         """
-        return self.analyzer.get_recognizers(language=language_code)  # type: ignore
+        return self.analyzer.get_recognizers(language=language_code)
 
     def analyze_item(
         self, text: str, language_code: str = DEFAULT_LANG, entities: List[str] = None
@@ -86,7 +88,7 @@ class PresidioPIIAnalyzer:
 
         try:
             # Engine Setup - spaCy model setup and PII recognizers
-            detections = self.analyzer.analyze(  # type: ignore
+            detections = self.analyzer.analyze(
                 text=text, entities=entities, language=language_code
             )
 
@@ -94,15 +96,20 @@ class PresidioPIIAnalyzer:
             logger.error(ex)
 
         # Return analyzer results in formatted Analysis Result List object
-        return [
+        detection_items = [
             DetectionResultItem(
-                entity_type=result.entity_type,
+                entity_type=PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(
+                    result.entity_type
+                ).name,
                 score=result.score,
                 start=result.start,
                 end=result.end,
             )
             for result in detections
-        ], self.sanitize_text(text=text, analysis_items=detections)
+        ]
+        return detection_items, self.sanitize_text(
+            text=text, analysis_items=detection_items
+        )
 
     def sanitize_text(
         self, text: str, analysis_items: List[DetectionResultItem]
@@ -114,11 +121,23 @@ class PresidioPIIAnalyzer:
         @return:
         """
         try:
+            # Convert DetectionResultItem back to RecognizerResult for Presidio anonymizer
+
+            recognizer_results = [
+                RecognizerResult(
+                    entity_type=item.entity_type,
+                    start=item.start,
+                    end=item.end,
+                    score=item.score,
+                )
+                for item in analysis_items
+            ]
+
             anonymization_result = self.anonymizer.anonymize(
-                text=text, analyzer_results=analysis_items, operators=self.operators
+                text=text, analyzer_results=recognizer_results, operators=self.operators
             )
 
-            return anonymization_result.text
+            return anonymization_result.text or ""
 
         except Exception as ex:
             logger.error("An error occurred sanitizing the string")
@@ -145,7 +164,7 @@ class PresidioPIIAnalyzer:
 
             # Engine Setup - spaCy model setup and PII recognizers
             for i, text in enumerate(texts):
-                text_analysis = self.analyzer.analyze(  # type: ignore
+                text_analysis = self.analyzer.analyze(
                     text=text, entities=entities, language=language_code
                 )
 

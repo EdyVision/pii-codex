@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "pii_codex/**"
-      - "poetry.lock"
+      - "uv.lock"
       - "pyproject.toml"
       - ".github/workflows/test.yml"
 
@@ -17,27 +17,24 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        python-version: [ "3.9", "3.10" ]
-        os: [ubuntu-22.04, macos-latest]
+        python-version: [ "3.9", "3.10", "3.11", "3.12" ]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     # Checkout the code, install poetry, install dependencies,
     # and run test with coverage
     steps:
       - name: Environment Setup
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Global Dependencies
-        run: pip install -U pip && pip install poetry wheel
+        run: pip install -U pip && pip install uv
       - name: Install Project Dependencies
         run: |
-          poetry config virtualenvs.create true
           make install
-          make install.extras
-      - uses: actions/checkout@master
       - name: Run Tests
         run: |
           make test.coverage

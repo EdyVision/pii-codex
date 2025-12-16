@@ -6,16 +6,18 @@ test: lint test.all
 test.cov: test.coverage
 
 install:
-	@poetry update
-	@poetry install
-	$(MAKE) install.extras
+	@uv sync
+	@uv sync --all-extras
+	@uv sync --extra dev 
 	$(MAKE) install.pre_commit
+	@echo "Installation complete!"
 
 install.pre_commit:
-	@poetry run pre-commit install
+	@uv run pre-commit install || (echo "Warning: pre-commit installation failed. You may need to run 'uv sync --extra dev' first." && exit 1)
 
 install.extras:
-	@poetry install --extras="detections"
+	@echo "Installing detection dependencies (spaCy, Presidio, etc.)..."
+	@uv sync --extra detections
 
 install_spacy_en_core_web_lg:
 	@python3 -m spacy download en_core_web_lg
@@ -27,14 +29,14 @@ test.all:
 	@pytest tests
 
 test.coverage:
-	@poetry run coverage run -m pytest -vv tests && poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=95
-	@poetry run coverage xml
+	@uv run coverage run -m pytest -vv tests && uv run coverage report -m --omit="*/test*,config/*.conf" --fail-under=95
+	@uv run coverage xml
 
 lint:
-	@poetry run pylint pii_codex tests
+	@uv run pylint pii_codex tests
 
 typecheck:
-	@poetry run mypy pii_codex tests
+	@uv run mypy pii_codex tests
 
 format.check:
 	@black . --check
@@ -49,16 +51,16 @@ docs:
 	@pdoc --html pii_codex --force -o ./docs/dev
 
 version.bump.patch:
-	@poetry version patch
-	$(MAKE) bump.citation.date
+	@uv run bumpver update --patch
+	# $(MAKE) bump.citation.date
 
 version.bump.minor:
-	@poetry version minor
+	@uv run bumpver update --minor
 	$(MAKE) bump.citation.date
 
 version.bump.major:
-	@poetry version major
+	@uv run bumpver update --major
 	$(MAKE) bump.citation.date
 
 package:
-	@poetry build
+	@uv build
