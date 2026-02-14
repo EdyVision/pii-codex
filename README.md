@@ -21,7 +21,7 @@ Author: Eidan Rosado - [@EdyVision](https://github.com/EdyVision)  <br/>
 Affiliation: Nova Southeastern University, College of Computing and Engineering
 
 ## Project Background
-The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment (to be publicly released later in 2023). There was a need to not only detect PII in text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
+The <em>PII Codex</em> project was built as a core part of an ongoing research effort in Personal Identifiable Information (PII) detection and risk assessment. There was a need to not only detect PII in text, but also identify its severity, associated categorizations in cybersecurity research and policy documentation, and provide a way for others in similar research efforts to reproduce or extend the research. PII Codex is a combination of systematic research, conceptual frameworks, third-party open source software, and cloud service provider integrations. The categorizations are directly influenced by the research of Milne et al. (2016) while the ranking is a result of category severities on the scale provided by Schwartz and Solove (2012) from Non-Identifiable, Semi-Identifiable, and Identifiable.
 
 The outputs of the primary PII Codex analysis and adapter functions are AnalysisResult or AnalysisResultSet objects that will provide a listing of detections, severities, mean risk scores for each string processed, and summary statistics on the analysis made. The final outputs do not contain the original texts but instead will provide where to find the detections should the end-user care for this information in their analysis.
 
@@ -37,43 +37,32 @@ Potential usages include sanitizing of dataset strings (e.g. a collection of soc
 <hr/>
 
 ## Running Locally with uv
-This project uses `uv` for dependency management. To run this project, install `uv` and proceed to follow the instructions under `/docs/LOCAL_SETUP.md`.
-
-`Note: This project has only been tested with Ubuntu and MacOS and with Python versions 3.11 and 3.12. You may need to upgrade pip ahead of installation.`
-
-## Installing with PIP
-Video capture of install provided in LOCAL_SETUP.md file. Make sure you set up a virtual environment with either python 3.11 or 3.12 and upgrade pip with:
+This project uses `uv` for dependency management. Install [uv](https://docs.astral.sh/uv/) then clone the repo and run:
 
 ```bash
-pip install --upgrade pip
-pip install -U pip uv # only needed if you haven't already done so 
+make install
 ```
 
-Before adding `pii-codex` on your project, download the spaCy `en_core_web_lg` model:
+This runs `uv sync --extra dev --extra detections` so you get the base package, dev tools (pytest, black, pylint, etc.), and detection extras (spaCy, Presidio Analyzer/Anonymizer). The spaCy model `en_core_web_lg` is included in the `detections` extra and is installed automatically; you do not need to run `spacy download` yourself. If for some reason the model is missing at runtime, the code will attempt to install it (via `spacy download` or, in uv-managed venvs without pip, via `uv pip install` and a known wheel URL).
 
-```bash
-pip install -U spacy
-python3 -m spacy download en_core_web_lg
-```
+For more detail, see [docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md). This project has been tested on Ubuntu and macOS with Python 3.11 and 3.12.
 
-For more details on spaCy installation and usage, refer to their <a href="https://spacy.io/usage">docs</a>.
-
-The repository releases are hosted on PyPi and can be installed with:
+## Installing as a dependency (PyPI or uv)
+Releases are on PyPI. To use PII Codex in another project:
 
 ```bash
 pip install pii-codex
 pip install "pii-codex[detections]"
 ```
 
-`Note: The extras installed with pii-codex[detections] are the spaCy, Micrisoft Presidio Analyzer, and Microsoft Anonymzer packages.`
-
-Using uv:
+With uv:
 
 ```bash
-uv sync
 uv add pii-codex
 uv add "pii-codex[detections]"
 ```
+
+The `[detections]` extra installs spaCy, Microsoft Presidio Analyzer and Anonymizer, and the `en_core_web_lg` model (via a direct wheel URL), so detection works out of the box. If you install without the extra and later use detection features, the code will try to install the model on first use when possible.
 
 For those using Google Collab, check out the example notebook:
 

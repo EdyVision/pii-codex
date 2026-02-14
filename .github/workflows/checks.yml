@@ -14,7 +14,7 @@ jobs:
             - name: setup - python
               uses: actions/setup-python@v4
               with:
-                  python-version: 3.12
+                  python-version: 3.13
             - name: Install Global Dependencies
               run: pip install -U pip && pip install uv
             - name: install

@@ -17,12 +17,11 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        python-version: [ "3.9", "3.10", "3.11", "3.12" ]
+        python-version: [ "3.10", "3.11", "3.12" ]  # 3.13: thinc/spacy not yet compatible (C API _PyLong_AsByteArray)
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
-    # Checkout the code, install poetry, install dependencies,
-    # and run test with coverage
+    # Checkout, install deps with uv, run tests with coverage
     steps:
       - name: Environment Setup
         uses: actions/checkout@v4

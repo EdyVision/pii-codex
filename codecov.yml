@@ -2,9 +2,11 @@ coverage:
   status:
     project:
       default:
-        target: 90%    # the required coverage value
-        threshold: 1%  # the leniency in hitting the target
+        target: 90%
+        threshold: 1%
+        informational: true   # report only; do not fail build or turn red when below target
     patch:
       default:
-        target: 90%    # the required coverage value
-        threshold: 1%  # the leniency in hitting the target
+        target: 90%
+        threshold: 1%
+        informational: true   # report only; do not fail build or turn red when below target

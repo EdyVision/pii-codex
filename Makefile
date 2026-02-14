@@ -6,9 +6,7 @@ test: lint test.all
 test.cov: test.coverage
 
 install:
-	@uv sync
-	@uv sync --all-extras
-	@uv sync --extra dev 
+	@uv sync --extra dev --extra detections
 	$(MAKE) install.pre_commit
 	@echo "Installation complete!"
 

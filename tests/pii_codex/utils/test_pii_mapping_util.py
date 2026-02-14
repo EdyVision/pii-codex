@@ -241,6 +241,20 @@ class TestPIIMappingUtil:
         assert_that(result).is_not_none()
         assert_that(result.pii_type_detected).is_equal_to("EMAIL_ADDRESS")
 
-    # endregion
+    @pytest.mark.parametrize(
+        "presidio_value",
+        list(
+            {
+                m.presidio_enum.value
+                for m in PII_TYPE_MAPPINGS.values()
+                if m.presidio_enum is not None
+            }
+        ),
+    )
+    def test_convert_presidio_string_to_common_pii_type(self, presidio_value):
+        """Presidio entity string (as returned by analyzer) -> PIIType; result must be in mappings (handles special cases e.g. DATE->DATE_TIME)."""
+        common = PII_MAPPER.convert_msft_presidio_pii_to_common_pii_type(presidio_value)
+        assert_that(common).is_instance_of(PIIType)
+        assert_that(common.name in PII_TYPE_MAPPINGS).is_true()
 
-    # CSV-related tests removed - no longer using CSV files
+    # endregion
