@@ -1,6 +1,6 @@
 [project]
 name = "pii-codex"
-version = "0.5.0"
+version = "0.6.0"
 description = "PII Detection, Categorization, and Severity Assessment"
 authors = [
     {name = "Eidan J. Rosado"}
@@ -16,10 +16,10 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",
 ]
-requires-python = ">=3.9,<3.13"
+requires-python = ">=3.10,<4"
 dependencies = [
     "dataclasses-json>=0.5.7,<0.6.0",
-    "pydantic[dotenv]>=1.10.2,<2.0.0",
+    "pydantic[dotenv]>=2.0.0,<3.0.0",
     "pandas>=2.0.0,<3.0.0",
     "pillow>=10.0.0,<11.0.0",
     "pdoc>=13.1.1,<14.0.0",
@@ -28,8 +28,10 @@ dependencies = [
 [project.optional-dependencies]
 detections = [
     "spacy>=3.8.7",
-    "presidio-analyzer>=2.2.359",
-    "presidio-anonymizer>=2.2.359"
+    "thinc>=8.3.10",  # 8.3.10+ has Python 3.13 wheels; older builds fail on 3.13 C API
+    "presidio-analyzer>=2.2.361",
+    "presidio-anonymizer>=2.2.361",
+    "en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl",
 ]
 dev = [
     "pytest>=7.4.0,<8.0.0",
@@ -47,6 +49,7 @@ dev = [
     "seaborn>=0.12.0,<1.0.0",
     "pre-commit>=3.0.0,<4.0.0",
     "spacy>=3.8.7",
+    "thinc>=8.3.10",  # 8.3.10+ has Python 3.13 wheels; older builds fail on 3.13 C API
     "presidio-analyzer>=2.2.360",
     "presidio-anonymizer>=2.2.360",
     "tomli>=1.2.0,<3.0.0"
@@ -57,7 +60,7 @@ Homepage = "https://github.com/EdyVision/pii-codex"
 Repository = "https://github.com/EdyVision/pii-codex"
 
 [bumpver]
-current_version = "0.5.0"
+current_version = "0.6.0"
 version_pattern = "MAJOR.MINOR.PATCH"
 files = [
     "pyproject.toml",
