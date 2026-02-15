@@ -931,14 +931,6 @@ wheels = [
 ]
 
 [[package]]
-name = "en-core-web-lg"
-version = "3.8.0"
-source = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl" }
-wheels = [
-    { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl", hash = "sha256:293e9547a655b25499198ab15a525b05b9407a75f10255e405e8c3854329ab63" },
-]
-
-[[package]]
 name = "exceptiongroup"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2437,7 +2429,6 @@ dependencies = [
 
 [package.optional-dependencies]
 detections = [
-    { name = "en-core-web-lg" },
     { name = "presidio-analyzer" },
     { name = "presidio-anonymizer" },
     { name = "spacy" },
@@ -2476,7 +2467,6 @@ requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = ">=23.0.0,<24.0.0" },
     { name = "coverage", marker = "extra == 'dev'", specifier = ">=7.2.0,<8.0.0" },
     { name = "dataclasses-json", specifier = ">=0.5.7,<0.6.0" },
-    { name = "en-core-web-lg", marker = "extra == 'detections'", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl" },
     { name = "faker", marker = "extra == 'dev'", specifier = ">=19.0.0,<20.0.0" },
     { name = "importlib-resources", marker = "extra == 'dev'", specifier = ">=6.0.0,<7.0.0" },
     { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.25.0,<7.0.0" },

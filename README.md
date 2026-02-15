@@ -43,7 +43,7 @@ This project uses `uv` for dependency management. Install [uv](https://docs.astr
 make install
 ```
 
-This runs `uv sync --extra dev --extra detections` so you get the base package, dev tools (pytest, black, pylint, etc.), and detection extras (spaCy, Presidio Analyzer/Anonymizer). The spaCy model `en_core_web_lg` is included in the `detections` extra and is installed automatically; you do not need to run `spacy download` yourself. If for some reason the model is missing at runtime, the code will attempt to install it (via `spacy download` or, in uv-managed venvs without pip, via `uv pip install` and a known wheel URL).
+This runs `uv sync --extra dev --extra detections` so you get the base package, dev tools (pytest, black, pylint, etc.), and detection extras (spaCy, Presidio Analyzer/Anonymizer). Install the spaCy English model for detection: `python -m spacy download en_core_web_lg` (or `uv pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl`). If the model is missing at runtime, the code may attempt to install it when possible.
 
 For more detail, see [docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md). This project has been tested on Ubuntu and macOS with Python 3.11 and 3.12.
 
@@ -62,7 +62,7 @@ uv add pii-codex
 uv add "pii-codex[detections]"
 ```
 
-The `[detections]` extra installs spaCy, Microsoft Presidio Analyzer and Anonymizer, and the `en_core_web_lg` model (via a direct wheel URL), so detection works out of the box. If you install without the extra and later use detection features, the code will try to install the model on first use when possible.
+The `[detections]` extra installs spaCy and Microsoft Presidio Analyzer/Anonymizer. Install the spaCy English model for detection: `python -m spacy download en_core_web_lg`. If you install without the extra and later use detection features, the code may try to install the model on first use when possible.
 
 For those using Google Collab, check out the example notebook:
 
